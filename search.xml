@@ -1,0 +1,623 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>hexo服务搭建</title>
+    <url>/codeHub/2020/03/23/01hexo%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/</url>
+    <content><![CDATA[<h1 id="hexo服务搭建"><a href="#hexo服务搭建" class="headerlink" title="hexo服务搭建"></a>hexo服务搭建</h1><span class="label success">Hexo</span>  一款简洁并且高效的博客框架，结合markdown语法，让你的想法展现的淋漓尽致。通过本地编译markdown文件生成html 静态文件，部署到云端；使得笔记得到永久保存。利用Github、腾讯云等免费代码仓库存储服务，让你能够随时随地编辑；不受设备影响。
+
+<a id="more"></a>
+
+<h3 id="1-初始化hexo"><a href="#1-初始化hexo" class="headerlink" title="1.初始化hexo"></a>1.初始化hexo</h3><p>​    在命令行中运行一下命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#初始化hexo</span></span><br><span class="line">hexo init &lt;folder_name&gt;</span><br><span class="line"><span class="built_in">cd</span> &lt;folder_name&gt;</span><br><span class="line"><span class="comment">#下载相关依赖</span></span><br><span class="line">npm i</span><br></pre></td></tr></table></figure>
+
+<p>​    hexo 初始化完成之后，在<code>folder_name</code>目录下将会产生一下文件和文件夹</p>
+<p>​    hexo相关的命令均需要在bash中进入<code>folder_name</code>目录后运行</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#启动本地预览</span></span><br><span class="line">hexo s</span><br><span class="line"><span class="comment">#将md文件编译为html</span></span><br><span class="line">hexo g</span><br></pre></td></tr></table></figure>
+
+<p>​    启动本地预览后，访问网址可以查看到静态网页</p>
+<blockquote>
+<p> <a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a> </p>
+</blockquote>
+<h3 id="2-部署到云端"><a href="#2-部署到云端" class="headerlink" title="2.部署到云端"></a>2.部署到云端</h3><h4 id="2-1GithubPage进行部署"><a href="#2-1GithubPage进行部署" class="headerlink" title="2.1GithubPage进行部署"></a>2.1GithubPage进行部署</h4><ol>
+<li><p>在github中创建一个仓库</p>
+</li>
+<li><p>将hexo push到github仓库中</p>
+</li>
+</ol>
+<p>下载对应的插件</p>
+<p><code>--save</code>参数会将插件信息保存在<code>package.json</code>文件中</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<p>配置站点目录下<code>_config.yml</code>文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/deployment.html</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: git@github.com:zpliu1126/codeHub.git</span><br><span class="line">  branch: gh-pages</span><br></pre></td></tr></table></figure>
+
+<p>部署实际上就是在将hexo编译生成的<code>public</code>目录下的所有文件推送到云端</p>
+<p>部署完成后通过访问网址即可访问到hexo静态博客</p>
+<blockquote>
+<p> https://&lt;Github账号名称&gt;.github.io /仓库名</p>
+</blockquote>
+<h4 id="2-2部署到腾讯云"><a href="#2-2部署到腾讯云" class="headerlink" title="2.2部署到腾讯云"></a>2.2部署到腾讯云</h4><p>当有多个云端时，配置文件如下进行配置</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/deployment.html</span></span><br><span class="line">deploy:</span><br><span class="line"> -  <span class="built_in">type</span>: git</span><br><span class="line">    repo: git@github.com:zpliu1126/codeHub.git</span><br><span class="line">    branch: gh-pages</span><br><span class="line"> -  <span class="built_in">type</span>: git</span><br><span class="line">    repo: git@e.coding.net:biocodehub/codeHub.git</span><br><span class="line">    branch: master</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-自定义主题"><a href="#3-自定义主题" class="headerlink" title="3.自定义主题"></a>3.自定义主题</h3><p>​    hexo中默认的主题是<code>landscape</code>，可以在github中搜索对应的主题选择下载</p>
+<h4 id="3-1主题安装"><a href="#3-1主题安装" class="headerlink" title="3.1主题安装"></a>3.1主题安装</h4><p>我这里使用到的是<code>next</code>主题</p>
+<ol>
+<li>下载对应的主题文件</li>
+<li>将主题整个文件夹粘贴到<code>themes</code>目录下</li>
+<li>更改站点文件夹配置文件中theme字段为对应的主题名</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#下载对应的主题 </span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/theme-next/hexo-theme-next themes/next</span><br><span class="line"><span class="comment"># Extensions</span></span><br><span class="line"><span class="comment">## Plugins: https://hexo.io/plugins/</span></span><br><span class="line"><span class="comment">## Themes: https://hexo.io/themes/</span></span><br><span class="line">theme: next</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-2主题优化"><a href="#3-2主题优化" class="headerlink" title="3.2主题优化"></a>3.2主题优化</h4><p><code>Next</code>主题优化官方文档</p>
+<blockquote>
+<p> <a href="https://theme-next.org/docs/theme-settings/" target="_blank" rel="noopener">https://theme-next.org/docs/theme-settings/</a> </p>
+</blockquote>
+<ul>
+<li><p>自定义样式文件</p>
+<p><code>Next</code>最新版主题支持将样式文件放置在主题文件夹之外，只需要在主题文件夹中进行配置</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">custom_file_path:</span><br><span class="line">  <span class="comment">#head: source/_data/head.swig</span></span><br><span class="line">  <span class="comment">#header: source/_data/header.swig</span></span><br><span class="line">  <span class="comment">#sidebar: source/_data/sidebar.swig</span></span><br><span class="line">  <span class="comment">#postMeta: source/_data/post-meta.swig</span></span><br><span class="line">  <span class="comment">#postBodyEnd: source/_data/post-body-end.swig</span></span><br><span class="line">  <span class="comment">#footer: source/_data/footer.swig</span></span><br><span class="line">   style: <span class="built_in">source</span>/_data/styles.styl</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>添加背景图片</p>
+<p>添加主题自定义样式</p>
+<p><strong><em>修改样式时，最后将public文件夹全部删除，然后<code>hexo g</code>重新编译生成css文件</em></strong></p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">body&#123;</span><br><span class="line">    background:url(/images/themeImg/splash.png);</span><br><span class="line">    background-size:cover;</span><br><span class="line">    background-repeat:no-repeat;</span><br><span class="line">    background-attachment:fixed;</span><br><span class="line">    background-position:center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>转载协议</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">creative_commons:</span><br><span class="line">  license: by-nc-sa</span><br><span class="line">  sidebar: <span class="literal">true</span></span><br><span class="line">  post: <span class="literal">true</span></span><br><span class="line">  language:</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>自定义<code>logo</code></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Custom Logo (Do not support scheme Mist)</span></span><br><span class="line">custom_logo: /images/themeImg/logo.png</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>代码高亮显示和复制按钮</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">codeblock:</span><br><span class="line">  <span class="comment"># Code Highlight theme</span></span><br><span class="line">  <span class="comment"># Available values: normal | night | night eighties | night blue | night bright | solarized | solarized dark | galactic</span></span><br><span class="line">  <span class="comment"># See: https://github.com/chriskempson/tomorrow-theme</span></span><br><span class="line">  highlight_theme: night</span><br><span class="line">  <span class="comment"># Add copy button on codeblock</span></span><br><span class="line">  copy_button:</span><br><span class="line">    <span class="built_in">enable</span>: <span class="literal">true</span></span><br><span class="line">    <span class="comment"># Show text copy result.</span></span><br><span class="line">    show_result: <span class="literal">true</span></span><br><span class="line">    <span class="comment"># Available values: default | flat | mac</span></span><br><span class="line">    style:</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>阅读进度条</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">reading_progress:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></span><br><span class="line">  color: <span class="string">"#37c6c0"</span></span><br><span class="line">  height: 2px</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>书签</p>
+<p>当下次访问时自动滚动到对应位置</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">bookmark:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">false</span></span><br><span class="line">  <span class="comment"># Customize the color of the bookmark.</span></span><br><span class="line">  color: <span class="string">"#222"</span></span><br><span class="line">  <span class="comment"># If auto, save the reading progress when closing the page or clicking the bookmark-icon.</span></span><br><span class="line">  <span class="comment"># If manual, only save it by clicking the bookmark-icon.</span></span><br><span class="line">  save: auto</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Follow me 标签</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Follow me on GitHub banner in right-top corner.</span></span><br><span class="line">github_banner:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></span><br><span class="line">  permalink: https://github.com/yourname</span><br><span class="line">  title: Follow me on GitHub</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>字体设置</p>
+<p><code>Next</code>为5中类型提供字体设置</p>
+<ul>
+<li>全局字体设置</li>
+<li>title字体设置</li>
+<li>标题字体设置 h1 、h2</li>
+<li>文章字体设置</li>
+<li>代码字体设置</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">font:</span><br><span class="line">  <span class="comment"># Use custom fonts families or not.</span></span><br><span class="line">  <span class="comment"># Depended options: `external` and `family`.</span></span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Uri of fonts host, e.g. //fonts.googleapis.com (Default).</span></span><br><span class="line">  host:</span><br><span class="line"></span><br><span class="line">  <span class="comment"># Font options:</span></span><br><span class="line">  <span class="comment"># `external: true` will load this font family from `host` above.</span></span><br><span class="line">  <span class="comment"># `family: Times New Roman`. Without any quotes.</span></span><br><span class="line">  <span class="comment"># `size: x.x`. Use `em` as unit. Default: 1 (16px)</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Global font settings used for all elements inside &lt;body&gt;.</span></span><br><span class="line">  global:</span><br><span class="line">    external: <span class="literal">true</span></span><br><span class="line">    family: Monda</span><br><span class="line">    size: 1.125</span><br><span class="line"></span><br><span class="line">  <span class="comment"># Font settings for site title (.site-title).</span></span><br><span class="line">  title:</span><br><span class="line">    external: <span class="literal">true</span></span><br><span class="line">    family: Lobster Two</span><br><span class="line">    size:</span><br><span class="line"></span><br><span class="line">  <span class="comment"># Font settings for headlines (&lt;h1&gt; to &lt;h6&gt;).</span></span><br><span class="line">  headings:</span><br><span class="line">    external: <span class="literal">true</span></span><br><span class="line">    family: Amita</span><br><span class="line">    size:</span><br><span class="line"></span><br><span class="line">  <span class="comment"># Font settings for posts (.post-body).</span></span><br><span class="line">  posts:</span><br><span class="line">    external: <span class="literal">true</span></span><br><span class="line">    family: Roboto Slab</span><br><span class="line"></span><br><span class="line">  <span class="comment"># Font settings for &lt;code&gt; and code blocks.</span></span><br><span class="line">  codes:</span><br><span class="line">    external: <span class="literal">true</span></span><br><span class="line">    family: PT Mono</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li><p>安装插件</p>
+<p>支持两种安装方法</p>
+<ol>
+<li>本地安装</li>
+<li>使用CDN links</li>
+</ol>
+<p>如果你的站点是部署在一些免费的云端，推荐使用CDN links，因为它加载起来更快</p>
+<p><strong>本地安装</strong></p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#在bash中安装下载对应插件</span></span><br><span class="line">$ <span class="built_in">cd</span> themes/next</span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/theme-next/theme-next-pjax <span class="built_in">source</span>/lib/pjax</span><br><span class="line"><span class="comment"># 启用pjax插件</span></span><br><span class="line"><span class="comment"># Easily enable fast Ajax navigation on your website.</span></span><br><span class="line"><span class="comment"># Dependencies: https://github.com/theme-next/theme-next-pjax</span></span><br><span class="line">pjax: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>CDN links 安装</p>
+<blockquote>
+<p> jsDelivr CDN is recommended to deliver our third-party plugins </p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Script Vendors. Set a CDN address for the vendor you want to customize.</span></span><br><span class="line"><span class="comment"># Be aware that you would better use the same version as internal ones to avoid potential problems.</span></span><br><span class="line"><span class="comment"># Remember to use the https protocol of CDN files when you enable https on your site.</span></span><br><span class="line">vendors:</span><br><span class="line">  <span class="comment"># Internal path prefix.</span></span><br><span class="line">  _internal: lib</span><br><span class="line">  pjax: https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>设置整体布局</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Schemes</span></span><br><span class="line"><span class="comment"># scheme: Muse</span></span><br><span class="line"><span class="comment">#scheme: Mist</span></span><br><span class="line"><span class="comment">#scheme: Pisces</span></span><br><span class="line">scheme: Gemini</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置菜单栏<ol>
+<li>第一栏表示菜单名</li>
+<li>第二栏表示相对url</li>
+<li><code>||</code>后表示icon</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: / || home</span><br><span class="line">  <span class="comment">#about: /about/ || user</span></span><br><span class="line">  <span class="comment">#tags: /tags/ || tags</span></span><br><span class="line">  <span class="comment">#categories: /categories/ || th</span></span><br><span class="line">  archives: /archives/ || archiveasad</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>菜单栏的一些修饰<ul>
+<li>显示icon</li>
+<li>显示条目数</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Enable / Disable menu icons / item badges.</span></span><br><span class="line">menu_settings:</span><br><span class="line">  icons: <span class="literal">true</span></span><br><span class="line">  badges: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>条目数支持中文</p>
+<p>修改<code>next\layout\_partials\header\menu-item.swig</code>文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&#123;%- <span class="keyword">if</span> theme.menu_settings.badges %&#125;</span><br><span class="line">  &#123;%- <span class="built_in">set</span> badges = &#123;</span><br><span class="line">    <span class="string">'文章'</span>  : site.posts.length,</span><br><span class="line">    <span class="string">'分类'</span>: site.categories.length,</span><br><span class="line">    <span class="string">'标签'</span>      : site.tags.length</span><br><span class="line">    &#125;</span><br><span class="line">  %&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li><p>侧边栏显示头像</p>
+<p>支持将图片放在<code>theme</code>文件夹之外，例如在  site directory <code>source/uploads/</code> 下</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Sidebar Avatar</span></span><br><span class="line">avatar:</span><br><span class="line">  <span class="comment"># Replace the default image and set the url here.</span></span><br><span class="line">  url: /images/avatar.gif</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>编辑站点信息</p>
+<ul>
+<li>author</li>
+<li>description</li>
+</ul>
+<p>配置<code>hexo/_config.yml</code>文件</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Site</span></span><br><span class="line">author:</span><br><span class="line">description:</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-第三方评论系统"><a href="#4-第三方评论系统" class="headerlink" title="4.第三方评论系统"></a>4.第三方评论系统</h3><table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">推荐指数</th>
+<th align="left">优点</th>
+<th align="left">缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a href="https://valine.js.org/" target="_blank" rel="noopener">Valine</a></td>
+<td align="left">4</td>
+<td align="left">每天30000条评论，10GB的储存</td>
+<td align="left">作者评论无标识</td>
+</tr>
+<tr>
+<td align="left"><a href="https://livere.com/" target="_blank" rel="noopener">来必力/livere</a></td>
+<td align="left">4</td>
+<td align="left">多种账号登录</td>
+<td align="left">评论无法导出</td>
+</tr>
+<tr>
+<td align="left"><a href="http://changyan.kuaizhan.com/" target="_blank" rel="noopener">畅言</a></td>
+<td align="left">3</td>
+<td align="left">美观</td>
+<td align="left">必须备案域名</td>
+</tr>
+<tr>
+<td align="left"><a href="https://github.com/imsun/gitment" target="_blank" rel="noopener">gitment</a></td>
+<td align="left">3</td>
+<td align="left">简洁</td>
+<td align="left">只能登陆github评论</td>
+</tr>
+<tr>
+<td align="left">Disqus</td>
+<td align="left">1</td>
+<td align="left"></td>
+<td align="left">需要翻*墙</td>
+</tr>
+</tbody></table>
+<h4 id="4-1Valine"><a href="#4-1Valine" class="headerlink" title="4.1Valine"></a>4.1Valine</h4><p>注册Valine账户</p>
+<blockquote>
+<p><a href="https://leancloud.cn/dashboard/applist.html" target="_blank" rel="noopener">https://leancloud.cn/dashboard/applist.html</a></p>
+</blockquote>
+<p>文章中添加字段</p>
+<p><code>comments: true</code></p>
+<p>主题文件中进行设置</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">valine:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></span><br><span class="line">  appid:  <span class="comment"># Your leancloud application appid</span></span><br><span class="line">  appkey:  <span class="comment"># Your leancloud application appkey</span></span><br><span class="line">  notify: <span class="literal">false</span> <span class="comment"># Mail notifier</span></span><br><span class="line">  verify: <span class="literal">false</span> <span class="comment"># Verification code</span></span><br><span class="line">  placeholder: Just go go <span class="comment"># Comment box placeholder</span></span><br><span class="line">  avatar: mm <span class="comment"># Gravatar style</span></span><br><span class="line">  guest_info: nick,mail,link <span class="comment"># Custom comment header</span></span><br><span class="line">  pageSize: 10 <span class="comment"># Pagination size</span></span><br><span class="line">  language: zh-cn <span class="comment"># Language, available values: en, zh-cn</span></span><br><span class="line">  visitor: <span class="literal">false</span> <span class="comment"># Article reading statistic</span></span><br><span class="line">  comment_count: <span class="literal">true</span> <span class="comment"># If false, comment count will only be displayed in post page, not in home page</span></span><br><span class="line">  recordIP: <span class="literal">false</span> <span class="comment"># Whether to record the commenter IP</span></span><br><span class="line">  serverURLs: <span class="comment"># When the custom domain name is enabled, fill it in here (it will be detected automatically by default, no need to fill in)</span></span><br><span class="line">  <span class="comment">#post_meta_order: 0</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-搜索"><a href="#5-搜索" class="headerlink" title="5.搜索"></a>5.搜索</h3><p>使用本地插件配置搜索数据库</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-searchdb</span><br></pre></td></tr></table></figure>
+
+<p><code>hexo/_config.yml</code>文件配置</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#96;search:  path: search.xml  field: post  format: html  limit: 10000&#96;</span><br></pre></td></tr></table></figure>
+
+<p><code>next/_config.yml</code>文件中配置</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Local search</span></span><br><span class="line"><span class="comment"># Dependencies: https://github.com/theme-next/hexo-generator-searchdb</span></span><br><span class="line">local_search:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></span><br><span class="line">  <span class="comment"># If auto, trigger search by changing input.</span></span><br><span class="line">  <span class="comment"># If manual, trigger search by pressing enter key or search button.</span></span><br><span class="line">  trigger: auto</span><br><span class="line">  <span class="comment"># Show top n results per article, show all results by setting to -1</span></span><br><span class="line">  top_n_per_article: 1</span><br><span class="line">  <span class="comment"># Unescape html strings to the readable one.</span></span><br><span class="line">  unescape: <span class="literal">false</span></span><br><span class="line">  <span class="comment"># Preload the search data when the page loads.</span></span><br><span class="line">  preload: <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="6-自定义标签"><a href="#6-自定义标签" class="headerlink" title="6.自定义标签"></a>6.自定义标签</h3><p>hexo生成标签页面</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new <span class="string">"新的标签"</span></span><br></pre></td></tr></table></figure>
+
+<p>在标签页面md文件中指定类型为标签</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">title: 新的标签</span><br><span class="line">date: 2020-03-22 08:39:29</span><br><span class="line"><span class="built_in">type</span>: tags</span><br></pre></td></tr></table></figure>
+
+<p>在post文章中使用标签</p>
+<ul>
+<li>多个标签使用<code>-</code>进行区分</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">title: hexo服务搭建</span><br><span class="line">comments: <span class="literal">true</span></span><br><span class="line">author: zzz</span><br><span class="line">date: &#123;date&#125;</span><br><span class="line">categories: </span><br><span class="line">	- <span class="built_in">test</span></span><br><span class="line">tags:</span><br><span class="line">	- hexo</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="7-首页进行文章截取"><a href="#7-首页进行文章截取" class="headerlink" title="7.首页进行文章截取"></a>7.首页进行文章截取</h3><p>编辑<code>theme/_config.yml</code>文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">excerpt_description: <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Read more button</span></span><br><span class="line"><span class="comment"># If true, the read more button will be displayed in excerpt section.</span></span><br><span class="line">read_more_btn: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>下载对应插件</p>
+<p><code>npm i hexo-excerpt</code></p>
+<p>另外一种可以使用<code>&lt;!-- more --&gt;</code>在md文件中实现更加精准的控制</p>
+<h3 id="8-静态资源压缩"><a href="#8-静态资源压缩" class="headerlink" title="8.静态资源压缩"></a>8.静态资源压缩</h3><p>一般将css和js文件中的空格和换行符进行压缩，一定程度上能减少网络延迟</p>
+<ul>
+<li><p>安装gulp 命令</p>
+<p>站点根目录下运行</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm install gulp</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>安装gulp插件</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install gulp-minify-css --save</span><br><span class="line">npm install gulp-uglify --save</span><br><span class="line">npm install gulp-htmlmin --save</span><br><span class="line">npm install gulp-htmlclean --save</span><br><span class="line">npm install gulp-imagemin --save</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>压缩规则文件</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">var gulp = require(<span class="string">'gulp'</span>);</span><br><span class="line">var minifycss = require(<span class="string">'gulp-minify-css'</span>);</span><br><span class="line">var uglify = require(<span class="string">'gulp-uglify'</span>);</span><br><span class="line">var htmlmin = require(<span class="string">'gulp-htmlmin'</span>);</span><br><span class="line">var htmlclean = require(<span class="string">'gulp-htmlclean'</span>);</span><br><span class="line">var imagemin = require(<span class="string">'gulp-imagemin'</span>);</span><br><span class="line">// 压缩css文件</span><br><span class="line">gulp.task(<span class="string">'minify-css'</span>, <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">  <span class="built_in">return</span> gulp.src(<span class="string">'./public/**/*.css'</span>)</span><br><span class="line">  .pipe(minifycss())</span><br><span class="line">  .pipe(gulp.dest(<span class="string">'./public'</span>));</span><br><span class="line">&#125;);</span><br><span class="line">// 压缩html文件</span><br><span class="line">gulp.task(<span class="string">'minify-html'</span>,  gulp.series(<span class="string">'minify-css'</span>,<span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">  <span class="built_in">return</span> gulp.src(<span class="string">'./public/**/*.html'</span>)</span><br><span class="line">  .pipe(htmlclean())</span><br><span class="line">  .pipe(htmlmin(&#123;</span><br><span class="line">    removeComments: <span class="literal">true</span>,</span><br><span class="line">    minifyJS: <span class="literal">true</span>,</span><br><span class="line">    minifyCSS: <span class="literal">true</span>,</span><br><span class="line">    minifyURLs: <span class="literal">true</span>,</span><br><span class="line">  &#125;))</span><br><span class="line">  .pipe(gulp.dest(<span class="string">'./public'</span>))</span><br><span class="line">&#125;));</span><br><span class="line">// 压缩js文件</span><br><span class="line">gulp.task(<span class="string">'minify-js'</span>, gulp.series(<span class="string">'minify-html'</span>,<span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">    <span class="built_in">return</span> gulp.src([<span class="string">'./public/**/.js'</span>,<span class="string">'!./public/js/**/*min.js'</span>])</span><br><span class="line">        .pipe(uglify())</span><br><span class="line">        .pipe(gulp.dest(<span class="string">'./public'</span>));</span><br><span class="line">&#125;));</span><br><span class="line">// 压缩 public/demo 目录内图片</span><br><span class="line">gulp.task(<span class="string">'minify-images'</span>, gulp.series(<span class="string">'minify-js'</span>,<span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">    gulp.src(<span class="string">'./public/demo/**/*.*'</span>)</span><br><span class="line">        .pipe(imagemin(&#123;</span><br><span class="line">           optimizationLevel: 5, //类型：Number  默认：3  取值范围：0-7（优化等级）</span><br><span class="line">           progressive: <span class="literal">true</span>, //类型：Boolean 默认：<span class="literal">false</span> 无损压缩jpg图片</span><br><span class="line">           interlaced: <span class="literal">false</span>, //类型：Boolean 默认：<span class="literal">false</span> 隔行扫描gif进行渲染</span><br><span class="line">           multipass: <span class="literal">false</span>, //类型：Boolean 默认：<span class="literal">false</span> 多次优化svg直到完全优化</span><br><span class="line">        &#125;))</span><br><span class="line">        .pipe(gulp.dest(<span class="string">'./public/uploads'</span>));</span><br><span class="line">&#125;));</span><br><span class="line">// 默认任务</span><br><span class="line">gulp.task(<span class="string">'default'</span>, gulp.series(<span class="string">'minify-css'</span>,<span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">  <span class="built_in">return</span> gulp.src(<span class="string">'./public/**/*.css'</span>)</span><br><span class="line">  .pipe(minifycss())</span><br><span class="line">  .pipe(gulp.dest(<span class="string">'./public'</span>));</span><br><span class="line">&#125;));</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在hexo 编译生成html文件后执行压缩即可</li>
+</ul>
+<p><code>hexo g &amp;&amp; gulp &amp;&amp; hexo d</code></p>
+<p>​    </p>
+<h3 id="9-保存原始post文件和主题配置文件"><a href="#9-保存原始post文件和主题配置文件" class="headerlink" title="9.保存原始post文件和主题配置文件"></a>9.保存原始post文件和主题配置文件</h3><h4 id="9-1新建空分支"><a href="#9-1新建空分支" class="headerlink" title="9.1新建空分支"></a>9.1新建空分支</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#先克隆仓库</span></span><br><span class="line"> git <span class="built_in">clone</span> git@e.coding.net:biocodehub/codeHub.git</span><br><span class="line"><span class="comment"># 进入仓库</span></span><br><span class="line"><span class="built_in">cd</span> codeHub</span><br><span class="line"><span class="comment"># 创建新的分支</span></span><br><span class="line">git checkout --orphan <span class="built_in">source</span></span><br><span class="line"><span class="comment"># 删除当前分支所有文件</span></span><br><span class="line">git rm -rf .</span><br><span class="line"><span class="comment"># 创建一个文件并提交到当前分支</span></span><br><span class="line">$ <span class="built_in">echo</span> \"My GitHub Page\" &gt; index.html</span><br><span class="line">$ git add .</span><br><span class="line">$ git commit -a -m \"new branch <span class="built_in">source</span>\"</span><br><span class="line">$ git push origin <span class="built_in">source</span></span><br></pre></td></tr></table></figure>
+
+<p>登录远程仓库，手动删除<code>index.html</code>就变成空的分支了</p>
+<h4 id="9-2提交hexo源码"><a href="#9-2提交hexo源码" class="headerlink" title="9.2提交hexo源码"></a>9.2提交hexo源码</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 站点初始化仓库</span></span><br><span class="line"><span class="built_in">cd</span> codeHub</span><br><span class="line">git init</span><br><span class="line"><span class="comment"># 添加远程地址</span></span><br><span class="line">git remote add origin “仓库地址<span class="string">"</span></span><br><span class="line"><span class="string"># 编辑</span></span><br></pre></td></tr></table></figure>
+
+<p><code>gitignore</code>文件 ,选择推送的文件</p>
+<p>在添加要推送的文件之间，先将主题下的<code>\themes\next\.git</code>文件夹删除，git不允许一个仓库包含另外一个仓库。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#获取远端分析</span></span><br><span class="line">git fetch</span><br><span class="line"><span class="comment">#切换到origin source分支</span></span><br><span class="line">git checkout origin/<span class="built_in">source</span></span><br><span class="line"><span class="comment">#新建本地分支</span></span><br><span class="line">git checkout -b <span class="built_in">source</span></span><br><span class="line"><span class="comment">#将本地分支与远端分支关联</span></span><br><span class="line">git branch -u origin/<span class="built_in">source</span> <span class="built_in">source</span></span><br><span class="line"><span class="comment">#开始上传文件</span></span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">"code Hub source code"</span></span><br><span class="line">git push origin <span class="built_in">source</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="9-3克隆远端源码"><a href="#9-3克隆远端源码" class="headerlink" title="9.3克隆远端源码"></a>9.3克隆远端源码</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> -b <span class="built_in">source</span> git@e.coding.net:biocodehub/codeHub.git</span><br><span class="line">$ hexo s</span><br><span class="line">$ npm install hexo-deployer-git -save</span><br><span class="line"><span class="comment"># 推送到远端</span></span><br><span class="line">$ hexo g &amp;&amp; gulp hexo d</span><br></pre></td></tr></table></figure>
+
+<h4 id="10文章访问统计"><a href="#10文章访问统计" class="headerlink" title="10文章访问统计"></a>10文章访问统计</h4><p>使用<code>LeanCloud (China)</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"> npm install hexo-leancloud-counter-security</span><br><span class="line"> <span class="comment">#hexo 站点进行配置</span></span><br><span class="line"> leancloud_counter_security:</span><br><span class="line">  enable_sync: <span class="literal">true</span></span><br><span class="line">  app_id: &lt;your app id&gt;</span><br><span class="line">  app_key: &lt;your app key&gt;</span><br><span class="line">  username: &lt;your username&gt; <span class="comment"># Will be asked while deploying if is left blank</span></span><br><span class="line">  password: &lt;your password&gt; <span class="comment"># Recommmended to be left blank. Will be asked while deploying if is left blank</span></span><br><span class="line"><span class="comment"># 主题配置文件</span></span><br><span class="line">leancloud_visitors:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></span><br><span class="line">  app_id: <span class="comment">#&lt;app_id&gt;</span></span><br><span class="line">  app_key: <span class="comment">#&lt;app_key&gt;</span></span><br><span class="line">  <span class="comment"># Required for apps from CN region</span></span><br><span class="line">  server_url: <span class="comment"># &lt;your server url&gt;</span></span><br><span class="line">  <span class="comment"># Dependencies: https://github.com/theme-next/hexo-leancloud-counter-security</span></span><br><span class="line">  <span class="comment"># If you don't care about security in lc counter and just want to use it directly</span></span><br><span class="line">  <span class="comment"># (without hexo-leancloud-counter-security plugin), set the `security` to `false`.</span></span><br><span class="line">  security: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>使用<code>Busuanzi</code></p>
+<p>开启主题配置文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">busuanzi_count:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></span><br><span class="line">  total_visitors: <span class="literal">true</span></span><br><span class="line">  total_visitors_icon: user</span><br><span class="line">  total_views: <span class="literal">true</span></span><br><span class="line">  total_views_icon: eye</span><br><span class="line">  post_views: <span class="literal">true</span></span><br><span class="line">  post_views_icon: eye</span><br></pre></td></tr></table></figure>
+
+<p>修改主题文件中swig文件实现自定义</p>
+<p><code>\themes\next\layout\_third-party\statistics\busuanzi-counter.swig</code></p>
+<p>修改文章顶部栏目</p>
+<p><code>\themes\next\layout\_macro\post.swig</code></p>
+<h3 id="11-参考"><a href="#11-参考" class="headerlink" title="11.参考"></a>11.参考</h3><ol>
+<li>遇见西门 <a href="https://www.simon96.online/2018/10/12/hexo-tutorial/" target="_blank" rel="noopener">https://www.simon96.online/2018/10/12/hexo-tutorial/</a> </li>
+<li>Next  <a href="https://theme-next.org/docs/" target="_blank" rel="noopener">https://theme-next.org/docs/</a> </li>
+<li>git仓库推送 <a href="https://blog.csdn.net/wankui/article/details/53328369" target="_blank" rel="noopener">https://blog.csdn.net/wankui/article/details/53328369</a> </li>
+</ol>
+]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo文章书写规范</title>
+    <url>/codeHub/2020/03/23/05hexo%E6%96%87%E7%AB%A0%E5%8F%91%E5%B8%83/</url>
+    <content><![CDATA[<h2 id="文章书写规范"><a href="#文章书写规范" class="headerlink" title="文章书写规范"></a>文章书写规范</h2><h3 id="1-生成一篇空白markdown文件"><a href="#1-生成一篇空白markdown文件" class="headerlink" title="1.生成一篇空白markdown文件"></a>1.生成一篇空白markdown文件</h3><ul>
+<li>在生成新的markdown时，加上数字编号，以便以后方便查看</li>
+<li>当然在文章属性栏，把数字去掉这样在网页上就不会看到这个编号了</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new <span class="string">"05hexo文章发布"</span></span><br></pre></td></tr></table></figure>
+
+<p>空白mrakdown生成后便如下所示:</p>
+<p><img data-src="https://43423.oss-cn-beijing.aliyuncs.com/img/20200323104754.png" alt="空白文件"></p>
+<h3 id="2-给文章分类或者加标签"><a href="#2-给文章分类或者加标签" class="headerlink" title="2.给文章分类或者加标签"></a>2.给文章分类或者加标签</h3><ul>
+<li>在文章属性栏进行修改，一篇文章可以有多个分类和标签</li>
+<li>注意<code>-</code>和标签名之间的空格</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">title: 05hexo文章发布</span><br><span class="line">comments: <span class="literal">true</span></span><br><span class="line">author: zpliu</span><br><span class="line">date: 2020-03-23 10:10:41</span><br><span class="line">categories:</span><br><span class="line">	- RNA-seq</span><br><span class="line">	- Circos</span><br><span class="line">Tags:</span><br><span class="line"> 	- hexo</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-创建新的标签或者分类"><a href="#3-创建新的标签或者分类" class="headerlink" title="3.创建新的标签或者分类"></a>3.创建新的标签或者分类</h3><p>当你写好一篇文章后发现没有你想要的分类或者标签时，可以自己手动创建对应的标签或者分类</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new page <span class="string">"新的标签名"</span></span><br></pre></td></tr></table></figure>
+
+<p>创建好后修改对应的标签文件<code>source/新的标签名/index.md</code></p>
+<ul>
+<li>如果是标签则增加<code>type</code>属性为<code>tags</code></li>
+<li>如果是分类则增加<code>rype</code>属性为<code>catrgories</code></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">title: 新的标签名</span><br><span class="line">date: 2020-03-22 21:56:41</span><br><span class="line"><span class="built_in">type</span>: tags</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-文章书写好后进行发布"><a href="#4-文章书写好后进行发布" class="headerlink" title="4.文章书写好后进行发布"></a>4.文章书写好后进行发布</h3><p>首先在将云端源代码全部pull下来</p>
+<blockquote>
+<p>因为这个项目是多个人共同编辑的，你需要将别人写好的源代码同样的拉到本地，进行编译</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git pull origin <span class="built_in">source</span></span><br></pre></td></tr></table></figure>
+
+<p>在将源代码更新到最新状态后，对markdown文件进行编译</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">gulp </span><br><span class="line">hexo d --message <span class="string">"comments"</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-上传源代码"><a href="#5-上传源代码" class="headerlink" title="5.上传源代码"></a>5.上传源代码</h3><p>在发布完成后，同样的需要将你的源代码上传到仓库中，因为其他人在发布文章的时候同样需要用到你的源代码进行编译</p>
+<p>使用命令<code>git status</code>查看当前源代码仓库文件变动</p>
+<p>可以看到在文章书写好后，源代码仓库中多了一个markdown文件，这个文件就需要提交到云端源码仓库</p>
+<p><img data-src="https://43423.oss-cn-beijing.aliyuncs.com/img/20200323110839.png" alt="y源代码变动"></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">"上传源代码 文章书写规范"</span></span><br><span class="line">git psuh origin <span class="built_in">source</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>有两点需要注意的是：</p>
+<p>①对于仓库中一下文件不需要做修改</p>
+<ul>
+<li><code>theme/</code>下所有文件</li>
+<li><code>_confg.yml</code>文件</li>
+</ul>
+<p>②每次修改文章之前都必须要通过命令<code>git  pull origin  source</code>把云端最新的源代码拉下来，然后再进行修改，同时建议每次写文章都要先打草稿，用尽可能短的时间对hexo进行修改发布。</p>
+<p>以上就完成了文章的发布，尽情享受hexo带来的便捷吧!</p>
+]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>04vscode与服务端R交互</title>
+    <url>/codeHub/2020/03/22/04vscode%E4%B8%8E%E6%9C%8D%E5%8A%A1%E7%AB%AFR%E4%BA%A4%E4%BA%92/</url>
+    <content><![CDATA[<span class="label success">vscode</span> 一款让人爱不释手的IDE，也是前端工程师一大杀器。在window上使用R对数据进行操作，当数据量太大的时候，电脑就会吃不消；而服务端的R一看起来就灰常的枯燥。加上最近vscode增加了对R语言的支持，使得在vscode中编写R脚本变成现实，vscode多session的特点使得能够同时打开多个窗口使用服务端的R进行大数据的计算。
+
+<a id="more"></a>
+
+<p>服务端R使用常见3种方法</p>
+<ul>
+<li>1.<code>Rstudio-server</code>建立网页版的Rstudio，需要管理员权限</li>
+<li>2.使用conda安装Rstudio，再使用x-manger将信号转发，软件收费</li>
+<li>3.使用vscode与连接服务器，直接与服务端进行交互</li>
+</ul>
+<p>我使用的是第3种方法</p>
+<h3 id="1-vscode安装插件"><a href="#1-vscode安装插件" class="headerlink" title="1.vscode安装插件"></a>1.vscode安装插件</h3><p>使用<code>Remote-SSH</code>插件连接服务器</p>
+<ul>
+<li>点击魔方图标，搜索关键字<code>remote-ssh</code></li>
+<li>下载对应的插件即可</li>
+</ul>
+<p><img data-src="https://s2.ax1x.com/2020/03/07/3XwhHP.png" alt="插件下载"></p>
+<h3 id="2-使用Remote-SSH连接·服务器"><a href="#2-使用Remote-SSH连接·服务器" class="headerlink" title="2.使用Remote-SSH连接·服务器"></a>2.使用<code>Remote-SSH</code>连接·服务器</h3><h4 id="2-1如下所示进行信息的配置"><a href="#2-1如下所示进行信息的配置" class="headerlink" title="2.1如下所示进行信息的配置"></a>2.1如下所示进行信息的配置</h4><p> <img data-src="https://s2.ax1x.com/2020/03/07/3Xdbex.png" alt="3Xdbex.png"></p>
+<h4 id="2-2配置信息如下"><a href="#2-2配置信息如下" class="headerlink" title="2.2配置信息如下"></a>2.2配置信息如下</h4><ul>
+<li><p>如果存在墙的话，可以使用x-shell隧道将信号转发到本地</p>
+<p>参考 <a href="https://zpliu.gitbook.io/booknote/mysql/02sqlyog-ruan-jian-pei-zhi" target="_blank" rel="noopener">https://zpliu.gitbook.io/booknote/mysql/02sqlyog-ruan-jian-pei-zhi</a> 进行隧道转发</p>
+</li>
+</ul>
+<p><img data-src="https://s2.ax1x.com/2020/03/07/3XdfFU.png" alt="3XdfFU.png"></p>
+<h3 id="3-验证密码"><a href="#3-验证密码" class="headerlink" title="3.验证密码"></a>3.验证密码</h3><ul>
+<li>密码输入后就登录成功了</li>
+</ul>
+<p><img data-src="https://s2.ax1x.com/2020/03/07/3X02PU.png" alt="3X02PU.png"></p>
+<ul>
+<li><p>选择要显示的目录，这里需要再一次输入密码</p>
+<p><strong><em>这里选择<code>.vscode</code>目录是方便vscode根据文件的变化情况进行自动刷新</em></strong></p>
+</li>
+</ul>
+<p><img data-src="https://s2.ax1x.com/2020/03/07/3XBCIf.png" alt="3XBCIf.png"></p>
+<ul>
+<li>登录成功后的样子</li>
+</ul>
+<p><img data-src="https://s2.ax1x.com/2020/03/07/3XDOud.png" alt="3XDOud.png"></p>
+<h3 id="4-给服务器装vscode的插件"><a href="#4-给服务器装vscode的插件" class="headerlink" title="4.给服务器装vscode的插件"></a>4.给服务器装vscode的插件</h3><ul>
+<li><code>R</code></li>
+<li><code>R LSP Client</code></li>
+</ul>
+<p><img data-src="https://s2.ax1x.com/2020/03/07/3XsCIx.png" alt="3XsCIx.png"></p>
+<h4 id="4-1分别对插件R和R-LSP-Clint进行配置"><a href="#4-1分别对插件R和R-LSP-Clint进行配置" class="headerlink" title="4.1分别对插件R和R LSP Clint进行配置"></a>4.1分别对插件<code>R</code>和<code>R LSP Clint</code>进行配置</h4><ul>
+<li>主要就是将<strong>服务器端的R执行脚本绝对路径</strong>添加进去</li>
+</ul>
+<p><img data-src="https://s2.ax1x.com/2020/03/07/3XyY9K.png" alt="3XyY9K.png"></p>
+<ul>
+<li><code>R LSP Client</code>插件也是同样的进行配置</li>
+</ul>
+<h3 id="5-重启vscode"><a href="#5-重启vscode" class="headerlink" title="5.重启vscode"></a>5.重启vscode</h3><ul>
+<li>再次输出服务器密码进行登录</li>
+<li>在目录下创建一个新的<code>test.R</code>文件</li>
+</ul>
+<p><img data-src="https://s2.ax1x.com/2020/03/07/3X6yZ9.png" alt="3X6yZ9.png"></p>
+<ul>
+<li><p>在<code>test.R</code>文件中编写脚本</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">install.packages(<span class="string">"ggplot2"</span>)</span><br><span class="line"><span class="keyword">require</span>(ggplot2)</span><br><span class="line">qplot(carat, price, data = diamonds, xlab = <span class="string">"hhh"</span>, xlim = c(<span class="number">1</span>, <span class="number">5</span>))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>快捷键<code>ctrl + enter</code>按行执行脚本</p>
+</li>
+<li><p><code>ctrl + shift +s</code>执行整个文件</p>
+</li>
+</ul>
+<h4 id="5-1最终效果"><a href="#5-1最终效果" class="headerlink" title="5.1最终效果"></a>5.1最终效果</h4><ul>
+<li>vscode能够自动跟踪文件的变化，刷新图片进行显示</li>
+</ul>
+<p><img data-src="https://s2.ax1x.com/2020/03/07/3X6xsg.png" alt="3X6xsg.png"></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li><a href="https://www.jianshu.com/p/0740b08e2a37" target="_blank" rel="noopener">https://www.jianshu.com/p/0740b08e2a37</a> </li>
+<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Frenkun.me%2F2019%2F12%2F11%2Fwriting-r-in-vscode-a-fresh-start%2F" target="_blank" rel="noopener">Writing R in VSCode: A Fresh Start</a></li>
+<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Frenkun.me%2F2019%2F12%2F26%2Fwriting-r-in-vscode-interacting-with-an-r-session%2F" target="_blank" rel="noopener">Writing R in VSCode: Interacting with an R session</a></li>
+<li><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fcode.visualstudio.com%2Fdocs%2Fremote%2Fssh" target="_blank" rel="noopener">Remote Development using SSH</a></li>
+<li>[Quick start: SSH key](</li>
+</ol>
+]]></content>
+      <categories>
+        <category>实用工具</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>circos作图基础</title>
+    <url>/codeHub/2020/03/22/03circos%E4%BD%9C%E5%9B%BE%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<h2 id="circos的简介"><a href="#circos的简介" class="headerlink" title="circos的简介"></a>circos的简介</h2><p>​    众所周知，生物信息学是一个以庞大的数据量为基础的学科，这也就是使得结果的可视化变得有些困难，随着生物信息的发展，其辅助分析工具也迅速增多，Martin Krzywinski等人开发的Circos就在一定程度上解决了可视化困难这个问题。Circos是一个可视化数据和信息的软件包。它以圆形布局可视化数据——这使得Circos非常适合探索对象或位置之间的关系。它是创建高质量信息图表和插图的理想工具，具有丰富的分层数据和令人愉快的对称性。你可以根据你的受众调整其焦点和细节并且可以很好地控制图中的每个元素，此外，其具备高度自动化的特点，是由纯文本配置文件控制，十分的方便快捷。</p>
+<a id="more"></a>
+
+<h2 id="circos的安装"><a href="#circos的安装" class="headerlink" title="circos的安装"></a>circos的安装</h2><p>​    首先在<a href="http://circos.ca/software/download/circos/" target="_blank" rel="noopener">这里</a>下载到最新的Circos软件包，这里主要介绍linux版本，Circos本身是基于Perl的，所以不需要编译安装。解压下载的软件包到你想要存放的位置，并将circos/bin加入环境变量即可。它依赖较多的Perl模块，可以用<code>circos -module</code>查看相关Perl模块的安装情况。如果全部安装完毕，结果如图所示</p>
+<p><img data-src="https://s1.ax1x.com/2020/03/21/8RAyfP.png" alt="8RAyfP.png"></p>
+<p>如果安装模块儿出现问题，别着急，之后会有文章详细介绍模块儿的安装哦</p>
+<h2 id="样本的运行测试"><a href="#样本的运行测试" class="headerlink" title="样本的运行测试"></a>样本的运行测试</h2><p>​    Circos包里有自己的demo，可通过<code>circos -conf yourpath/circos/example/etc/circos.conf</code>来运行，如果你成功的在命令行当前目录下生成png和svg两个图形文件。如下图所示，那么恭喜你已经完成了第一步并且得到了一个十分漂亮的图。</p>
+<p><img data-src="https://s1.ax1x.com/2020/03/21/8RAIkn.png" alt="8RAIkn.png"></p>
+<h2 id="数据文件格式"><a href="#数据文件格式" class="headerlink" title="数据文件格式"></a>数据文件格式</h2><p>circos主要有四个模块儿需要输入数据文件，包括karyotype以及highlight、plot、link，其格式都相对简单，编辑起来也不麻烦。</p>
+<p>我们来看karyotype这个数据文件，这个文件记载了染色体的相关信息，其基本数据格式如下</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chr - ID LABEL START END COLOR	</span><br><span class="line">chr - hs1 1 0 249250621 chr1</span><br><span class="line">chr - hs2 2 0 243199373 chr2</span><br><span class="line">chr - hs3 3 0 198022430 chr3</span><br><span class="line">chr - hs4 4 0 191154276 chr4</span><br><span class="line">chr - hs5 5 0 180915260 chr5</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>这里第一列和第二列一般都是固定的</p>
+<p>ID是染色体的名称，一定是你课题中使用的染色体名称</p>
+<p>LABEL是在图中显示的染色体名称</p>
+<p>START、END尽量覆盖全长，其他的控制文件可以控制画出来的长度</p>
+<p>最后一列的color可以随心所欲的自己控制</p>
+<h2 id="配置文件的书写"><a href="#配置文件的书写" class="headerlink" title="配置文件的书写"></a>配置文件的书写</h2><h3 id="最简配置文件"><a href="#最简配置文件" class="headerlink" title="最简配置文件"></a>最简配置文件</h3><p>配置文件至少需要五个部分，</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># Karyotypes</span><br><span class="line">karyotype &#x3D; data&#x2F;karyotype&#x2F;karyotype.human.txt</span><br><span class="line"></span><br><span class="line"># Ideograms</span><br><span class="line">&lt;ideogram&gt;</span><br><span class="line"></span><br><span class="line">&lt;spacing&gt;</span><br><span class="line">default		&#x3D; 0.002r</span><br><span class="line">&lt;&#x2F;spacing&gt;</span><br><span class="line"></span><br><span class="line">thickness	&#x3D; 25p</span><br><span class="line">fill		&#x3D; yes</span><br><span class="line">radius		&#x3D; 0.80r</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;ideogram&gt;</span><br><span class="line"></span><br><span class="line"># Image</span><br><span class="line">&lt;image&gt;</span><br><span class="line">&lt;&lt;include etc&#x2F;image.conf&gt;&gt;</span><br><span class="line">&lt;&#x2F;image&gt;</span><br><span class="line"></span><br><span class="line"># RGB&#x2F;HSV color definitions, color lists, location of fonts, fill patterns.</span><br><span class="line">&lt;&lt;include etc&#x2F;colors_fonts_patterns.conf&gt;&gt;</span><br><span class="line"></span><br><span class="line"># Debugging, I&#x2F;O and other system parameters</span><br><span class="line">&lt;&lt;include etc&#x2F;housekeeping.conf&gt;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>我们可以在…/circos-0.69-9/example/etc/下面创建一个test文件夹来逐渐学习我们的配置文件，在test文件夹下创建一个新的circos.conf文件，并将上述代码复制进去，并执行下列指令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">circos -conf ./circos.conf</span><br></pre></td></tr></table></figure>
+
+<p>就可以得到这样的一张图片</p>
+<p><img data-src="https://s1.ax1x.com/2020/03/21/8RAcSf.png" alt="8RAcSf.png"></p>
+<p>下面我们就对上述代码中涉及到模块儿进行学习，包括karyotype、ideogram、ticks等模块。</p>
+<h3 id="Karyotype"><a href="#Karyotype" class="headerlink" title="Karyotype"></a>Karyotype</h3><p>Karyotype的信息就如同坐标轴一般，其大小、顺序、位置等直接决定了后续数据的展示。这里我们新建一个karyotype.conf文件用来设置karyotype的相关信息，主要设置的参数包括数据文件来源、是否使用特定染色体、染色体显示的单位大小（unit）、颜色、图中半径等，我们可以在我们的circos.conf中使用&lt;<include karyotype.conf>&gt;来进行调用，karyotype.conf文件的具体格式如下</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 指定数据文件的位置，这里共使用了人类的数据</span><br><span class="line">karyotype &#x3D; data&#x2F;karyotype&#x2F;karyotype.human.txt</span><br><span class="line">chromosomes_display_default &#x3D; no</span><br><span class="line"># 使用哪些染色体，这里可以使用正则表达式</span><br><span class="line">chromosomes	&#x3D; &#x2F;hs[12345678XY]$&#x2F; #匹配以[]中的字符结尾的</span><br><span class="line"># 染色体排序方式</span><br><span class="line">chromosomes_order_by_karyotype	&#x3D; yes</span><br><span class="line"># 染色体单位大小，在后续进行ticks等的设置时都会参考</span><br><span class="line">chromosomes_units	&#x3D; 1000000</span><br><span class="line"># 设置染色体颜色，不指定则用默认设置</span><br><span class="line">chromosomes_color	&#x3D; </span><br><span class="line"># 将染色体反向排列,将所需反向排列的染色体名称写在下面即可</span><br><span class="line">chromosomes_reverse	&#x3D; hs1</span><br><span class="line"># 改变染色体在circos环图内所占比例</span><br><span class="line">chromosomes_scale	&#x3D; hs1:0.25r;hs2:0.25r</span><br><span class="line"># 改变染色体在circos环图内半径大小，如图中右上角</span><br><span class="line">chromosomes_radius	&#x3D; hs1:1.15r;hs2:1.05r</span><br></pre></td></tr></table></figure>
+
+<p>图片会变成下面这个样子</p>
+<p><img data-src="https://s1.ax1x.com/2020/03/21/8RAhwj.png" alt="8RAhwj.png"></p>
+<h3 id="Ideogram"><a href="#Ideogram" class="headerlink" title="Ideogram"></a>Ideogram</h3><p>Ideogram主要是karyotype相关的其它一些基本显示信息的设置，包括线条颜色、粗细、间隔，标签位置、字体等，这里我们新建一个ideogram.conf文件用来管理ideogram的相关信息。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;ideogram&gt;</span><br><span class="line"></span><br><span class="line">&lt;spacing&gt;</span><br><span class="line">default &#x3D; 0.002r</span><br><span class="line">&lt;&#x2F;spacing&gt;</span><br><span class="line"></span><br><span class="line"># Ideogram position, fill and outline</span><br><span class="line">radius           &#x3D; 0.80r</span><br><span class="line">thickness        &#x3D; 20p</span><br><span class="line">fill             &#x3D; yes</span><br><span class="line">stroke_color     &#x3D; dgrey</span><br><span class="line">stroke_thickness &#x3D; 4p</span><br><span class="line"></span><br><span class="line">#显示label</span><br><span class="line">show_label       &#x3D; yes</span><br><span class="line">label_font       &#x3D; default </span><br><span class="line">## label位置在圈外侧50像素</span><br><span class="line">label_radius     &#x3D; dims(ideogram,radius_outer) + 50p</span><br><span class="line">label_size       &#x3D; 30</span><br><span class="line"># label与karyotype平行</span><br><span class="line">label_parallel   &#x3D; yes</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;ideogram&gt;</span><br></pre></td></tr></table></figure>
+
+<p>我们的圈图就变成了下面这个样子</p>
+<p><img data-src="https://s1.ax1x.com/2020/03/21/8RAROg.png" alt="8RAROg.png"></p>
+<h3 id="Ticks"><a href="#Ticks" class="headerlink" title="Ticks"></a>Ticks</h3><p>Ticks主要是指坐标刻度和区块分隔线等，可以针对不同尺度设置不同的刻度显示方式。需要注意的是，Circos是由大至小进行刻度标识的，因此大尺度的刻度显示方式会替换小尺度。这里我们新建一个ticks.conf文件来设置相关信息</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 是否显示ticks</span><br><span class="line">show_ticks &#x3D; yes</span><br><span class="line"># 是否显示ticks的lables</span><br><span class="line">show_tick_labels &#x3D; yes</span><br><span class="line">#子程序ticks的设置</span><br><span class="line">&lt;ticks&gt;</span><br><span class="line"># ticks的位置</span><br><span class="line">radius &#x3D; 1r</span><br><span class="line"># ticks的颜色</span><br><span class="line">color &#x3D; black</span><br><span class="line"># ticks的厚度</span><br><span class="line">thickness &#x3D; 2p</span><br><span class="line">multiplier &#x3D; 1e-6</span><br><span class="line"># label 值的格式化方法。%d 表示结果为整数；%f 结果为浮点数； %.1f 结果为小数点后保留1位； %.2f 结果为小数点后保留2位。</span><br><span class="line">format &#x3D; %d</span><br><span class="line">## 以下设置了 2 个 ticks，前者是小刻度，后者是大刻度。</span><br><span class="line">&lt;tick&gt;</span><br><span class="line"># 设置每个刻度代表的长度。若其单位为 u，则必须要设置 chromosomes_units 参数。比如设置 chromosomes_units &#x3D; 1000000，则如下 5u 表示每个刻度代表 5M 长度的基因组序列。</span><br><span class="line">spacing &#x3D; 5u</span><br><span class="line"># 设置 tick 的长度</span><br><span class="line">size &#x3D; 10p</span><br><span class="line">&lt;&#x2F;tick&gt;</span><br><span class="line">&lt;tick&gt;</span><br><span class="line">spacing &#x3D; 25u</span><br><span class="line">size &#x3D; 15p</span><br><span class="line"># 以下用于设置展示 ticks&#39; label。</span><br><span class="line">show_label &#x3D; yes</span><br><span class="line"># 设置 ticks&#39; label 的字体大小</span><br><span class="line">label_size &#x3D; 20p</span><br><span class="line"># 设置 ticks&#39; label 离 ticks 的距离</span><br><span class="line">label_offset &#x3D; 10p</span><br><span class="line">format &#x3D; %d</span><br><span class="line">&lt;&#x2F;tick&gt;</span><br><span class="line">&lt;&#x2F;ticks&gt;</span><br></pre></td></tr></table></figure>
+
+<p>此外需要将上一个板块儿中的参数50p改为250p，否则ticks会与染色体的label重叠</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">label_radius     &#x3D; dims(ideogram,radius_outer) + 250p</span><br></pre></td></tr></table></figure>
+
+<p>最终我们就得到的圈图，如下图所示</p>
+<p><img data-src="https://s1.ax1x.com/2020/03/21/8RAfmQ.png" alt="8RAfmQ.png"></p>
+<p>最后我们的配置circos.conf文件就变成了</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#karyotypes</span><br><span class="line">&lt;&lt;include karyotype.conf&gt;&gt;</span><br><span class="line"></span><br><span class="line"># Ideograms</span><br><span class="line">&lt;&lt;include ideogram.conf&gt;&gt;</span><br><span class="line"></span><br><span class="line"># Image</span><br><span class="line">&lt;image&gt;</span><br><span class="line">&lt;&lt;include etc&#x2F;image.conf&gt;&gt;</span><br><span class="line">&lt;&#x2F;image&gt;</span><br><span class="line"></span><br><span class="line">#Ticks</span><br><span class="line">&lt;&lt;include ticks.conf&gt;&gt;</span><br><span class="line"></span><br><span class="line"># RGB&#x2F;HSV color definitions, color lists, location of fonts, fill patterns.</span><br><span class="line">&lt;&lt;include etc&#x2F;colors_fonts_patterns.conf&gt;&gt;</span><br><span class="line"></span><br><span class="line"># Debugging, I&#x2F;O and other system parameters</span><br><span class="line">&lt;&lt;include etc&#x2F;housekeeping.conf&gt;&gt;</span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>Circos</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>基因差异表达分析</title>
+    <url>/codeHub/2020/03/22/02%E5%9F%BA%E5%9B%A0%E5%B7%AE%E5%BC%82%E8%A1%A8%E8%BE%BE%E5%88%86%E6%9E%90/</url>
+    <content><![CDATA[<h1 id="差异表达基因"><a href="#差异表达基因" class="headerlink" title="差异表达基因"></a>差异表达基因</h1><p>​    生物学上不同样本之间的表达差异时服从负二项分布的，RNA-seq中得到的基因表达水平是抽样过程中的一种离散形式。在测得的reads总量一定的情况下，表达水平越高的基因在抽样过程中所占的比例就越高，有些低表达的基因也有可能无法被检测出来。在得到基因的表达量之后，根据实验设计对不同样本之间基因进行差异表达分析</p>
+<ol>
+<li>同物种、不同组织间的比较</li>
+<li>同一物种、同一组织、在不同处理下的比较</li>
+<li>同一组织、不同物种间的比较</li>
+<li>同一组织在不同时期间的比较</li>
+</ol>
+<p>​    通过差异表达分析，发现组织特异性、时期特异性、物种特异性的基因表达模式。通过GO功能富集、KEGG分析发现基因在细胞中参与的代谢和具体的功能、基因与基因之间的互作等。</p>
+<a id="more"></a>
+
+<h3 id="1-reads计数"><a href="#1-reads计数" class="headerlink" title="1.reads计数"></a>1.reads计数</h3><p>​    使用python包HTseq对统计每个基因比对到的read数</p>
+<h4 id="1-1软件安装"><a href="#1-1软件安装" class="headerlink" title="1.1软件安装"></a>1.1软件安装</h4><p>​    非root用户需要使用<code>--user</code>参数</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip3 install HTSeq --user</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-2统计基因比对上的read数"><a href="#1-2统计基因比对上的read数" class="headerlink" title="1.2统计基因比对上的read数"></a>1.2统计基因比对上的read数</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">htseq-count  -f bam -r pos -t exon -i gene_id  -m union -q  1_1_5_rmdup.bam genome.gtf &gt;count.txt</span><br></pre></td></tr></table></figure>
+
+<p>​    <strong>命令参数如下</strong>：</p>
+<ul>
+<li><code>-f | --format</code>设置输入文件格式，默认sam</li>
+<li><code>-r | --order</code> 设置输入文件排序方式，默认按照read name排序</li>
+<li><code>-s | --stranded</code>是否链特异性建库，默认yes</li>
+<li><code>-a | --a</code>设置质量阀值，默认忽略比对质量低于10的read</li>
+<li><code>-t | --type</code>对gtf或者gff文件中指定feature计算，默认exon</li>
+<li><code>-i | --idattr</code>设置feature id，通常是指第9列中，多个exon共有的gene属性如gene_id</li>
+<li><code>-m | --mode default: union</code>设置统计模式</li>
+<li><code>-o | --samout</code>输出一个sam文件，比对结果中多一个XF标签比对到的feature id。</li>
+<li><code>-q | --quiet</code> 不输出程序运行的状态信息和警告信息</li>
+<li><code>-h | --help</code>输出帮助信息。</li>
+</ul>
+<p><img data-src="https://upload-images.jianshu.io/upload_images/6049898-721e9cbe006abbe3.png" alt="计数模式图"></p>
+<h4 id="1-3输出结果"><a href="#1-3输出结果" class="headerlink" title="1.3输出结果"></a>1.3输出结果</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Ghir_A01G000010	11</span><br><span class="line">Ghir_A01G000020	10</span><br><span class="line">Ghir_A01G000030	20</span><br><span class="line">Ghir_A01G000040	139</span><br><span class="line">Ghir_A01G000050	9</span><br><span class="line">Ghir_A01G000060	52</span><br><span class="line">Ghir_A01G000070	68</span><br><span class="line">__no_feature	8716242</span><br><span class="line">__ambiguous	157518</span><br><span class="line">__too_low_aQual	0</span><br><span class="line">__not_aligned	0</span><br><span class="line">__alignment_not_unique	0</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-4批量提交任务"><a href="#1-4批量提交任务" class="headerlink" title="1.4批量提交任务"></a>1.4批量提交任务</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> `ls `</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">bsub -J htseqCount -q <span class="string">"smp"</span> -n 1 -R span[hosts=1] -e htseqCount.err -o htseqCount.out <span class="string">"bash htseqcount.sh <span class="variable">$&#123;i&#125;</span>"</span></span><br><span class="line">sleep 1</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-样品无重复"><a href="#2-样品无重复" class="headerlink" title="2.样品无重复"></a>2.样品无重复</h3><p>​    使用DESeq包，对于技术重复作者推荐将两个技术重复的read进行加和后作为样本的read数</p>
+<blockquote>
+<p> For technical replicates (e. g. when the same library preparation was distributed over multiple lanes of the sequencer), please sum up their counts to get a single column, corresponding to a unique biological replicate.  </p>
+</blockquote>
+<h4 id="2-1读取原始read数据"><a href="#2-1读取原始read数据" class="headerlink" title="2.1读取原始read数据"></a>2.1读取原始read数据</h4><p>​    其中行名为基因名，列名为样本名</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">	untreated3 untreated4 treated2 treated3</span><br><span class="line">FBgn0000003 0 0 0 1</span><br><span class="line">FBgn0000008 76 70 88 70</span><br><span class="line">FBgn0000014 0 0 0 0</span><br><span class="line">FBgn0000015 1 2 0 0</span><br><span class="line">FBgn0000017 3564 3150 3072 3334</span><br><span class="line">FBgn0000018 245 310 299 308</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2补充样品分组信息"><a href="#2-2补充样品分组信息" class="headerlink" title="2.2补充样品分组信息"></a>2.2补充样品分组信息</h4><p>​    第一列与第二列属于<code>untreated</code>处理的两个重复</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">condition = factor( c( <span class="string">"untreated"</span>, <span class="string">"untreated"</span>, <span class="string">"treated"</span>, <span class="string">"treated"</span> ) )</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-3将分组信息与read表进行合并"><a href="#2-3将分组信息与read表进行合并" class="headerlink" title="2.3将分组信息与read表进行合并"></a>2.3将分组信息与read表进行合并</h4><figure class="highlight r"><table><tr><td class="code"><pre><span class="line">&gt; <span class="keyword">library</span>( <span class="string">"DESeq"</span> )</span><br><span class="line">&gt; cds = newCountDataSet( countTable, condition )</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-4对不同处理进行标准化"><a href="#2-4对不同处理进行标准化" class="headerlink" title="2.4对不同处理进行标准化"></a>2.4对不同处理进行标准化</h4><p>​    通过<code>estimateSizeFactors( cds )</code>函数来计算不同处理间测序深度是否存在较大的差异</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">cds=estimateSizeFactors( cds )</span><br><span class="line">counts(cds, normalized = <span class="literal">TRUE</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-5估计离散度"><a href="#2-5估计离散度" class="headerlink" title="2.5估计离散度"></a>2.5估计离散度</h4><ul>
+<li>这里由于没有重复需要使用<code>method= &quot;blind&quot;, sharingMode = &quot;fit-only&quot;</code>参数</li>
+</ul>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">cds &lt;- estimateDispersions(cds, method = <span class="string">"blind"</span>, sharingMode = <span class="string">"fit-only"</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-6差异分析"><a href="#2-6差异分析" class="headerlink" title="2.6差异分析"></a>2.6差异分析</h4><p>​    后两个参数是指定需要比较的样品</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">res = nbinomTest( cds, <span class="string">"untreated"</span>, <span class="string">"treated"</span> )</span><br><span class="line"><span class="comment">## 绘制数据的分布情况</span></span><br><span class="line">plotMA(res)</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="https://s1.ax1x.com/2020/03/17/8t6jXV.png" alt="数据分布"></p>
+<h4 id="2-7输出结果"><a href="#2-7输出结果" class="headerlink" title="2.7输出结果"></a>2.7输出结果</h4><ul>
+<li><code>id feature</code> identifier baseMean mean normalised counts, averaged over all samples from both conditions +</li>
+<li><code>baseMeanA</code> mean normalised counts from condition A </li>
+<li><code>baseMeanB</code>mean normalised counts from condition B foldChange </li>
+<li><code>fold change</code> from condition A to B </li>
+<li><code>log2FoldChange</code> the logarithm (to basis 2) of the fold change </li>
+<li><code>pval</code>p value for the statistical significance of this change </li>
+<li><code>padj</code>p value adjusted for multiple testing with the Benjamini-Hochberg procedure (see the R function p.adjust), which controls false discovery rate (FDR)  </li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">id baseMean baseMeanA baseMeanB foldChange log2FoldChange pval padj</span><br><span class="line">1 FBgn0000003 0.224 0.00 0.449 Inf Inf 1.000 1.000</span><br><span class="line">2 FBgn0000008 76.296 78.16 74.436 0.952 -0.0704 0.835 1.000</span><br><span class="line">3 FBgn0000014 0.000 0.00 0.000 NaN NaN NA NA</span><br><span class="line">4 FBgn0000015 0.781 1.56 0.000 0.000 -Inf 0.416 1.000</span><br><span class="line">5 FBgn0000017 3298.682 3599.47 2997.890 0.833 -0.2638 0.241 0.881</span><br><span class="line">6 FBgn0000018 289.031 293.68 284.385 0.968 -0.0464 0.757 1.000</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-8筛选差异表达基因"><a href="#2-8筛选差异表达基因" class="headerlink" title="2.8筛选差异表达基因"></a>2.8筛选差异表达基因</h4><p>​    没有重复的样根据p-value来筛选差异表达的基因意义不大，所以直接对输出的结果用awk进行筛选。筛选的时候有三种情况</p>
+<ul>
+<li>两个样都有read比对上</li>
+<li>两个样中有一个样是没有read比对上，这种情况会使的log2foldcahnge为inf</li>
+<li>两个样中比对到的read都为0</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">awk -F <span class="string">"\t"</span> <span class="string">'NR&gt;=2&amp;&amp;$6!="Inf"&amp;&amp;$6!="NA"&amp;&amp;$6&gt;=1&#123;print $1"\tup"&#125;NR&gt;=2&amp;&amp;$6!="Inf"&amp;&amp;$6!="NA"&amp;&amp;$6&lt;=-1&#123;print $1"\tdown"&#125;'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 第三种情况相当于没有差异表达，不用考虑</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-样品有重复"><a href="#3-样品有重复" class="headerlink" title="3.样品有重复"></a>3.样品有重复</h3><p>​    推荐使用DESeq2包</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li>HTSeq仓库  <a href="https://github.com/simon-anders/htseq" target="_blank" rel="noopener">https://github.com/simon-anders/htseq</a> </li>
+<li>HTSeq使用文档  <a href="https://htseq.readthedocs.io/en/release_0.11.1/" target="_blank" rel="noopener">https://htseq.readthedocs.io/en/release_0.11.1/</a> </li>
+<li>HTSeq使用文档  <a href="https://www.cnblogs.com/triple-y/p/9338890.html" target="_blank" rel="noopener">https://www.cnblogs.com/triple-y/p/9338890.html</a> </li>
+<li>DESeq使用文档  <a href="https://bioconductor.org/packages/release/bioc/vignettes/DESeq/inst/doc/DESeq.pdf" target="_blank" rel="noopener">https://bioconductor.org/packages/release/bioc/vignettes/DESeq/inst/doc/DESeq.pdf</a> </li>
+</ol>
+]]></content>
+      <categories>
+        <category>RNA-seq</category>
+      </categories>
+  </entry>
+</search>
