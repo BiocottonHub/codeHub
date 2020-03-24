@@ -6,6 +6,8 @@
     <content><![CDATA[<h1 id="MCScanX的使用"><a href="#MCScanX的使用" class="headerlink" title="MCScanX的使用"></a>MCScanX的使用</h1><hr>
 <h2 id="MCScanX的简介"><a href="#MCScanX的简介" class="headerlink" title="MCScanX的简介"></a>MCScanX的简介</h2><p>MCScanX：Multiple Collinearity Scan toolkit是一种算法，扫描多个基因组或亚基因组，以识别假定的同源染色体区域，然后使用基因定位这些区域。它的速度很快，操作简单，便于使用，是我们在进行基因共线性分析时的一个利器。</p>
 <p>今天我们就来学习一下如何使用这个利器来帮助我们分析生物学问题</p>
+<a id="more"></a>
+
 <h2 id="MCScanX的下载与安装"><a href="#MCScanX的下载与安装" class="headerlink" title="MCScanX的下载与安装"></a>MCScanX的下载与安装</h2><p>下载软件</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget http://chibba.pgml.uga.edu/mcscan2/MCScanX.zip</span><br></pre></td></tr></table></figure>
 
@@ -71,7 +73,7 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">800	&#x2F;&#x2F;dimension (in pixels) of x axis</span><br><span class="line">800	&#x2F;&#x2F;dimension (in pixels) of y axis</span><br><span class="line">Ghir_A01,Ghir_A02,Ghir_A03,Ghir_A04,Ghir_A05,Ghir_A06,Ghir_A07,Ghir_A08,Ghir_A09,Ghir_A10,Ghir_A11,Ghir_A12,Ghir_A13	&#x2F;&#x2F;chromosomes in x axis</span><br><span class="line">Ghir_D01,Ghir_D02,Ghir_D03,Ghir_D04,Ghir_D05,Ghir_D06,Ghir_D07,Ghir_D08,Ghir_D09,Ghir_D10,Ghir_D11,Ghir_D12,Ghir_D13	&#x2F;&#x2F;chromosomes in y axis</span><br></pre></td></tr></table></figure>
 
 <p>主要修改的部分就是染色体名字，想画哪条染色体就把那一条染色体写进去就可以了，染色体名字要和gff文件中的染色体名字相同，然后运行代码</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">java dot_plotter -g At-Dt.gff -s At-Dt.collinearity -c dot.ctl -o At-Dtdot.PNG</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">java dot_plotter </span><br><span class="line">-g At-Dt.gff </span><br><span class="line">-s At-Dt.collinearity </span><br><span class="line">-c dot.ctl </span><br><span class="line">-o At-Dtdot.PNG</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>-g后面是gff文件</li>
@@ -80,19 +82,32 @@
 <li>-o是输出的文件名称</li>
 </ul>
 <p>各个文件的路径要指定明确，之后会得到图片如下</p>
-<p><img data-src="https://s1.ax1x.com/2020/03/24/8qbv6K.png" alt="At-Dtdot.PNG"></p>
+<img data-src="https://s1.ax1x.com/2020/03/24/8qbv6K.png" alt="At-Dtdot.PNG" style="zoom: 50%;" />
+
 <p>如果有使用Xshell运行上述代码时提示需要下载Xmanager的小伙伴，可以参考主页文章<a href="[https://biocottonhub.github.io/codeHub/2020/03/22/04vscode%E4%B8%8E%E6%9C%8D%E5%8A%A1%E7%AB%AFR%E4%BA%A4%E4%BA%92/](https://biocottonhub.github.io/codeHub/2020/03/22/04vscode与服务端R交互/)">04vscode与服务端R交互</a></p>
 <h3 id="dual-synteny-plotter"><a href="#dual-synteny-plotter" class="headerlink" title="dual_synteny_plotter"></a>dual_synteny_plotter</h3><p>dual_synteny.ctl文件</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">600     &#x2F;&#x2F;plot width (in pixels)</span><br><span class="line">800     &#x2F;&#x2F;plot height (in pixels)</span><br><span class="line">Ghir_A01      &#x2F;&#x2F;chromosomes in the left column</span><br><span class="line">Ghir_D01       &#x2F;&#x2F;chromosomes in the right column</span><br></pre></td></tr></table></figure>
 
 <p>指令如下</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">java dual_synteny_plotter -g At-Dt.gff -s At-Dt.collinearity -c dual_synteny.ctl -o At-Dtdual.PNG</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">java dual_synteny_plotter </span><br><span class="line">-g At-Dt.gff </span><br><span class="line">-s At-Dt.collinearity </span><br><span class="line">-c dual_synteny.ctl </span><br><span class="line">-o At-Dtdual.PNG</span><br></pre></td></tr></table></figure>
 
-<h3 id="circle-plotter"><a href="#circle-plotter" class="headerlink" title="circle_plotter"></a>circle_plotter</h3><p>指令如下</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">java circle_plotter -g ..&#x2F;At-Dt&#x2F;At-Dt.gff -s ..&#x2F;At-Dt&#x2F;At-Dt.collinearity -c circle.ctl -o circle.PNG</span><br></pre></td></tr></table></figure>
+<img data-src="https://s1.ax1x.com/2020/03/24/8LPmu9.png" alt="At-Dtdual.PNG" style="zoom:50%;" />
 
-<h3 id="bar-plotter"><a href="#bar-plotter" class="headerlink" title="bar_plotter"></a>bar_plotter</h3><p>指令如下</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">java bar_plotter -g ..&#x2F;At-Dt&#x2F;At-Dt.gff -s ..&#x2F;At-Dt&#x2F;At-Dt.collinearity -c bar.ctl -o bar.PNG</span><br></pre></td></tr></table></figure>
+<h3 id="circle-plotter"><a href="#circle-plotter" class="headerlink" title="circle_plotter"></a>circle_plotter</h3><p>circle.ctl文件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">800	&#x2F;&#x2F;plot width and height (in pixels)	</span><br><span class="line">Ghir_A01,Ghir_A02,Ghir_A03,Ghir_D01,Ghir_D02,Ghir_D03	&#x2F;&#x2F;chromosomes in the circle</span><br></pre></td></tr></table></figure>
+
+<p>指令如下</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">java circle_plotter </span><br><span class="line">-g At-Dt.gff </span><br><span class="line">-s At-Dt.collinearity </span><br><span class="line">-c circle.ctl </span><br><span class="line">-o At-Dtcircle.PNG</span><br></pre></td></tr></table></figure>
+
+<img data-src="https://s1.ax1x.com/2020/03/24/8LPnBR.png" alt="At-Dtcircle.PNG" style="zoom:50%;" />
+
+<h3 id="bar-plotter"><a href="#bar-plotter" class="headerlink" title="bar_plotter"></a>bar_plotter</h3><p>bar.ctl文件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">800     &#x2F;&#x2F;dimension (in pixels) of x axis</span><br><span class="line">800     &#x2F;&#x2F;dimension (in pixels) of y axis</span><br><span class="line">Ghir_A01,Ghir_A02,Ghir_A03      &#x2F;&#x2F;reference chromosomes</span><br><span class="line">Ghir_D01,Ghir_D02,Ghir_D03      &#x2F;&#x2F;target chromosomes</span><br></pre></td></tr></table></figure>
+
+<p>指令如下</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">java bar_plotter </span><br><span class="line">-g At-Dt.gff </span><br><span class="line">-s At-Dt.collinearity </span><br><span class="line">-c bar.ctl </span><br><span class="line">-o At-Dtbar.PNG</span><br></pre></td></tr></table></figure>
+
+<img data-src="https://s1.ax1x.com/2020/03/24/8LPZjJ.png" alt="At-Dtbar.PNG" style="zoom:50%;" />
 
 <p>至此我们就基本掌握MCScanX的用法，还有一些其他的下游分析，可以参考<a href="http://chibba.pgml.uga.edu/mcscan2/" target="_blank" rel="noopener">官网</a></p>
 <p>如果想画出更美观的图片，可以参考我们的后续文章，会教大家如何处理MCScanX的结果文件然后使用circos画出更好看的圈图</p>
