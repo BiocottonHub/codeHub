@@ -21,22 +21,18 @@
     var CONFIG = {"hostname":"biocottonhub.github.io","root":"/codeHub/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="文章书写规范1.生成一篇空白markdown文件 在生成新的markdown时，加上数字编号，以便以后方便查看 当然在文章属性栏，把数字去掉这样在网页上就不会看到这个编号了  1hexo new &quot;05hexo文章发布&quot;">
+  <meta name="description" content="ExonSkipDB: functional annotation of exon skipping event in human    Abstract在人类中，外显子跳跃事件是最常见的一种剪切事件，它通常会导致功能保守位点的缺失或者是ORF的偏移，最终导致多种疾病的产生。而迄今为止，基于癌症组织和正常组织来系统的、完整的注释人类中外显子事件，没有人做过。因此作者通过建立人类中外显子跳跃数">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hexo文章书写规范">
-<meta property="og:url" content="https://biocottonhub.github.io/codeHub/2020/03/23/05hexo%E6%96%87%E7%AB%A0%E5%8F%91%E5%B8%83/index.html">
+<meta property="og:title" content="ExonSkipDB 数据库">
+<meta property="og:url" content="https://biocottonhub.github.io/codeHub/2020/03/26/08ExonSkipDB-%E6%95%B0%E6%8D%AE%E5%BA%93/index.html">
 <meta property="og:site_name" content="Code Hub">
-<meta property="og:description" content="文章书写规范1.生成一篇空白markdown文件 在生成新的markdown时，加上数字编号，以便以后方便查看 当然在文章属性栏，把数字去掉这样在网页上就不会看到这个编号了  1hexo new &quot;05hexo文章发布&quot;">
+<meta property="og:description" content="ExonSkipDB: functional annotation of exon skipping event in human    Abstract在人类中，外显子跳跃事件是最常见的一种剪切事件，它通常会导致功能保守位点的缺失或者是ORF的偏移，最终导致多种疾病的产生。而迄今为止，基于癌症组织和正常组织来系统的、完整的注释人类中外显子事件，没有人做过。因此作者通过建立人类中外显子跳跃数">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://43423.oss-cn-beijing.aliyuncs.com/img/20200323104754.png">
-<meta property="og:image" content="https://43423.oss-cn-beijing.aliyuncs.com/img/20200323110839.png">
-<meta property="article:published_time" content="2020-03-23T02:10:41.000Z">
-<meta property="article:modified_time" content="2020-03-26T12:57:27.863Z">
-<meta property="article:tag" content="hexo">
+<meta property="article:published_time" content="2020-03-26T12:15:46.000Z">
+<meta property="article:modified_time" content="2020-03-26T15:23:05.403Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://43423.oss-cn-beijing.aliyuncs.com/img/20200323104754.png">
 
-<link rel="canonical" href="https://biocottonhub.github.io/codeHub/2020/03/23/05hexo%E6%96%87%E7%AB%A0%E5%8F%91%E5%B8%83/">
+<link rel="canonical" href="https://biocottonhub.github.io/codeHub/2020/03/26/08ExonSkipDB-%E6%95%B0%E6%8D%AE%E5%BA%93/">
 
 
 <script id="page-configurations">
@@ -49,7 +45,7 @@
   };
 </script>
 
-  <title>hexo文章书写规范 | Code Hub</title>
+  <title>ExonSkipDB 数据库 | Code Hub</title>
   
 
 
@@ -194,7 +190,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
-    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2020/03/23/05hexo%E6%96%87%E7%AB%A0%E5%8F%91%E5%B8%83/">
+    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2020/03/26/08ExonSkipDB-%E6%95%B0%E6%8D%AE%E5%BA%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/codeHub/uploads/themeImg/logo.png">
@@ -207,7 +203,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          hexo文章书写规范
+          ExonSkipDB 数据库
         </h1>
 
         <div class="post-meta">
@@ -217,23 +213,17 @@
                 <i class="fa fa-calendar-o"></i>发布于
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2020-03-23 10:10:41" itemprop="dateCreated datePublished" datetime="2020-03-23T10:10:41+08:00">2020-03-23</time>
+              <time title="Created: 2020-03-26 20:15:46 / Modified: 23:23:05" itemprop="dateCreated datePublished" datetime="2020-03-26T20:15:46+08:00">2020-03-26</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>修改于
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-26 20:57:27" itemprop="dateModified" datetime="2020-03-26T20:57:27+08:00">2020-03-26</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  分类于<a href="/codeHub/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a>
+                  分类于<a href="/codeHub/categories/%E6%96%87%E7%8C%AE/" itemprop="url" rel="index"><span itemprop="name">文献</span></a>
                 </span>
             </span>
 
@@ -253,8 +243,8 @@
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/codeHub/2020/03/23/05hexo%E6%96%87%E7%AB%A0%E5%8F%91%E5%B8%83/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2020/03/23/05hexo%E6%96%87%E7%AB%A0%E5%8F%91%E5%B8%83/" itemprop="commentCount"></span>
+    <a title="valine" href="/codeHub/2020/03/26/08ExonSkipDB-%E6%95%B0%E6%8D%AE%E5%BA%93/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2020/03/26/08ExonSkipDB-%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -269,57 +259,51 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="文章书写规范"><a href="#文章书写规范" class="headerlink" title="文章书写规范"></a>文章书写规范</h2><h3 id="1-生成一篇空白markdown文件"><a href="#1-生成一篇空白markdown文件" class="headerlink" title="1.生成一篇空白markdown文件"></a>1.生成一篇空白markdown文件</h3><ul>
-<li>在生成新的markdown时，加上数字编号，以便以后方便查看</li>
-<li>当然在文章属性栏，把数字去掉这样在网页上就不会看到这个编号了</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new <span class="string">"05hexo文章发布"</span></span><br></pre></td></tr></table></figure>
-
+        <blockquote>
+<p>  ExonSkipDB: functional annotation of exon skipping event in human  </p>
+</blockquote>
+<h3 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h3><p>在人类中，外显子跳跃事件是最常见的一种剪切事件，它通常会导致功能保守位点的缺失或者是ORF的偏移，最终导致多种疾病的产生。而迄今为止，基于癌症组织和正常组织来系统的、完整的注释人类中外显子事件，没有人做过。因此作者通过建立人类中外显子跳跃数据库，在外显子水平上，为研究多种癌症的治疗靶标提供功能注释和参考。作者从  TCGA  数据集和  GTEx  数据集中收集了33份癌症组织和31份正常组织数据，鉴定到了90616和89845个ES事件，对应于14272个基因。对于外显子跳跃事件，作者进行了多种功能注释，包括对ES事件产生的转录本的ORF预测，ES事件导致的蛋白功能丧失，ES事件与碱基突变、甲基化的关联。总的来说，ExonSkipDB数据库将会是用于研究癌症、药物发现的独特资源。</p>
 <a id="more"></a>
 
-<p>空白mrakdown生成后便如下所示:</p>
-<p><img data-src="https://43423.oss-cn-beijing.aliyuncs.com/img/20200323104754.png" alt="空白文件"></p>
-<h3 id="2-给文章分类或者加标签"><a href="#2-给文章分类或者加标签" class="headerlink" title="2.给文章分类或者加标签"></a>2.给文章分类或者加标签</h3><ul>
-<li>在文章属性栏进行修改，一篇文章可以有多个分类和标签</li>
-<li>注意<code>-</code>和标签名之间的空格</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">title: 05hexo文章发布</span><br><span class="line">comments: <span class="literal">true</span></span><br><span class="line">author: zpliu</span><br><span class="line">date: 2020-03-23 10:10:41</span><br><span class="line">categories:</span><br><span class="line">	- RNA-seq</span><br><span class="line">	- Circos</span><br><span class="line">Tags:</span><br><span class="line"> 	- hexo</span><br></pre></td></tr></table></figure>
 
 
-
-<h3 id="3-创建新的标签或者分类"><a href="#3-创建新的标签或者分类" class="headerlink" title="3.创建新的标签或者分类"></a>3.创建新的标签或者分类</h3><p>当你写好一篇文章后发现没有你想要的分类或者标签时，可以自己手动创建对应的标签或者分类</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page <span class="string">"新的标签名"</span></span><br></pre></td></tr></table></figure>
-
-<p>创建好后修改对应的标签文件<code>source/新的标签名/index.md</code></p>
-<ul>
-<li>如果是标签则增加<code>type</code>属性为<code>tags</code></li>
-<li>如果是分类则增加<code>rype</code>属性为<code>catrgories</code></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">title: 新的标签名</span><br><span class="line">date: 2020-03-22 21:56:41</span><br><span class="line"><span class="built_in">type</span>: tags</span><br></pre></td></tr></table></figure>
-
-<h3 id="4-文章书写好后进行发布"><a href="#4-文章书写好后进行发布" class="headerlink" title="4.文章书写好后进行发布"></a>4.文章书写好后进行发布</h3><p>首先在将云端源代码全部pull下来</p>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>逐渐累积的证据表明，可变剪切的破坏将会导致疾病的发生。在几种典型的剪切模式中，外显子跳跃是最常见的事件。由于ES将会导致保守功能域的丢失或者ORF的偏移，跳跃的外显子也被当做治疗的靶标。例如：</p>
 <blockquote>
-<p>因为这个项目是多个人共同编辑的，你需要将别人写好的源代码同样的拉到本地，进行编译</p>
+<p><strong><em>MET</em></strong> 基因第14个exon的skip导致E3 泛素连接酶不能结合，使得MET的表达水平增加，而MET表达的增加又驱动了癌细胞的扩增。</p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull origin <span class="built_in">source</span></span><br></pre></td></tr></table></figure>
-
-<p>在将源代码更新到最新状态后，对markdown文件进行编译</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">gulp </span><br><span class="line">hexo d --message <span class="string">"comments"</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="5-上传源代码"><a href="#5-上传源代码" class="headerlink" title="5.上传源代码"></a>5.上传源代码</h3><p>在发布完成后，同样的需要将你的源代码上传到仓库中，因为其他人在发布文章的时候同样需要用到你的源代码进行编译</p>
-<p>使用命令<code>git status</code>查看当前源代码仓库文件变动</p>
-<p>可以看到在文章书写好后，源代码仓库中多了一个markdown文件，这个文件就需要提交到云端源码仓库</p>
-<p><img data-src="https://43423.oss-cn-beijing.aliyuncs.com/img/20200323110839.png" alt="y源代码变动"></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">"上传源代码 文章书写规范"</span></span><br><span class="line">git push origin <span class="built_in">source</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>需要注意的是，对于仓库中一下文件不需要做修改</p>
+<blockquote>
+<p>治疗方案：用络氨酸酶抑制剂的药物治疗MET第14个exon skip的患者</p>
+</blockquote>
+<p><strong>E3 泛素连接酶</strong>：蛋白降解系统里的一种酶</p>
+<p>因此通过系统的鉴定和整合分析PAN-cancer和健康组织中的ES事件，将会为解析疾病的机理和发现新的靶标药物提供参考。</p>
+<p>随着癌症基因组数据和其他生物数据指数级的增长，其中几个研究通过分析多个癌症中、组织特异性的AS，并且提供了web tools对AS的注释；但是这些研究仅仅只是关注在AS的鉴定以及isform 结构的可视化，并没有对AS的具体功能进行注释。因此作者就建立了ExonSkipDB数据库，为研究癌症、药物发提供参考。</p>
+<h3 id="数据库概括"><a href="#数据库概括" class="headerlink" title="数据库概括"></a>数据库概括</h3><p>通过使用ExonSkipDB，用户可以得到如下几方面的信息。</p>
 <ul>
-<li><code>theme/</code>下所有文件</li>
-<li><code>_confg.yml</code>文件</li>
+<li>通过比较癌细胞与正常细胞中ES事件的PSI、isform丰度，能够发现潜在的癌症或者与癌症相关的特异性ES事件</li>
+<li>分析大量ES事件的特征，更深层次的理解癌细胞ES事件中 功能缺失效应</li>
+<li>对ES的exon进行ORF预测，分为能够反映的ES和不能翻译的ES；提供能够恢复蛋白功能的候选位点</li>
+<li>由于甲基化参与到RNA聚合酶II转录延伸速率的控制，因此作者分析了剪切和甲基化之间的关联sQTM。</li>
 </ul>
-<p>以上就完成了文章的发布，尽情享受hexo带来的便捷吧!</p>
+<h4 id="数据整合"><a href="#数据整合" class="headerlink" title="数据整合"></a>数据整合</h4><p>从TCGA和GTEx数据集中下载了33种癌症类型和31中不同组织的正常组织，其中只有跳跃的那个Exon、上游Exon、下游Exon都保守的才被用于本次研究。</p>
+<h4 id="ORF注释"><a href="#ORF注释" class="headerlink" title="ORF注释"></a>ORF注释</h4><p>对于那些特异的Exon skip事件，作者检查主要isform对于的转录本序列，当跳跃的exon是位于编码区的内部，并且碱基数是3的倍数是，这种编码框没有偏移，而当跳跃的exon的碱基数是1或者2的倍数时，称作frame-shift</p>
+<h4 id="蛋白特征注释"><a href="#蛋白特征注释" class="headerlink" title="蛋白特征注释"></a>蛋白特征注释</h4><blockquote>
+<p>  6 molecule processing features, 13<br>  region features, 4 site features, 6 amino acid modifcation<br>  features, 2 natural variation features, 5 experimental info<br>  features and 3 secondary structure features  </p>
+</blockquote>
+<h4 id="鉴定与ES相关的突变"><a href="#鉴定与ES相关的突变" class="headerlink" title="鉴定与ES相关的突变"></a>鉴定与ES相关的突变</h4><p>根据  Wimmer et al. and Anna and Monika  的研究表明，总共有5种剪切突变。其中就包括</p>
+<ul>
+<li>外显子区域突变，导致剪切增强子被破坏</li>
+<li>exon-intron边界区域的剪切位点 突变</li>
+<li>内含子区域分支位点 突变</li>
+<li>内含子区域多嘧啶束 突变</li>
+<li>内含子区域新的剪切位点的突变</li>
+</ul>
+<p>在数据库中，由于作者用到的是全基因组外显子测序数据而不是全基因组测序数据，所有这里只分析外显子区域的突变，而导致的ES事件。</p>
+<h4 id="sQTL和sQTM分析"><a href="#sQTL和sQTM分析" class="headerlink" title="sQTL和sQTM分析"></a>sQTL和sQTM分析</h4><p>为了鉴定ES特定的QTL，作者使用TCGA中的sQTL数据，其中有来自于2254个ES基因的4124个SNP被鉴定到。</p>
+<p>为了鉴定与ES相关的甲基化位点，作者使用线性回归对ES区域的甲基化程度进行计算，结合eQTL，计算了ES区域甲基化程度与上游区域甲基化程度的相关性。为了鉴定与疾病相关的sQTM，作者挑选出一些显著性的cis-sQTMs，运行生存分析，使用  Kaplan–Meier method and log-rank test  方法。</p>
+<h4 id="药物和疾病相关信息"><a href="#药物和疾病相关信息" class="headerlink" title="药物和疾病相关信息"></a>药物和疾病相关信息</h4><p>从Drug Bank数据集中提取了药物靶标互作信息，其中重复的数据被剔除，并且系统的进行了分类编码。从gene-disease关联数据库中提取了疾病-遗传相关信息。</p>
+<h3 id="web界面和分析结果"><a href="#web界面和分析结果" class="headerlink" title="web界面和分析结果"></a>web界面和分析结果</h3><h4 id="1-ES结构浏览和与潜在疾病相关的特定ES"><a href="#1-ES结构浏览和与潜在疾病相关的特定ES" class="headerlink" title="1.ES结构浏览和与潜在疾病相关的特定ES"></a>1.ES结构浏览和与潜在疾病相关的特定ES</h4><h4 id="2-对单个ES进行ORF分析有利于筛选潜在的药物靶标"><a href="#2-对单个ES进行ORF分析有利于筛选潜在的药物靶标" class="headerlink" title="2.对单个ES进行ORF分析有利于筛选潜在的药物靶标"></a>2.对单个ES进行ORF分析有利于筛选潜在的药物靶标</h4><h4 id="3-ES导致蛋白功能丧失的特征"><a href="#3-ES导致蛋白功能丧失的特征" class="headerlink" title="3.ES导致蛋白功能丧失的特征"></a>3.ES导致蛋白功能丧失的特征</h4><h4 id="4-非同义突变与ES的关联"><a href="#4-非同义突变与ES的关联" class="headerlink" title="4.非同义突变与ES的关联"></a>4.非同义突变与ES的关联</h4><h4 id="5-ES与sQTL、sQTM"><a href="#5-ES与sQTL、sQTM" class="headerlink" title="5.ES与sQTL、sQTM"></a>5.ES与sQTL、sQTM</h4><h4 id="6-与ES相关的药物和人类疾病"><a href="#6-与ES相关的药物和人类疾病" class="headerlink" title="6.与ES相关的药物和人类疾病"></a>6.与ES相关的药物和人类疾病</h4><h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li>ExonSkipDB: functional annotation of exon skipping event in human  </li>
+</ol>
 
     </div>
 
@@ -373,7 +357,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>Post link: </strong>
-    <a href="https://biocottonhub.github.io/codeHub/2020/03/23/05hexo%E6%96%87%E7%AB%A0%E5%8F%91%E5%B8%83/" title="hexo文章书写规范">https://biocottonhub.github.io/codeHub/2020/03/23/05hexo文章发布/</a>
+    <a href="https://biocottonhub.github.io/codeHub/2020/03/26/08ExonSkipDB-%E6%95%B0%E6%8D%AE%E5%BA%93/" title="ExonSkipDB 数据库">https://biocottonhub.github.io/codeHub/2020/03/26/08ExonSkipDB-数据库/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
@@ -383,9 +367,6 @@
 
 
       <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/codeHub/tags/hexo/" rel="tag"># hexo</a>
-          </div>
 
         
 
@@ -393,12 +374,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/codeHub/2020/03/22/04vscode%E4%B8%8E%E6%9C%8D%E5%8A%A1%E7%AB%AFR%E4%BA%A4%E4%BA%92/" rel="prev" title="04vscode与服务端R交互">
-      <i class="fa fa-chevron-left"></i> 04vscode与服务端R交互
+    <a href="/codeHub/2020/03/24/07T%E7%BB%86%E8%83%9E3%E7%BB%B4%E6%9F%93%E8%89%B2%E8%B4%A8%E5%9B%BE%E8%B0%B1/" rel="prev" title="白血病中T细胞3维染色质图谱">
+      <i class="fa fa-chevron-left"></i> 白血病中T细胞3维染色质图谱
     </a></div>
       <div class="post-nav-item">
-    <a href="/codeHub/2020/03/24/06MCScanX%E5%85%B1%E7%BA%BF%E6%80%A7%E5%88%86%E6%9E%90/" rel="next" title="MCScanX共线性分析">
-      MCScanX共线性分析 <i class="fa fa-chevron-right"></i>
+    <a href="/codeHub/2020/03/26/09%E6%8B%9F%E5%8D%97%E8%8A%A5%E4%B8%ADco-transcriptional-splicing/" rel="next" title="拟南芥中co-transcriptional splicing">
+      拟南芥中co-transcriptional splicing <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -460,7 +441,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#文章书写规范"><span class="nav-number">1.</span> <span class="nav-text">文章书写规范</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-生成一篇空白markdown文件"><span class="nav-number">1.1.</span> <span class="nav-text">1.生成一篇空白markdown文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-给文章分类或者加标签"><span class="nav-number">1.2.</span> <span class="nav-text">2.给文章分类或者加标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-创建新的标签或者分类"><span class="nav-number">1.3.</span> <span class="nav-text">3.创建新的标签或者分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-文章书写好后进行发布"><span class="nav-number">1.4.</span> <span class="nav-text">4.文章书写好后进行发布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-上传源代码"><span class="nav-number">1.5.</span> <span class="nav-text">5.上传源代码</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#背景"><span class="nav-number">2.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库概括"><span class="nav-number">3.</span> <span class="nav-text">数据库概括</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据整合"><span class="nav-number">3.1.</span> <span class="nav-text">数据整合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ORF注释"><span class="nav-number">3.2.</span> <span class="nav-text">ORF注释</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#蛋白特征注释"><span class="nav-number">3.3.</span> <span class="nav-text">蛋白特征注释</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#鉴定与ES相关的突变"><span class="nav-number">3.4.</span> <span class="nav-text">鉴定与ES相关的突变</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sQTL和sQTM分析"><span class="nav-number">3.5.</span> <span class="nav-text">sQTL和sQTM分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#药物和疾病相关信息"><span class="nav-number">3.6.</span> <span class="nav-text">药物和疾病相关信息</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web界面和分析结果"><span class="nav-number">4.</span> <span class="nav-text">web界面和分析结果</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-ES结构浏览和与潜在疾病相关的特定ES"><span class="nav-number">4.1.</span> <span class="nav-text">1.ES结构浏览和与潜在疾病相关的特定ES</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-对单个ES进行ORF分析有利于筛选潜在的药物靶标"><span class="nav-number">4.2.</span> <span class="nav-text">2.对单个ES进行ORF分析有利于筛选潜在的药物靶标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-ES导致蛋白功能丧失的特征"><span class="nav-number">4.3.</span> <span class="nav-text">3.ES导致蛋白功能丧失的特征</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-非同义突变与ES的关联"><span class="nav-number">4.4.</span> <span class="nav-text">4.非同义突变与ES的关联</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-ES与sQTL、sQTM"><span class="nav-number">4.5.</span> <span class="nav-text">5.ES与sQTL、sQTM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-与ES相关的药物和人类疾病"><span class="nav-number">4.6.</span> <span class="nav-text">6.与ES相关的药物和人类疾病</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

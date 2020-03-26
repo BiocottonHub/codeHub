@@ -1,6 +1,219 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>10circos进阶之link图</title>
+    <url>/codeHub/2020/03/26/10circos%E8%BF%9B%E9%98%B6%E4%B9%8Blink%E5%9B%BE/</url>
+    <content><![CDATA[<h1 id="circos进阶之link图"><a href="#circos进阶之link图" class="headerlink" title="circos进阶之link图"></a>circos进阶之link图</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>Links主要试图利用连线关系，表明染色体上不同位置之间的联系。这在实际生物学问题中很常用，尤其是在表示基因和基因之间的共线性的时候，link图是我们的不二选择，之前我们一起学习了使用MCScanX进行共线性分析，下游分析中可以画一个圈图，但是本人认为那个圈图无论是配色还是布局都不是特别好看，今天我们就来学习如何处理MCScanX的结果文件然后用circos去画出我们想要的圈图</p>
+<a id="more"></a>
+
+<p>本次教程相应的配置文件和原始数据文件，请点击<a href="https://github.com/yxlong-science/yxlong/archive/master.zip" target="_blank" rel="noopener">此处</a>下载</p>
+<h2 id="文件的处理"><a href="#文件的处理" class="headerlink" title="文件的处理"></a>文件的处理</h2><p>link图是需要输入数据的，所以下里面介绍一下link图的输入数据格式</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line">hs1 100 200 hs2 250 300 color&#x3D;ch1</span><br><span class="line">hs2 400 550 hs3 500 750 color&#x3D;ch2</span><br><span class="line">hs3 600 800 hs4 150 350 color&#x3D;ch3</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>我们来看看我们的raw data</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">0-  0:        Ghir_A01G000050.1       Ghir_D01G000050.1         2e-52</span><br><span class="line">0-  1:        Ghir_A01G000080.1       Ghir_D01G000080.1        5e-171</span><br><span class="line">0-  2:        Ghir_A01G000090.1       Ghir_D01G000100.1         2e-26</span><br><span class="line">0-  3:        Ghir_A01G000100.1       Ghir_D01G000120.1             0</span><br><span class="line">0-  4:        Ghir_A01G000110.1       Ghir_D01G000130.1        9e-179</span><br></pre></td></tr></table></figure>
+
+<p>首先我们要找出MCScanX的结果文件<code>At-Dt.collinearity</code>，通过gff文件，把每一个基因的注释信息找出来，指令如下</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">awk -F <span class="string">"\t"</span> <span class="string">'&#123;print $2 "\t" $3&#125;'</span> At-Dt.collinearity | awk <span class="string">'/^Ghir/&#123;print $1&#125;'</span> | xargs -I &#123;&#125; grep &#123;&#125; ./At-Dt.gff | awk <span class="string">'&#123;a=substr($2,1,8)&#125;&#123;print a "\t" $3 "\t" $4&#125;'</span> &gt; 1.tmp</span><br><span class="line">awk -F <span class="string">"\t"</span> <span class="string">'&#123;print $2 "\t" $3&#125;'</span> At-Dt.collinearity | awk <span class="string">'/^Ghir/&#123;print $2&#125;'</span> | xargs -I &#123;&#125; grep &#123;&#125; ./At-Dt.gff | awk <span class="string">'&#123;a=substr($2,1,8)&#125;&#123;print a "\t" $3 "\t" $4&#125;'</span> &gt; 2.tmp</span><br><span class="line">paste 1.tmp 2.tmp  &gt;link.tmp</span><br></pre></td></tr></table></figure>
+
+<p>为了区分不同染色体之间的link，我们这里让link的染色和第一条染色体颜色相同，我们引入一个参数去定义颜色，指令如下</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">awk <span class="string">'&#123;a=substr($1,7,2)&#125;&#123;print $0 "\t" "value=rgb"a&#125;'</span> link.tmp &gt;link.tmp1</span><br></pre></td></tr></table></figure>
+
+<p>我们的link文件就变成了</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Ghir_A01        76870   77973   Ghir_D01        33573   38297   value&#x3D;rgb01</span><br><span class="line">Ghir_A01        88691   90135   Ghir_D01        58267   58998   value&#x3D;rgb01</span><br><span class="line">Ghir_A01        93974   95093   Ghir_D01        67754   69206   value&#x3D;rgb01</span><br><span class="line">...</span><br><span class="line">Ghir_A13	46708701	46711385	Ghir_D13	21207310	21209912	value&#x3D;rgb13</span><br></pre></td></tr></table></figure>
+
+<p>这里我们再使用linux指令对我们的link文件进行筛选，指令如下</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">awk <span class="string">'&#123;gsub(/A0/,"A",$1);gsub(/D0/,"D",$4);print $0&#125;'</span> OFS=<span class="string">"\t"</span> link.tmp|awk <span class="string">'&#123;a=substr($1,7);b=substr($4,7);if(a==b)&#123;print $0&#125;else if(a&gt;=2&amp;&amp;a&lt;=3&amp;&amp;b&gt;=2&amp;&amp;b&lt;=3)&#123;print $0&#125;else if(a&gt;=4&amp;&amp;a&lt;=5&amp;&amp;b&gt;=4&amp;&amp;b&lt;=5)&#123;print $0&#125;&#125;'</span>|awk <span class="string">'&#123;gsub(/A([0-9])$/,"0&amp;",$1);gsub(/D([0-9])$/,"0&amp;",$4);print $0&#125;'</span> OFS=<span class="string">"\t"</span> |sed -e <span class="string">'s/0A/A0/g'</span> -e <span class="string">'s/0D/D0/g'</span> &gt;link.txt</span><br></pre></td></tr></table></figure>
+
+<p>这里我们筛选条件有两个</p>
+<ul>
+<li><p>保留对应染色体之间的links</p>
+</li>
+<li><p>不同染色体之间只保留两个亚组的二号三号染色体间和四号五号染色体间的links</p>
+</li>
+</ul>
+<h2 id="配置文件的书写"><a href="#配置文件的书写" class="headerlink" title="配置文件的书写"></a>配置文件的书写</h2><p>circos.conf、ideogram.conf、karyotype.conf、ticks.conf之前的文章有讲述，这里只是多了一个links和colors模块，所以我们这次重点讲述这两个模块</p>
+<h3 id="mycolors-conf"><a href="#mycolors-conf" class="headerlink" title="mycolors.conf"></a>mycolors.conf</h3><p>染色体文件karyotype.txt如下</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chr - Ghir_A01 At01 0 117757855 rgb01</span><br><span class="line">chr - Ghir_A02 At02 0 108092100 rgb02</span><br></pre></td></tr></table></figure>
+
+<p>看到这里肯定有许多小伙伴不太明白最后一列rgb的意义，我们就来看一下前面引用的colors.conf</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">rgb01&#x3D;26,188,156</span><br><span class="line">rgb02&#x3D;46,204,113</span><br><span class="line">...</span><br><span class="line">rgb12&#x3D;192,57,43</span><br><span class="line">rgb13&#x3D;142,68,173</span><br></pre></td></tr></table></figure>
+
+<p>这里对每一个rgb都进行了注释，这里采用的注释信息均来自于<a href="https://flatuicolors.com/palette/defo" target="_blank" rel="noopener">flatuicolors</a>，可以直接在上面复制一些自己喜欢的颜色的rgb值。</p>
+<h3 id="links-conf"><a href="#links-conf" class="headerlink" title="links.conf"></a>links.conf</h3><p>下面我们就来看一下links.conf这个控制文件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;links&gt;</span><br><span class="line">&lt;link&gt;</span><br><span class="line"># 指定link文件，最好使用绝对路径</span><br><span class="line">file&#x3D;&#x2F;public&#x2F;home&#x2F;yxlong&#x2F;yxlong&#x2F;synteny&#x2F;At-DtMCScanX&#x2F;circos&#x2F;link.txt</span><br><span class="line"># links的起始终止位置</span><br><span class="line">radius&#x3D;0.95r</span><br><span class="line">color&#x3D;black_a4</span><br><span class="line"># Circos提供bezier_radius、crest、bezier_radius_purity等参数来控制link的弯曲形式，具体见下图</span><br><span class="line">bezier_radius&#x3D;0.1r</span><br><span class="line">thickness&#x3D;2</span><br><span class="line"># record_limit &#x3D; 控制最后图片上显示的link条数</span><br><span class="line">record_limit &#x3D; </span><br><span class="line"></span><br><span class="line"># 一下就是rules的使用了，这里主要对于link的颜色进行指定，使得link的颜色和A亚组的染色体颜色相同</span><br><span class="line">&lt;rules&gt;</span><br><span class="line">&lt;rule&gt;</span><br><span class="line">condition&#x3D; var(value) eq &quot;rgb01&quot;</span><br><span class="line">color&#x3D;rgb(26,188,156)</span><br><span class="line">&lt;&#x2F;rule&gt;</span><br><span class="line"></span><br><span class="line">&lt;rule&gt;</span><br><span class="line">condition&#x3D; var(value) eq &quot;rgb02&quot;</span><br><span class="line">color&#x3D;rgb(46,204,113)</span><br><span class="line">&lt;&#x2F;rule&gt;</span><br><span class="line"></span><br><span class="line">&lt;rule&gt;</span><br><span class="line">condition&#x3D; var(value) eq &quot;rgb03&quot;</span><br><span class="line">color&#x3D;rgb(52,152,219)</span><br><span class="line">&lt;&#x2F;rule&gt;</span><br><span class="line"></span><br><span class="line">&lt;rule&gt;</span><br><span class="line">condition&#x3D; var(value) eq &quot;rgb04&quot;</span><br><span class="line">color&#x3D;rgb(155,89,182)</span><br><span class="line">&lt;&#x2F;rule&gt;</span><br><span class="line"></span><br><span class="line">&lt;rule&gt;</span><br><span class="line">condition&#x3D; var(value) eq &quot;rgb05&quot;</span><br><span class="line">color&#x3D;rgb(52,73,94)</span><br><span class="line">&lt;&#x2F;rule&gt;</span><br><span class="line"></span><br><span class="line">&lt;rule&gt;</span><br><span class="line">condition&#x3D; var(value) eq &quot;rgb06&quot;</span><br><span class="line">color&#x3D;rgb(241,196,15)</span><br><span class="line">&lt;&#x2F;rule&gt;</span><br><span class="line"></span><br><span class="line">&lt;rule&gt;</span><br><span class="line">condition&#x3D; var(value) eq &quot;rgb07&quot;</span><br><span class="line">color&#x3D;rgb(230,126,34)</span><br><span class="line">&lt;&#x2F;rule&gt;</span><br><span class="line"></span><br><span class="line">&lt;rule&gt;</span><br><span class="line">condition&#x3D; var(value) eq &quot;rgb08&quot;</span><br><span class="line">color&#x3D;rgb(231,76,60)</span><br><span class="line">&lt;&#x2F;rule&gt;</span><br><span class="line"></span><br><span class="line">&lt;rule&gt;</span><br><span class="line">condition&#x3D; var(value) eq &quot;rgb09&quot;</span><br><span class="line">color&#x3D;rgb(149,165,166)</span><br><span class="line">&lt;&#x2F;rule&gt;</span><br><span class="line"></span><br><span class="line">&lt;rule&gt;</span><br><span class="line">condition&#x3D; var(value) eq &quot;rgb10&quot;</span><br><span class="line">color&#x3D;rgb(243,156,18)</span><br><span class="line">&lt;&#x2F;rule&gt;</span><br><span class="line"></span><br><span class="line">&lt;rule&gt;</span><br><span class="line">condition&#x3D; var(value) eq &quot;rgb11&quot;</span><br><span class="line">color&#x3D;rgb(211,84,0)</span><br><span class="line">&lt;&#x2F;rule&gt;</span><br><span class="line"></span><br><span class="line">&lt;rule&gt;</span><br><span class="line">condition&#x3D; var(value) eq &quot;rgb12&quot;</span><br><span class="line">color&#x3D;rgb(192,57,43)</span><br><span class="line">&lt;&#x2F;rule&gt;</span><br><span class="line"></span><br><span class="line">&lt;rule&gt;</span><br><span class="line">condition&#x3D; var(value) eq &quot;rgb13&quot;</span><br><span class="line">color&#x3D;rgb(142,68,173)</span><br><span class="line">&lt;&#x2F;rule&gt;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;rules&gt;</span><br><span class="line">&lt;&#x2F;link&gt;</span><br><span class="line">&lt;&#x2F;links&gt;</span><br></pre></td></tr></table></figure>
+
+<p>最后我们输入指令<code>circos -conf circos..conf</code>等待一会儿就可以得到下面这张图片</p>
+<p><img data-src="https://s1.ax1x.com/2020/03/26/G93ZS1.png" alt="G93ZS1.png"></p>
+<p>我们的circos之links图就画到这里了，之后我们继续学习更多的circos功能</p>
+]]></content>
+      <tags>
+        <tag>Circos</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>拟南芥中co-transcriptional splicing</title>
+    <url>/codeHub/2020/03/26/09%E6%8B%9F%E5%8D%97%E8%8A%A5%E4%B8%ADco-transcriptional-splicing/</url>
+    <content><![CDATA[<blockquote>
+<p>  The Features and Regulation of Co-transcriptional Splicing in Arabidopsis  </p>
+</blockquote>
+<p>在多数真核生物钟，前体RNA的剪切对于基因表达是至关重要的。在之前哺乳动物、果蝇和酵母的研究中发现，大多数剪切事件与RNA的转录是同时进行的。然而在植物中，co-transcriptional splicing(CTS ) 在细胞中表现的特征和它具体的调控机制仍旧是不清楚的。因此作者使用<strong>chromatin-bound RNA sequencing</strong>技术来研究拟南芥中的<strong>CTS</strong>(剪切与转录共同进行)。通过分析发现，拟南芥中大量的可变剪切事件是受到 co-transcriptionally 决定的。同时CTS的效率与基因表达水平、染色质状态、还有基因中内含子、外显子数目存在相关性，而与基因的长度不相关。与此同时结合免疫共沉淀技术，表明一些hnRNP-like 蛋白(RNA结合蛋白)，通过结合到外显子序列上来促进CTS。</p>
+<a id="more"></a>
+
+<blockquote>
+<p><strong>bound RNA sequencing</strong></p>
+</blockquote>
+<ul>
+<li>从细胞核中提取结合到染色质上的RNA</li>
+<li>使用试剂去除非染色相关的RNa和蛋白质</li>
+</ul>
+<img data-src="https://43423.oss-cn-beijing.aliyuncs.com/img/20200326132718.png" alt="测试示意图" style="zoom: 80%;" />
+
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>前体RNA的剪切是受到一种剪切复合物调控的，剪切复合物能够精准的切除前体RNA中的内含子。之前对于单个基因的研究表明，在基因的转录过程中剪切机制就已经发挥作用，这一过程也被称为<strong>co-transcriptional splicing</strong>(CTS)。这种机制的存在也不足为奇，因为基因的长度相对来说比较长，而基因转录所花的时间平均10min，剪切的时间平均3分钟；当生物为了高效、快速的产生mRNA时，必定会将两个步骤同时进行。在酵母中，RNA聚合酶II完成内含子3‘位点的转录后，向后平均延伸45bp时，剪切复合体就开始催化pre-mRNA的剪切；而在人类细胞中延伸的距离超过1000kb；这也表明不同物种中的CTS存在显著差异</p>
+<p>在体内，转录和剪切高度的耦合在一起；但是在体外情况下两者还是可以独立的进行。其中有一种假说，</p>
+<h4 id="动力学耦合"><a href="#动力学耦合" class="headerlink" title="动力学耦合"></a><strong>动力学耦合</strong></h4><p>在细胞内，基因在转录时更快的延伸速率将会使得一些弱的剪切位点被识别的几率降低，从而影响了mRNA isforms的产生。转录的延伸速率受到多种因素的调控，其中就包含以下两种:</p>
+<ul>
+<li>反式因子 </li>
+<li>染色质结构， 染色质的开放状态</li>
+</ul>
+<p>在拟南芥中就报道了两个参与到开花时间控制<strong>FLC</strong>、光响应基因<strong>DOG1</strong>，在不同转录延伸速率下基因 表达出不同的isforms。</p>
+<h4 id="剪切因子耦合"><a href="#剪切因子耦合" class="headerlink" title="剪切因子耦合"></a>剪切因子耦合</h4><p>在植物中研究比较深入的一类RNA-binding 蛋白，也被称为SR 蛋白。这些蛋白通过与exon或者intron出的sequence motifs结合，调节RNA聚合酶的延伸、停止。</p>
+<h3 id="拟南芥种子中的CTS"><a href="#拟南芥种子中的CTS" class="headerlink" title="拟南芥种子中的CTS"></a>拟南芥种子中的CTS</h3><p>进过 bounding RNA sequence 后，对于每个基因位点可以检测到两种类型RNA：图B</p>
+<ol>
+<li>RNAs正在转录</li>
+<li>RNA转录完成，但还没从染色质上释放</li>
+</ol>
+<p>将bounding RNA sequence测序得到的read比对回基因组后，发现exon处read比intronread多，说明剪切和转录时同时进行的，导致intron处的read被剪切掉。图C</p>
+<img data-src="https://43423.oss-cn-beijing.aliyuncs.com/img/20200326133431.png" alt="测序数据验证" style="zoom: 80%;" />
+
+<h4 id="CTS效率量化"><a href="#CTS效率量化" class="headerlink" title="CTS效率量化"></a>CTS效率量化</h4><p>通过计算发现，CTS rations平均值为0.2，这样说明拟南芥中大多数的pre-mRNA是共转录的剪切方式。</p>
+<p><img data-src="https://43423.oss-cn-beijing.aliyuncs.com/img/20200326133934.png" alt="CTS量化"></p>
+<h3 id="CTS效率与Exon、Intron数目相关"><a href="#CTS效率与Exon、Intron数目相关" class="headerlink" title="CTS效率与Exon、Intron数目相关"></a>CTS效率与Exon、Intron数目相关</h3><p>在老鼠与果蝇中，基因结构会影响剪切效率。其中第一个和最后一个intron被切除的效率更低，相比与内部的intron。同时基因长度、内含子|外显子的数目与 splice ratios呈负相关。由于基因长度和内含子外显子数目也有一定关系，于是作者分别在固定gene长度的条件下，和固定intron数目下比较相关性。发现intron|exon 的数目与剪切效率存在相关。</p>
+<img data-src="https://43423.oss-cn-beijing.aliyuncs.com/img/20200326145813.png" style="zoom:80%;" />
+
+<h3 id="CTS效率与组蛋白修饰呈现负相关"><a href="#CTS效率与组蛋白修饰呈现负相关" class="headerlink" title="CTS效率与组蛋白修饰呈现负相关"></a>CTS效率与组蛋白修饰呈现负相关</h3><p>高水平的H3K4me3、H3K9ac可能会导致更高的转录延伸速率，从而减少CTS的效率。</p>
+<p><img data-src="https://43423.oss-cn-beijing.aliyuncs.com/img/20200326150123.png" alt="组蛋白修饰与CTS"></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li>The Features and Regulation of Co-transcriptional Splicing in Arabidopsis  </li>
+</ol>
+]]></content>
+      <categories>
+        <category>文献</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>ExonSkipDB 数据库</title>
+    <url>/codeHub/2020/03/26/08ExonSkipDB-%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
+    <content><![CDATA[<blockquote>
+<p>  ExonSkipDB: functional annotation of exon skipping event in human  </p>
+</blockquote>
+<h3 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h3><p>在人类中，外显子跳跃事件是最常见的一种剪切事件，它通常会导致功能保守位点的缺失或者是ORF的偏移，最终导致多种疾病的产生。而迄今为止，基于癌症组织和正常组织来系统的、完整的注释人类中外显子事件，没有人做过。因此作者通过建立人类中外显子跳跃数据库，在外显子水平上，为研究多种癌症的治疗靶标提供功能注释和参考。作者从  TCGA  数据集和  GTEx  数据集中收集了33份癌症组织和31份正常组织数据，鉴定到了90616和89845个ES事件，对应于14272个基因。对于外显子跳跃事件，作者进行了多种功能注释，包括对ES事件产生的转录本的ORF预测，ES事件导致的蛋白功能丧失，ES事件与碱基突变、甲基化的关联。总的来说，ExonSkipDB数据库将会是用于研究癌症、药物发现的独特资源。</p>
+<a id="more"></a>
+
+
+
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>逐渐累积的证据表明，可变剪切的破坏将会导致疾病的发生。在几种典型的剪切模式中，外显子跳跃是最常见的事件。由于ES将会导致保守功能域的丢失或者ORF的偏移，跳跃的外显子也被当做治疗的靶标。例如：</p>
+<blockquote>
+<p><strong><em>MET</em></strong> 基因第14个exon的skip导致E3 泛素连接酶不能结合，使得MET的表达水平增加，而MET表达的增加又驱动了癌细胞的扩增。</p>
+</blockquote>
+<blockquote>
+<p>治疗方案：用络氨酸酶抑制剂的药物治疗MET第14个exon skip的患者</p>
+</blockquote>
+<p><strong>E3 泛素连接酶</strong>：蛋白降解系统里的一种酶</p>
+<p>因此通过系统的鉴定和整合分析PAN-cancer和健康组织中的ES事件，将会为解析疾病的机理和发现新的靶标药物提供参考。</p>
+<p>随着癌症基因组数据和其他生物数据指数级的增长，其中几个研究通过分析多个癌症中、组织特异性的AS，并且提供了web tools对AS的注释；但是这些研究仅仅只是关注在AS的鉴定以及isform 结构的可视化，并没有对AS的具体功能进行注释。因此作者就建立了ExonSkipDB数据库，为研究癌症、药物发提供参考。</p>
+<h3 id="数据库概括"><a href="#数据库概括" class="headerlink" title="数据库概括"></a>数据库概括</h3><p>通过使用ExonSkipDB，用户可以得到如下几方面的信息。</p>
+<ul>
+<li>通过比较癌细胞与正常细胞中ES事件的PSI、isform丰度，能够发现潜在的癌症或者与癌症相关的特异性ES事件</li>
+<li>分析大量ES事件的特征，更深层次的理解癌细胞ES事件中 功能缺失效应</li>
+<li>对ES的exon进行ORF预测，分为能够反映的ES和不能翻译的ES；提供能够恢复蛋白功能的候选位点</li>
+<li>由于甲基化参与到RNA聚合酶II转录延伸速率的控制，因此作者分析了剪切和甲基化之间的关联sQTM。</li>
+</ul>
+<h4 id="数据整合"><a href="#数据整合" class="headerlink" title="数据整合"></a>数据整合</h4><p>从TCGA和GTEx数据集中下载了33种癌症类型和31中不同组织的正常组织，其中只有跳跃的那个Exon、上游Exon、下游Exon都保守的才被用于本次研究。</p>
+<h4 id="ORF注释"><a href="#ORF注释" class="headerlink" title="ORF注释"></a>ORF注释</h4><p>对于那些特异的Exon skip事件，作者检查主要isform对于的转录本序列，当跳跃的exon是位于编码区的内部，并且碱基数是3的倍数是，这种编码框没有偏移，而当跳跃的exon的碱基数是1或者2的倍数时，称作frame-shift</p>
+<h4 id="蛋白特征注释"><a href="#蛋白特征注释" class="headerlink" title="蛋白特征注释"></a>蛋白特征注释</h4><blockquote>
+<p>  6 molecule processing features, 13<br>  region features, 4 site features, 6 amino acid modifcation<br>  features, 2 natural variation features, 5 experimental info<br>  features and 3 secondary structure features  </p>
+</blockquote>
+<h4 id="鉴定与ES相关的突变"><a href="#鉴定与ES相关的突变" class="headerlink" title="鉴定与ES相关的突变"></a>鉴定与ES相关的突变</h4><p>根据  Wimmer et al. and Anna and Monika  的研究表明，总共有5种剪切突变。其中就包括</p>
+<ul>
+<li>外显子区域突变，导致剪切增强子被破坏</li>
+<li>exon-intron边界区域的剪切位点 突变</li>
+<li>内含子区域分支位点 突变</li>
+<li>内含子区域多嘧啶束 突变</li>
+<li>内含子区域新的剪切位点的突变</li>
+</ul>
+<p>在数据库中，由于作者用到的是全基因组外显子测序数据而不是全基因组测序数据，所有这里只分析外显子区域的突变，而导致的ES事件。</p>
+<h4 id="sQTL和sQTM分析"><a href="#sQTL和sQTM分析" class="headerlink" title="sQTL和sQTM分析"></a>sQTL和sQTM分析</h4><p>为了鉴定ES特定的QTL，作者使用TCGA中的sQTL数据，其中有来自于2254个ES基因的4124个SNP被鉴定到。</p>
+<p>为了鉴定与ES相关的甲基化位点，作者使用线性回归对ES区域的甲基化程度进行计算，结合eQTL，计算了ES区域甲基化程度与上游区域甲基化程度的相关性。为了鉴定与疾病相关的sQTM，作者挑选出一些显著性的cis-sQTMs，运行生存分析，使用  Kaplan–Meier method and log-rank test  方法。</p>
+<h4 id="药物和疾病相关信息"><a href="#药物和疾病相关信息" class="headerlink" title="药物和疾病相关信息"></a>药物和疾病相关信息</h4><p>从Drug Bank数据集中提取了药物靶标互作信息，其中重复的数据被剔除，并且系统的进行了分类编码。从gene-disease关联数据库中提取了疾病-遗传相关信息。</p>
+<h3 id="web界面和分析结果"><a href="#web界面和分析结果" class="headerlink" title="web界面和分析结果"></a>web界面和分析结果</h3><h4 id="1-ES结构浏览和与潜在疾病相关的特定ES"><a href="#1-ES结构浏览和与潜在疾病相关的特定ES" class="headerlink" title="1.ES结构浏览和与潜在疾病相关的特定ES"></a>1.ES结构浏览和与潜在疾病相关的特定ES</h4><h4 id="2-对单个ES进行ORF分析有利于筛选潜在的药物靶标"><a href="#2-对单个ES进行ORF分析有利于筛选潜在的药物靶标" class="headerlink" title="2.对单个ES进行ORF分析有利于筛选潜在的药物靶标"></a>2.对单个ES进行ORF分析有利于筛选潜在的药物靶标</h4><h4 id="3-ES导致蛋白功能丧失的特征"><a href="#3-ES导致蛋白功能丧失的特征" class="headerlink" title="3.ES导致蛋白功能丧失的特征"></a>3.ES导致蛋白功能丧失的特征</h4><h4 id="4-非同义突变与ES的关联"><a href="#4-非同义突变与ES的关联" class="headerlink" title="4.非同义突变与ES的关联"></a>4.非同义突变与ES的关联</h4><h4 id="5-ES与sQTL、sQTM"><a href="#5-ES与sQTL、sQTM" class="headerlink" title="5.ES与sQTL、sQTM"></a>5.ES与sQTL、sQTM</h4><h4 id="6-与ES相关的药物和人类疾病"><a href="#6-与ES相关的药物和人类疾病" class="headerlink" title="6.与ES相关的药物和人类疾病"></a>6.与ES相关的药物和人类疾病</h4><h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li>ExonSkipDB: functional annotation of exon skipping event in human  </li>
+</ol>
+]]></content>
+      <categories>
+        <category>文献</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>白血病中T细胞3维染色质图谱</title>
+    <url>/codeHub/2020/03/24/07T%E7%BB%86%E8%83%9E3%E7%BB%B4%E6%9F%93%E8%89%B2%E8%B4%A8%E5%9B%BE%E8%B0%B1/</url>
+    <content><![CDATA[<blockquote>
+<p>Three-dimensional chromatin landscapes in T cell acute lymphoblastic leukemia</p>
+</blockquote>
+<hr>
+<p>​    染色质3维结构的差异会影响TADs(topologically associating domains)的完整性，使得特定的增强子和启动子发生互作，从而影响基因的表达、导致疾病的发生。通过使用人类中白血病样本，并且检测在药物施加后染色质结构的变化，整合原位Hi-c、RNA-seq、CTCG Chip-seq等多种数据集，揭示了白血病细胞中TAD内部的交互、TAD边界的结缘效应的差异。本文研究发现：TAD的 ‘fusion’事件与CTCT的缺失存在关联，TAD的合并事件也直接导致<strong><em>MYC</em></strong>基因去远端超级增强子之间发生互作。同时作者也发现，小分子药物通过靶向癌症相关基因或是对应的表观调控过程，最终能够改变白血病细胞中特定的3D交互。</p>
+<a id="more"></a>
+
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>​    在人类基因组中充斥着大量的调控元件，例如我们常说的启动子、增强子、绝缘子。最近的研究基因组在空间上形成3维结构，来控制这些调控元件在物理上的距离，从而达到对基因表达的精细控制。</p>
+<p>​    基因组压缩成染色体包含多个步骤，其中就包括将染色质压缩成核小体、染色质丝、compartments、染色质domain。多种证据表明，在Mb分辨率下，基因组被组织成一个个称作TAD的染色质区域，在每个TAD区域内部染色质发生频繁的交互。从生物学上解释这个现象就是，TAD限制了调控元件和基因在同一个区域，与此同时又隔绝了与相邻区域的交互；保证了基因正常的表达。进一步的证据也表明基因组内往往存在一些超级增强子，它们调控一些控制细胞身份、或者是驱动癌症发生的关键基因的表达；但是这些增强子往往与TAD 的boundary一同存在，从而隔绝了它对下游基因的调控，保证生命活动的正常进行。</p>
+<p>​    TAD boundary （TAD 边界）通常富集一些能够与<strong>CTCF</strong>蛋白结合的motif，motif的方向以及  Cohesin-mediated  是形成TADs的关键。在TAD 边界处异常的<strong>CTCF</strong> 结合位点或者倒置的方向，都会倒置TAD结构的改变，并且使得增强子和启动子之间的交互发生改变，倒置异常的基因表达。</p>
+<img data-src="https://43423.oss-cn-beijing.aliyuncs.com/img/20200324211307.png" alt="TAD结构图" style="zoom:80%;" />
+
+<p>​    </p>
+<p>​    作者通过比较正常的T细胞与白血病人的T细胞中，染色质结构的差异；在白血病患者T细胞中鉴定到一个TAD boundary的改变，而TAD边界的改变导致<strong>MYC</strong>基因与  NOTCH-bound super-enhancer之间的交互。通过药物<strong>γSI</strong>抑制<strong>MYX</strong>和增强子的交互，结果发现有一部分仍旧维持交互。作者通过分析发现另外一个因子<strong>CDK7</strong>，也能控制启动子和增强子的交互。</p>
+<h3 id="3D-染色质结构在T细胞中的差异"><a href="#3D-染色质结构在T细胞中的差异" class="headerlink" title="3D 染色质结构在T细胞中的差异"></a>3D 染色质结构在T细胞中的差异</h3><p>​    通过对数据集中  ‘hic-ratio’ insulation scores 指标 ，在每样本个基因组bin中的分值进行PCA分析，发现数据集被分为3类样本。通过分析白血病细胞的表达模式，发现样本可以分为两个亚组。比较不同类之间Compartment  的差异，发现一些样本特异的 Compartments,和共有的compartments。 </p>
+<img data-src="https://43423.oss-cn-beijing.aliyuncs.com/img/20200324200600.png" alt="图1" style="zoom:80%;" />
+
+
+
+<h3 id="T细胞中TAD活性的差异"><a href="#T细胞中TAD活性的差异" class="headerlink" title="T细胞中TAD活性的差异"></a>T细胞中TAD活性的差异</h3><p>比较白血病T细胞与正常的T细胞中共有的TAD活性的差异，将TAD分成几类：</p>
+<ul>
+<li>在正常细胞中TAD活性下降</li>
+<li>在白血病细胞中TAD活性增加</li>
+</ul>
+<p>在两类细胞中活性改变的模式也呈现相似性。</p>
+<p>为了进一步分析正常T细胞和白血病T细胞中TAD的差异，作者结合 CTCF Chip-seq数据，分析了CTCG在上一步分好类的TAD的聚集情况。基因表达在不同类型TAD的情况，超级增强子非富集情况。可以看出在<code>在白血病细胞中TAD活性增加</code>这一类TAD中，增强子的富集程度存在显著差异。</p>
+<p><img data-src="https://43423.oss-cn-beijing.aliyuncs.com/img/20200324203041.png" alt="TAD差异与其他数据的关联"></p>
+<h3 id="TAD-boundary的绝缘效应"><a href="#TAD-boundary的绝缘效应" class="headerlink" title="TAD boundary的绝缘效应"></a>TAD boundary的绝缘效应</h3><p>​    在比较了两种细胞TAD上的差异后，作者又比较了TAD boundary的差异。TAD boundary的丢失通常增加TAD内部的交互，使得相邻的两个TAD融合成为一个TAD；而TAD boundary的获得，会减少TAD内部的交互，因为TAD boundary的存在隔绝了TAD 与TAD之间的交互。</p>
+<p>通过比较两类细胞中boundary gain类型与boundary loose类型的boundary在绝缘效应上的变化，发现boundary获得性绝缘效应增加(图f),而boundary丢失型，绝缘效应减少。</p>
+<img data-src="https://43423.oss-cn-beijing.aliyuncs.com/img/20200324204344.png" alt="boundary的差异" style="zoom:80%;" />
+
+
+
+<h3 id="CTCF介导TAD的绝缘效应，控制MYC基因与增强子的交互"><a href="#CTCF介导TAD的绝缘效应，控制MYC基因与增强子的交互" class="headerlink" title="CTCF介导TAD的绝缘效应，控制MYC基因与增强子的交互"></a>CTCF介导TAD的绝缘效应，控制MYC基因与增强子的交互</h3><ul>
+<li><p>MYC基因在白血病细胞中显著上调，与此同时发现MYC基因对应的基因组区域有TAD 融合事件，表明附近染色质的交互作用增强。</p>
+</li>
+<li><p>通过比较正常细胞与白血病细胞的CTCF Chip-seq数据发现，白血病细胞peak的缺失。导致peak的缺失原因不是由于碱基的突变或者DNA的超甲基化。</p>
+</li>
+<li><p>通过CRISPR技术将正常细胞的CTCF位点突变后，使用FISH进行染色，发现MYC启动子与增强子之间的物理距离被拉近。这也证实了作者的猜想，CTCF可能是控制TAD 稳定性的一个因素</p>
+</li>
+</ul>
+<p><img data-src="https://43423.oss-cn-beijing.aliyuncs.com/img/20200324210009.png" alt="CTCF绝缘效应"></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>MYC基因的上调表达，以及CTCF peak的缺失，表明TAD的融合对基因表达的影响；但是究竟是什么调控CTCF仍旧是未知的。初步的研究以及排除了碱基突变和超甲基化两种可能的因素；ATAC-seq分析表明染色质可及性可能是一个潜在的原因。</li>
+<li>TAD内部的交互与基因表达、增强子活性存在关联</li>
+<li>有些特定的抑制剂能够抑制对应增强子的活性，但是仍旧有一些增强子不会被抑制；并且这些增强子长度更长，可能它受到多种调控因子的作用</li>
+</ul>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li>Three-dimensional chromatin landscapes in T cell acute lymphoblastic leukemia  </li>
+<li>On the existence and functionality of topologically associating domains  </li>
+</ol>
+]]></content>
+      <categories>
+        <category>文献</category>
+      </categories>
+  </entry>
+  <entry>
     <title>MCScanX共线性分析</title>
     <url>/codeHub/2020/03/24/06MCScanX%E5%85%B1%E7%BA%BF%E6%80%A7%E5%88%86%E6%9E%90/</url>
     <content><![CDATA[<h2 id="MCScanX的简介"><a href="#MCScanX的简介" class="headerlink" title="MCScanX的简介"></a>MCScanX的简介</h2><p>MCScanX：Multiple Collinearity Scan toolkit是一种算法，扫描多个基因组或亚基因组，以识别假定的同源染色体区域，然后使用基因定位这些区域。它的速度很快，操作简单，便于使用，是我们在进行基因共线性分析时的一个利器。</p>
@@ -120,6 +333,8 @@
 <li>当然在文章属性栏，把数字去掉这样在网页上就不会看到这个编号了</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new <span class="string">"05hexo文章发布"</span></span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
 
 <p>空白mrakdown生成后便如下所示:</p>
 <p><img data-src="https://43423.oss-cn-beijing.aliyuncs.com/img/20200323104754.png" alt="空白文件"></p>
