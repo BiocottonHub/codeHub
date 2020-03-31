@@ -21,22 +21,24 @@
     var CONFIG = {"hostname":"biocottonhub.github.io","root":"/codeHub/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="文章书写规范1.生成一篇空白markdown文件 在生成新的markdown时，加上数字编号，以便以后方便查看 当然在文章属性栏，把数字去掉这样在网页上就不会看到这个编号了  1hexo new &quot;05hexo文章发布&quot;">
+  <meta name="description" content="三维基因组之TAD的形成机制以及其特征 （上）Abstract了解细胞核内染色体折叠的机制对于确定基因组结构和功能之间的关系至关重要。最近应用的“染色体构象捕获”技术揭示了许多物种的基因组被组织成优先的内部染色质相互作用域，称为TADs。这种染色体区域化已成为高阶基因组组织和功能进化的重要特征。虽然TADs现在已经被广泛的应用于各种生物中，但它们在大小、结构和形成过程中所涉及的蛋白质方面似乎有特定">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hexo文章书写规范">
-<meta property="og:url" content="https://biocottonhub.github.io/codeHub/2020/03/23/05hexo%E6%96%87%E7%AB%A0%E5%8F%91%E5%B8%83/index.html">
+<meta property="og:title" content="三维基因组之TAD的形成机制以及其特征 （上）">
+<meta property="og:url" content="https://biocottonhub.github.io/codeHub/2020/03/31/12%E4%B8%89%E7%BB%B4%E5%9F%BA%E5%9B%A0%E7%BB%84%E4%B9%8BTAD%E7%9A%84%E5%BD%A2%E6%88%90%E6%9C%BA%E5%88%B6%E4%BB%A5%E5%8F%8A%E5%85%B6%E7%89%B9%E5%BE%81-%EF%BC%88%E4%B8%8A%EF%BC%89/index.html">
 <meta property="og:site_name" content="Code Hub">
-<meta property="og:description" content="文章书写规范1.生成一篇空白markdown文件 在生成新的markdown时，加上数字编号，以便以后方便查看 当然在文章属性栏，把数字去掉这样在网页上就不会看到这个编号了  1hexo new &quot;05hexo文章发布&quot;">
+<meta property="og:description" content="三维基因组之TAD的形成机制以及其特征 （上）Abstract了解细胞核内染色体折叠的机制对于确定基因组结构和功能之间的关系至关重要。最近应用的“染色体构象捕获”技术揭示了许多物种的基因组被组织成优先的内部染色质相互作用域，称为TADs。这种染色体区域化已成为高阶基因组组织和功能进化的重要特征。虽然TADs现在已经被广泛的应用于各种生物中，但它们在大小、结构和形成过程中所涉及的蛋白质方面似乎有特定">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://43423.oss-cn-beijing.aliyuncs.com/img/20200323104754.png">
-<meta property="og:image" content="https://43423.oss-cn-beijing.aliyuncs.com/img/20200323110839.png">
-<meta property="article:published_time" content="2020-03-23T02:10:41.000Z">
-<meta property="article:modified_time" content="2020-03-26T12:57:27.863Z">
-<meta property="article:tag" content="hexo">
+<meta property="og:image" content="https://s1.ax1x.com/2020/03/31/GlV5As.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/03/31/GlVohq.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/03/31/GlVfBQ.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/03/31/GlVh7j.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/03/31/GlVWng.png">
+<meta property="article:published_time" content="2020-03-31T15:30:22.000Z">
+<meta property="article:modified_time" content="2020-03-31T15:31:41.546Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://43423.oss-cn-beijing.aliyuncs.com/img/20200323104754.png">
+<meta name="twitter:image" content="https://s1.ax1x.com/2020/03/31/GlV5As.png">
 
-<link rel="canonical" href="https://biocottonhub.github.io/codeHub/2020/03/23/05hexo%E6%96%87%E7%AB%A0%E5%8F%91%E5%B8%83/">
+<link rel="canonical" href="https://biocottonhub.github.io/codeHub/2020/03/31/12%E4%B8%89%E7%BB%B4%E5%9F%BA%E5%9B%A0%E7%BB%84%E4%B9%8BTAD%E7%9A%84%E5%BD%A2%E6%88%90%E6%9C%BA%E5%88%B6%E4%BB%A5%E5%8F%8A%E5%85%B6%E7%89%B9%E5%BE%81-%EF%BC%88%E4%B8%8A%EF%BC%89/">
 
 
 <script id="page-configurations">
@@ -49,7 +51,7 @@
   };
 </script>
 
-  <title>hexo文章书写规范 | Code Hub</title>
+  <title>三维基因组之TAD的形成机制以及其特征 （上） | Code Hub</title>
   
 
 
@@ -194,7 +196,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
-    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2020/03/23/05hexo%E6%96%87%E7%AB%A0%E5%8F%91%E5%B8%83/">
+    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2020/03/31/12%E4%B8%89%E7%BB%B4%E5%9F%BA%E5%9B%A0%E7%BB%84%E4%B9%8BTAD%E7%9A%84%E5%BD%A2%E6%88%90%E6%9C%BA%E5%88%B6%E4%BB%A5%E5%8F%8A%E5%85%B6%E7%89%B9%E5%BE%81-%EF%BC%88%E4%B8%8A%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/codeHub/uploads/themeImg/logo.png">
@@ -207,7 +209,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          hexo文章书写规范
+          三维基因组之TAD的形成机制以及其特征 （上）
         </h1>
 
         <div class="post-meta">
@@ -217,23 +219,17 @@
                 <i class="fa fa-calendar-o"></i>发布于
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2020-03-23 10:10:41" itemprop="dateCreated datePublished" datetime="2020-03-23T10:10:41+08:00">2020-03-23</time>
+              <time title="Created: 2020-03-31 23:30:22 / Modified: 23:31:41" itemprop="dateCreated datePublished" datetime="2020-03-31T23:30:22+08:00">2020-03-31</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>修改于
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-26 20:57:27" itemprop="dateModified" datetime="2020-03-26T20:57:27+08:00">2020-03-26</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  分类于<a href="/codeHub/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a>
+                  分类于<a href="/codeHub/categories/%E6%96%87%E7%8C%AE/" itemprop="url" rel="index"><span itemprop="name">文献</span></a>
                 </span>
             </span>
 
@@ -253,8 +249,8 @@
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/codeHub/2020/03/23/05hexo%E6%96%87%E7%AB%A0%E5%8F%91%E5%B8%83/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2020/03/23/05hexo%E6%96%87%E7%AB%A0%E5%8F%91%E5%B8%83/" itemprop="commentCount"></span>
+    <a title="valine" href="/codeHub/2020/03/31/12%E4%B8%89%E7%BB%B4%E5%9F%BA%E5%9B%A0%E7%BB%84%E4%B9%8BTAD%E7%9A%84%E5%BD%A2%E6%88%90%E6%9C%BA%E5%88%B6%E4%BB%A5%E5%8F%8A%E5%85%B6%E7%89%B9%E5%BE%81-%EF%BC%88%E4%B8%8A%EF%BC%89/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2020/03/31/12%E4%B8%89%E7%BB%B4%E5%9F%BA%E5%9B%A0%E7%BB%84%E4%B9%8BTAD%E7%9A%84%E5%BD%A2%E6%88%90%E6%9C%BA%E5%88%B6%E4%BB%A5%E5%8F%8A%E5%85%B6%E7%89%B9%E5%BE%81-%EF%BC%88%E4%B8%8A%EF%BC%89/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -269,57 +265,72 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="文章书写规范"><a href="#文章书写规范" class="headerlink" title="文章书写规范"></a>文章书写规范</h2><h3 id="1-生成一篇空白markdown文件"><a href="#1-生成一篇空白markdown文件" class="headerlink" title="1.生成一篇空白markdown文件"></a>1.生成一篇空白markdown文件</h3><ul>
-<li>在生成新的markdown时，加上数字编号，以便以后方便查看</li>
-<li>当然在文章属性栏，把数字去掉这样在网页上就不会看到这个编号了</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new <span class="string">"05hexo文章发布"</span></span><br></pre></td></tr></table></figure>
-
+        <h1 id="三维基因组之TAD的形成机制以及其特征-（上）"><a href="#三维基因组之TAD的形成机制以及其特征-（上）" class="headerlink" title="三维基因组之TAD的形成机制以及其特征 （上）"></a>三维基因组之TAD的形成机制以及其特征 （上）</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>了解细胞核内染色体折叠的机制对于确定基因组结构和功能之间的关系至关重要。最近应用的“染色体构象捕获”技术揭示了许多物种的基因组被组织成优先的内部染色质相互作用域，称为TADs。这种染色体区域化已成为高阶基因组组织和功能进化的重要特征。虽然TADs现在已经被广泛的应用于各种生物中，但它们在大小、结构和形成过程中所涉及的蛋白质方面似乎有特定的特征。在此，我们描述了这些跨物种区域的主要特征，并讨论了染色质结构、基因组活性和表观基因组之间的关系，着重讲述了TAD形成的机制原理。我们还考虑了TADs在基因组进化中的潜在影响。</p>
 <a id="more"></a>
 
-<p>空白mrakdown生成后便如下所示:</p>
-<p><img data-src="https://43423.oss-cn-beijing.aliyuncs.com/img/20200323104754.png" alt="空白文件"></p>
-<h3 id="2-给文章分类或者加标签"><a href="#2-给文章分类或者加标签" class="headerlink" title="2.给文章分类或者加标签"></a>2.给文章分类或者加标签</h3><ul>
-<li>在文章属性栏进行修改，一篇文章可以有多个分类和标签</li>
-<li>注意<code>-</code>和标签名之间的空格</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">title: 05hexo文章发布</span><br><span class="line">comments: <span class="literal">true</span></span><br><span class="line">author: zpliu</span><br><span class="line">date: 2020-03-23 10:10:41</span><br><span class="line">categories:</span><br><span class="line">	- RNA-seq</span><br><span class="line">	- Circos</span><br><span class="line">Tags:</span><br><span class="line"> 	- hexo</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="3-创建新的标签或者分类"><a href="#3-创建新的标签或者分类" class="headerlink" title="3.创建新的标签或者分类"></a>3.创建新的标签或者分类</h3><p>当你写好一篇文章后发现没有你想要的分类或者标签时，可以自己手动创建对应的标签或者分类</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page <span class="string">"新的标签名"</span></span><br></pre></td></tr></table></figure>
-
-<p>创建好后修改对应的标签文件<code>source/新的标签名/index.md</code></p>
+<h2 id="Introduce"><a href="#Introduce" class="headerlink" title="Introduce"></a>Introduce</h2><p>A图展示了细胞核内的染色体折叠情况：染色质丝 &gt; TAD &gt; 区室 &gt; 染色体疆域</p>
 <ul>
-<li>如果是标签则增加<code>type</code>属性为<code>tags</code></li>
-<li>如果是分类则增加<code>rype</code>属性为<code>catrgories</code></li>
+<li>染色质丝：染色体折叠的最基本的层是DNA组蛋白结合水平，形成核小体进而形成染色质丝</li>
+<li>TAD：由于基因调控，染色体一不同的核小体密度进行包装，并在submegabase尺度折叠成内部相互作用的高级结构</li>
+<li>区室：在染色体尺度，染色质被隔离成活跃的“A”和被抑制的的“B”区室，说明了具有相同表观遗传特征的染色质区域会更多的进行交互</li>
+<li>每个染色体在细胞核内占据自己位置，形成染色体疆域</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">title: 新的标签名</span><br><span class="line">date: 2020-03-22 21:56:41</span><br><span class="line"><span class="built_in">type</span>: tags</span><br></pre></td></tr></table></figure>
-
-<h3 id="4-文章书写好后进行发布"><a href="#4-文章书写好后进行发布" class="headerlink" title="4.文章书写好后进行发布"></a>4.文章书写好后进行发布</h3><p>首先在将云端源代码全部pull下来</p>
-<blockquote>
-<p>因为这个项目是多个人共同编辑的，你需要将别人写好的源代码同样的拉到本地，进行编译</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull origin <span class="built_in">source</span></span><br></pre></td></tr></table></figure>
-
-<p>在将源代码更新到最新状态后，对markdown文件进行编译</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">gulp </span><br><span class="line">hexo d --message <span class="string">"comments"</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="5-上传源代码"><a href="#5-上传源代码" class="headerlink" title="5.上传源代码"></a>5.上传源代码</h3><p>在发布完成后，同样的需要将你的源代码上传到仓库中，因为其他人在发布文章的时候同样需要用到你的源代码进行编译</p>
-<p>使用命令<code>git status</code>查看当前源代码仓库文件变动</p>
-<p>可以看到在文章书写好后，源代码仓库中多了一个markdown文件，这个文件就需要提交到云端源码仓库</p>
-<p><img data-src="https://43423.oss-cn-beijing.aliyuncs.com/img/20200323110839.png" alt="y源代码变动"></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">"上传源代码 文章书写规范"</span></span><br><span class="line">git push origin <span class="built_in">source</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>需要注意的是，对于仓库中一下文件不需要做修改</p>
+<p>B图展示了不同染色体水平的Hi-C热图，反映了不同层次的高阶染色体折叠，两个坐标轴上都表示基因组坐标，区域间的交互频率用颜色深浅表示</p>
 <ul>
-<li><code>theme/</code>下所有文件</li>
-<li><code>_confg.yml</code>文件</li>
+<li>在submegabase尺度，TAD沿着正方形的对角线分布，相互作用十分富集，同时TAD存在边界而且TAD被 contact depletion zones 分割开</li>
+<li>在染色体尺度上，染色质的远距离的交互形成具有典型格子图案的相互排斥的A、B区室</li>
+<li>与染色体间的交互相比，染色体内的交互频率会更高，这与染色体疆域的形成是相互一致的</li>
 </ul>
-<p>以上就完成了文章的发布，尽情享受hexo带来的便捷吧!</p>
+<img data-src="https://s1.ax1x.com/2020/03/31/GlV5As.png" alt="Fig. 1" style="zoom:67%;" />
+
+<h2 id="TADs-Across-Species"><a href="#TADs-Across-Species" class="headerlink" title="TADs Across Species"></a>TADs Across Species</h2><p>在这个板块，作者主要讲述了TAD在不同的物种中的特征以及形成机制</p>
+<h3 id="TADs-in-mammals"><a href="#TADs-in-mammals" class="headerlink" title="TADs in mammals"></a>TADs in mammals</h3><p>在哺乳动物中，TAD的特征十分的保守，特征主要有以下几条</p>
+<ul>
+<li>大多数哺乳动物TAD边界的一个显著特征是存在 CCCTC-binding factor (CTCF)  以及structural maintenance of chromosomes (SMC) cohesin complex， loop-anchored TADs 总是出现CTCF之间，并且位于一个收敛的方向，并且改变单个CTCF的方向会对TAD边界的位置</li>
+<li>针对这些TADs的形成，提出了一种称为“loop extrusion model“的模型，这个模型指出loop-anchored TADs 的形成与CTCF/cohesin有关，CTCF/cohesin来自于黏连蛋白复合物的出现和移除之间的平衡，这是一个动态的过程。另一个SMC蛋白复合物富集在TAD边界。</li>
+<li>在缺乏cohesin或TADs通过自发的染色质接触形成的情况下，可能存在其他的机制</li>
+<li>CTCF与增强子-启动子的交互有关；transcription-associated supercoiling 和 type II DNA topoisomerase都与染色体的拓扑结构有关</li>
+</ul>
+<img data-src="https://s1.ax1x.com/2020/03/31/GlVohq.png" alt="mammals" style="zoom:80%;" />
+
+<h3 id="TADs-in-Drosophila"><a href="#TADs-in-Drosophila" class="headerlink" title="TADs in Drosophila"></a>TADs in Drosophila</h3><ul>
+<li><p>果蝇TADs表现出与表观遗传有很好的相关性，并根据其具体的染色质特征分为四个主要类别(active TADs、PcG TADs、 null or void TADs、 heterochromatin TADs}</p>
+</li>
+<li><p>RNAPII和转录过程与果蝇TAD的形成有关，但并不完全决定其形成</p>
+</li>
+<li><p>Zelda转录因子在TAD边界处建立绝缘的作用，它可能与TAD边界处的其他调控因子合作，如 BEAF-32 and GAGA factor ，但在脊椎动物中没有发现其同系物，这也许是果蝇特有的机制</p>
+</li>
+</ul>
+<img data-src="https://s1.ax1x.com/2020/03/31/GlVfBQ.png" alt="Drosophila"  />
+
+<h3 id="TADs-in-Caenorhabditis-elegans"><a href="#TADs-in-Caenorhabditis-elegans" class="headerlink" title="TADs in Caenorhabditis elegans"></a>TADs in Caenorhabditis elegans</h3><ul>
+<li>X染色体上存在约1Mb大小的self-interacting domains ，但常染色体没有这个明显特征</li>
+<li>雌雄同体的X染色体被 dosage compensation complex (DCC) 特异性结合，（DCC是一种凝缩蛋白复合物）</li>
+</ul>
+<h3 id="TADs-in-plants"><a href="#TADs-in-plants" class="headerlink" title="TADs in plants"></a>TADs in plants</h3><ul>
+<li>拟南芥中没有明显的的TAD，但拟南芥基因组包涵了与H3K27me3或H3K9me2等受抑制的染色质标记丰富的相互作用的紧密区域；在水稻和棉花中可以鉴定出明显的TAD</li>
+<li>玉米、番茄、高粱、粟、水稻中发现了一种类似于果蝇的 TAD-like domains ，也可以根据他的表观遗传特征分成四种染色质类型</li>
+<li>在水稻TAD边界上发现了DNA GC-rich motifs，类似于那些属于TCP家族的被植物特异性转录因子结合的序列</li>
+</ul>
+<p><img data-src="https://s1.ax1x.com/2020/03/31/GlVh7j.png" alt=" plants"></p>
+<h3 id="Self-interacting-domains-in-yeast"><a href="#Self-interacting-domains-in-yeast" class="headerlink" title="Self-interacting domains in yeast"></a>Self-interacting domains in yeast</h3><ul>
+<li>在Schizosaccharomyces pombe 发现了叫做”globules“ 的 Self-interacting domains，</li>
+<li>最近，用了一个类似于Hi-C的Micro-C技术揭示了 small self-interacting domains的存在</li>
+</ul>
+<h3 id="TAD-like-domains-in-bacteria"><a href="#TAD-like-domains-in-bacteria" class="headerlink" title="TAD-like domains in bacteria"></a>TAD-like domains in bacteria</h3><ul>
+<li>Caulobacter crescentus 中存在分立的chromosomal interaction domains (CIDs) ，类似于真核生物的TAD</li>
+<li>研究表明，富含plectonemes的区域形成CIDs，而边界是由高表达基因和无plectonemes区域的形成而形成的。</li>
+<li>研究发现SMC环能够围绕DNA和染色体臂，形成依赖于复合物中腺苷三磷酸酶(ATPase)活性的 processive loops </li>
+</ul>
+<p><img data-src="https://s1.ax1x.com/2020/03/31/GlVWng.png" alt="bacteria "></p>
+<h3 id="General-and-specific-features-of-TADs"><a href="#General-and-specific-features-of-TADs" class="headerlink" title="General and specific features of TADs"></a>General and specific features of TADs</h3><ul>
+<li>虽然TADs或相互作用域作为基因组组织的一个基本组成部分出现，但它们的特征并不是普遍保守的。 在不同的物种中，Contact domains 显著程度、边界的清晰度都存在差异。此外，TAD形成的分子机制可能是多种多样的，这与不同类型TADs的存在是一致的。因此，尚不清楚TADs是高阶基因组的普遍单位，还是在进化过程中由于作用于染色质的不同分子引擎的相互作用而反复出现。然而，不同物种都保守的一个显著特征是基因活性和基因组折叠之间的关系。边界的染色质活性相对较高，</li>
+<li>CTCF在脊椎动物的特性较为保守，然而，在其他生物如植物、酵母和秀丽隐杆线虫中没有发现CTCF</li>
+<li>然而，绝缘体蛋白也可能在其他物种转录区域的TAD边界的定义中发挥类似的作用，如果蝇中的BEAF-32和CP190，植物中的TCP蛋白</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li>Principles of genome folding into topologically associating domains</li>
+</ul>
 
     </div>
 
@@ -369,11 +380,11 @@
 <div>
 <ul class="post-copyright">
   <li class="post-copyright-author">
-    <strong>Post author:  </strong>zpliu
+    <strong>Post author:  </strong>yxlong
   </li>
   <li class="post-copyright-link">
     <strong>Post link: </strong>
-    <a href="https://biocottonhub.github.io/codeHub/2020/03/23/05hexo%E6%96%87%E7%AB%A0%E5%8F%91%E5%B8%83/" title="hexo文章书写规范">https://biocottonhub.github.io/codeHub/2020/03/23/05hexo文章发布/</a>
+    <a href="https://biocottonhub.github.io/codeHub/2020/03/31/12%E4%B8%89%E7%BB%B4%E5%9F%BA%E5%9B%A0%E7%BB%84%E4%B9%8BTAD%E7%9A%84%E5%BD%A2%E6%88%90%E6%9C%BA%E5%88%B6%E4%BB%A5%E5%8F%8A%E5%85%B6%E7%89%B9%E5%BE%81-%EF%BC%88%E4%B8%8A%EF%BC%89/" title="三维基因组之TAD的形成机制以及其特征 （上）">https://biocottonhub.github.io/codeHub/2020/03/31/12三维基因组之TAD的形成机制以及其特征-（上）/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
@@ -383,9 +394,6 @@
 
 
       <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/codeHub/tags/hexo/" rel="tag"># hexo</a>
-          </div>
 
         
 
@@ -393,13 +401,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/codeHub/2020/03/22/04vscode%E4%B8%8E%E6%9C%8D%E5%8A%A1%E7%AB%AFR%E4%BA%A4%E4%BA%92/" rel="prev" title="04vscode与服务端R交互">
-      <i class="fa fa-chevron-left"></i> 04vscode与服务端R交互
+    <a href="/codeHub/2020/03/27/11circos%E6%A8%A1%E5%9D%97%E5%AE%89%E8%A3%85/" rel="prev" title="circos模块安装">
+      <i class="fa fa-chevron-left"></i> circos模块安装
     </a></div>
-      <div class="post-nav-item">
-    <a href="/codeHub/2020/03/24/06MCScanX%E5%85%B1%E7%BA%BF%E6%80%A7%E5%88%86%E6%9E%90/" rel="next" title="MCScanX共线性分析">
-      MCScanX共线性分析 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -460,7 +465,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#文章书写规范"><span class="nav-number">1.</span> <span class="nav-text">文章书写规范</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-生成一篇空白markdown文件"><span class="nav-number">1.1.</span> <span class="nav-text">1.生成一篇空白markdown文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-给文章分类或者加标签"><span class="nav-number">1.2.</span> <span class="nav-text">2.给文章分类或者加标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-创建新的标签或者分类"><span class="nav-number">1.3.</span> <span class="nav-text">3.创建新的标签或者分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-文章书写好后进行发布"><span class="nav-number">1.4.</span> <span class="nav-text">4.文章书写好后进行发布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-上传源代码"><span class="nav-number">1.5.</span> <span class="nav-text">5.上传源代码</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#三维基因组之TAD的形成机制以及其特征-（上）"><span class="nav-number">1.</span> <span class="nav-text">三维基因组之TAD的形成机制以及其特征 （上）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduce"><span class="nav-number">1.2.</span> <span class="nav-text">Introduce</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TADs-Across-Species"><span class="nav-number">1.3.</span> <span class="nav-text">TADs Across Species</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TADs-in-mammals"><span class="nav-number">1.3.1.</span> <span class="nav-text">TADs in mammals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TADs-in-Drosophila"><span class="nav-number">1.3.2.</span> <span class="nav-text">TADs in Drosophila</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TADs-in-Caenorhabditis-elegans"><span class="nav-number">1.3.3.</span> <span class="nav-text">TADs in Caenorhabditis elegans</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TADs-in-plants"><span class="nav-number">1.3.4.</span> <span class="nav-text">TADs in plants</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Self-interacting-domains-in-yeast"><span class="nav-number">1.3.5.</span> <span class="nav-text">Self-interacting domains in yeast</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TAD-like-domains-in-bacteria"><span class="nav-number">1.3.6.</span> <span class="nav-text">TAD-like domains in bacteria</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#General-and-specific-features-of-TADs"><span class="nav-number">1.3.7.</span> <span class="nav-text">General and specific features of TADs</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">1.4.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
