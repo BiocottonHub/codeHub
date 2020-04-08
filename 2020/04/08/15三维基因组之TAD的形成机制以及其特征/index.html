@@ -21,24 +21,25 @@
     var CONFIG = {"hostname":"biocottonhub.github.io","root":"/codeHub/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="三维基因组之TAD的形成机制以及其特征 （上）Abstract了解细胞核内染色体折叠的机制对于确定基因组结构和功能之间的关系至关重要。最近应用的“染色体构象捕获”技术揭示了许多物种的基因组被组织成优先的内部染色质相互作用域，称为TADs。这种染色体区域化已成为高阶基因组组织和功能进化的重要特征。虽然TADs现在已经被广泛的应用于各种生物中，但它们在大小、结构和形成过程中所涉及的蛋白质方面似乎有特定">
+  <meta name="description" content="三维基因组之TAD的形成机制以及其特征Abstract了解细胞核内染色体折叠的机制对于确定基因组结构和功能之间的关系至关重要。最近应用的“染色体构象捕获”技术揭示了许多物种的基因组被组织成优先的内部染色质相互作用域，称为TADs。这种染色体区域化已成为高阶基因组组织和功能进化的重要特征。虽然TADs现在已经被广泛的应用于各种生物中，但它们在大小、结构和形成过程中所涉及的蛋白质方面似乎有特定的特征。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="三维基因组之TAD的形成机制以及其特征 （上）">
-<meta property="og:url" content="https://biocottonhub.github.io/codeHub/2020/03/31/12%E4%B8%89%E7%BB%B4%E5%9F%BA%E5%9B%A0%E7%BB%84%E4%B9%8BTAD%E7%9A%84%E5%BD%A2%E6%88%90%E6%9C%BA%E5%88%B6%E4%BB%A5%E5%8F%8A%E5%85%B6%E7%89%B9%E5%BE%81-%EF%BC%88%E4%B8%8A%EF%BC%89/index.html">
+<meta property="og:title" content="15三维基因组之TAD的形成机制以及其特征">
+<meta property="og:url" content="https://biocottonhub.github.io/codeHub/2020/04/08/15%E4%B8%89%E7%BB%B4%E5%9F%BA%E5%9B%A0%E7%BB%84%E4%B9%8BTAD%E7%9A%84%E5%BD%A2%E6%88%90%E6%9C%BA%E5%88%B6%E4%BB%A5%E5%8F%8A%E5%85%B6%E7%89%B9%E5%BE%81/index.html">
 <meta property="og:site_name" content="Code Hub">
-<meta property="og:description" content="三维基因组之TAD的形成机制以及其特征 （上）Abstract了解细胞核内染色体折叠的机制对于确定基因组结构和功能之间的关系至关重要。最近应用的“染色体构象捕获”技术揭示了许多物种的基因组被组织成优先的内部染色质相互作用域，称为TADs。这种染色体区域化已成为高阶基因组组织和功能进化的重要特征。虽然TADs现在已经被广泛的应用于各种生物中，但它们在大小、结构和形成过程中所涉及的蛋白质方面似乎有特定">
+<meta property="og:description" content="三维基因组之TAD的形成机制以及其特征Abstract了解细胞核内染色体折叠的机制对于确定基因组结构和功能之间的关系至关重要。最近应用的“染色体构象捕获”技术揭示了许多物种的基因组被组织成优先的内部染色质相互作用域，称为TADs。这种染色体区域化已成为高阶基因组组织和功能进化的重要特征。虽然TADs现在已经被广泛的应用于各种生物中，但它们在大小、结构和形成过程中所涉及的蛋白质方面似乎有特定的特征。">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://s1.ax1x.com/2020/03/31/GlV5As.png">
 <meta property="og:image" content="https://s1.ax1x.com/2020/03/31/GlVohq.png">
 <meta property="og:image" content="https://s1.ax1x.com/2020/03/31/GlVfBQ.png">
 <meta property="og:image" content="https://s1.ax1x.com/2020/03/31/GlVh7j.png">
 <meta property="og:image" content="https://s1.ax1x.com/2020/03/31/GlVWng.png">
-<meta property="article:published_time" content="2020-03-31T15:30:22.000Z">
-<meta property="article:modified_time" content="2020-03-31T15:31:41.546Z">
+<meta property="og:image" content="https://s1.ax1x.com/2020/04/08/GWHh8K.png">
+<meta property="article:published_time" content="2020-04-08T08:58:35.000Z">
+<meta property="article:modified_time" content="2020-04-08T08:59:41.185Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://s1.ax1x.com/2020/03/31/GlV5As.png">
 
-<link rel="canonical" href="https://biocottonhub.github.io/codeHub/2020/03/31/12%E4%B8%89%E7%BB%B4%E5%9F%BA%E5%9B%A0%E7%BB%84%E4%B9%8BTAD%E7%9A%84%E5%BD%A2%E6%88%90%E6%9C%BA%E5%88%B6%E4%BB%A5%E5%8F%8A%E5%85%B6%E7%89%B9%E5%BE%81-%EF%BC%88%E4%B8%8A%EF%BC%89/">
+<link rel="canonical" href="https://biocottonhub.github.io/codeHub/2020/04/08/15%E4%B8%89%E7%BB%B4%E5%9F%BA%E5%9B%A0%E7%BB%84%E4%B9%8BTAD%E7%9A%84%E5%BD%A2%E6%88%90%E6%9C%BA%E5%88%B6%E4%BB%A5%E5%8F%8A%E5%85%B6%E7%89%B9%E5%BE%81/">
 
 
 <script id="page-configurations">
@@ -51,7 +52,7 @@
   };
 </script>
 
-  <title>三维基因组之TAD的形成机制以及其特征 （上） | Code Hub</title>
+  <title>15三维基因组之TAD的形成机制以及其特征 | Code Hub</title>
   
 
 
@@ -196,7 +197,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
-    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2020/03/31/12%E4%B8%89%E7%BB%B4%E5%9F%BA%E5%9B%A0%E7%BB%84%E4%B9%8BTAD%E7%9A%84%E5%BD%A2%E6%88%90%E6%9C%BA%E5%88%B6%E4%BB%A5%E5%8F%8A%E5%85%B6%E7%89%B9%E5%BE%81-%EF%BC%88%E4%B8%8A%EF%BC%89/">
+    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2020/04/08/15%E4%B8%89%E7%BB%B4%E5%9F%BA%E5%9B%A0%E7%BB%84%E4%B9%8BTAD%E7%9A%84%E5%BD%A2%E6%88%90%E6%9C%BA%E5%88%B6%E4%BB%A5%E5%8F%8A%E5%85%B6%E7%89%B9%E5%BE%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/codeHub/uploads/themeImg/logo.png">
@@ -209,7 +210,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          三维基因组之TAD的形成机制以及其特征 （上）
+          15三维基因组之TAD的形成机制以及其特征
         </h1>
 
         <div class="post-meta">
@@ -221,7 +222,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-03-31 23:30:22 / Modified: 23:31:41" itemprop="dateCreated datePublished" datetime="2020-03-31T23:30:22+08:00">2020-03-31</time>
+              <time title="Created: 2020-04-08 16:58:35 / Modified: 16:59:41" itemprop="dateCreated datePublished" datetime="2020-04-08T16:58:35+08:00">2020-04-08</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -249,8 +250,8 @@
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/codeHub/2020/03/31/12%E4%B8%89%E7%BB%B4%E5%9F%BA%E5%9B%A0%E7%BB%84%E4%B9%8BTAD%E7%9A%84%E5%BD%A2%E6%88%90%E6%9C%BA%E5%88%B6%E4%BB%A5%E5%8F%8A%E5%85%B6%E7%89%B9%E5%BE%81-%EF%BC%88%E4%B8%8A%EF%BC%89/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2020/03/31/12%E4%B8%89%E7%BB%B4%E5%9F%BA%E5%9B%A0%E7%BB%84%E4%B9%8BTAD%E7%9A%84%E5%BD%A2%E6%88%90%E6%9C%BA%E5%88%B6%E4%BB%A5%E5%8F%8A%E5%85%B6%E7%89%B9%E5%BE%81-%EF%BC%88%E4%B8%8A%EF%BC%89/" itemprop="commentCount"></span>
+    <a title="valine" href="/codeHub/2020/04/08/15%E4%B8%89%E7%BB%B4%E5%9F%BA%E5%9B%A0%E7%BB%84%E4%B9%8BTAD%E7%9A%84%E5%BD%A2%E6%88%90%E6%9C%BA%E5%88%B6%E4%BB%A5%E5%8F%8A%E5%85%B6%E7%89%B9%E5%BE%81/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2020/04/08/15%E4%B8%89%E7%BB%B4%E5%9F%BA%E5%9B%A0%E7%BB%84%E4%B9%8BTAD%E7%9A%84%E5%BD%A2%E6%88%90%E6%9C%BA%E5%88%B6%E4%BB%A5%E5%8F%8A%E5%85%B6%E7%89%B9%E5%BE%81/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -265,7 +266,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="三维基因组之TAD的形成机制以及其特征-（上）"><a href="#三维基因组之TAD的形成机制以及其特征-（上）" class="headerlink" title="三维基因组之TAD的形成机制以及其特征 （上）"></a>三维基因组之TAD的形成机制以及其特征 （上）</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>了解细胞核内染色体折叠的机制对于确定基因组结构和功能之间的关系至关重要。最近应用的“染色体构象捕获”技术揭示了许多物种的基因组被组织成优先的内部染色质相互作用域，称为TADs。这种染色体区域化已成为高阶基因组组织和功能进化的重要特征。虽然TADs现在已经被广泛的应用于各种生物中，但它们在大小、结构和形成过程中所涉及的蛋白质方面似乎有特定的特征。在此，我们描述了这些跨物种区域的主要特征，并讨论了染色质结构、基因组活性和表观基因组之间的关系，着重讲述了TAD形成的机制原理。我们还考虑了TADs在基因组进化中的潜在影响。</p>
+        <h1 id="三维基因组之TAD的形成机制以及其特征"><a href="#三维基因组之TAD的形成机制以及其特征" class="headerlink" title="三维基因组之TAD的形成机制以及其特征"></a>三维基因组之TAD的形成机制以及其特征</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>了解细胞核内染色体折叠的机制对于确定基因组结构和功能之间的关系至关重要。最近应用的“染色体构象捕获”技术揭示了许多物种的基因组被组织成优先的内部染色质相互作用域，称为TADs。这种染色体区域化已成为高阶基因组组织和功能进化的重要特征。虽然TADs现在已经被广泛的应用于各种生物中，但它们在大小、结构和形成过程中所涉及的蛋白质方面似乎有特定的特征。在此，我们描述了这些跨物种区域的主要特征，并讨论了染色质结构、基因组活性和表观基因组之间的关系，着重讲述了TAD形成的机制原理。我们还考虑了TADs在基因组进化中的潜在影响。</p>
 <a id="more"></a>
 
 <h2 id="Introduce"><a href="#Introduce" class="headerlink" title="Introduce"></a>Introduce</h2><p>A图展示了细胞核内的染色体折叠情况：染色质丝 &gt; TAD &gt; 区室 &gt; 染色体疆域</p>
@@ -328,6 +329,38 @@
 <li>CTCF在脊椎动物的特性较为保守，然而，在其他生物如植物、酵母和秀丽隐杆线虫中没有发现CTCF</li>
 <li>然而，绝缘体蛋白也可能在其他物种转录区域的TAD边界的定义中发挥类似的作用，如果蝇中的BEAF-32和CP190，植物中的TCP蛋白</li>
 </ul>
+<h2 id="Physical-Nature-Of-TADs"><a href="#Physical-Nature-Of-TADs" class="headerlink" title="Physical Nature Of TADs"></a>Physical Nature Of TADs</h2><h3 id="TADs-and-compartments"><a href="#TADs-and-compartments" class="headerlink" title="TADs and compartments"></a>TADs and compartments</h3><p>下图展示了在果蝇和哺乳动物中的染色体折叠情况</p>
+<p>A图（果蝇）</p>
+<ul>
+<li>TAD和区室都与其表观遗传区域相对应，其优先在自身折叠并和同类型的TAD发生远程顺式交互</li>
+<li>大的受抑制的染色质区域形成显著的TAD</li>
+<li>这些大的受抑制的区域被这些转录基因分隔开，这些转录基因形成小的active TAD 或者 inter-TAD–like regions </li>
+</ul>
+<p>B图（哺乳动物）</p>
+<ul>
+<li>在哺乳动物中，为TAD的形成提出了一种“loop extrusion model”，里边包含了一种 loop extrusion factor，被Nipbl和Wapl装载和释放，黏连蛋白挤压染色质使其分离、与另一个黏连蛋白发生碰撞、通过CTCF蛋白反向或者其他边界上的原件来到达TAD的边界。这些loop在TAD的边界之间的交互是被看作是一个strong peak</li>
+<li>在活跃的转录其实位点也发现了绝缘子的存在</li>
+<li>最新研究发现，loop挤压过程会与本身活跃与不活跃的染色质之间的隔离相互竞争</li>
+</ul>
+<img data-src="https://s1.ax1x.com/2020/04/08/GWHh8K.png" alt="compartment" style="zoom:67%;" />
+
+<h3 id="TAD-structure-and-dynamics"><a href="#TAD-structure-and-dynamics" class="headerlink" title="TAD structure and dynamics"></a>TAD structure and dynamics</h3><ul>
+<li>显微镜技术、聚合物模型和Single-cell Hi-C (scHi-C) 都表明哺乳动物的TADs可以呈现各种各样的构象，从浓缩的球状物体到更延伸的结构</li>
+<li>TADs的边界精度和绝缘程度在不同的细胞类型或细胞周期期间都不同</li>
+<li>“stirring model” 表明增强子和启动子的相互作用是动态的。转录本身可能稳定近端染色质构象，减少增强子和启动子之间的距离</li>
+<li>因此，TADs可能建立一个局部的染色体环境，调控信号可能调节远端定位增强子和启动子之间的动态相互作用的频率。</li>
+</ul>
+<h2 id="TADs-And-Genome-Evolution"><a href="#TADs-And-Genome-Evolution" class="headerlink" title="TADs And Genome Evolution"></a>TADs And Genome Evolution</h2><ul>
+<li>TAD可能作为缓冲因子，允许突变发挥局部影响，而不影响周围的的额外的TAD位点</li>
+<li>TAD在大小上表现出灵活可变性，可以允许DNA序列的增加和缺失，这有利于新的调控效应的出现</li>
+<li>这些三维结构有利于维持内部各种元件的选择压力，进而有利于控制某些特定的位点</li>
+<li>CTCF binding 和染色质的结构趋于共同进化</li>
+<li>在斑马鱼和其他脊椎动物中，位于相同TAD的基因对比临近TAD的基因对在同源性上更近一些，</li>
+<li>TAD的边界存在局部开放的染色质结构，边界一旦被扰动，会导致异常的交互和基因的错误表达，并通常会带来有害的影响，这为TAD在进化中保持完整性提供了基础</li>
+<li>基因组的复制有时候会导致新的TAD出现，这些新的TAD有时候可以解释病理，但有时候它没有表型</li>
+<li>在脊椎动物中，一个新的TAD的出现可能导致新的顺势调控元件的插入</li>
+</ul>
+<h2 id="Conclusion-And-Perspective"><a href="#Conclusion-And-Perspective" class="headerlink" title="Conclusion And Perspective"></a>Conclusion And Perspective</h2><p>染色体的折叠情况是一个跨物种保守的特征，为什么CTCF在不同物种之间的出现与消失仍然是一个有待解决的问题，在存在CTCF的物中，CTCF可以用来定义TAD的边界，但是其他物种缺失CTCF表明TAD是一个可以脱离CTCF而存在的一个更基本的染色质结构，并且在这些物种中转录基因的分布和绝缘子的出现和分布为交互模型的构建提供了框架。</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
 <li>Principles of genome folding into topologically associating domains</li>
 </ul>
@@ -384,7 +417,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>Post link: </strong>
-    <a href="https://biocottonhub.github.io/codeHub/2020/03/31/12%E4%B8%89%E7%BB%B4%E5%9F%BA%E5%9B%A0%E7%BB%84%E4%B9%8BTAD%E7%9A%84%E5%BD%A2%E6%88%90%E6%9C%BA%E5%88%B6%E4%BB%A5%E5%8F%8A%E5%85%B6%E7%89%B9%E5%BE%81-%EF%BC%88%E4%B8%8A%EF%BC%89/" title="三维基因组之TAD的形成机制以及其特征 （上）">https://biocottonhub.github.io/codeHub/2020/03/31/12三维基因组之TAD的形成机制以及其特征-（上）/</a>
+    <a href="https://biocottonhub.github.io/codeHub/2020/04/08/15%E4%B8%89%E7%BB%B4%E5%9F%BA%E5%9B%A0%E7%BB%84%E4%B9%8BTAD%E7%9A%84%E5%BD%A2%E6%88%90%E6%9C%BA%E5%88%B6%E4%BB%A5%E5%8F%8A%E5%85%B6%E7%89%B9%E5%BE%81/" title="15三维基因组之TAD的形成机制以及其特征">https://biocottonhub.github.io/codeHub/2020/04/08/15三维基因组之TAD的形成机制以及其特征/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
@@ -401,13 +434,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/codeHub/2020/03/27/11circos%E6%A8%A1%E5%9D%97%E5%AE%89%E8%A3%85/" rel="prev" title="circos模块安装">
-      <i class="fa fa-chevron-left"></i> circos模块安装
+    <a href="/codeHub/2020/04/08/14Blast-%E7%BD%91%E9%A1%B5/" rel="prev" title="Blast+网页">
+      <i class="fa fa-chevron-left"></i> Blast+网页
     </a></div>
-      <div class="post-nav-item">
-    <a href="/codeHub/2020/04/06/13fasta%E6%96%87%E4%BB%B6%E6%A0%A1%E9%AA%8C/" rel="next" title="fasta文件校验">
-      fasta文件校验 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -468,7 +498,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#三维基因组之TAD的形成机制以及其特征-（上）"><span class="nav-number">1.</span> <span class="nav-text">三维基因组之TAD的形成机制以及其特征 （上）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduce"><span class="nav-number">1.2.</span> <span class="nav-text">Introduce</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TADs-Across-Species"><span class="nav-number">1.3.</span> <span class="nav-text">TADs Across Species</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TADs-in-mammals"><span class="nav-number">1.3.1.</span> <span class="nav-text">TADs in mammals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TADs-in-Drosophila"><span class="nav-number">1.3.2.</span> <span class="nav-text">TADs in Drosophila</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TADs-in-Caenorhabditis-elegans"><span class="nav-number">1.3.3.</span> <span class="nav-text">TADs in Caenorhabditis elegans</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TADs-in-plants"><span class="nav-number">1.3.4.</span> <span class="nav-text">TADs in plants</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Self-interacting-domains-in-yeast"><span class="nav-number">1.3.5.</span> <span class="nav-text">Self-interacting domains in yeast</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TAD-like-domains-in-bacteria"><span class="nav-number">1.3.6.</span> <span class="nav-text">TAD-like domains in bacteria</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#General-and-specific-features-of-TADs"><span class="nav-number">1.3.7.</span> <span class="nav-text">General and specific features of TADs</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">1.4.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#三维基因组之TAD的形成机制以及其特征"><span class="nav-number">1.</span> <span class="nav-text">三维基因组之TAD的形成机制以及其特征</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduce"><span class="nav-number">1.2.</span> <span class="nav-text">Introduce</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TADs-Across-Species"><span class="nav-number">1.3.</span> <span class="nav-text">TADs Across Species</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TADs-in-mammals"><span class="nav-number">1.3.1.</span> <span class="nav-text">TADs in mammals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TADs-in-Drosophila"><span class="nav-number">1.3.2.</span> <span class="nav-text">TADs in Drosophila</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TADs-in-Caenorhabditis-elegans"><span class="nav-number">1.3.3.</span> <span class="nav-text">TADs in Caenorhabditis elegans</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TADs-in-plants"><span class="nav-number">1.3.4.</span> <span class="nav-text">TADs in plants</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Self-interacting-domains-in-yeast"><span class="nav-number">1.3.5.</span> <span class="nav-text">Self-interacting domains in yeast</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TAD-like-domains-in-bacteria"><span class="nav-number">1.3.6.</span> <span class="nav-text">TAD-like domains in bacteria</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#General-and-specific-features-of-TADs"><span class="nav-number">1.3.7.</span> <span class="nav-text">General and specific features of TADs</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Physical-Nature-Of-TADs"><span class="nav-number">1.4.</span> <span class="nav-text">Physical Nature Of TADs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TADs-and-compartments"><span class="nav-number">1.4.1.</span> <span class="nav-text">TADs and compartments</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TAD-structure-and-dynamics"><span class="nav-number">1.4.2.</span> <span class="nav-text">TAD structure and dynamics</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TADs-And-Genome-Evolution"><span class="nav-number">1.5.</span> <span class="nav-text">TADs And Genome Evolution</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-And-Perspective"><span class="nav-number">1.6.</span> <span class="nav-text">Conclusion And Perspective</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">1.7.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

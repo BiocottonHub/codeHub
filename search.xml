@@ -1,6 +1,269 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>15三维基因组之TAD的形成机制以及其特征</title>
+    <url>/codeHub/2020/04/08/15%E4%B8%89%E7%BB%B4%E5%9F%BA%E5%9B%A0%E7%BB%84%E4%B9%8BTAD%E7%9A%84%E5%BD%A2%E6%88%90%E6%9C%BA%E5%88%B6%E4%BB%A5%E5%8F%8A%E5%85%B6%E7%89%B9%E5%BE%81/</url>
+    <content><![CDATA[<h1 id="三维基因组之TAD的形成机制以及其特征"><a href="#三维基因组之TAD的形成机制以及其特征" class="headerlink" title="三维基因组之TAD的形成机制以及其特征"></a>三维基因组之TAD的形成机制以及其特征</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>了解细胞核内染色体折叠的机制对于确定基因组结构和功能之间的关系至关重要。最近应用的“染色体构象捕获”技术揭示了许多物种的基因组被组织成优先的内部染色质相互作用域，称为TADs。这种染色体区域化已成为高阶基因组组织和功能进化的重要特征。虽然TADs现在已经被广泛的应用于各种生物中，但它们在大小、结构和形成过程中所涉及的蛋白质方面似乎有特定的特征。在此，我们描述了这些跨物种区域的主要特征，并讨论了染色质结构、基因组活性和表观基因组之间的关系，着重讲述了TAD形成的机制原理。我们还考虑了TADs在基因组进化中的潜在影响。</p>
+<a id="more"></a>
+
+<h2 id="Introduce"><a href="#Introduce" class="headerlink" title="Introduce"></a>Introduce</h2><p>A图展示了细胞核内的染色体折叠情况：染色质丝 &gt; TAD &gt; 区室 &gt; 染色体疆域</p>
+<ul>
+<li>染色质丝：染色体折叠的最基本的层是DNA组蛋白结合水平，形成核小体进而形成染色质丝</li>
+<li>TAD：由于基因调控，染色体一不同的核小体密度进行包装，并在submegabase尺度折叠成内部相互作用的高级结构</li>
+<li>区室：在染色体尺度，染色质被隔离成活跃的“A”和被抑制的的“B”区室，说明了具有相同表观遗传特征的染色质区域会更多的进行交互</li>
+<li>每个染色体在细胞核内占据自己位置，形成染色体疆域</li>
+</ul>
+<p>B图展示了不同染色体水平的Hi-C热图，反映了不同层次的高阶染色体折叠，两个坐标轴上都表示基因组坐标，区域间的交互频率用颜色深浅表示</p>
+<ul>
+<li>在submegabase尺度，TAD沿着正方形的对角线分布，相互作用十分富集，同时TAD存在边界而且TAD被 contact depletion zones 分割开</li>
+<li>在染色体尺度上，染色质的远距离的交互形成具有典型格子图案的相互排斥的A、B区室</li>
+<li>与染色体间的交互相比，染色体内的交互频率会更高，这与染色体疆域的形成是相互一致的</li>
+</ul>
+<img data-src="https://s1.ax1x.com/2020/03/31/GlV5As.png" alt="Fig. 1" style="zoom:67%;" />
+
+<h2 id="TADs-Across-Species"><a href="#TADs-Across-Species" class="headerlink" title="TADs Across Species"></a>TADs Across Species</h2><p>在这个板块，作者主要讲述了TAD在不同的物种中的特征以及形成机制</p>
+<h3 id="TADs-in-mammals"><a href="#TADs-in-mammals" class="headerlink" title="TADs in mammals"></a>TADs in mammals</h3><p>在哺乳动物中，TAD的特征十分的保守，特征主要有以下几条</p>
+<ul>
+<li>大多数哺乳动物TAD边界的一个显著特征是存在 CCCTC-binding factor (CTCF)  以及structural maintenance of chromosomes (SMC) cohesin complex， loop-anchored TADs 总是出现CTCF之间，并且位于一个收敛的方向，并且改变单个CTCF的方向会对TAD边界的位置</li>
+<li>针对这些TADs的形成，提出了一种称为“loop extrusion model“的模型，这个模型指出loop-anchored TADs 的形成与CTCF/cohesin有关，CTCF/cohesin来自于黏连蛋白复合物的出现和移除之间的平衡，这是一个动态的过程。另一个SMC蛋白复合物富集在TAD边界。</li>
+<li>在缺乏cohesin或TADs通过自发的染色质接触形成的情况下，可能存在其他的机制</li>
+<li>CTCF与增强子-启动子的交互有关；transcription-associated supercoiling 和 type II DNA topoisomerase都与染色体的拓扑结构有关</li>
+</ul>
+<img data-src="https://s1.ax1x.com/2020/03/31/GlVohq.png" alt="mammals" style="zoom:80%;" />
+
+<h3 id="TADs-in-Drosophila"><a href="#TADs-in-Drosophila" class="headerlink" title="TADs in Drosophila"></a>TADs in Drosophila</h3><ul>
+<li><p>果蝇TADs表现出与表观遗传有很好的相关性，并根据其具体的染色质特征分为四个主要类别(active TADs、PcG TADs、 null or void TADs、 heterochromatin TADs}</p>
+</li>
+<li><p>RNAPII和转录过程与果蝇TAD的形成有关，但并不完全决定其形成</p>
+</li>
+<li><p>Zelda转录因子在TAD边界处建立绝缘的作用，它可能与TAD边界处的其他调控因子合作，如 BEAF-32 and GAGA factor ，但在脊椎动物中没有发现其同系物，这也许是果蝇特有的机制</p>
+</li>
+</ul>
+<img data-src="https://s1.ax1x.com/2020/03/31/GlVfBQ.png" alt="Drosophila"  />
+
+<h3 id="TADs-in-Caenorhabditis-elegans"><a href="#TADs-in-Caenorhabditis-elegans" class="headerlink" title="TADs in Caenorhabditis elegans"></a>TADs in Caenorhabditis elegans</h3><ul>
+<li>X染色体上存在约1Mb大小的self-interacting domains ，但常染色体没有这个明显特征</li>
+<li>雌雄同体的X染色体被 dosage compensation complex (DCC) 特异性结合，（DCC是一种凝缩蛋白复合物）</li>
+</ul>
+<h3 id="TADs-in-plants"><a href="#TADs-in-plants" class="headerlink" title="TADs in plants"></a>TADs in plants</h3><ul>
+<li>拟南芥中没有明显的的TAD，但拟南芥基因组包涵了与H3K27me3或H3K9me2等受抑制的染色质标记丰富的相互作用的紧密区域；在水稻和棉花中可以鉴定出明显的TAD</li>
+<li>玉米、番茄、高粱、粟、水稻中发现了一种类似于果蝇的 TAD-like domains ，也可以根据他的表观遗传特征分成四种染色质类型</li>
+<li>在水稻TAD边界上发现了DNA GC-rich motifs，类似于那些属于TCP家族的被植物特异性转录因子结合的序列</li>
+</ul>
+<p><img data-src="https://s1.ax1x.com/2020/03/31/GlVh7j.png" alt=" plants"></p>
+<h3 id="Self-interacting-domains-in-yeast"><a href="#Self-interacting-domains-in-yeast" class="headerlink" title="Self-interacting domains in yeast"></a>Self-interacting domains in yeast</h3><ul>
+<li>在Schizosaccharomyces pombe 发现了叫做”globules“ 的 Self-interacting domains，</li>
+<li>最近，用了一个类似于Hi-C的Micro-C技术揭示了 small self-interacting domains的存在</li>
+</ul>
+<h3 id="TAD-like-domains-in-bacteria"><a href="#TAD-like-domains-in-bacteria" class="headerlink" title="TAD-like domains in bacteria"></a>TAD-like domains in bacteria</h3><ul>
+<li>Caulobacter crescentus 中存在分立的chromosomal interaction domains (CIDs) ，类似于真核生物的TAD</li>
+<li>研究表明，富含plectonemes的区域形成CIDs，而边界是由高表达基因和无plectonemes区域的形成而形成的。</li>
+<li>研究发现SMC环能够围绕DNA和染色体臂，形成依赖于复合物中腺苷三磷酸酶(ATPase)活性的 processive loops </li>
+</ul>
+<p><img data-src="https://s1.ax1x.com/2020/03/31/GlVWng.png" alt="bacteria "></p>
+<h3 id="General-and-specific-features-of-TADs"><a href="#General-and-specific-features-of-TADs" class="headerlink" title="General and specific features of TADs"></a>General and specific features of TADs</h3><ul>
+<li>虽然TADs或相互作用域作为基因组组织的一个基本组成部分出现，但它们的特征并不是普遍保守的。 在不同的物种中，Contact domains 显著程度、边界的清晰度都存在差异。此外，TAD形成的分子机制可能是多种多样的，这与不同类型TADs的存在是一致的。因此，尚不清楚TADs是高阶基因组的普遍单位，还是在进化过程中由于作用于染色质的不同分子引擎的相互作用而反复出现。然而，不同物种都保守的一个显著特征是基因活性和基因组折叠之间的关系。边界的染色质活性相对较高，</li>
+<li>CTCF在脊椎动物的特性较为保守，然而，在其他生物如植物、酵母和秀丽隐杆线虫中没有发现CTCF</li>
+<li>然而，绝缘体蛋白也可能在其他物种转录区域的TAD边界的定义中发挥类似的作用，如果蝇中的BEAF-32和CP190，植物中的TCP蛋白</li>
+</ul>
+<h2 id="Physical-Nature-Of-TADs"><a href="#Physical-Nature-Of-TADs" class="headerlink" title="Physical Nature Of TADs"></a>Physical Nature Of TADs</h2><h3 id="TADs-and-compartments"><a href="#TADs-and-compartments" class="headerlink" title="TADs and compartments"></a>TADs and compartments</h3><p>下图展示了在果蝇和哺乳动物中的染色体折叠情况</p>
+<p>A图（果蝇）</p>
+<ul>
+<li>TAD和区室都与其表观遗传区域相对应，其优先在自身折叠并和同类型的TAD发生远程顺式交互</li>
+<li>大的受抑制的染色质区域形成显著的TAD</li>
+<li>这些大的受抑制的区域被这些转录基因分隔开，这些转录基因形成小的active TAD 或者 inter-TAD–like regions </li>
+</ul>
+<p>B图（哺乳动物）</p>
+<ul>
+<li>在哺乳动物中，为TAD的形成提出了一种“loop extrusion model”，里边包含了一种 loop extrusion factor，被Nipbl和Wapl装载和释放，黏连蛋白挤压染色质使其分离、与另一个黏连蛋白发生碰撞、通过CTCF蛋白反向或者其他边界上的原件来到达TAD的边界。这些loop在TAD的边界之间的交互是被看作是一个strong peak</li>
+<li>在活跃的转录其实位点也发现了绝缘子的存在</li>
+<li>最新研究发现，loop挤压过程会与本身活跃与不活跃的染色质之间的隔离相互竞争</li>
+</ul>
+<img data-src="https://s1.ax1x.com/2020/04/08/GWHh8K.png" alt="compartment" style="zoom:67%;" />
+
+<h3 id="TAD-structure-and-dynamics"><a href="#TAD-structure-and-dynamics" class="headerlink" title="TAD structure and dynamics"></a>TAD structure and dynamics</h3><ul>
+<li>显微镜技术、聚合物模型和Single-cell Hi-C (scHi-C) 都表明哺乳动物的TADs可以呈现各种各样的构象，从浓缩的球状物体到更延伸的结构</li>
+<li>TADs的边界精度和绝缘程度在不同的细胞类型或细胞周期期间都不同</li>
+<li>“stirring model” 表明增强子和启动子的相互作用是动态的。转录本身可能稳定近端染色质构象，减少增强子和启动子之间的距离</li>
+<li>因此，TADs可能建立一个局部的染色体环境，调控信号可能调节远端定位增强子和启动子之间的动态相互作用的频率。</li>
+</ul>
+<h2 id="TADs-And-Genome-Evolution"><a href="#TADs-And-Genome-Evolution" class="headerlink" title="TADs And Genome Evolution"></a>TADs And Genome Evolution</h2><ul>
+<li>TAD可能作为缓冲因子，允许突变发挥局部影响，而不影响周围的的额外的TAD位点</li>
+<li>TAD在大小上表现出灵活可变性，可以允许DNA序列的增加和缺失，这有利于新的调控效应的出现</li>
+<li>这些三维结构有利于维持内部各种元件的选择压力，进而有利于控制某些特定的位点</li>
+<li>CTCF binding 和染色质的结构趋于共同进化</li>
+<li>在斑马鱼和其他脊椎动物中，位于相同TAD的基因对比临近TAD的基因对在同源性上更近一些，</li>
+<li>TAD的边界存在局部开放的染色质结构，边界一旦被扰动，会导致异常的交互和基因的错误表达，并通常会带来有害的影响，这为TAD在进化中保持完整性提供了基础</li>
+<li>基因组的复制有时候会导致新的TAD出现，这些新的TAD有时候可以解释病理，但有时候它没有表型</li>
+<li>在脊椎动物中，一个新的TAD的出现可能导致新的顺势调控元件的插入</li>
+</ul>
+<h2 id="Conclusion-And-Perspective"><a href="#Conclusion-And-Perspective" class="headerlink" title="Conclusion And Perspective"></a>Conclusion And Perspective</h2><p>染色体的折叠情况是一个跨物种保守的特征，为什么CTCF在不同物种之间的出现与消失仍然是一个有待解决的问题，在存在CTCF的物中，CTCF可以用来定义TAD的边界，但是其他物种缺失CTCF表明TAD是一个可以脱离CTCF而存在的一个更基本的染色质结构，并且在这些物种中转录基因的分布和绝缘子的出现和分布为交互模型的构建提供了框架。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li>Principles of genome folding into topologically associating domains</li>
+</ul>
+]]></content>
+      <categories>
+        <category>文献</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Blast+网页</title>
+    <url>/codeHub/2020/04/08/14Blast-%E7%BD%91%E9%A1%B5/</url>
+    <content><![CDATA[<h1 id="Blast-网页实现"><a href="#Blast-网页实现" class="headerlink" title="Blast+ 网页实现"></a>Blast+ 网页实现</h1><img data-src="http://image.sciencenet.cn/album/201311/28/073831c6zann9dznas78pw.jpg" alt=" Stephen Altschul, PhD " style="zoom:80%;  float:left; margin-right:20px" />
+
+<span class="label success">BLAST</span>( Basic Local Alignment Search Tool ),基于局部比对算法的搜索工具，实现比较两段核酸序列或者蛋白序列之间的同源性的功能，快速找到序列之间的同源区域，并且进行打分来区分同源性的高低。BLAST的作者 斯蒂芬·弗兰克·阿尔丘尔 **Stephen Frank  Altschul**，是一位著名数学家，同时本科期间对生物学有着浓厚的兴趣。因此他阅读了一些关于DNA的书籍其中包括詹姆斯.沃森撰写的《The Double Helix 》；同时选修了《进化生物学》；在博士期间为X射线晶体学项目写过计算机代码。1994年至今在美国国家生物信息中心NCBI从事计算生物学的工作。
+
+<p>​    网页版BLAST相比与本地BLAST有着一些优势，比如不用下载软件只需要在现代一款浏览器上便可以实现。</p>
+<a id="more"></a>
+
+<h3 id="1-前端发送表单"><a href="#1-前端发送表单" class="headerlink" title="1.前端发送表单"></a>1.前端发送表单</h3><p>表单数据包括</p>
+<ul>
+<li>序列信息</li>
+<li>blast database</li>
+<li>其他可选的参数</li>
+<li>选择blastn或者blastp</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">formInline: &#123;</span><br><span class="line">  sequence: <span class="string">''</span>,</span><br><span class="line">  database: <span class="string">''</span>,</span><br><span class="line">  evalue: <span class="string">'-evalue 1.0e-5 -num_alignments 10 -max_hsps 10'</span>,</span><br><span class="line">  blastType: <span class="string">''</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-1提交表单数据前进行数据校验"><a href="#1-1提交表单数据前进行数据校验" class="headerlink" title="1.1提交表单数据前进行数据校验"></a>1.1提交表单数据前进行数据校验</h4><ul>
+<li>表单校验不成功，不能够提交</li>
+<li>校验成功后使用<code>FormData</code>封装表单数据</li>
+<li>打开遮罩层，阻止多次提交</li>
+<li>使用<code>axios</code>获取响应数据后，关闭遮罩层</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">onSubmit () &#123;</span><br><span class="line">  <span class="keyword">this</span>.$refs.blastForm.validate(<span class="function">(<span class="params">valid</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (valid) &#123;</span><br><span class="line">      <span class="keyword">const</span> formData = <span class="keyword">new</span> FormData()</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">var</span> key <span class="keyword">in</span> <span class="keyword">this</span>.formInline) &#123;</span><br><span class="line">        formData.append(key, <span class="keyword">this</span>.formInline[key])</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">this</span>.showProcess = <span class="literal">true</span></span><br><span class="line">      request.post(<span class="string">'/test'</span>, formData).then(</span><br><span class="line">        (reponse) =&gt; &#123;</span><br><span class="line">          <span class="keyword">this</span>.reponseData = reponse.data</span><br><span class="line">          <span class="keyword">this</span>.showProcess = <span class="literal">false</span></span><br><span class="line">        &#125;</span><br><span class="line">      )</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-响应数据渲染"><a href="#2-响应数据渲染" class="headerlink" title="2.响应数据渲染"></a>2.响应数据渲染</h3><p>封装一个<code>show.vue</code>子组件，子组件中使用<code>props</code>获取父组件传递的响应数据，子组件中<code>reponseData</code>初始化值为空</p>
+<blockquote>
+<p>在渲染序列比对情况时候，遇到对不齐的情况；主要是由于没有使用等宽字体</p>
+</blockquote>
+<p><img data-src="https://43423.oss-cn-beijing.aliyuncs.com/img/20200408152513.png" alt="字体对齐"></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">props: &#123;</span><br><span class="line">  reponseData: &#123;</span><br><span class="line">    <span class="keyword">default</span>: <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> [&#123;</span><br><span class="line">        query: <span class="string">'CYP78A7'</span>,</span><br><span class="line">        queryLength: <span class="string">'559'</span>,</span><br><span class="line">        alignments: []</span><br><span class="line">      &#125;]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用计算属性，将父组件的响应数据转换成需要渲染的数据</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">   <span class="function"><span class="title">ValidateReponse</span></span> () &#123;</span><br><span class="line">     var newDataArray = []</span><br><span class="line">     this.reponseData.forEach((item) =&gt; &#123;</span><br><span class="line">       var queryName = item.query</span><br><span class="line">       var queryLength = item.queryLength</span><br><span class="line">       var summaryTable = []</span><br><span class="line">       var singleTable = []</span><br><span class="line">       var AlignmentIf = <span class="string">''</span></span><br><span class="line">       <span class="keyword">if</span> (item.alignments.length &gt; 0) &#123;</span><br><span class="line">         AlignmentIf = <span class="literal">true</span></span><br><span class="line">         item.alignments.forEach((subject, index) =&gt; &#123;</span><br><span class="line">           summaryTable.push(</span><br><span class="line">             &#123;</span><br><span class="line">               id: index + 1,</span><br><span class="line">               subjectName: subject.subjectName,</span><br><span class="line">               score: subject.score,</span><br><span class="line">               evalue: subject.eValue,</span><br><span class="line">               length: subject.subjectLength,</span><br><span class="line">               identities: subject.identities,</span><br><span class="line">               pairSequence: subject.pairSequence</span><br><span class="line"></span><br><span class="line">             &#125;</span><br><span class="line">           )</span><br><span class="line">           singleTable.push([&#123;</span><br><span class="line">             id: index + 1,</span><br><span class="line">             subjectName: subject.subjectName,</span><br><span class="line">             score: subject.score,</span><br><span class="line">             evalue: subject.eValue,</span><br><span class="line">             length: subject.subjectLength,</span><br><span class="line">             identities: subject.identities,</span><br><span class="line">             pairSequence: subject.pairSequence</span><br><span class="line">           &#125;])</span><br><span class="line">         &#125;)</span><br><span class="line">       &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">         AlignmentIf = <span class="literal">false</span></span><br><span class="line">       &#125;</span><br><span class="line">       newDataArray.push(&#123;</span><br><span class="line">         queryName,</span><br><span class="line">         queryLength,</span><br><span class="line">         summaryTable,</span><br><span class="line">         AlignmentIf,</span><br><span class="line">         singleTable</span><br><span class="line">       &#125;)</span><br><span class="line">     &#125;)</span><br><span class="line">     <span class="built_in">return</span> newDataArray</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-后端node运行blast"><a href="#3-后端node运行blast" class="headerlink" title="3.后端node运行blast+"></a>3.后端node运行blast+</h3><p>使用node运行系统命令，来执行blast+</p>
+<h4 id="3-1创建两个临时文件，用于存储序列信息和blast运行结果"><a href="#3-1创建两个临时文件，用于存储序列信息和blast运行结果" class="headerlink" title="3.1创建两个临时文件，用于存储序列信息和blast运行结果"></a>3.1创建两个临时文件，用于存储序列信息和blast运行结果</h4><ul>
+<li>使用<code>tmp</code>模块</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> tmp = <span class="built_in">require</span>(<span class="string">'tmp'</span>)</span><br><span class="line"><span class="keyword">var</span> queryFile = tmp.fileSync()</span><br><span class="line"><span class="keyword">var</span> BlastOutFile = tmp.fileSync()</span><br><span class="line"><span class="comment">//程序结束后，可以选择删除临时文件；或系统自动处理</span></span><br><span class="line">BlastOutFile.removeCallback()</span><br><span class="line">queryFile.removeCallback()</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-2运行系统命令"><a href="#3-2运行系统命令" class="headerlink" title="3.2运行系统命令"></a>3.2运行系统命令</h4><p>使用<code>child_process</code>模块运行子进程，调用<code>execFile</code>函数执行系统脚本</p>
+<p><code>execFile</code>函数参数:</p>
+<ul>
+<li>系统脚本所在绝对路径</li>
+<li>传递参数的数组</li>
+<li>回调函数，判断脚本是否执行成功</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> callfile = <span class="built_in">require</span>(<span class="string">'child_process'</span>)</span><br><span class="line">  callfile.execFile(</span><br><span class="line">    <span class="string">'使用系统脚本的绝对路径'</span>,</span><br><span class="line">    [</span><br><span class="line">      queryFile.name,</span><br><span class="line">      BlastOutFile.name,</span><br><span class="line">      req.body.blastType,</span><br><span class="line">      req.body.database,</span><br><span class="line">      req.body.evalue</span><br><span class="line">    ],  (error, stdout, stderr) =&gt; &#123;</span><br><span class="line">      <span class="keyword">if</span> (error) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(error)</span><br><span class="line">        rep.send(<span class="string">'error'</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">//读取blast结果</span></span><br><span class="line">      BlastText = fs.readFileSync(BlastOutFile.name, <span class="string">'utf-8'</span>)</span><br><span class="line">      <span class="comment">//解析blast outfmt 0 格式文件</span></span><br><span class="line">      BlastJson = parseBlastText(BlastText)</span><br><span class="line">      BlastOutFile.removeCallback()</span><br><span class="line">      queryFile.removeCallback()</span><br><span class="line">      rep.send(BlastJson)</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-3解析Blast-outfmt-0格式文件"><a href="#3-3解析Blast-outfmt-0格式文件" class="headerlink" title="3.3解析Blast+ outfmt 0格式文件"></a>3.3解析Blast+ <code>outfmt 0</code>格式文件</h4><ul>
+<li>利用关键字<code>Query=</code>获取查询序列所在行号</li>
+<li>关键字<code>&gt;</code>获取匹配序列所在行号</li>
+<li>匹配序列之间，间隔行数是固定的</li>
+</ul>
+<p><a href="https://github.com/BiocottonHub/zpliuCode/blob/b9f1c6b4b3479e0104a32d2470b02a648e0275de/BioJs/parseBlastText.js" target="_blank" rel="noopener">脚本地址</a></p>
+<h3 id="4-演示地址"><a href="#4-演示地址" class="headerlink" title="4.演示地址"></a>4.演示地址</h3><p> <a href="http://cotton.hzau.edu.cn/web/test#/blast/query" target="_blank" rel="noopener">http://cotton.hzau.edu.cn/web/test#/blast/query</a> </p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li>node<a href="http://nodejs.cn/api/child_process.html" target="_blank" rel="noopener">执行系统命令</a></li>
+<li>tmp<a href="https://www.npmjs.com/package/tmp" target="_blank" rel="noopener">模块创建临时文件</a></li>
+<li>转换Blast<a href="https://github.com/sing-group/biojs-vis-blasterjs/blob/ed8cfd8bb8e9a1b88251a6006cf308c30758dcab/lib/index.js" target="_blank" rel="noopener">输出文件</a></li>
+<li><a href="https://biojs.net/#/" target="_blank" rel="noopener">js生物仓库</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>Javascript</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>fasta文件校验</title>
+    <url>/codeHub/2020/04/06/13fasta%E6%96%87%E4%BB%B6%E6%A0%A1%E9%AA%8C/</url>
+    <content><![CDATA[<h1 id="fasta文件校验"><a href="#fasta文件校验" class="headerlink" title="fasta文件校验"></a>fasta文件校验</h1><p>最近在利用javascripte构建网页blast时候，涉及到客户端文件和表单的提交。因此结合vue与element-ui框架封装了一个上传并对fasta文件进行校验的插件</p>
+<a id="more"></a>
+
+<h3 id="1-获取文件对象"><a href="#1-获取文件对象" class="headerlink" title="1.获取文件对象"></a>1.获取文件对象</h3><ul>
+<li>使用拖拽事件，移动文件</li>
+<li><code>dataTransfer.files</code>获取拖拽文件</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">this</span>.fileData = e.dataTransfer.files[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-读取文件数据"><a href="#2-读取文件数据" class="headerlink" title="2.读取文件数据"></a>2.读取文件数据</h3><ul>
+<li>使用<code>FileReader</code>对象读取文件对象内容</li>
+<li>作为字符窜进行读取，触发<code>load</code>事件</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> reader = <span class="keyword">new</span> FileReader()</span><br><span class="line">reader.readAsText(fileData, <span class="string">'utf-8'</span>) <span class="comment">// 触发load事件</span></span><br><span class="line"> reader.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  reader.result <span class="comment">//文件内容</span></span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-匹配核酸序列与蛋白序列"><a href="#3-匹配核酸序列与蛋白序列" class="headerlink" title="3.匹配核酸序列与蛋白序列"></a>3.匹配核酸序列与蛋白序列</h3><p>创建正则表达式对核酸序列与蛋白序列进行匹配</p>
+<ul>
+<li>核苷酸序列，除了<code>A T C G N</code>几种碱基外还有换行符<code>\n</code></li>
+<li><code>i</code>忽略大小写，<code>m</code>多行匹配</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> Basepattern = <span class="regexp">/[^ATCGN\n\r]/im</span> <span class="comment">// 匹配除这些字符之外的字符</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>蛋白序列就包含20中氨基酸缩写和换行符</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> ProteinPattern = <span class="regexp">/[^GAVLIPFYWSTCMNQDEKRH\\*\r\n]/im</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>提取核苷序列与蛋白序列,<code>slice</code>忽略第一个空白字符</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> sequenceArray = reader.result.split(<span class="regexp">/&gt;[^\n]+\n/</span>).slice(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>遍历所有序列</li>
+</ul>
+<blockquote>
+<p>只有序列中有一条满足正则表达式，则表示错误的序列格式；并返回true；</p>
+<p>而蛋白序列的校验时还多了一条规则，因为蛋白序列都是以甲硫氨酸开头，并且核酸的基因缩写与氨基酸缩写重叠了不能够区分蛋白序列与氨基酸序列</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">BaseFlag = sequenceArray.some(<span class="function">(<span class="params">sequence</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> Basepattern.test(sequence)</span><br><span class="line">&#125;)</span><br><span class="line">ProteinFlag = sequenceArray.some(<span class="function">(<span class="params">sequence</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> ProteinPattern.test(sequence) || <span class="regexp">/^[^M]/i</span>.test(sequence)</span><br><span class="line">  <span class="comment">// 核苷酸序列碱基缩写被氨基酸序列覆盖，所有必须以M氨基酸开头才是蛋白序列</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-回调函数获取校验结果"><a href="#4-回调函数获取校验结果" class="headerlink" title="4.回调函数获取校验结果"></a>4.回调函数获取校验结果</h3><p>因为onload函数是异步的，所以有可能出现文件还没校验完，客户端状态就已经发生改变；所以使用回调函数获取校验结果</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">validateFasta(<span class="keyword">this</span>.fileData, (BaseFlag, ProteinFlag) =&gt; &#123;</span><br><span class="line">          <span class="keyword">if</span> (BaseFlag &amp;&amp; ProteinFlag) &#123;</span><br><span class="line">            <span class="keyword">this</span>.showModal = <span class="literal">true</span></span><br><span class="line">            <span class="keyword">this</span>.Modalmessage = <span class="string">'error fasta file'</span></span><br><span class="line">            <span class="keyword">this</span>.ModalFontColor = &#123; <span class="attr">color</span>: <span class="string">'#d63031'</span> &#125;</span><br><span class="line">            <span class="keyword">this</span>.Modalicon = <span class="string">'el-icon-check'</span></span><br><span class="line">            setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123; <span class="keyword">this</span>.showModal = <span class="literal">false</span> &#125;, <span class="number">1000</span>)</span><br><span class="line">          &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!BaseFlag) &#123;</span><br><span class="line">            <span class="keyword">this</span>.showModal = <span class="literal">true</span></span><br><span class="line">            <span class="keyword">this</span>.Modalmessage = <span class="string">'Nucleic acid sequence file'</span></span><br><span class="line">            <span class="keyword">this</span>.ModalFontColor = &#123; <span class="attr">color</span>: <span class="string">'#4cd137'</span> &#125;</span><br><span class="line">            <span class="keyword">this</span>.Modalicon = <span class="string">'el-icon-close'</span></span><br><span class="line">            setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123; <span class="keyword">this</span>.showModal = <span class="literal">false</span> &#125;, <span class="number">1000</span>)</span><br><span class="line">          &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!ProteinFlag) &#123;</span><br><span class="line">            <span class="keyword">this</span>.showModal = <span class="literal">true</span></span><br><span class="line">            <span class="keyword">this</span>.Modalmessage = <span class="string">'Protein sequence file'</span></span><br><span class="line">            <span class="keyword">this</span>.ModalFontColor = &#123; <span class="attr">color</span>: <span class="string">'#4cd137'</span> &#125;</span><br><span class="line">            <span class="keyword">this</span>.Modalicon = <span class="string">'el-icon-close'</span></span><br><span class="line">            setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123; <span class="keyword">this</span>.showModal = <span class="literal">false</span> &#125;, <span class="number">1000</span>)</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-校验完成后将数据提交后台"><a href="#5-校验完成后将数据提交后台" class="headerlink" title="5.校验完成后将数据提交后台"></a>5.校验完成后将数据提交后台</h3><p>客户端使用<code>FormData</code>对象可以同时提交文件与表单，在后台借助<code>connect-multiparty</code>插件获取上传的文件</p>
+<ul>
+<li>将文件数据与表单数据合并</li>
+<li>表单数据需要使用for循环进行包装</li>
+</ul>
+<p>如果需要获取FormData已经添加的内容，需要使用get方法；因为添加进去的内容已经变成私有变量无法直接访问。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">  <span class="keyword">const</span> formData = <span class="keyword">new</span> FormData()</span><br><span class="line">  formData.append(<span class="string">'fastafile'</span>, <span class="keyword">this</span>.$refs.dropfile.fileData)</span><br><span class="line"><span class="comment">//包装表单数据</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> key <span class="keyword">in</span> <span class="keyword">this</span>.formInline) &#123;</span><br><span class="line">        formData.append(key, <span class="keyword">this</span>.formInline[key])</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>提交后台</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">request.post(<span class="string">'/test'</span>, formData).then(</span><br><span class="line">  () =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'ok'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>测试过程遇到的跨域问题，使用本地代理服务器与后端API进行交互；因为使用浏览器与后端API交互时，浏览器处于安全原因会阻止跨域请求。</p>
+<p>配置<code>vue.config.js</code>配置文件，以及axios的请求地址改成’/api’</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">proxy: &#123;</span><br><span class="line">  <span class="string">'/api'</span>: &#123;</span><br><span class="line">    target: <span class="string">'http://后端地址:80'</span>,</span><br><span class="line">    ws: <span class="literal">true</span>, <span class="comment">// 允许跨域</span></span><br><span class="line">    pathRewrite: &#123;</span><br><span class="line">      <span class="string">'^/api'</span>: <span class="string">'/'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-后端获取数据"><a href="#6-后端获取数据" class="headerlink" title="6.后端获取数据"></a>6.后端获取数据</h3><p><img data-src="https://43423.oss-cn-beijing.aliyuncs.com/img/20200406191939.png" alt="后台获取数据展示"></p>
+<ul>
+<li>借助<code>connect-multiparty</code>插件,将文件存在<code>/tmp/</code>目录下</li>
+<li>借助<code>body-parse</code>解析form表单数据</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> multipart = <span class="built_in">require</span>(<span class="string">'connect-multiparty'</span>) <span class="comment">//处理上传的文件</span></span><br><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> multipartMiddleware = multipart()</span><br><span class="line">router.post(<span class="string">'/test'</span>, multipartMiddleware, <span class="function"><span class="keyword">function</span> (<span class="params">req, rep</span>) </span>&#123;</span><br><span class="line">  tmpFilePath = req.files.fastafile.path</span><br><span class="line">  <span class="built_in">console</span>.log(req.files)</span><br><span class="line">  <span class="keyword">var</span> fasta = fs.readFileSync(tmpFilePath, <span class="string">'utf-8'</span>)</span><br><span class="line">  <span class="built_in">console</span>.log(req.body)</span><br><span class="line">  <span class="built_in">console</span>.log(fasta)</span><br><span class="line">  rep.send(<span class="string">'test'</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="7-演示地址"><a href="#7-演示地址" class="headerlink" title="7.演示地址"></a>7.演示地址</h3><p><code>fasta</code><a href="https://biocottonhub.github.io/VueCLII/#/blast/query">文件拖拽校验</a></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li><a href="https://blog.csdn.net/qq_39816673/article/details/89036065" target="_blank" rel="noopener">文件拖拽失效解决</a> </li>
+<li><a href="https://blog.csdn.net/zhq2005095/article/details/89069851" target="_blank" rel="noopener">读取FileList对象内容</a></li>
+<li><a href="https://www.jianshu.com/p/83311935d0c0" target="_blank" rel="noopener">拖拽事件触发</a></li>
+<li>axios<a href="https://blog.csdn.net/qq_36485978/article/details/100017849?depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-1&utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-1" target="_blank" rel="noopener">跨域</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>Javascript</category>
+      </categories>
+  </entry>
+  <entry>
     <title>三维基因组之TAD的形成机制以及其特征 （上）</title>
     <url>/codeHub/2020/03/31/12%E4%B8%89%E7%BB%B4%E5%9F%BA%E5%9B%A0%E7%BB%84%E4%B9%8BTAD%E7%9A%84%E5%BD%A2%E6%88%90%E6%9C%BA%E5%88%B6%E4%BB%A5%E5%8F%8A%E5%85%B6%E7%89%B9%E5%BE%81-%EF%BC%88%E4%B8%8A%EF%BC%89/</url>
     <content><![CDATA[<h1 id="三维基因组之TAD的形成机制以及其特征-（上）"><a href="#三维基因组之TAD的形成机制以及其特征-（上）" class="headerlink" title="三维基因组之TAD的形成机制以及其特征 （上）"></a>三维基因组之TAD的形成机制以及其特征 （上）</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>了解细胞核内染色体折叠的机制对于确定基因组结构和功能之间的关系至关重要。最近应用的“染色体构象捕获”技术揭示了许多物种的基因组被组织成优先的内部染色质相互作用域，称为TADs。这种染色体区域化已成为高阶基因组组织和功能进化的重要特征。虽然TADs现在已经被广泛的应用于各种生物中，但它们在大小、结构和形成过程中所涉及的蛋白质方面似乎有特定的特征。在此，我们描述了这些跨物种区域的主要特征，并讨论了染色质结构、基因组活性和表观基因组之间的关系，着重讲述了TAD形成的机制原理。我们还考虑了TADs在基因组进化中的潜在影响。</p>
