@@ -1,7 +1,231 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>15三维基因组之TAD的形成机制以及其特征</title>
+    <title>三维基因组中的结构变异</title>
+    <url>/codeHub/2020/04/15/18%E4%B8%89%E7%BB%B4%E5%9F%BA%E5%9B%A0%E7%BB%84%E4%B8%AD%E7%9A%84%E7%BB%93%E6%9E%84%E5%8F%98%E5%BC%82/</url>
+    <content><![CDATA[<h1 id="三维基因组中的结构变异"><a href="#三维基因组中的结构变异" class="headerlink" title="三维基因组中的结构变异"></a>三维基因组中的结构变异</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>结构和数量上的染色体重排统称为结构变异（SV），它在很大程度上对人类的遗传多样性做出了贡献，因此其与癌症、罕见疾病和进化具有高度的相关性，近来的研究表明，SVs不仅仅可以影响基因剂量，还能影响基因的调控，SVs可以通过扰动TAD（topologically associating domains）来改变调控元件的拷贝数或对三维基因组造成影响，由于这些位置效应，SVs会影响距离SVs断点较远的基因的表达，从而导致疾病的发生，所以在解释这些疾病的病理的时候，必须要考虑SVs对三维基因组和基因表达调控的影响。</p>
+<a id="more"></a>
+
+<p>知识补充（在之后的文章中遇到不会的生物关键词，可以来这里查询）</p>
+<ul>
+<li>结构变异（SV）包括以下五种类型：deletions（缺失）, duplications（加倍）, inversions（倒位）, insertions（插入） and translocations （易位）</li>
+<li>位置效性是指SVs可以不影响编码序列或启动子区域而导致疾病的发生</li>
+<li>Copy number variation (CNV)：一种遗传变异只包括数量上的染色体重排，如缺失、加倍</li>
+<li>Penetrance（外显率）：一种对有特定遗传变异(如某一特定基因的突变)的人表现出遗传障碍的症状和体征的比例的测量。如果有一些个体存在这种突变没有表现出这种疾病，这种情况称为 incomplete penetrance（不完全外显）</li>
+<li>Haploinsufficiency（单倍剂量不足）：基因的一个拷贝被灭活或缺失，剩下的拷贝基因的表达不足以保持正常功能的一种状态。</li>
+<li>Gene dosage （基因的剂量）：一个基因的拷贝数，包括在基因组中这个基因的所有的调控区域。</li>
+<li>Intra- TAD SVs ：出现在TAD内部的结构变异</li>
+<li>Inter- TAD SVs ：出现在TADs间的结构变异</li>
+<li>TAD shuffling ：基因组内TADs的重排列</li>
+<li>Enhancer adoption ：其中一个基因的异常表达是由位于不同调节区域的另一个基因的增强子所驱动的这种现象，又称作Enhancer hijacking（增强子劫持）</li>
+</ul>
+<h2 id="Structural-Variation-In-Disease"><a href="#Structural-Variation-In-Disease" class="headerlink" title="Structural Variation In Disease"></a>Structural Variation In Disease</h2><p>用于鉴定SVs的生物学方法有很多，但都各有利弊</p>
+<ul>
+<li>array comparative genomic hybridization (array  CGH) 被广泛用于鉴定CNV，但它的分辨率较低而且无法鉴定 balanced rearrangements </li>
+<li>Whole- genome sequencing (WGS)可以鉴定所有类型的SVs，但它不能在重复的区域（出现多个断点）鉴定断点</li>
+<li>Long- read sequencing technology可以很好的鉴定SVs和断点，但由于价格问题不能用于日常的临床诊断</li>
+</ul>
+<h2 id="De-Novo-Structural-Variation"><a href="#De-Novo-Structural-Variation" class="headerlink" title="De Novo Structural Variation"></a>De Novo Structural Variation</h2><ul>
+<li>在人类基因组有多少SVs和疾病有关是一个重要的问题，因为新发生的SVs通常和疾病的发生有关，所以要想将基因组的多态性和导致疾病的SVs区分开，就需要去鉴定SVs是新发生的还是遗传于上一代的。</li>
+<li>由目前的研究来看，即使使用相同的数据，估计出的新发生SVs的比率和其对疾病的影响也有很大不同。</li>
+<li>虽然新生的SVs更容易引起疾病，但很多因素均会使得外显率降低，可能是由于潜在的隐形或者双等位基因遗传</li>
+</ul>
+<h2 id="Gene-Dosage"><a href="#Gene-Dosage" class="headerlink" title="Gene Dosage"></a>Gene Dosage</h2><ul>
+<li>SVs影响编码序列是用根据它对基因的剂量的影响来解释的，这个方法在研究孟德尔疾病的病理时取得了巨大的成功，这个方法主要是用array  CGH数据和动物的数据去鉴定疾病基因</li>
+<li>由于大多数SVs也影响非编码区域，所以还需要考虑基因的调控机制</li>
+</ul>
+<h2 id="From-Linear-View-To-3D-Perspective"><a href="#From-Linear-View-To-3D-Perspective" class="headerlink" title="From Linear View To 3D Perspective"></a>From Linear View To 3D Perspective</h2><ul>
+<li>人的基因组种存在大量的调控序列，大多数的SVs会影响调控因子的位置和数量，在三维基因组种这些可能会影响空间结构，所以说了解基因组的空间结构对理解SVs的潜在致病性十分重要，（如果想详细了解基因组的空间结构，请阅读此<a href="[https://biocottonhub.github.io/codeHub/2020/04/08/15%E4%B8%89%E7%BB%B4%E5%9F%BA%E5%9B%A0%E7%BB%84%E4%B9%8BTAD%E7%9A%84%E5%BD%A2%E6%88%90%E6%9C%BA%E5%88%B6%E4%BB%A5%E5%8F%8A%E5%85%B6%E7%89%B9%E5%BE%81/](https://biocottonhub.github.io/codeHub/2020/04/08/15三维基因组之TAD的形成机制以及其特征/)">文章</a>的Introduce部分）</li>
+<li>SVs通常会改变Hi-C的数据结果，还会留下一些信号供我们进一步理解，如缺失通常会使得原来被分离的两个区域发生新的交互。</li>
+</ul>
+<img data-src="https://s1.ax1x.com/2020/04/15/Jik8gA.png" alt="3D" style="zoom: 50%;" />
+
+<img data-src="https://s1.ax1x.com/2020/04/15/JPxLEd.png" alt="FIG1.png" style="zoom: 50%;" />
+
+<h2 id="The-3D-Regulatory-Landscape"><a href="#The-3D-Regulatory-Landscape" class="headerlink" title="The 3D Regulatory Landscape"></a>The 3D Regulatory Landscape</h2><ul>
+<li>染色质的折叠不仅束缚了染色质还为以增强子驱使的长距离的基因调控提供了条件，长距离的基因表达调控通常包含两种不同的顺式作用元件：启动子（由核心启动子和附近的调控元件组成）；更多的远端调控单位（包括所谓的增强子或被称作基因座控制区），TAD同时限制了增强子作用的基因组区域</li>
+<li>60–70%的TAD在不同的细胞类型和五种类型之间都是保守的，这说明了TAD在基因组形式十分基础的功能</li>
+<li>TAD的鉴定十分依赖于计算机的算法，但其受限于分辨率和阈值的调整</li>
+</ul>
+<h2 id="Enhancer-Redundancy"><a href="#Enhancer-Redundancy" class="headerlink" title="Enhancer Redundancy"></a>Enhancer Redundancy</h2><ul>
+<li>研究表明，发育基因通常由具有组织特异性活性的多种增强子元件控制</li>
+<li>增强子的活性部分或者完全重叠，这种现象被称作增强子冗余或者‘shadow enhancers’。冗余的增强子具有很强的转录活性控制一些关键的基因，而且其与癌症也有关联</li>
+<li>增强子并不是单个独立的元件，而是形成一个复杂冗余的调控单位，为基因的表达提供了稳定精确的调控</li>
+<li>总的来说，基因是由和自身具有亲和力和功能关系的调控元件所调控的，这些特性限制于他们在一维基因组的具体排列以及染色质的三维结构</li>
+</ul>
+<h2 id="The-Impact-Of-SVs-On-Gene-Regulation"><a href="#The-Impact-Of-SVs-On-Gene-Regulation" class="headerlink" title="The Impact Of SVs On Gene Regulation"></a>The Impact Of SVs On Gene Regulation</h2><ul>
+<li>缺失和加倍除了会影响基因的剂量，它也有可能影响顺式调控元件的剂量和位置和这个位点的染色质的高级结构</li>
+<li>同样，倒位和易位不仅会影响编码序列和转录，也会对三维结构造成影响</li>
+<li>一些临床上的SVs影响基因组三维结构的例子如下</li>
+</ul>
+<p><img data-src="https://s1.ax1x.com/2020/04/15/JPx7uD.png" alt="FIG2"></p>
+<h2 id="Intra-TAD-SVs-Effects-On-Enhancer-Dosage"><a href="#Intra-TAD-SVs-Effects-On-Enhancer-Dosage" class="headerlink" title="Intra- TAD SVs: Effects On Enhancer Dosage"></a>Intra- TAD SVs: Effects On Enhancer Dosage</h2><ul>
+<li>SVs可以通过影响顺式调控元件进而对距离几百kilobases的基因造成影响</li>
+<li>TAD内部的SVs可能会影响增强子的剂量进而会导致内源目的基因的功能缺失或获得</li>
+<li>当TAD内部调控元件缺失时，可能会导致基因功能的丧失，但由于增强子的冗余，所以单个的丢失往往不会造成影响</li>
+<li>TAD内部调控元件的加倍可能导致内源靶基因的组织特异性过表达或错表达从而导致疾病</li>
+<li>目前研究表明，不影响编码序列和TAD边界的倒位对长距离的基因调控没有影响</li>
+</ul>
+<img data-src="https://s1.ax1x.com/2020/04/15/JPxojO.png" alt="FIG3" style="zoom: 80%;" />
+
+<ul>
+<li>a图：基因A、B分别控制头和四肢的发育，他们分别有各自的位于不同TAD的组织特异性顺式调控元件，TAD之间存在边界</li>
+<li>b图：不影响编码基因或TAD的边界的TAD内部的倒位对基因的远距离的调控没有大的影响，尽管目前尚无病例报道。</li>
+<li>c图：调控B基因的增强子的缺失会导致B基因功能的丧失</li>
+<li>d图：调控B基因的增强子的加倍会导致B基因的错误表达或过量表达</li>
+</ul>
+<h2 id="Inter-TAD-SVs-Effects-On-3D-Architecture"><a href="#Inter-TAD-SVs-Effects-On-3D-Architecture" class="headerlink" title="Inter- TAD SVs: Effects On 3D Architecture"></a>Inter- TAD SVs: Effects On 3D Architecture</h2><p>发生在TAD间的SVs同样会影响三维结构，并且具相关研究表明染色质域的改变是发育障碍和癌症的重要疾病机理，TAD间的SVs可能会导致以下三种TAD的变化</p>
+<ul>
+<li>TAD fusion</li>
+<li>Neo-TADs</li>
+<li>TAD shuffling</li>
+</ul>
+<p>下面是两幅图解</p>
+<img data-src="https://s1.ax1x.com/2020/04/15/JPxbHH.png" alt="FIG4" style="zoom: 67%;" />
+
+<ul>
+<li>a图：基因A、B分别控制头和四肢的发育，他们分别有各自的位于不同TAD的组织特异性顺式调控元件，TAD之间存在边界</li>
+<li>b图：边界上的元件缺失导致TAD的融合和增强子劫持，B基因的增强子会影响基因A的表达，同时也会导致四肢的发育异常</li>
+<li>c图：边界和A基因的复制会导致neo- TAD的形成，在新的TAD种，加倍的调控B基因的增强子会调控A基因的表达，从而导致四肢发育异常</li>
+<li>d图：A基因不加倍，即使形成新的TAD，也不会导致转录的变化</li>
+</ul>
+<img data-src="https://s1.ax1x.com/2020/04/15/JPxHDe.png" alt="FIG5" style="zoom: 67%;" />
+
+<ul>
+<li>a图：基因A、B分别控制头和四肢的发育，他们分别有各自的位于不同TAD的组织特异性顺式调控元件，TAD之间存在边界</li>
+<li>b图：TAD间的倒位，会导致来自B基因的增强子劫持，会导致A基因在四肢中的异常表达，同时也会导致B基因功能的丧失</li>
+<li>c图：平衡易位通过将控制肢体发育的B基因的增强子替换为控制脊髓发育D基因的增强子来使基因组的TAD结构域重新排列，导致B基因的不表达，进而使得脊髓发育异常（D基因的变化图中没有展示）</li>
+</ul>
+<h2 id="Interpretation-Of-SVs-In-The-3D-Genome"><a href="#Interpretation-Of-SVs-In-The-3D-Genome" class="headerlink" title="Interpretation Of SVs In The 3D Genome"></a>Interpretation Of SVs In The 3D Genome</h2><p>考虑到SVs的多重影响，作者提出了一个系统的方法来解释SVs</p>
+<img data-src="C:\Users\DELL\Desktop\5.PNG" style="zoom:67%;" />
+
+<ul>
+<li>第一步，判断基因SVs是调控元件突变还是基因的编码区突变</li>
+<li>第二步，判断突变是否引起TAD边界的改变，进而对其进行分类</li>
+<li>第三步，鉴定顺式调控元件和潜在的目的基因</li>
+<li>第四步：功能验证</li>
+</ul>
+<h2 id="Conclusions-And-Future-Developments"><a href="#Conclusions-And-Future-Developments" class="headerlink" title="Conclusions And Future Developments"></a>Conclusions And Future Developments</h2><p>作者提出了现存的五个挑战</p>
+<ul>
+<li>SVs的比率计算和断点的精确定位还存在问题</li>
+<li>相关的数据相对分散，需要一个跨学科的团队去研究人体的SVs</li>
+<li>对于非编码区的调控序列的相关研究还十分有限，使预测表型变得十分困难</li>
+<li>目前计算机预测工具还不够，需要深入包括动物模型在内的功能研究，来确定变异的致病性</li>
+<li>目前，SVs主要是使用基因的剂量效应来解释，对于非编码区域的位置效应认识较浅，导致许多患者无法做出诊断</li>
+</ul>
+]]></content>
+      <categories>
+        <category>文献</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>棉属A基因组起源与进化</title>
+    <url>/codeHub/2020/04/15/17%E6%A3%89%E5%B1%9EA%E5%9F%BA%E5%9B%A0%E7%BB%84%E8%BF%9B%E5%8C%96/</url>
+    <content><![CDATA[<h1 id="棉属A基因组的起源与进化"><a href="#棉属A基因组的起源与进化" class="headerlink" title="棉属A基因组的起源与进化"></a>棉属A基因组的起源与进化</h1><h3 id="Abstarct"><a href="#Abstarct" class="headerlink" title="Abstarct"></a>Abstarct</h3><p>在完成非洲棉 A1基因组、亚洲棉A2基因组、四倍体陆地棉（AD）1基因组组装后，表明A基因组可能起源于一个共同的A0基因组，同时在系统发生树上A1相比与A2更加接近于祖先A0基因组；同时异源四倍体的形成可能早于A1和A2基因组的分化。通过高斯密度分布函数估计表明，大约570万年前~61万年前出现的几次转座子爆发事件极大的促进了A基因组的扩张、物种的形成和进化。同时在基因区域大量的物种特异性的结构变异，改变了许多重要基因的表达，这些有可能是导致四倍体（AD）1中棉纤维品质得到改良。该研究不仅解决了长期以来颇具争议的概念：关于A基因组起源；同时为棉花的遗传改良提供了有价值的基因组资源。</p>
+<a id="more"></a>
+
+<p><img data-src="https://s1.ax1x.com/2020/04/15/JCoEi4.png" alt="棉属进化"></p>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>栽培棉花是世界上最重要的经济作物之一。其中异源四倍体陆地棉 G.hirsutum在世界棉花贸易中占据着主要地位，它是由旧世界的A基因组祖先和新世界D基因组组件杂交然后进过染色体加倍后形成。（AD）1的真正的A-genome 供体仍旧不确定，而世界上仅仅只存在两个二倍体A基因组分别是A1 非洲棉、A2亚洲棉。<strong>Stephens</strong> 第一个提出A2是异源四倍体中A基因组的供体，<strong>Gerstel</strong>则认为A1与At1关系更加接近。因此到现在为止对于四倍体中A基因组的起源仍旧具有争议。</p>
+<p>在本研究中，作者基于PacBio测序技术、双末端测序技术、Hi-c技术，首次组装了A1基因组。并且重新组织了高质量的A2基因组、（AD）1基因组；揭示了A基因组的起源、转座子事件的爆发以及二倍体A基因组间的遗传差异；并且鉴定到大量的能够印象附近基因表达的结构变异，进一步的解释了不同棉种间的表型差异。</p>
+<h3 id="2-1组装高质量的棉花基因组"><a href="#2-1组装高质量的棉花基因组" class="headerlink" title="2.1组装高质量的棉花基因组"></a>2.1组装高质量的棉花基因组</h3><p>作者使用PacBio对A1基因组进行测序，其中N50长度达到13Kb，测序深度达到x138倍；contigs的N50达到1915Kb，同时使用二代测序数据对组装进行校正。最后使用Hi-c数据将contigs分成了13组scaffolds，对应13条染色体。同样作者对A2、（AD）1进行了从头组装，相比与之前发表的数据质量得到了提升，减少了 contigs 之间的gaps。对基因信息进行注释后，其中A1、A2、（AD）1分别包含了 43,952, 43,278 and 74,350 蛋白编码基因。这些基因主要分布在染色体的两端，同时由于基因组复含转座子，这些TES regions主要位于染色体中间区域。</p>
+<h3 id="2-2棉属间染色体的倒位和易位"><a href="#2-2棉属间染色体的倒位和易位" class="headerlink" title="2.2棉属间染色体的倒位和易位"></a>2.2棉属间染色体的倒位和易位</h3><p>通过比较A1和A2基因组发现，1号和2号染色体之间发生了相互易位，这种现象似乎是在两个物种形成之后才出现的并且在A2中被固定下来。将A1、A2分别与At1进行比较后发现一些染色体易位，并且有些只在At1中才出现，说明这些可能是在多倍化之后才出现的。大量的倒位现象同样也被检测到，其中有一些倒位只在某个基因组或者某两个基因组中才出现，例如只在A1中出现的倒位、只在A2和At1中才出现的倒位，说明这些倒位可能是在A1和A2分化之后才形成的。</p>
+<h3 id="2-3四倍体棉花的起源"><a href="#2-3四倍体棉花的起源" class="headerlink" title="2.3四倍体棉花的起源"></a>2.3四倍体棉花的起源</h3><p>基于单拷贝基因建立分子树，表明At和A1、A2起源于同一个进化枝，表明它们之间具有一定的亲缘关系。通过计算发现A1、A2之间分化的时间大致在0.7个百万年前，四倍体的形成估计在1~1.6个百万年前。全基因组系统发生树分析，表明拓扑结构1与分子树结构一样，拓扑2表明At与A1是姐妹关系、拓扑3表明A2和At也是姐妹关系。结合Ka/Ks分析表明A1与A2之间的差异时最小的。进一步作者选择了几个具有代表性的材料，用它们的SNP数据构建了系统发生树。同比较发现，A1与At间SNP的数目更少一些，相比与A2与At。作者提出A1、A2可能都不是At基因组的祖先，于是提出假设A1、A2、At共同的祖先基因组A0与D5基因组杂交后形成四倍体物种。这种假说也就解释了A2、A1与D5之间杂交为什么不能成功，是由于它们之间遗传距离相差比较大。</p>
+<h3 id="2-4对两个A基因组物种的研究"><a href="#2-4对两个A基因组物种的研究" class="headerlink" title="2.4对两个A基因组物种的研究"></a>2.4对两个A基因组物种的研究</h3><p>作者分别用了14份、67份具有代表性的A1、A2基因组材料。通过PCA主成分分析发现，这些材料分为2组分别对应了A1、A2。对材料进行聚类发现聚为了3类其中k=3和k=2之间存在一些差异，这可能是由于中国的A2是从印度引进，经过多年的地理隔离形成不独特的A2种族。通过分析也发现A1、和A2两个物种分别经历了独立的进化事件。</p>
+<h3 id="2-5基因组的扩张和进化"><a href="#2-5基因组的扩张和进化" class="headerlink" title="2.5基因组的扩张和进化"></a>2.5基因组的扩张和进化</h3><p>在已经测序的D5和Dt1基因组中，它们基因组的大小与与可可之间相差将近两倍，而与木棉几乎差不多大。两个A基因组和At1亚基因组同样的进行了进一步的两倍扩张，并且与转座子的爆发事件有着很高的相关性。在D基因组中有50%左右LTR（ long terminal repeat  ），而在A基因组中则达到70%多，在棉属中的LTR反转座子经历了多次扩增。通过高斯密度分别函数估计LTR扩增事件的发生时间，其中最早的插入时间大约在~5.7个百万年前，那个时间点之前被认为是分化为A、D基因组的时间。紧接着是At1与Dt1，表明多倍化形成大约在2百万年前，</p>
+<h3 id="2-6结构变异与纤维发育"><a href="#2-6结构变异与纤维发育" class="headerlink" title="2.6结构变异与纤维发育"></a>2.6结构变异与纤维发育</h3><p>大片段的插入或者删除，被报道驱动重要表型的变异。通过比较A基因组与At1基因组，发现大量的SVs。同时发现大量的结构变异在A1与A2中都存在，说明在物种A1、A2分化之前就已经形成了对应的SVs。将SVs与基因区域取交集，结合之前报道的与纤维性状有关的关联位点，找到一些SVs附近的基因，进行GO富集分析发现一些与纤维发育相关的关键基因和转录因子</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li>Genome sequence of <em>Gossypium herbaceum</em> and genome updates of <em>Gossypium arboreum</em> and <em>Gossypium hirsutum</em> provide insights into cotton A-genome evolution</li>
+</ol>
+]]></content>
+      <categories>
+        <category>文献</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>ggplot-直方图</title>
+    <url>/codeHub/2020/04/12/16ggplot-%E7%9B%B4%E6%96%B9%E5%9B%BE/</url>
+    <content><![CDATA[<h2 id="1-频数直方图"><a href="#1-频数直方图" class="headerlink" title="1.频数直方图"></a>1.频数直方图</h2><h3 id="数据准备"><a href="#数据准备" class="headerlink" title="数据准备"></a>数据准备</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt; head(pacBioData)</span><br><span class="line">               V1 V2</span><br><span class="line">1 Ghir_A01G000010  1</span><br><span class="line">2 Ghir_A01G000030  1</span><br><span class="line">3 Ghir_A01G000040  3</span><br><span class="line">4 Ghir_A01G000070  3</span><br><span class="line">5 Ghir_A01G000080  1</span><br><span class="line">6 Ghir_A01G000100  2</span><br></pre></td></tr></table></figure>
+
+<p>如果你同时含有两个样本的频数信息，需要针对不同的样本画不同的的柱子；只需要在数据框中添加一个字段即可。例如我的数据中含有PacBio测序数据和参考基因组数据两个文件</p>
+<ul>
+<li>PacBio</li>
+<li>regerence</li>
+</ul>
+<a id="more"></a>
+
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">pacBioData&lt;- read.table(<span class="string">"PacBio文件"</span>)</span><br><span class="line">referenceData &lt;- read.table(<span class="string">"reference文件"</span>)</span><br><span class="line"><span class="comment">##添加分类信息</span></span><br><span class="line">pacBioData$type &lt;- <span class="string">"PacBio"</span></span><br><span class="line">referenceData$type &lt;- <span class="string">"reference"</span></span><br><span class="line"><span class="comment">## 合并两个数据框</span></span><br><span class="line">mergeData &lt;- rbind(pacBioData, referenceData)</span><br></pre></td></tr></table></figure>
+
+<h3 id="绘制直方图"><a href="#绘制直方图" class="headerlink" title="绘制直方图"></a>绘制直方图</h3><ul>
+<li><code>x=V2</code>表示x轴数据使用V2字段进行映射</li>
+<li><code>fill = type</code>针对type字段使用不同颜色进行填充</li>
+<li><code>stat = &quot;count&quot;</code>统计x轴中每个值出现的次数，用作柱子的高度</li>
+</ul>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="keyword">library</span>(ggplot2)</span><br><span class="line">ggplot(data = mergeData, aes(x = V2, fill = type)) +</span><br><span class="line">  geom_bar(stat = <span class="string">"count"</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="https://s1.ax1x.com/2020/04/12/GO7SiV.png" alt="堆积直方图"></p>
+<h4 id="调整"><a href="#调整" class="headerlink" title="调整"></a>调整</h4><ul>
+<li><code>position = &quot;dodge&quot;</code>将柱子调整为不堆积状态</li>
+<li><code>width = 0.5</code>调整柱子宽度 </li>
+</ul>
+<p>这里由于x轴的坐标轴范围比较大，柱子缩放了看不清</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">ggplot(data = mergeData, aes(x = V2, fill = type)) +</span><br><span class="line">  geom_bar(stat = <span class="string">"count"</span>, position = <span class="string">"dodge"</span>, width = <span class="number">0.5</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="https://s1.ax1x.com/2020/04/12/GOH6nH.png" alt="不堆积"></p>
+<h2 id="2-频率直方图"><a href="#2-频率直方图" class="headerlink" title="2.频率直方图"></a>2.频率直方图</h2><h3 id="数据准备-1"><a href="#数据准备-1" class="headerlink" title="数据准备"></a>数据准备</h3><p>使用R中的<code>table</code>函数和<code>prop.table</code>函数计算频率</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">PacBioFrequent &lt;- as.data.frame(prop.table(table(pacBioData$V2)))[<span class="number">1</span>:<span class="number">10</span>, ]</span><br><span class="line">referenceFrequent &lt;- as.data.frame(prop.table(table(referenceData$V2)))[<span class="number">1</span>:<span class="number">10</span>, ]</span><br><span class="line"><span class="comment">## 样本分类</span></span><br><span class="line">PacBioFrequent$type &lt;- <span class="string">"PacBio"</span></span><br><span class="line">referenceFrequent$type &lt;- <span class="string">"reference"</span></span><br><span class="line"><span class="comment">## 合并数据</span></span><br><span class="line">mergeData &lt;- rbind(PacBioFrequent, referenceFrequent)</span><br></pre></td></tr></table></figure>
+
+<p>处理后的数据</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">Var1       Freq   type</span><br><span class="line"><span class="number">1</span>    <span class="number">1</span> <span class="number">0.28121310</span> PacBio</span><br><span class="line"><span class="number">2</span>    <span class="number">2</span> <span class="number">0.21962588</span> PacBio</span><br><span class="line"><span class="number">3</span>    <span class="number">3</span> <span class="number">0.15747934</span> PacBio</span><br><span class="line"><span class="number">4</span>    <span class="number">4</span> <span class="number">0.10686098</span> PacBio</span><br><span class="line"><span class="number">5</span>    <span class="number">5</span> <span class="number">0.07342614</span> PacBio</span><br></pre></td></tr></table></figure>
+
+<h3 id="绘制图形"><a href="#绘制图形" class="headerlink" title="绘制图形"></a>绘制图形</h3><p>参数和之前的都是一样的</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">ggplot(data = mergeData, aes(x =Var1, y=Freq,fill = type)) +</span><br><span class="line">  geom_bar(stat = <span class="string">"identity"</span>, position = <span class="string">"dodge"</span>, width = <span class="number">0.5</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="https://s1.ax1x.com/2020/04/12/GOqkLQ.png" alt="频率直方图"></p>
+<h2 id="3-美化图片"><a href="#3-美化图片" class="headerlink" title="3.美化图片"></a>3.美化图片</h2><h3 id="不涉及数据层的美化"><a href="#不涉及数据层的美化" class="headerlink" title="不涉及数据层的美化"></a>不涉及数据层的美化</h3><ul>
+<li>图片背景色</li>
+<li>图片网格</li>
+<li>坐标轴刻度线</li>
+<li>坐标轴刻度文字</li>
+<li>坐标轴label文字</li>
+<li>图例标题</li>
+<li>图例位置</li>
+</ul>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">p=ggplot(data = mergeData, aes(x =Var1, y=Freq,fill = type)) +</span><br><span class="line">  geom_bar(stat = <span class="string">"identity"</span>, position = <span class="string">"dodge"</span>, width = <span class="number">0.5</span>)  </span><br><span class="line"></span><br><span class="line">p+theme_bw() +</span><br><span class="line">  theme(</span><br><span class="line">    panel.grid = element_blank(), <span class="comment">#图片网格线</span></span><br><span class="line">    panel.background = element_blank(), <span class="comment">#图片背景色为空</span></span><br><span class="line">    axis.line = element_line(size = <span class="number">0.5</span>, color = <span class="string">"black"</span>),<span class="comment">#坐标轴线条</span></span><br><span class="line">    axis.text.x = element_text(size = <span class="string">"15"</span>), <span class="comment">#x坐标轴刻度文字</span></span><br><span class="line">    axis.text.y = element_text(size = <span class="string">"10"</span>), <span class="comment">#y坐标轴刻度文字</span></span><br><span class="line">    axis.title.y = element_text(size = <span class="string">"15"</span>), <span class="comment">#x坐标轴label文字</span></span><br><span class="line">    legend.title = element_blank(), <span class="comment">#图例标题</span></span><br><span class="line">    legend.position = c(<span class="number">0.8</span>, <span class="number">0.8</span>), <span class="comment">#图例位置</span></span><br><span class="line">  )</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="https://s1.ax1x.com/2020/04/12/GOLE6O.png" alt="美化1"></p>
+<h3 id="自定义填充色"><a href="#自定义填充色" class="headerlink" title="自定义填充色"></a>自定义填充色</h3><figure class="highlight r"><table><tr><td class="code"><pre><span class="line">p+  scale_fill_manual(values = c(</span><br><span class="line">    <span class="string">"#f6e58d"</span>, <span class="string">"#ffbe76"</span>, <span class="string">"#686de0"</span>, <span class="string">"#4834d4"</span></span><br><span class="line">  ))</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="https://s1.ax1x.com/2020/04/12/GOLYng.png" alt="美化2"></p>
+<h3 id="调整柱子离坐标轴位置"><a href="#调整柱子离坐标轴位置" class="headerlink" title="调整柱子离坐标轴位置"></a>调整柱子离坐标轴位置</h3><p>这里我将柱子与x轴进行贴近，其他的可以类似</p>
+<ul>
+<li><code>expand</code>贴近坐标轴的位置</li>
+<li><code>limits</code>设置显示的范围</li>
+</ul>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">p+  scale_y_continuous(expand = c(<span class="number">0</span>, <span class="number">0</span>), limits = c(<span class="number">0</span>, <span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="https://s1.ax1x.com/2020/04/12/GOOFEj.png" alt="美化3"></p>
+<h3 id="添加自定义文字"><a href="#添加自定义文字" class="headerlink" title="添加自定义文字"></a>添加自定义文字</h3><p>通过使用<code>geom_text</code>函数，并且选择不继承原有的图片数据</p>
+<ul>
+<li><code>data = labelData</code>要显示的注释信息</li>
+<li><code>mapping</code>指定显示的位置和字段</li>
+<li><code>inherit.aes</code>是否继承图形数据，如果是使用自定义数据，这里一定要<code>FALSE</code></li>
+</ul>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment">#将要展示的注释文字</span></span><br><span class="line">labelData &lt;- data.frame(text1 = <span class="string">"3.39"</span>, text2 = <span class="string">"/"</span>, text3 = <span class="string">"2.01"</span>)</span><br><span class="line">p+geom_text(</span><br><span class="line">    data = labelData,</span><br><span class="line">    mapping = aes(x = <span class="number">8</span>, y = <span class="number">0.5</span>, label = text1),</span><br><span class="line">    inherit.aes = <span class="literal">FALSE</span>,</span><br><span class="line">    show.legend = <span class="literal">NA</span>,</span><br><span class="line">    color = <span class="string">"#ffbe76"</span></span><br><span class="line">  ) +</span><br><span class="line">  geom_text(</span><br><span class="line">    data = labelData,</span><br><span class="line">    mapping = aes(x = <span class="number">8.5</span>, y = <span class="number">0.5</span>, label = text2),</span><br><span class="line">    inherit.aes = <span class="literal">FALSE</span>,</span><br><span class="line">    show.legend = <span class="literal">NA</span>,</span><br><span class="line">    color = <span class="string">"black"</span></span><br><span class="line">  ) +</span><br><span class="line">  geom_text(</span><br><span class="line">    data = labelData,</span><br><span class="line">    mapping = aes(x = <span class="number">9</span>, y = <span class="number">0.5</span>, label = text3),</span><br><span class="line">    inherit.aes = <span class="literal">FALSE</span>,</span><br><span class="line">    show.legend = <span class="literal">NA</span>,</span><br><span class="line">    color = <span class="string">"#4834d4"</span></span><br><span class="line">  )</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="https://s1.ax1x.com/2020/04/12/GOzsjx.png" alt="美化4"></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li>CDSN<a href="https://blog.csdn.net/Bone_ACE/article/details/47427453" target="_blank" rel="noopener">博客</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>R</category>
+      </categories>
+      <tags>
+        <tag>ggplot2</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>三维基因组之TAD的形成机制以及其特征</title>
     <url>/codeHub/2020/04/08/15%E4%B8%89%E7%BB%B4%E5%9F%BA%E5%9B%A0%E7%BB%84%E4%B9%8BTAD%E7%9A%84%E5%BD%A2%E6%88%90%E6%9C%BA%E5%88%B6%E4%BB%A5%E5%8F%8A%E5%85%B6%E7%89%B9%E5%BE%81/</url>
     <content><![CDATA[<ul>
 <li><h1 id="三维基因组之TAD的形成机制以及其特征"><a href="#三维基因组之TAD的形成机制以及其特征" class="headerlink" title="三维基因组之TAD的形成机制以及其特征"></a>三维基因组之TAD的形成机制以及其特征</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>了解细胞核内染色体折叠的机制对于确定基因组结构和功能之间的关系至关重要。最近应用的“染色体构象捕获”技术揭示了许多物种的基因组被组织成频繁交互的染色质区域，称为TADs。这种染色体区域化已成为高阶基因组结构和功能的重要特征。虽然TADs现在已经被广泛的研究于各种生物体中，但它们在大小、结构和形成过程中所涉及的蛋白质方面似乎有特定的特征。在此，我们描述了这些跨物种染色质区域的主要特征，并讨论了染色质结构、基因组活性和表观基因组之间的关系，着重讲述了TAD形成的机制原理。还涉及到了TADs在基因组进化中的潜在影响。</p>
@@ -345,7 +569,7 @@
       </categories>
   </entry>
   <entry>
-    <title>10circos进阶之link图</title>
+    <title>circos进阶之link图</title>
     <url>/codeHub/2020/03/26/10circos%E8%BF%9B%E9%98%B6%E4%B9%8Blink%E5%9B%BE/</url>
     <content><![CDATA[<h1 id="circos进阶之link图"><a href="#circos进阶之link图" class="headerlink" title="circos进阶之link图"></a>circos进阶之link图</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>Links主要试图利用连线关系，表明染色体上不同位置之间的联系。这在实际生物学问题中很常用，尤其是在表示基因和基因之间的共线性的时候，link图是我们的不二选择，之前我们一起学习了使用MCScanX进行共线性分析，下游分析中可以画一个圈图，但是本人认为那个圈图无论是配色还是布局都不是特别好看，今天我们就来学习如何处理MCScanX的结果文件然后用circos去画出我们想要的圈图</p>
 <a id="more"></a>
@@ -732,7 +956,7 @@
       </tags>
   </entry>
   <entry>
-    <title>04vscode与服务端R交互</title>
+    <title>vscode与服务端R交互</title>
     <url>/codeHub/2020/03/22/04vscode%E4%B8%8E%E6%9C%8D%E5%8A%A1%E7%AB%AFR%E4%BA%A4%E4%BA%92/</url>
     <content><![CDATA[<span class="label success">vscode</span> 一款让人爱不释手的IDE，也是前端工程师一大杀器。在window上使用R对数据进行操作，当数据量太大的时候，电脑就会吃不消；而服务端的R一看起来就灰常的枯燥。加上最近vscode增加了对R语言的支持，使得在vscode中编写R脚本变成现实，vscode多session的特点使得能够同时打开多个窗口使用服务端的R进行大数据的计算。
 
