@@ -1,6 +1,420 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>癌症中基因组的重排对染色质折叠的影响</title>
+    <url>/codeHub/2020/04/23/25%E7%99%8C%E7%97%87%E4%B8%AD%E5%9F%BA%E5%9B%A0%E7%BB%84%E7%9A%84%E9%87%8D%E6%8E%92%E5%AF%B9%E6%9F%93%E8%89%B2%E8%B4%A8%E6%8A%98%E5%8F%A0%E7%9A%84%E5%BD%B1%E5%93%8D/</url>
+    <content><![CDATA[<h1 id="癌症中基因组的重排对染色质折叠的影响"><a href="#癌症中基因组的重排对染色质折叠的影响" class="headerlink" title="癌症中基因组的重排对染色质折叠的影响"></a>癌症中基因组的重排对染色质折叠的影响</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>基因组的构象在细胞核内是分层次的，其中TAD被认为是最能代表功能的区域，因为在TAD内部包含着可以去调控基因的调控元件，TAD边界区域的扰动可能会使相邻的TAD发生异常的交互从而去影响相邻基因的调控，相关的一些研究表明，基因组的重排现象会使得TAD的结构发生改变从而影响基因的调控，这篇文章就去探究在不同的肿瘤组织中不同的结构变异对于TAD以及基因表达的影响，从而帮助我们更好的理解染色质的折叠和基因组的重排之间的关系。</p>
+<a id="more"></a>
+
+<h2 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h2><h3 id="TAD-boundaries-are-affected-by-different-types-of-somatic-SV-in-cancer-genomes"><a href="#TAD-boundaries-are-affected-by-different-types-of-somatic-SV-in-cancer-genomes" class="headerlink" title="TAD boundaries are affected by different types of somatic SV in cancer genomes"></a>TAD boundaries are affected by different types of somatic SV in cancer genomes</h3><ul>
+<li>文章用了五种细胞的Hi-C数据去鉴定TAD，这五种细胞分别来自三个胚胎层：中胚层（ mesoderm）、下胚层（endoderm）、外胚层（ectoderm）</li>
+<li>在这五种细胞中鉴定到了3,926 to 4,690个TAD，与之前的研究数据相比有84%以上的相似度</li>
+<li>之后，作者鉴定了已知的这些 TAD边界附近的特征，然后在所有细胞种一共鉴定到了2477个边界，然后这2477区域就被用于之后的分析</li>
+<li>之后作者鉴定了这些边界在癌症细胞中的存在分布情况，发现在白血病细胞和乳腺癌细胞中分别有85%和83.4%的重叠，说明绝大部分边界在正常细胞和恶性的细胞中使保守的</li>
+<li>此外，作者发现边界TAD信号水平是最低的，这和TAD边界减少临近区域的交互这个特点相符合，如下图所示</li>
+</ul>
+<img data-src="https://s1.ax1x.com/2020/04/22/JUymJU.png" alt="1.png" style="zoom:50%;" />
+
+<ul>
+<li>作者使用了288,457 个可信度较高的SVs，并且使用SVs断点的方向去将这些SVs分类（deletions, inversions, duplications or complex rearrangements），然后按照2Mb长度作为界限去将SVs分成两类：long-range SVs short-range SVs，deletions, inversions and duplications大部分都是短距离，其中大部分complex rearrangements都是长距离的，本文主要分析短距离的SVs</li>
+<li>作者鉴定了那些跨越了整个TAD边界的SV，结果发现5.0%, 8.5%, 12.8% and 19.9% of all deletions, inversions, duplications and complex events是BA（(boundary affecting ）事件，如下图所示</li>
+</ul>
+<img data-src="https://s1.ax1x.com/2020/04/22/JUyeiT.png" alt="2.png" style="zoom:50%;" />
+
+<ul>
+<li>进而，作者发现和预期的边界扰动相比，BA-duplications高于预期，BA-deletion低于预期，其他两种在预期之内，这表明deletion更易于出现在TAD内部 ，duplication更易于跨越TAD，结果如下图</li>
+</ul>
+<img data-src="https://s1.ax1x.com/2020/04/22/JUyVoV.png" alt="3.png" style="zoom:50%;" />
+
+<ul>
+<li>作者还发现，在不同的SVs种，BA-SVs在长度上的分布基本相同，大部分BA-SVs都只影响一个边界，绝大多数(98.4%) 癌细胞的TAD边界都会被影响，很有趣的是，这些TAD的边界不太可能会被健康人群基因组中的deletion and duplication所影响。图示如下</li>
+</ul>
+<img data-src="https://s1.ax1x.com/2020/04/22/JUynWF.png" alt="4.png" style="zoom: 50%;" />
+
+<ul>
+<li>最后作者研究了deletions在胚胎细胞和癌细胞中的分布，发现在胚胎细胞中只有少于0.1%的deletions发生在边界上，而癌细胞中有4.1%</li>
+</ul>
+<img data-src="https://s1.ax1x.com/2020/04/22/JUyEd0.png" alt="5.png" style="zoom: 50%;" />
+
+<h3 id="Chromatin-folding-disruptions-are-specific-to-histological-subtypes"><a href="#Chromatin-folding-disruptions-are-specific-to-histological-subtypes" class="headerlink" title="Chromatin folding disruptions are specific to histological subtypes"></a>Chromatin folding disruptions are specific to histological subtypes</h3><ul>
+<li>之后，作者比较了这些BA-SVs在不同的肿瘤类型中的分布情况，发现BA-SVs在不同的肿瘤类型之间存在显著差异</li>
+</ul>
+<img data-src="https://s1.ax1x.com/2020/04/22/JUyuz4.png" alt="6.png" style="zoom: 50%;" />
+
+<ul>
+<li>下面这张图描述了同一肿瘤类型的每一位病人的BA-SV分布情况</li>
+</ul>
+<img data-src="https://s1.ax1x.com/2020/04/22/JUyQy9.png" alt="7.png" style="zoom: 50%;" />
+
+<h3 id="Recurrently-affected-boundaries-in-specific-cancer-types"><a href="#Recurrently-affected-boundaries-in-specific-cancer-types" class="headerlink" title="Recurrently affected boundaries in specific cancer types"></a>Recurrently affected boundaries in specific cancer types</h3><ul>
+<li>作者接下来探究癌症驱动基因附近的TAD边界与这些结构变异之间分布关系，结果如下(red, deletion; orange, complex; green, duplication; gray, different SV types were observed)，圆圈大小代表某一个特定的肿瘤内BA-SV在这个癌症驱动基因中附近的出现比例</li>
+</ul>
+<img data-src="https://s1.ax1x.com/2020/04/22/JUyMQJ.png" alt="8.png" style="zoom: 50%;" />
+
+<ul>
+<li>此外，作者发现了KIAA1549、BRAF这两个基因之间的边界在纤维性星形细胞瘤中易于发生 BA-duplications  ；还发现在平滑肌肉瘤中MDM2这个位点附近的边界被影响的频率较高；同时平滑肌肉瘤12号染色体上突变频率较高，图示如下（列代表TAD边界，行代表不同的样本）</li>
+</ul>
+<img data-src="https://s1.ax1x.com/2020/04/22/JUy3e1.png" alt="9.png" style="zoom:67%;" />
+
+<ul>
+<li>此外，作者研究了TAD内部的一些SVs，这些SVs主要扰动 CTCF–CTCF chromatin loops，作者鉴定了许多可能被扰动的 chromatin loops ，这表明染色质折叠的扰动会发生在不同的尺度上，包括TAD和CTCF–CTCF chromatin loop </li>
+<li>其中值得注意的是在食道癌、胃癌和结肠癌细胞的6号染色体上 FOXC1 基因附近的一个CTCF位点与一个删除区域有重叠，如下图所示（图中紫色的弧线新出现的CTCF–CTCF loops ）</li>
+</ul>
+<img data-src="https://s1.ax1x.com/2020/04/22/JUy0OA.png" alt="10.png" style="zoom:67%;" />
+
+<h3 id="Most-domain-disruptions-do-not-result-in-marked-gene-expression-changes"><a href="#Most-domain-disruptions-do-not-result-in-marked-gene-expression-changes" class="headerlink" title="Most domain disruptions do not result in marked gene-expression changes."></a>Most domain disruptions do not result in marked gene-expression changes.</h3><ul>
+<li>作者对TAD进行注释，通过分析TAD所在区域的的染色质状态将TAD分成五类： heterochromatin (61), low/quiescent (705), repressed (481), low-active (764) and active (365)，然后作者计算了每种类型的TAD内部基因的表达量，发现基因在repressed domains和constitutive LADs的表达要低于active domains和inter-LADs ，图解如下</li>
+</ul>
+<p><img data-src="https://s1.ax1x.com/2020/04/22/JUy8dx.png" alt="11.png"></p>
+<img data-src="https://s1.ax1x.com/2020/04/22/JUylLR.png" alt="12.png" style="zoom: 80%;" />
+
+<ul>
+<li>之后，作者研究了BA-SVs两侧的TAD的类型，发现大多数都是相同的，但不同的出现概率要大于预期，所以作者就研究了发生在活跃和抑制区域之间的BA-deletions，发现缺失导致的TAD的融合会使得附近基因表达上调，但这种现象并不是普遍存在的，图解如下</li>
+</ul>
+<p>图中黑色的块代表边界，阴影部分代表 BA-deletions 区域，WNT4表达上调37倍</p>
+<img data-src="https://s1.ax1x.com/2020/04/22/JUytJO.png" alt="13.png" style="zoom: 50%;" />
+
+<p>e图SLC22A2基因表达上调了26倍，但f图中SLC2A10只有1.1倍</p>
+<img data-src="https://s1.ax1x.com/2020/04/22/JUyaSe.png" alt="14.png" style="zoom: 33%;" />
+
+<ul>
+<li>但作者发现整体上BA-deletions附近的基因表达并没有显著差异，只有14%发生了两倍以上的变化，图示如下</li>
+</ul>
+<img data-src="https://s1.ax1x.com/2020/04/22/JUyGo6.png" alt="15.png" style="zoom: 80%;" />
+
+<p>综上，作者总结出：在癌细胞基因组中基因的调控是多因素的，虽然在某些特定情况下染色质折叠的扰动会引起表达水平的差异，但并不是总是出现的。</p>
+<h3 id="Cell-type-specific-alterations-in-chromatin-folding-patterns-by-different-SV-types"><a href="#Cell-type-specific-alterations-in-chromatin-folding-patterns-by-different-SV-types" class="headerlink" title="Cell-type-specific alterations in chromatin folding patterns by different SV types."></a>Cell-type-specific alterations in chromatin folding patterns by different SV types.</h3><ul>
+<li>作者研究了BA-deletions, BA-inversions, BA-duplications and BA-complex rearrangements 是如何影响染色质交互热图的，结果如下</li>
+</ul>
+<img data-src="https://s1.ax1x.com/2020/04/22/JUyYFK.png" alt="16.png" style="zoom: 50%;" />
+
+<p>附图，图中黑色框框住的就是倒位导致的改变</p>
+<img data-src="https://s1.ax1x.com/2020/04/22/JUyNWD.png" alt="17.png" style="zoom: 50%;" />
+
+<ul>
+<li>然后作者把跨越TAD边界和SV断点的交互称作Inter-breakpoint/TAD interactions 只跨越断点的交互称为Intra-breakpoint/TAD interactions ，作者发现后一种交互要强于前一种，所以SVs可能会导致跨越边界的交互的形成，还可能会导致新的TAD的形成。图示如下</li>
+</ul>
+<img data-src="https://s1.ax1x.com/2020/04/22/JUydQH.png" alt="18.png" style="zoom: 50%;" />
+
+<ul>
+<li>作者举了两个TAD改变的例子</li>
+</ul>
+<p>左图是倒位导致的TAD的融合，右图是加倍导致的TAD的形成</p>
+<img data-src="https://s1.ax1x.com/2020/04/22/JUywyd.png" alt="19.png" style="zoom: 50%;" />
+
+<h3 id="Complex-rearrangements-markedly-change-chromatin-folding-maps-in-the-cancer-genomes"><a href="#Complex-rearrangements-markedly-change-chromatin-folding-maps-in-the-cancer-genomes" class="headerlink" title="Complex rearrangements markedly change chromatin folding maps in the cancer genomes"></a>Complex rearrangements markedly change chromatin folding maps in the cancer genomes</h3><ul>
+<li>复杂的重排现象会明显导致Hi-C热图发生明显的变化，如下图所示：左图展示了8号染色体上的一个复杂的重排区域（ Green, tandem duplication; red, deletion; cyan and purple, inversion），右图展示了5号和8号染色体上以及两个染色体间的之间复杂的重排区域导致的热图的变化</li>
+</ul>
+<img data-src="https://s1.ax1x.com/2020/04/22/JUyDeI.png" alt="20.png" style="zoom: 67%;" />
+
+<h2 id="Discussion"><a href="#Discussion" class="headerlink" title="Discussion"></a>Discussion</h2><ul>
+<li>本文作者探讨了SVs在多种肿瘤类型中的分布及其在染色质折叠和基因调控中的潜在作用。</li>
+<li>其次作者发现，一些边界的改变只分布在某一特定的癌症中，这可能与一些特定的癌症驱动基因有关</li>
+<li>删除易于发生在TADs和LADs内，而加倍倾向于发生在TADs之间，这表明不同类型的SVs的产生机制可能存在差异</li>
+<li>值得注意的是，作者没有观察到TAD的扰动与基因的总体表达水平变化之间有很强的关联，只有14%的TAD扰动导致了2倍以上的表达上调</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>Disruption of chromatin folding domains by somatic genomic rearrangements in human cancer</p>
+]]></content>
+      <categories>
+        <category>文献</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>指导植物RNA聚合酶II转录的‘GPS’</title>
+    <url>/codeHub/2020/04/19/24%E6%8C%87%E5%AF%BC%E6%A4%8D%E7%89%A9RNA%E8%81%9A%E5%90%88%E9%85%B6II%E8%BD%AC%E5%BD%95%E7%9A%84%E2%80%98GPS%E2%80%99/</url>
+    <content><![CDATA[<h1 id="指导植物RNA聚合酶II转录的‘GPS’"><a href="#指导植物RNA聚合酶II转录的‘GPS’" class="headerlink" title="指导植物RNA聚合酶II转录的‘GPS’"></a>指导植物RNA聚合酶II转录的‘GPS’</h1><p>组蛋白翻译后的修饰，通过调节转录过程中RNA聚合酶II的动态变化，塑造了基因的表达图谱。转录分为转录起始、延伸和终止等阶段，在植物中能够标识特定转录阶段的组蛋白修饰仍旧比较模糊。通过CHIP-seq技术，能够得到全基因组上组蛋白修饰的分布；并且发现了一些能够指导RNAII转录的基因组位置信号（GPS）。同时阐明了一些组蛋白修饰因子（readers、weiters、erasers），在基因表达和生物学上的作用。在不同的转录阶段，RNAPII有着不同的功能，这可能与组蛋白修饰存在一定的关联。</p>
+<h3 id="组蛋白作为基因转录的坐标"><a href="#组蛋白作为基因转录的坐标" class="headerlink" title="组蛋白作为基因转录的坐标"></a>组蛋白作为基因转录的坐标</h3><p>基因的表达依赖于转录过程中RNA聚合酶II的不同功能，根据功能的不同将转录分成了3个阶段：1.转录起始、2.延伸、3.终止。那么问题来了，RNA聚合酶II是如何识别基因不同的位置信号来执行不同的功能的呢？</p>
+<p><img data-src="https://s1.ax1x.com/2020/04/19/JKjSRU.png" alt="RNAPII转录周期"></p>
+<p>在真核生物中，基因组被组装在核小体内，而核小体又由组蛋白八聚体组成（H2A、H2B、H3、H4）；组蛋白的N端氨基酸通常会经过多种的翻译后修饰（PTMs），其中就包括甲基化、乙酰化、泛素化，这些组蛋白修饰把染色质结构和基因表达联系起来。</p>
+<p>组蛋白修饰通常由3种酶进行催化：</p>
+<ol>
+<li>‘reader’ enzymes 识别需要修饰的位点</li>
+<li>‘writer’ enzymes 添加对应的修饰</li>
+<li>‘eraser’ enzymes 去除对应的修饰</li>
+</ol>
+<p>通过这3种酶的作用，实现基因组上的组蛋白修饰。</p>
+<p>通过ChIP-seq、CUT&amp;RUN-seq或者是CUT&amp;Tag-seq能够揭示全基因组范围的组蛋白修饰；但是这里存在一个争论：组蛋白修饰能够指导RNAPII的转录，但反过来RNAPII的活动也能够塑造染色质的 landscape；或者这两者之间存在着反馈调节作用。</p>
+<p><img data-src="https://s1.ax1x.com/2020/04/19/JKXUbR.png" alt="几种seq技术"></p>
+<h3 id="组蛋白修饰确立了RNAPII所处的时期"><a href="#组蛋白修饰确立了RNAPII所处的时期" class="headerlink" title="组蛋白修饰确立了RNAPII所处的时期"></a>组蛋白修饰确立了RNAPII所处的时期</h3><p>RNAPII在启动子区域的转录起始位点（TSSs），启动基因的转录；在完成转录起始之后，RNAII开始进入到gene body区域延伸新和成的RNA链，在刚开始进入gene body区域时RNAPII的移动速度会放缓，这一阶段也被称为（early elongation）；之后RNAPII 开始继续合成RNA（elongation）；在经过基因3’端的多聚腺苷酸位点时RNAPII的速度在一次放缓，协助转录的终止。</p>
+<p>与此同时在转录的过程中还有一些共转录事件在进行着，例如 5’加帽，剪切、多聚腺苷酸化。那么RNAPII又是如何在对应的位置进入正确的阶段呢？有趣的是，通过CHIP-seq数据分析发现，组蛋白修饰的出现与不同的转录时期存在一定的关联，因此基因区域的组蛋白修饰可能是指导RNAPII进行正确转录的一种位置信号。</p>
+<h3 id="在转录不同阶段的组蛋白修饰"><a href="#在转录不同阶段的组蛋白修饰" class="headerlink" title="在转录不同阶段的组蛋白修饰"></a>在转录不同阶段的组蛋白修饰</h3><p>在对组蛋白修饰和基因转录进行了广泛的研究之后，普遍认为在基因转录的不同阶段，存在着一些位置信号指导基因的转录。例如H3K9ac、H3K4me3在转录起始位点TTSs处富集，在转录早期延伸阶段H4K4me2和H3K36me3与其他peaks信号相比，稍微下降，这可能和RNAPII的失速有关。</p>
+<p>在转录延伸阶段H2Bun（H2B泛素化）、和H3K4me3与转录激活呈相关。在转录终止阶段同样存在着一些组蛋白修饰信号。总的来说，整片文章的精华都集中在这张图片里了。</p>
+<p><img data-src="https://s1.ax1x.com/2020/04/19/JKXVgg.png" alt="组蛋白修饰与转录阶段"></p>
+<h3 id="基于‘GPS’指导植物的发育和与环境的互作"><a href="#基于‘GPS’指导植物的发育和与环境的互作" class="headerlink" title="基于‘GPS’指导植物的发育和与环境的互作"></a>基于‘GPS’指导植物的发育和与环境的互作</h3><p>当组蛋白修饰酶发生突变时，通常对基因的表达产生巨大的影响，最终导致生长、发育或者与环境互作方面的缺陷。</p>
+<p><img data-src="https://s1.ax1x.com/2020/04/19/JKXiUP.png" alt="与植物生长发育"></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li>A G(enomic)P(ositioning)S(ystem) for PlantRNAPII Transcription  </li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
+    <title>Promise源码解析</title>
+    <url>/codeHub/2020/04/19/23Promise%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</url>
+    <content><![CDATA[<p>众所周知javascript是一门单线程语言，这种设计有效的避免了多线程带来的复杂同步问题。但有时候单线程模式遇到耗时较长的任务时，会拖延整个程序的进度，造成浏览器长时间无响应。为了解决这个问题，js将任务分为两种执行模式：</p>
+<ul>
+<li>异步模式</li>
+<li>同步模式</li>
+</ul>
+<p>为了获得异步任务得到的结果，最常见的做法是使用回调函数。但是回调函数剥夺了我们使用return和throw的权利，而且代码以一种向右扩展的风格；不利于维护（回调地狱)，还会产生一些回调问题。</p>
+<ul>
+<li>回调过早（一般是异步被同步调用）；</li>
+<li>回调过晚或没有回调；</li>
+<li>回调次数过多；</li>
+<li>等等</li>
+</ul>
+<a id="more"></a>
+
+<p><img data-src="https://user-gold-cdn.xitu.io/2018/7/11/1648870b900aeb47?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="回调地狱"></p>
+<p>​    值得注意的是，两种任务模式是位于两个任务队列里的；只有同步队列里的任务都执行完成后才会开始执行异步队列里的任务。这里在for循环同步任务结束后才会进入到异步队列执行异步任务。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">    <span class="built_in">console</span>.log(<span class="string">'同步任务1'</span>)</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'异步任务1'</span>)</span><br><span class="line">    &#125;, <span class="number">2000</span>)</span><br><span class="line">    <span class="keyword">var</span> j</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt;= <span class="number">10000000</span>; i++) &#123;</span><br><span class="line">      i = i - <span class="number">0.5</span></span><br><span class="line">      j = i</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(j)</span><br><span class="line"><span class="comment">//同步任务1</span></span><br><span class="line"><span class="comment">//9999999.5</span></span><br><span class="line"><span class="comment">//异步任务1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Promise状态"><a href="#Promise状态" class="headerlink" title="Promise状态"></a>Promise状态</h3><p>Promise在ES6中被引入，作为解决回调地狱的标准方法。Promise有三种状态</p>
+<ul>
+<li>padding</li>
+<li>resolve</li>
+<li>reject</li>
+</ul>
+<p>在任意时刻promise只能处于一种状态，并且状态只能从padding向resolve或者padding向reject转变；状态一经改变后就无法撤回。</p>
+<p>在定义一个promise对象时，通过<code>reject()</code>或者<code>resolve()</code>来指定状态是否成功；<code>then</code>方法中定义对应的回调函数</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    resolve(<span class="number">1</span>)</span><br><span class="line">&#125;).then(<span class="function">(<span class="params">value</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'成功回调:'</span> + value)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="回调函数定义顺序"><a href="#回调函数定义顺序" class="headerlink" title="回调函数定义顺序"></a>回调函数定义顺序</h3><ol>
+<li>后定义回调函数</li>
+</ol>
+<p>这里<code>Promise</code>对象中，同步执行回调函数，此时then方法还没有执行，因此then中回调函数的定义时后定义的</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    resolve(<span class="number">1</span>)</span><br><span class="line">&#125;).then(<span class="function">(<span class="params">value</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'成功回调:'</span> + value)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>先定义回调函数</li>
+</ol>
+<p>这里<code>Promise</code>对象中，异步执行回调函数，因此同步队列中的then方法执行完后才会开始执行异步队列中的回调函数</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    reject(<span class="number">1</span>)</span><br><span class="line">  &#125;, <span class="number">1000</span>)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'1s后启动异步回调:'</span>)</span><br><span class="line">&#125;).then(</span><br><span class="line">  (value) =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'成功回调:'</span> + value)</span><br><span class="line">  &#125;,</span><br><span class="line">  (reason) =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'失败回调:'</span> + reason)</span><br><span class="line">  &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h3 id="链式调用"><a href="#链式调用" class="headerlink" title="链式调用"></a>链式调用</h3><p><code>then</code>方法返回的是一个新的<code>promise</code>对象，因此返回的新的<code>promise</code>对象又可以调用对应的then方法。</p>
+<p>then方法中返回promise对象的三种方式：</p>
+<ul>
+<li>默认</li>
+<li>新的<code>promise</code>对象</li>
+<li>抛出错误</li>
+</ul>
+<h4 id="默认情况"><a href="#默认情况" class="headerlink" title="默认情况"></a>默认情况</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">then(</span><br><span class="line">      (value) =&gt; &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'成功回调:'</span> + value)</span><br><span class="line">      &#125;,</span><br><span class="line">      (reason) =&gt; &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'失败回调:'</span> + reason)</span><br><span class="line">      &#125;</span><br><span class="line">    )</span><br><span class="line"><span class="comment">//相当于</span></span><br><span class="line">then(</span><br><span class="line">      (value) =&gt; &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'成功回调:'</span> + value)</span><br><span class="line">          <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve,reject</span>)=&gt;</span>&#123;</span><br><span class="line">              resolve()</span><br><span class="line">          &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+
+<h4 id="返回新的Promise对象"><a href="#返回新的Promise对象" class="headerlink" title="返回新的Promise对象"></a>返回新的Promise对象</h4><p>在新的Promise对象中可以指定新的回调函数，并且这个新的Promise函数一定是在第一个Promise函数后执行的</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">then(</span><br><span class="line">        (value) =&gt; &#123;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">'成功回调:'</span> + value)</span><br><span class="line">        &#125;,</span><br><span class="line">        (reason) =&gt; &#123;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">'失败回调:'</span> + reason)</span><br><span class="line">          <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">            resolve(<span class="number">2</span>)</span><br><span class="line">          &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">      )</span><br></pre></td></tr></table></figure>
+
+<h3 id="值传透"><a href="#值传透" class="headerlink" title="值传透"></a>值传透</h3><p>在Promise返回是吧状态后，如果没有定义对应的失败回调，错误将会传递到catch，这一切是通过默认的失败回调执行的</p>
+<p>默认的失败回调如下，因此如果<code>then</code>中没有定义对应的失败回调则会将错误抛出，最后传递到catch中</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">(reason) =&gt; &#123;</span><br><span class="line">  <span class="keyword">throw</span> reason</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>定定义失败回调函数</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    reject(<span class="number">1</span>)</span><br><span class="line">  &#125;, <span class="number">1000</span>)</span><br><span class="line">&#125;)      </span><br><span class="line"> .then(</span><br><span class="line">    (value) =&gt; &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'成功回调:'</span> + value)</span><br><span class="line">    &#125;,</span><br><span class="line">    (reason) =&gt; &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'自定义解决:'</span> + reason)</span><br><span class="line">      <span class="keyword">throw</span> <span class="number">2</span> + reason</span><br><span class="line">    &#125;</span><br><span class="line">  )</span><br><span class="line">  .catch(<span class="function">(<span class="params">reason</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'值传透:'</span> + reason)</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+
+<p>同样的如果then方法中传递的不是回调函数，它将会将结果传递给下一个promise</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">    <span class="built_in">Promise</span>.resolve(<span class="string">'foo'</span>)</span><br><span class="line">    .then(<span class="built_in">Promise</span>.resolve(<span class="string">'bar'</span>))</span><br><span class="line">    .then(<span class="function"><span class="keyword">function</span>(<span class="params">result</span>)</span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(result)</span><br><span class="line">    &#125;)</span><br><span class="line"><span class="comment">//foo</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="链终止"><a href="#链终止" class="headerlink" title="链终止"></a>链终止</h3><p>在catch后。Promise仍旧可以传递，通过返回一个padding状态的Promise实现链终止</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">      .catch(<span class="function">(<span class="params">reason</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'值传透:'</span> + reason)</span><br><span class="line">      &#125;)</span><br><span class="line">      .then(<span class="function">(<span class="params">value</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(value)</span><br><span class="line">      &#125;)</span><br><span class="line"><span class="comment">//undefined</span></span><br><span class="line"></span><br><span class="line">      .catch(<span class="function">(<span class="params">reason</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'值传透:'</span> + reason)</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;) <span class="comment">//padding状态</span></span><br><span class="line">      &#125;)</span><br><span class="line">      .then(<span class="function">(<span class="params">value</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(value)</span><br><span class="line">      &#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-参考"><a href="#1-参考" class="headerlink" title="1.参考"></a>1.参考</h3><ol>
+<li><a href="https://juejin.im/post/5b45bea65188251b1c3ce1ec" target="_blank" rel="noopener">Promise解决了什么问题</a></li>
+<li><a href="https://www.jianshu.com/p/4e8aaa87540a" target="_blank" rel="noopener">值传透</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Tweenjs动画插件</title>
+    <url>/codeHub/2020/04/17/22Tweenjs%E5%8A%A8%E7%94%BB%E6%8F%92%E4%BB%B6/</url>
+    <content><![CDATA[<p>TweenJS允许你以一种平滑的方式来改变对象的属性。所有的动画处理函数都封装成了API，你需要做的仅仅是告诉它哪些属性需要被修改，修改的值的范围，修改所经历的时间、轨迹的选择。</p>
+<h3 id="1-快速入门"><a href="#1-快速入门" class="headerlink" title="1.快速入门"></a>1.快速入门</h3><ul>
+<li>首先给<code>TWEEN</code>对象传递一个对象，里面包含了需要修改的属性</li>
+<li>传递属性范围值</li>
+<li>激活TWEEN实例</li>
+<li>使用主函数进行渲染</li>
+</ul>
+<a id="more"></a>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 首先为位置创建一个补间(tween)</span></span><br><span class="line"><span class="keyword">var</span> tween = <span class="keyword">new</span> TWEEN.Tween(position);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 然后告诉 tween 我们想要在1000毫秒内以动画的形式移动 x 的位置</span></span><br><span class="line">tween.to(&#123; <span class="attr">x</span>: <span class="number">200</span> &#125;, <span class="number">1000</span>);</span><br><span class="line"><span class="comment">// 启动</span></span><br><span class="line">tween.start();</span><br><span class="line"><span class="comment">//进行渲染</span></span><br><span class="line">animate();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">animate</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	requestAnimationFrame(animate);</span><br><span class="line">	<span class="comment">// [...]</span></span><br><span class="line">	TWEEN.update();</span><br><span class="line">	<span class="comment">// [...]</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//属性更新时所做的操作</span></span><br><span class="line">tween.onUpdate(<span class="function"><span class="keyword">function</span>(<span class="params">object</span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(object.x);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-进度条展示"><a href="#2-进度条展示" class="headerlink" title="2.进度条展示"></a>2.进度条展示</h3><p><img data-src="https://s1.ax1x.com/2020/04/17/JZzUN8.gif" alt="进度条"></p>
+<p>使用SVG绘制对应的圆形图片，这里使用两个圆进行重叠展示，其中一个圆充当背景色，另外一个充当进度条；数字的累积同样使用动画效果。</p>
+<p>在<code>Vue</code>中通过this获取到DOM中的样式</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">this</span>.$refs.$bar.style.strokeDashoffset</span><br></pre></td></tr></table></figure>
+
+<h4 id="TWEENJS动态修改样式"><a href="#TWEENJS动态修改样式" class="headerlink" title="TWEENJS动态修改样式"></a>TWEENJS动态修改样式</h4><p>同时对两个属性进行操作，在动画<code>onUpdate</code>回调函数中分别去渲染对应的DOM节点</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">new</span> TWEEN.Tween(</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="string">'strokeDashoffset'</span>: (<span class="keyword">this</span>.width - <span class="keyword">this</span>.radius) * <span class="number">3.14</span>,</span><br><span class="line">    <span class="string">'showProgress'</span>: <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">).to(&#123;</span><br><span class="line">  <span class="string">'strokeDashoffset'</span>: (<span class="keyword">this</span>.width - <span class="keyword">this</span>.radius) * <span class="number">3.14</span> * (<span class="number">100</span> - <span class="keyword">this</span>.progress) / <span class="number">100</span>,</span><br><span class="line">  <span class="string">'showProgress'</span>: <span class="keyword">this</span>.progress</span><br><span class="line">&#125;, <span class="keyword">this</span>.duration).onUpdate(<span class="function">(<span class="params">tween</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">this</span>.$refs.$bar.style.strokeDashoffset = tween.strokeDashoffset</span><br><span class="line">  <span class="keyword">this</span>.showprogress = tween.showProgress.toFixed(<span class="number">0</span>)</span><br><span class="line">&#125;).start()</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-无限链式"><a href="#3-无限链式" class="headerlink" title="3.无限链式"></a>3.无限链式</h3><p><img data-src="https://s1.ax1x.com/2020/04/17/JZza4S.gif" alt="无限链式调用"></p>
+<ul>
+<li>创建两个<code>TWEEN</code>实例对象</li>
+<li>使用<code>chain</code>相互链起来，实现无限循环动画</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//定义下降动画</span></span><br><span class="line"><span class="keyword">var</span> tweenDown = <span class="keyword">new</span> TWEEN.Tween(</span><br><span class="line">        &#123;</span><br><span class="line">          top: <span class="number">10</span></span><br><span class="line">        &#125;</span><br><span class="line">      )</span><br><span class="line">      tweenDown.to(&#123;</span><br><span class="line">        top: <span class="number">15</span></span><br><span class="line">      &#125;, <span class="number">1000</span>).onUpdate(<span class="function">(<span class="params">tween</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.$refs.Nextbutton.style.top = tween.top + <span class="string">"px"</span></span><br><span class="line">        <span class="comment">// this.$refs.Nextbutton.style.top = tween.top</span></span><br><span class="line">      &#125;).start()</span><br><span class="line"><span class="comment">//定义下降动画</span></span><br><span class="line">      <span class="keyword">var</span> tweenUp = <span class="keyword">new</span> TWEEN.Tween(</span><br><span class="line">        &#123;</span><br><span class="line">          top: <span class="number">15</span></span><br><span class="line">        &#125;</span><br><span class="line">      )</span><br><span class="line">      tweenUp.to(&#123;</span><br><span class="line">        top: <span class="number">10</span></span><br><span class="line">      &#125;, <span class="number">800</span>).onUpdate(<span class="function">(<span class="params">tween</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.$refs.Nextbutton.style.top = tween.top + <span class="string">"px"</span></span><br><span class="line">        <span class="comment">// this.$refs.Nextbutton.style.top = tween.top</span></span><br><span class="line">      &#125;).start()</span><br><span class="line"><span class="comment">//无限链式调用</span></span><br><span class="line">tweenDown.chain(tweenUp)</span><br><span class="line">tweenUp.chain(tweenDown)</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-参考"><a href="#4-参考" class="headerlink" title="4.参考"></a>4.参考</h3><ol>
+<li><a href="https://github.com/tweenjs/tween.js/blob/master/docs/user_guide_zh-CN.md" target="_blank" rel="noopener">https://github.com/tweenjs/tween.js/blob/master/docs/user_guide_zh-CN.md</a> </li>
+<li><a href="https://codepen.io/jackpan/pen/pdVVzE/" target="_blank" rel="noopener">https://codepen.io/jackpan/pen/pdVVzE/</a> </li>
+<li><a href="https://segmentfault.com/a/1190000013219501" target="_blank" rel="noopener">https://segmentfault.com/a/1190000013219501</a> </li>
+<li><a href="https://www.cnblogs.com/createGod/p/6941340.html" target="_blank" rel="noopener">https://www.cnblogs.com/createGod/p/6941340.html</a> </li>
+</ol>
+]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>植物DNA甲基化机制和靶向操纵工具</title>
+    <url>/codeHub/2020/04/17/21%E6%A4%8D%E7%89%A9DNA%E7%94%B2%E5%9F%BA%E5%8C%96%E6%9C%BA%E5%88%B6%E5%92%8C%E9%9D%B6%E5%90%91%E6%93%8D%E7%BA%B5%E5%B7%A5%E5%85%B7/</url>
+    <content><![CDATA[<h3 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h3><p>DNA甲基化是表观遗传中的一种，它能够调控多种生物途径，例如：基因的表达、基因组的稳定性。在植物中对某个位点突变或者使用药物的方法被用来研究DNA甲基化的作用。许多工具就能够直接的对特定位点的DNA甲基化进行操作，从而评估DNA甲基化在特定途径中的直接效应。最近研究者们，通过改造DNA-binding蛋白，实现对甲基化机器的招募，从而改变特定位点的DNA甲基化水平。</p>
+<a id="more"></a>
+
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>DNA甲基化是一种保守的表观遗传标记，调控着包括基因表达、基因组稳定性和基因印记等多种生物学过程；因此破坏DNA甲基化会导致发育异常。在植物中，DNA甲基化包含以下几种:</p>
+<ul>
+<li>CG甲基化</li>
+<li>CHG</li>
+<li>CHH</li>
+</ul>
+<p>这些甲基化标记主要富集在异染色质区域的转座子、重复序列上，并且扮演着一个主要的角色-在转录水平沉默基因的表达。在内含子区域的转座子、重复元件的甲基化同样会影响mRNA的加工，例如改变mRNA的剪切方式、改变mRNA3‘端的多聚腺苷酸位点。在有些地方，DNA甲基化也能够促进基因的表达，通过DNA methyl-readers <strong>SU3-9</strong>.</p>
+<p>通过基因突变或者药物的方式虽然能够改变DNA甲基化，但是这些方法是全基因组范围的改变甲基化水平，不能够实现研究特定位点的甲基化。因此为了达到这个目的，研究者们通过开发一些位点特异的工具来操纵DNA甲基化水平，并且在特定位点改变基因的表达模式来产生新的等位基因。</p>
+<h3 id="植物中DNA甲基化机制"><a href="#植物中DNA甲基化机制" class="headerlink" title="植物中DNA甲基化机制"></a>植物中DNA甲基化机制</h3><p>在植物中，通过RNA介导的DNA甲基化（RdDM）途径来调控DNA的甲基化水平。DNA甲基转移酶2（<strong>DRM2</strong>）在不依赖于序列特异性的情况，催化新的DNA的甲基化。在RdDM途径中，植物中特异的RNA聚合酶IV合成单链RNA，进而在RDR2的催化下合成双链RNA（dsRNA）。dsRNA在<strong>DCL3</strong>的催化下被切割成24nt的small interfering RNA（siRNA），最后和AGO4/6 形成复合物。</p>
+<p>在组蛋白reader <strong>SHHH1</strong>和<strong>CLASSSY</strong>的招募下，RNA聚合酶IV被招募到染色质区域，通过AGO-siRNA的与目标序列进行互补，RNA聚合酶IV合成non-coding RNAs。一旦形成了  AGO-siRNAncRNA-Pol V ribonucleoprotein complex  ，DRM2倍招募到DNA处，进行甲基化</p>
+<p><img data-src="https://s1.ax1x.com/2020/04/17/JEBy5R.png" alt="甲基化机制"></p>
+<p>在新的甲基化位点生成后，通过<strong>MET1</strong>、<strong>CMT2/3</strong>维持DNA的甲基化；这些酶分别针对<strong>CG</strong>|、<strong>CHH</strong>、<strong>CHG</strong>三种甲基化类型。在经历多轮的DNA复制后，DNA甲基化也可能会丢失在缺少  methylation maintenance时。植物中的去甲基酶就包括<strong>ROS1</strong>、<strong>DME</strong>、<strong>DML2/3</strong>。</p>
+<h3 id="在植物中靶向操纵DNA甲基化"><a href="#在植物中靶向操纵DNA甲基化" class="headerlink" title="在植物中靶向操纵DNA甲基化"></a>在植物中靶向操纵DNA甲基化</h3><p><img data-src="https://s1.ax1x.com/2020/04/17/JEBfKO.png" alt="siRNAs"></p>
+<h4 id="通过siRNAs介导靶向甲基化"><a href="#通过siRNAs介导靶向甲基化" class="headerlink" title="通过siRNAs介导靶向甲基化"></a>通过siRNAs介导靶向甲基化</h4><p>研究者通过使用不同的病毒、或者转化载体来产生与靶标位点互补的siRNAs。当siRNA靶向基因的启动子区域时，能够诱导RdDM和基因的转录沉默，其中应用最广泛就是VIGS。反向重复序列IR，同样能够产生siRNAs。</p>
+<h4 id="改造DNA-binding蛋白操纵DNA甲基化"><a href="#改造DNA-binding蛋白操纵DNA甲基化" class="headerlink" title="改造DNA-binding蛋白操纵DNA甲基化"></a>改造DNA-binding蛋白操纵DNA甲基化</h4><p><img data-src="https://s1.ax1x.com/2020/04/17/JEBHPI.png" alt="DNA-binding"></p>
+<p>例如DNA结合蛋白：  ZFs、TALEs  、CRISPR-dCas9，直接结合到靶标位点来招募甲基化机器改变附近的甲基化水平。这些改造的DNA-binding蛋白即使在缺少siRNAs的情况下，依旧能够招募聚合酶IV和AGO来驱动DNA的甲基化</p>
+<h4 id="靶向的去除DNA的甲基化"><a href="#靶向的去除DNA的甲基化" class="headerlink" title="靶向的去除DNA的甲基化"></a>靶向的去除DNA的甲基化</h4><p>同样是使用改造的DNA-binding蛋白对靶标位点进行去甲基化，在动物中对<strong><em>FWA</em></strong>，进行可遗传的去甲基化，促进<strong><em>FWA</em></strong>的表达。</p>
+<h3 id="conclusions"><a href="#conclusions" class="headerlink" title="conclusions"></a>conclusions</h3><p>这些靶向的操纵特定位点的甲基化工具虽然能够起到作用，但是如何精确、高效的并且减少脱靶率仍旧是需要进一步优化的。这些工具可以被用来修复那些不希望出现的甲基化位点，例如在植物的组织培养中后代甲基化水平的改变。并且甲基化化水平的改变是能够永久遗传的，从而改变基因的表达模式；可以考虑作为产生新的等位基因的一种方式。这些tools直接操纵蛋白质和RNA，不需要经过遗传转化从而实现操纵植物DNA的甲基化。</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li>DNA methylation in plants: mechanisms and tools for targeted manipulation  </li>
+</ol>
+]]></content>
+      <categories>
+        <category>文献</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>sgRNAcase9设计</title>
+    <url>/codeHub/2020/04/16/20sgRNAcase9%E8%AE%BE%E8%AE%A1/</url>
+    <content><![CDATA[<p>使用<code>sgRNAcas9</code>软件包进行基于参考基因组的sgRNA 设计：针对每条给定的query 序列首先搜索<code>NGG</code>的PAM结构，找到对应的motif后，在全基因组范围内评估<code>on-target</code>和<code>off-target</code>值。如果有多条质量比较好的<code>on-target</code>sgRNA，后面还可以根据基因注释文件筛选那些距离5’端更近的sgRNA。</p>
+<blockquote>
+<p> <a href="http://www.biootools.com/software.html#tab1" target="_blank" rel="noopener">软件包地址</a></p>
+</blockquote>
+<a id="more"></a>
+
+<p><img data-src="https://s1.ax1x.com/2020/04/16/JEVP3T.png" alt="CRISPRcase9"></p>
+<h3 id="主要流程"><a href="#主要流程" class="headerlink" title="主要流程"></a>主要流程</h3><ol>
+<li>提取基因的cDNA序列</li>
+<li>使用软件包中<code>sgRNAcas9.pl</code>脚本，进行全基因组范围搜索靶位点</li>
+<li>根据参考基因组的注释文件，对靶向位点进行注释（看是否靶向exon区域）</li>
+</ol>
+<h3 id="1-全基因组搜索sgRNA"><a href="#1-全基因组搜索sgRNA" class="headerlink" title="1.全基因组搜索sgRNA"></a>1.全基因组搜索sgRNA</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">perl sgRNAcas9_3.0.5.pl </span><br><span class="line">-i genes_end.fasta </span><br><span class="line">-x 20 </span><br><span class="line">-l 40 </span><br><span class="line">-m 60 </span><br><span class="line">-g Ghirsutum_genome.fasta </span><br><span class="line">-o b </span><br><span class="line">-t s -v l -n 5 -s -3 -e 33</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">-i &lt;str&gt;                 Input file</span><br><span class="line">-x &lt;int&gt;                 Length of sgRNA[20]</span><br><span class="line">-l &lt;int&gt;                 The minimum value of GC content [20]</span><br><span class="line">-m &lt;int&gt;                 The maximum value of GC content [80]</span><br><span class="line">-g &lt;str&gt;                 The reference genome sequence</span><br><span class="line">-o &lt;str&gt;                 Searching CRISPR target sites using DNA strands based option(s/a/b)</span><br><span class="line">                         [s, sense strand searching mode]</span><br><span class="line">                         [a, anti-sense strand searching mode]</span><br><span class="line">                         [b, both strand searching mode]</span><br><span class="line">-t &lt;str&gt;                 Type of sgRNA searching mode(s/p)</span><br><span class="line">                           [s, single-gRNA searching mode]</span><br><span class="line">                           [p, paired-gRNA searching mode]</span><br><span class="line">-v &lt;str&gt;                 Operation system(w/l/u/m/a)</span><br><span class="line">                            [w, <span class="keyword">for</span> windows-32, 64]</span><br><span class="line">                            [l, <span class="keyword">for</span> linux-64]</span><br><span class="line">                            [u, <span class="keyword">for</span> linux-32]</span><br><span class="line">                            [m, <span class="keyword">for</span> MacOSX-64]</span><br><span class="line">                            [a, <span class="keyword">for</span> MacOSX-32]</span><br><span class="line">-n &lt;int&gt;                 Maximum number of mismatches [5]</span><br><span class="line">-s &lt;int&gt;                 The minimum value of sgRNA offset [-2] 错配罚分</span><br><span class="line">-e &lt;int&gt;                 The maximum value of sgRNA offset [32]</span><br><span class="line">-p &lt;str&gt;                 Output path</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-根据参考文件对sgRNA进行注释"><a href="#2-根据参考文件对sgRNA进行注释" class="headerlink" title="2.根据参考文件对sgRNA进行注释"></a>2.根据参考文件对sgRNA进行注释</h3><h4 id="2-1提取评分等级为一下的sgRNA-ID信息"><a href="#2-1提取评分等级为一下的sgRNA-ID信息" class="headerlink" title="2.1提取评分等级为一下的sgRNA ID信息"></a>2.1提取评分等级为一下的sgRNA ID信息</h4><ul>
+<li>Best </li>
+<li>repeat_sites_or_bad </li>
+<li>low_risk </li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#M表示错配碱基数</span></span><br><span class="line">0M	1M      2M    3M     rank </span><br><span class="line">2       0       0     0    repeat_sites_or_bad</span><br><span class="line">1       0       0    5    low_risk</span><br><span class="line">1       0       0    3    Best</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p> 例如repeat等级中0M靶向的位置有2个，我们要看看它靶向的位置是否是同一个基因，进行sgRNA评价 </p>
+</blockquote>
+<h4 id="2-2合并所有的sgRNA信息"><a href="#2-2合并所有的sgRNA信息" class="headerlink" title="2.2合并所有的sgRNA信息"></a>2.2合并所有的sgRNA信息</h4><p><code>cat A.Sort_OT_byID/*  &gt;all_genen_OT.txt</code></p>
+<p>靶标序列评价</p>
+<p> 使用自带的脚本<strong><em>ot2gtf_v2.pl\</em></strong>，对得到的sgRNA靶标进行评价，主要是看它是否靶向目标基因的外显子区域，或者存在靶向其他基因exon区域（脱靶情况）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">perl ../Usefull_Script/ot2gtf_v2.pl  -i Low_OT.text  -g ../Gh_gene.gtf  -o Low_OT_gtf_out.text</span><br><span class="line"><span class="comment">#也可以将上一步所有的OT文件合并之后，在运行脚本</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-3去除脱靶的sgRNA"><a href="#2-3去除脱靶的sgRNA" class="headerlink" title="2.3去除脱靶的sgRNA"></a>2.3去除脱靶的sgRNA</h4><p>awk的原理:</p>
+<ol>
+<li>靶标基因与sgRNA的序列信息一致赋权值 0</li>
+<li>sgRNA靶向同源基因和自己本身赋权值 0</li>
+<li>靶标序列脱靶赋权值 1</li>
+<li>最后将同一个sgRNA靶标的权值相加，为0则表示没有脱靶；否则脱靶舍弃</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#awk脚本</span></span><br><span class="line">-F <span class="string">"\t"</span> <span class="string">'&#123;</span></span><br><span class="line"><span class="string">    a=substr($1,1,15);a1=substr($1,6,1);a2=substr($1,7,2);b1=substr($5,6,1);b2=substr($5,7,2)</span></span><br><span class="line"><span class="string">    &#125;&#123;</span></span><br><span class="line"><span class="string">if(a==$8)print $0"\t"0;</span></span><br><span class="line"><span class="string">else if(a1=="A"&amp;&amp;b1=="D")&#123;</span></span><br><span class="line"><span class="string">    if(a2==b2||a2=="02"&amp;&amp;b2==03||a2=="03"&amp;&amp;b2=="02")&#123;</span></span><br><span class="line"><span class="string">        print $0"\t"0;&#125;else print $0"\t"1;&#125;</span></span><br><span class="line"><span class="string">        else if(a1=="D"&amp;&amp;b1=="A")&#123;</span></span><br><span class="line"><span class="string">            if(a2==b2||a2=="02"&amp;&amp;b2=="03"||a2=="03"&amp;&amp;b2=="02")&#123;</span></span><br><span class="line"><span class="string">                print $0"\t"0;&#125;else print $0"\t"1;&#125;</span></span><br><span class="line"><span class="string">else print $0"\t"1;&#125;'</span> Best_Repeat_Low_OT_gtf  &gt;2222222</span><br></pre></td></tr></table></figure>
+
+<p>得到的没有脱靶的sgRNA编号</p>
+<p><img data-src="https://zpliu1126.github.io/Blog/img/sgRNAcase/otsgRNAcase.png" alt="没有脱靶sgRNA"></p>
+<h3 id="3-sgRNA筛选"><a href="#3-sgRNA筛选" class="headerlink" title="3.sgRNA筛选"></a>3.sgRNA筛选</h3><p>经过上一步筛选后的sgRNA文件，我们需要根据以下几个指标筛选比较理想的靶标序列</p>
+<ol>
+<li>靶标序列尽量靠近5’端</li>
+<li>同一个基因找两个靶标序列，尽量让这两段序列间隔在100bp左右</li>
+</ol>
+<p>自定义python脚本</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">usage:</span><br><span class="line">    -h|--help    <span class="keyword">print</span> help information</span><br><span class="line">    -g|--gff=    gff file path way</span><br><span class="line">    -s|--sgRNA=    sgRNA file path way</span><br><span class="line">    -l|--genelength=    length of gene</span><br><span class="line">    -r|--sequence=    sgRNA sequence path way</span><br><span class="line">    -o|--outfile=    output file path way</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><a href="https://github.com/zpliu1126/Bioinformatic/blob/33379dd39a948ff6e463a9c9f31ca5fb837ac998/sgRNAcas9/comparisonsgRNA.py" target="_blank" rel="noopener">脚本获取</a></p>
+</blockquote>
+<h3 id="4-参考"><a href="#4-参考" class="headerlink" title="4.参考"></a>4.参考</h3><ol>
+<li><a href="https://tiramisutes.github.io/2017/01/13/CRISPR-Designer.html" target="_blank" rel="noopener">tramisutes</a></li>
+<li><a href="http://www.biootools.com/software.html#tab1" target="_blank" rel="noopener">sgRNAcase9</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>python基于模块化编程</title>
+    <url>/codeHub/2020/04/16/19python%E6%A8%A1%E5%9D%97%E5%8C%96/</url>
+    <content><![CDATA[<img data-src="https://pypi.org/static/images/logo-large.svg" alt=" python模块化" style="zoom:80%;  float:left; margin-right:20px" />
+
+<p>代码模块化是进行大型项目的必经之路，通过将代码进行模块化、解耦将功能进行模块化。在C语言中通过<code>include</code>语法，将不同模块的头文件进行重复利用；在javascript中使用<code>module export||require</code>语法实现模块的引入。同样在python中也可以引入自定义模块，简化代码。</p>
+<a id="more"></a>
+
+<h3 id="1-定义模块"><a href="#1-定义模块" class="headerlink" title="1.定义模块"></a>1.定义模块</h3><p>模块文件实际上就是一个<code>python</code>脚本，脚本中可以向外部提供变量、函数、类等数据结构</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">## 模块文件readHomolog.py</span></span><br><span class="line">def readHomologous(fileName,sep,columnId1,columnId2):</span><br><span class="line">   HomologDict=&#123;&#125;</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>: <span class="comment">#调试模块时才会运行</span></span><br><span class="line">    pass</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-组织模块"><a href="#2-组织模块" class="headerlink" title="2.组织模块"></a>2.组织模块</h3><p>当一个工程之中包含有多个模块，并且模块之间具有一定的依赖关系；我们可以将这些模块组织起来形成一个packages。一个packages对应了一个工程所用到的模块，进而在python packa仓库发布。</p>
+<ul>
+<li>module1.py</li>
+<li>modlue2.py</li>
+</ul>
+<blockquote>
+<p>packages 目录中需要包含 <strong>init</strong>.py文件，说明当前目录为packages</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">## 目录结构</span></span><br><span class="line">homolog</span><br><span class="line">├── __init__.py</span><br><span class="line">├── __pycache__  <span class="comment">##引入packages后自动创建</span></span><br><span class="line">└── readHomolog.py</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-引入模块"><a href="#3-引入模块" class="headerlink" title="3.引入模块"></a>3.引入模块</h3><h4 id="3-1直接引入"><a href="#3-1直接引入" class="headerlink" title="3.1直接引入"></a>3.1直接引入</h4><p>当python可执行脚本与模块文件同属于一个父目录时，可以直接引入</p>
+<p>例如<code>run.py</code>脚本与模块文件<code>readHomolog.py</code>同属于一个父目录，所以在<code>run.py</code>中直接import 即可。这里引入的是模块文件中自定义的函数</p>
+<blockquote>
+<p>from readHomolog import readHomologous</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">homolog</span><br><span class="line">├── __init__.py</span><br><span class="line">├── __pycache__  <span class="comment">##引入packages后自动创建</span></span><br><span class="line">└── readHomolog.py</span><br><span class="line">|__ run.py</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2sys模块引入"><a href="#3-2sys模块引入" class="headerlink" title="3.2sys模块引入"></a>3.2sys模块引入</h3><p>使用<code>sys</code>模块，指定自定义模块所在目录，python能够自动进行搜索</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#在run.py中</span></span><br><span class="line">import sys</span><br><span class="line">sys.path.append(<span class="string">"模块所在绝对路径"</span>)</span><br><span class="line">from readHomolog import readHomologous</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3通过pth文件进行配置"><a href="#3-3通过pth文件进行配置" class="headerlink" title="3.3通过pth文件进行配置"></a>3.3通过pth文件进行配置</h3><p>在python的安装路径<code>\Python35\Lib\site-packages</code>中配置对应的pth文件，</p>
+<p>pth文件格式</p>
+<p>conda中python对应的路径为<code>~/anaconda3/lib/python3.6/site-packages</code></p>
+<blockquote>
+<p>module_模块名.pth</p>
+</blockquote>
+<p>在脚本中直接引用即可</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">from readHomolog import readHomologous</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li><a href="https://blog.csdn.net/weixin_34114823/article/details/92862081?depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-1&utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-1" target="_blank" rel="noopener">模块引入</a></li>
+<li><a href="https://blog.csdn.net/lengye7/article/details/90045498?depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-3&utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-3" target="_blank" rel="noopener">模块属性</a></li>
+<li><a href="https://blog.csdn.net/lengye7/article/details/90045498?depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-3&utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-3" target="_blank" rel="noopener">模块组织</a></li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
     <title>三维基因组中的结构变异</title>
     <url>/codeHub/2020/04/15/18%E4%B8%89%E7%BB%B4%E5%9F%BA%E5%9B%A0%E7%BB%84%E4%B8%AD%E7%9A%84%E7%BB%93%E6%9E%84%E5%8F%98%E5%BC%82/</url>
     <content><![CDATA[<h1 id="三维基因组中的结构变异"><a href="#三维基因组中的结构变异" class="headerlink" title="三维基因组中的结构变异"></a>三维基因组中的结构变异</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>染色体在结构和数量上的重排统称为结构变异（SV），它在很大程度上对人类的遗传多样性做出了贡献，因此其与癌症、罕见疾病和进化具有高度的相关性，近来的研究表明，SVs不仅仅可以影响基因剂量，还能影响基因的调控，SVs可以通过扰动TAD（topologically associating domains）来改变调控元件的拷贝数或对三维基因组造成影响，由于这些位置效应，SVs会影响距离SVs断点较远的基因的表达，从而导致疾病的发生，所以在解释这些疾病的病理的时候，必须要考虑SVs对三维基因组和基因表达调控的影响。</p>
