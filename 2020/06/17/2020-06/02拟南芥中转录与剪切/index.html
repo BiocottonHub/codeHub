@@ -21,16 +21,27 @@
     var CONFIG = {"hostname":"biocottonhub.github.io","root":"/codeHub/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Javascript">
-<meta property="og:url" content="https://biocottonhub.github.io/codeHub/Javascript/index.html">
+  <meta name="description" content="Abstract在真核生物中，基因在RNA聚合酶II的作用下被转录成成mRNA，其中多数时候intron是在转录的过程中被剪切复合体剪切掉。在酵母的long-read sequencing研究中发现，当聚合酶II越过内含子时，剪切随即发生。本文基于Nanopore测序技术，绘制了结合在染色质上的RNA图谱，与此同时能够在全基因组范围检测剪切状态、聚合酶II的位置、多聚腺苷酸化。通过分析发现，在聚合">
+<meta property="og:type" content="article">
+<meta property="og:title" content="拟南芥中转录与剪切">
+<meta property="og:url" content="https://biocottonhub.github.io/codeHub/2020/06/17/2020-06/02%E6%8B%9F%E5%8D%97%E8%8A%A5%E4%B8%AD%E8%BD%AC%E5%BD%95%E4%B8%8E%E5%89%AA%E5%88%87/index.html">
 <meta property="og:site_name" content="Code Hub">
+<meta property="og:description" content="Abstract在真核生物中，基因在RNA聚合酶II的作用下被转录成成mRNA，其中多数时候intron是在转录的过程中被剪切复合体剪切掉。在酵母的long-read sequencing研究中发现，当聚合酶II越过内含子时，剪切随即发生。本文基于Nanopore测序技术，绘制了结合在染色质上的RNA图谱，与此同时能够在全基因组范围检测剪切状态、聚合酶II的位置、多聚腺苷酸化。通过分析发现，在聚合">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-04-06T11:56:02.000Z">
-<meta property="article:modified_time" content="2020-06-17T02:43:15.052Z">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/17/NEjmOf.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/17/NExRFe.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/17/NVSwK1.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/17/NV9VpQ.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/17/NVF8V1.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/17/NVZT8P.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/17/NV4Ege.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/17/NVIMp8.png">
+<meta property="article:published_time" content="2020-06-17T12:00:19.000Z">
+<meta property="article:modified_time" content="2020-06-17T12:03:53.449Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s1.ax1x.com/2020/06/17/NEjmOf.png">
 
-<link rel="canonical" href="https://biocottonhub.github.io/codeHub/Javascript/">
+<link rel="canonical" href="https://biocottonhub.github.io/codeHub/2020/06/17/2020-06/02%E6%8B%9F%E5%8D%97%E8%8A%A5%E4%B8%AD%E8%BD%AC%E5%BD%95%E4%B8%8E%E5%89%AA%E5%88%87/">
 
 
 <script id="page-configurations">
@@ -38,13 +49,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>Javascript | Code Hub
-  </title>
+  <title>拟南芥中转录与剪切 | Code Hub</title>
   
 
 
@@ -185,52 +195,200 @@
       <div class="main-inner">
         <div class="content-wrap">
           
-  
-  
 
           <div class="content">
             
 
   <div class="posts-expand">
-    
-    
-    
-    <div class="post-block" lang="en">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2020/06/17/2020-06/02%E6%8B%9F%E5%8D%97%E8%8A%A5%E4%B8%AD%E8%BD%AC%E5%BD%95%E4%B8%8E%E5%89%AA%E5%88%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/codeHub/uploads/themeImg/logo.png">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Hub">
+    </span>
       <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          拟南芥中转录与剪切
+        </h1>
 
-<h1 class="post-title" itemprop="name headline">Javascript统计
-</h1>
+        <div class="post-meta">
+            <span class="post-meta-item">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>发布于
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
 
-<div class="post-meta">
+              <time title="Created: 2020-06-17 20:00:19 / Modified: 20:03:53" itemprop="dateCreated datePublished" datetime="2020-06-17T20:00:19+08:00">2020-06-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  分类于<a href="/codeHub/categories/%E6%96%87%E7%8C%AE/" itemprop="url" rel="index"><span itemprop="name">文献</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                阅读量:<i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/codeHub/2020/06/17/2020-06/02%E6%8B%9F%E5%8D%97%E8%8A%A5%E4%B8%AD%E8%BD%AC%E5%BD%95%E4%B8%8E%E5%89%AA%E5%88%87/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2020/06/17/2020-06/02%E6%8B%9F%E5%8D%97%E8%8A%A5%E4%B8%AD%E8%BD%AC%E5%BD%95%E4%B8%8E%E5%89%AA%E5%88%87/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
   
 
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h3><p>在真核生物中，基因在RNA聚合酶II的作用下被转录成成mRNA，其中多数时候intron是在转录的过程中被剪切复合体剪切掉。在酵母的long-read sequencing研究中发现，当聚合酶II越过内含子时，剪切随即发生。本文基于Nanopore测序技术，绘制了结合在染色质上的RNA图谱，与此同时能够在全基因组范围检测剪切状态、聚合酶II的位置、多聚腺苷酸化。通过分析发现，在聚合酶II越过3‘剪切位点1Kb后，仍旧有超过半数的intron仍旧保持未剪切的状态；相比于酵母，植物中的剪切速率慢的多。许多全长的chromatin-bound RNA在多聚腺苷化后，仍旧包含有未剪切的内含子。而这些内含子在细胞质中几乎是不存在的，对nonsense-mediate decay具有抵抗力，表明这些RNA是在转录完成后、被释放到细胞质之前完成剪切的；作者给这类intron下了一个定义，post-transcriptionally splice intron <strong>pts intron</strong>.对来自公共数据库中6500份RNA-sequencing分析后，发现pts intron的剪切依赖于剪切相关蛋白<strong>PRMT5</strong>、<strong>SKIP</strong>同时又受到各种环境信号的影响。在拟南芥中大多数内含子保留事件是发生在pts introns，表明pts intron是内含子保留事件的主要来源，也可能是机体产生有功能的mRA的一种快速响应机制。</p>
+<a id="more"></a>
+
+<h3 id="introduction"><a href="#introduction" class="headerlink" title="introduction"></a>introduction</h3><p>在真核生物中，pre-mRNA的剪切是mRNA成熟中一个基本的过程，并且剪切是转录往往同时进行。之前的研究通过人工合成pre-mRNA，在体外重构了剪切事件这一过程，帮助我们很好的理解了剪切位点的识别以及剪切复合体的组装。随着高通量测序技术的绘制新生RNA的图谱，极大的促进了在全基因组水平量化剪切事件，同时精准的追踪聚合酶II。但是研究剪切和转录之间的关系存在很大的困难，因为在同一个转录本上描述剪切和转录很困难。</p>
+<p>通过long-read sequence可以发现大多数intron的剪切是在转录时发生的，当然这种现象也因组织而异。除了共转录剪切，也存在大量的转录后剪切，这些mRNA在多聚腺苷酸化后bound在染色质上。</p>
+<p>通过对chromatin-bound RNA进行捕获后发现，处于延伸中的RNA占了70%，而多聚腺苷酸化的RNA只有30%。有了这些数据后，进一步的研究剪切和转录的关系。</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/17/NEjmOf.png" alt="NEjmOf.png"></p>
+<p>进一步对处于elongating中的full-read 分析发现，有将近20%的read，存在至少一个已经剪切的intron，而有50%的内含子，在聚合酶II跨过3’剪切位点1100bp后,仍旧没有被剪切掉。</p>
+<blockquote>
+<p>不同颜色代表不同类型的mRNA，和对应的比例</p>
+</blockquote>
+<p><img data-src="https://s1.ax1x.com/2020/06/17/NExRFe.png" alt="NExRFe.png"></p>
+<p>由于文章的方法能够同时追踪来自同一个转录本的多个intron的状态，作者比较了任意两个相邻的intron的剪切顺序，发现有70%是上游的intron先发生剪切。</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/17/NVSwK1.png" alt="NVSwK1.png"></p>
+<p>进一步比较了包含多个intron 的基因转录动态过程，发现上游intron被剪切的比例更高一些，同时又一部分的上游intron已经被剪切掉了，在聚合酶II越过下游内含子时，也有一部分上游内含子在下游内含子都剪切掉的情况、多聚腺苷酸化后仍旧没有被剪切。</p>
+<p>还存在相邻两个intron协助剪切的情况，可能是由于位于同一个transcript上的intron通过招募一些剪切复合物来帮助其他intron剪切。</p>
+<blockquote>
+<p>柱状图中恒坐标表示第几个外显子，例如S2中当聚合酶II越过第2个内含子时，两个intron就有4中可能，对应4种比例</p>
+</blockquote>
+<p><img data-src="https://s1.ax1x.com/2020/06/17/NV9VpQ.png" alt="NV9VpQ.png"></p>
+<p>研究多聚腺苷酸化的transcript的剪切情况，其中有30%没有完全的剪切掉内含子，并且大多数为剪切的转录本只包含了一个或少数未剪切的intron。分析这些未完全剪切的transcript是否会从染色质上释放，</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/17/NVF8V1.png" alt="NVF8V1.png"></p>
+<p>通过分析那些未剪切比例大于0,.1的transcript在细胞核和细胞质中的含量，表明这些transcript仍旧bound在chromatin上，在多聚腺苷酸化后，同时FPKM分析也表明，驻留在chromatin上的表达量相比于细胞核、细胞质中的更高。unspliced的intron如果释放到细胞质中会被NMD降解，通过<strong><em>upf1</em></strong>敲除后，没有NMD发现unspliced的含量没有变化。</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/17/NVZT8P.png" alt="NVZT8P.png"></p>
+<p>当分析RNA-seq数据时，内含子错误的注释是很常见的，因此作者选择了constitutively spliced introns  进行了下一步的分析。为了研究pts intron中调控内含子剪切的因素，作者选择了6521份RNA-seq数据进行分析，其中包括一些突变体、不同调节处理的材料。其中有10份突变材料中，500个intron的保留率相比于野生型有所提高。其中就包括已经报导的<strong>*PRMT5  *</strong>、**<em>SKIP  *</em>两个基因。这两个基因主要是促进pts transcript 中Intron的剪切，当然对于非pts也有一定的影响。</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/17/NV4Ege.png" alt="NV4Ege.png"></p>
+<blockquote>
+<p>PRMT5 is implicated in various developmental processes, such as flowering time control, stress response and circadian rhythm, by promoting the recruitment of NineTeen Complex to the spliceosome and modulating pre-mRNA splicing of diverse genes  </p>
+</blockquote>
+<p>在细胞核中保留的已经多聚腺苷酸化，但是没有完全剪切的transcript，被存储在细胞核中防止被NMD降解，可能是在机体受到环境刺激时，激活剪切机制，产生具有功能的mRNA。</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/17/NVIMp8.png" alt="NVIMp8.png"></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li>Post-transcriptional splicing of nascent RNA contributes to widespread intron retention in plants  </li>
+</ol>
+
+    </div>
+
+    
+    
+    
+   
+   <div>
+     <div>
+  
+    <div style="text-align:center;color:#bfbfbf;font-size:16px;">
+      <span>------ 本文结束 </span>
+      <img src="https://s1.ax1x.com/2020/03/23/8HFzxH.png" 
+      style="display:inline-block;"
+      data-loaded="true"
+      alt="thankyou" border="0" 
+      width="100"
+      heigh="100"
+      />
+      <span> 感谢阅读 ------</span>
+
+    </div>
+    <p>
+    <a class="fancybox fancybox.image" 
+    href="https://s1.ax1x.com/2020/03/23/8HCEjI.jpg" 
+    itemscope="" itemtype="http://schema.org/ImageObject" 
+    itemprop="url" data-fancybox="default" 
+    rel="default" title="公众号" 
+    data-caption="公众号"
+    >
+    <img data-src="https://s1.ax1x.com/2020/03/23/8HCEjI.jpg" alt="公众号"
+     src="https://s1.ax1x.com/2020/03/23/8HCEjI.jpg" data-loaded="true">
+    </a>
+    <p  style="text-align:center;">
+     <sapn style="">欢迎扫一扫上面的微信二维码，订阅
+     <span style="color: #428bca;font-size:20px;">codeHub</span>
+     公众号</span>
+     </p>
+     </p>
+    
+  
+</div>
+   </div>
+  
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>zpliu
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://biocottonhub.github.io/codeHub/2020/06/17/2020-06/02%E6%8B%9F%E5%8D%97%E8%8A%A5%E4%B8%AD%E8%BD%AC%E5%BD%95%E4%B8%8E%E5%89%AA%E5%88%87/" title="拟南芥中转录与剪切">https://biocottonhub.github.io/codeHub/2020/06/17/2020-06/02拟南芥中转录与剪切/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
 </div>
 
-</header>
 
-      
-      
-      
-      <div class="post-body">
-          <div class="category-all-page">
-            <div class="category-all-title">
-              目前总共 9 个分类
-            </div>
-            <div class="category-all">
-              <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/codeHub/categories/Circos/">Circos</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/codeHub/categories/Javascript/">Javascript</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/codeHub/categories/R/">R</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/codeHub/categories/RNA-seq/">RNA-seq</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/codeHub/categories/hexo/">hexo</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/codeHub/categories/javascript/">javascript</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/codeHub/categories/python/">python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/codeHub/categories/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/">实用工具</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/codeHub/categories/%E6%96%87%E7%8C%AE/">文献</a><span class="category-list-count">12</span></li></ul>
-            </div>
-          </div>
+      <footer class="post-footer">
+
         
-      </div>
-      
-      
-      
-    </div>
-    
 
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/codeHub/2020/06/17/02%E6%8B%9F%E5%8D%97%E8%8A%A5%E4%B8%AD%E8%BD%AC%E5%BD%95%E4%B8%8E%E5%89%AA%E5%88%87/" rel="prev" title="02拟南芥中转录与剪切">
+      <i class="fa fa-chevron-left"></i> 02拟南芥中转录与剪切
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
     
-    
-    
+  </article>
+  
+  
+  
+
   </div>
 
 
@@ -283,6 +441,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#introduction"><span class="nav-number">2.</span> <span class="nav-text">introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
