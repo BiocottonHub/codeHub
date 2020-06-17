@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/codeHub/uploads/themeImg/logo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/codeHub/uploads/themeImg/logo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/codeHub/uploads/themeImg/logo.png">
+  <link rel="mask-icon" href="/codeHub/uploads/themeImg/logo.png" color="#222">
+
+<link rel="stylesheet" href="/codeHub/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/codeHub/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"biocottonhub.github.io","root":"/codeHub/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Abstract区分玉米不同单倍型的遗传变异对研究等位基因的功能和群体遗传分析，基因组的解析有着重要的作用。使用全长cDNA测序，在isform水平对两个玉米自交系品种和对应的杂交品种进行分析。通过使用IsoPhase方法，在胚胎、胚乳和根组织中验证了大多数从二代数据called SNP；并且在自交系与杂交后代之间鉴定了在等位基因间特异的、基因水平、isform水平的差异表达。在互惠杂交后代中，经">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于三代测序对等位基因进行分型">
+<meta property="og:url" content="https://biocottonhub.github.io/codeHub/2020/06/17/2020-06/2020-06-01/index.html">
+<meta property="og:site_name" content="Code Hub">
+<meta property="og:description" content="Abstract区分玉米不同单倍型的遗传变异对研究等位基因的功能和群体遗传分析，基因组的解析有着重要的作用。使用全长cDNA测序，在isform水平对两个玉米自交系品种和对应的杂交品种进行分析。通过使用IsoPhase方法，在胚胎、胚乳和根组织中验证了大多数从二代数据called SNP；并且在自交系与杂交后代之间鉴定了在等位基因间特异的、基因水平、isform水平的差异表达。在互惠杂交后代中，经">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/17/NAhv1H.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/17/NA4iAf.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/17/NA4aHx.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/17/NA42DI.png">
+<meta property="article:published_time" content="2020-06-17T02:47:28.000Z">
+<meta property="article:modified_time" content="2020-06-17T03:02:08.375Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s1.ax1x.com/2020/06/17/NAhv1H.png">
+
+<link rel="canonical" href="https://biocottonhub.github.io/codeHub/2020/06/17/2020-06/2020-06-01/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>基于三代测序对等位基因进行分型 | Code Hub</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/codeHub/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Code Hub</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">keeping learn</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-首页">
+
+    <a href="/codeHub/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-文章">
+
+    <a href="/codeHub/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>文章<span class="badge">27</span></a>
+
+  </li>
+        <li class="menu-item menu-item-分类">
+
+    <a href="/codeHub/categories" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-标签">
+
+    <a href="/codeHub/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">3</span></a>
+
+  </li>
+        <li class="menu-item menu-item-关于">
+
+    <a href="https://zpliu1126.github.io/About/" rel="noopener" target="_blank"><i class="fa fa-fw fa-heartbeat"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/BiocottonHub/" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="200" height="200" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2020/06/17/2020-06/2020-06-01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/codeHub/uploads/themeImg/logo.png">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Hub">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          基于三代测序对等位基因进行分型
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>发布于
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-06-17 10:47:28 / Modified: 11:02:08" itemprop="dateCreated datePublished" datetime="2020-06-17T10:47:28+08:00">2020-06-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  分类于<a href="/codeHub/categories/%E6%96%87%E7%8C%AE/" itemprop="url" rel="index"><span itemprop="name">文献</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                阅读量:<i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/codeHub/2020/06/17/2020-06/2020-06-01/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2020/06/17/2020-06/2020-06-01/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h3><p>区分玉米不同单倍型的遗传变异对研究等位基因的功能和群体遗传分析，基因组的解析有着重要的作用。使用全长cDNA测序，在isform水平对两个玉米自交系品种和对应的杂交品种进行分析。通过使用IsoPhase方法，在胚胎、胚乳和根组织中验证了大多数从二代数据called SNP；并且在自交系与杂交后代之间鉴定了在等位基因间特异的、基因水平、isform水平的差异表达。在互惠杂交后代中，经过分型后对6907个基因注释了SNP，鉴定了大效应基因。并且，在不同的组织中鉴定了亲本起源的isform，杂交后代中独特的isform，印记基因。最后，作者表征了顺式和反式调节作用的变化。</p>
+<a id="more"></a>
+
+<h3 id="introduction"><a href="#introduction" class="headerlink" title="introduction"></a>introduction</h3><p>对遗传变异进行分型，对于鉴定出潜在的致病变异，表征遗传变异和表型之间的关系有着重要的作用。玉米作为一个二倍体物种，虽然不同基因组之间存在很高的相似性，但是仍旧表现出等位基因的特异性表达ASE（等位基因间表达水平不相同)。并且ASE随着不同组织、不同发育阶段、不同生长环境中变化。等位基因在序列水平上产生不同的转录本，为了更好的解析玉米的转录图谱，因此有必要分析ASE。之前的研究是通过二代数据，在SNP水平对等位基因的表达进行量化，但是不能够提供全长的单倍型信息。</p>
+<p>PacBio和Nenopore则通过对全长转录本进行测序，广泛的被应用于基因组注释中；但是只有少量的研究使用long reads进行isform水平的亚型研究。本研究中使用PacBio和RNA-seq测序，并且开发了一套流程IsoPhase，对杂交种中等位基因的亚型进行分型。第一个在玉米中实验IsoPhase方法进行研究，这套流程同样适用于多倍体物种。这套流程不需要父母本的信息，虽然父母本的信息可以区分母本还是父本的等位基因。并且isform水平可以确定到底是那个等位基因在转录，可以产生特定的等位基因转录组。</p>
+<h3 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h3><h4 id="全长转录组测序和生信分析流程"><a href="#全长转录组测序和生信分析流程" class="headerlink" title="全长转录组测序和生信分析流程"></a>全长转录组测序和生信分析流程</h4><p><img data-src="https://s1.ax1x.com/2020/06/17/NAhv1H.png" alt="流程图"></p>
+<p>首先两个亲本在一些性状上存在巨大的差异，使得这两个亲本的杂交非常的适合研究等位基因的杂种优势。同时为了量化不同组织中基因表达谱，作者提取了不同物种、不同组织的RNA进行反转录，加上组织特异的barcode进行混池测序，将得到的环形共识序列使用Isoseq3分析流程。其中有76.3的read被归类为全长的转录本，根据barcode和ployA是否出现。经过Isoseq处理后，产生了25万个高质量的全长转录本。将这些全长转录本比对到玉米参考基因组上，约有99.3%被比对到参考基因组上，根据覆盖度和相似度进行筛选后，仅仅保留91.8%，这些序列进一步  collapsed  成9万多个非冗余的转录本。将没有比对上的全长转录本比对到  RefSeq NR database  数据库中其中约有50%的比对到了其他生物中，说明这些在文库制备的时候来至于质粒或者其他来源。</p>
+<h4 id="Isoform-characterization"><a href="#Isoform-characterization" class="headerlink" title="Isoform characterization"></a>Isoform characterization</h4><p>使用  SQANTI   将转录本与参考基因组注释进行比较，其中有  3344  被认为是新的没有被注释的转录本。其中有95.5%是位于基因间区的。</p>
+<p>SQANTI  将转录本进行了分类</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/17/NA4iAf.png" alt="isform分类"></p>
+<ol>
+<li>FSM 与参考基因组注释的剪切完全匹配</li>
+<li>ISM  不完全匹配</li>
+<li>NIC 全新的在分类内</li>
+<li>NNC全新的不在分类内</li>
+<li>反义链</li>
+<li>基因间区</li>
+</ol>
+<p>并且全长转录本测序的转录本长度能达到10kb以上。并且新鉴定出的基因主要是多外显子。</p>
+<ul>
+<li>对于剪切位点完全匹配的isform，发生了起始和终止位点的改变。</li>
+</ul>
+<p>将转录本进行分池，也就是分组织的分析。当一个组织中的转录本有一条全长转录本的read支持，就认为它已经表达了。每个组织中包含有20000到30000个表达的转录本。为了验证数据的饱和，对样本进行二次采样，Isoseq数据在基因水平上已经达到饱和。</p>
+<p>在基因和isform水平比较双亲和杂交种，没有发现明显的模式。与此同时在比较双亲与两个杂交种时，发现一些共享的和品种特异的基因、isform；这个发现同样被二代测序的数据所确认。对这四个品种的剪切模式进行探讨发现，内含子保守时最主要的模式；使用二代数据进行定量分析发现，在三个组织中大多数基因表现出一种加性效应。同时比较了两个杂交种，发现它们在加性基因的数目上存在差异。这也可能是导致两个杂交种间存在差异的原因。在加性基因与非加性基因的比较中isform的数目上没有存在明显的差异。</p>
+<h4 id="全长转录本实现准确的亚型分型"><a href="#全长转录本实现准确的亚型分型" class="headerlink" title="全长转录本实现准确的亚型分型"></a>全长转录本实现准确的亚型分型</h4><p><img data-src="https://s1.ax1x.com/2020/06/17/NA4aHx.png" alt="基于SNP进行分型"></p>
+<p>为了对Iso-seq转录本进行分型，作者开发了一套IsoPhase流程，对于每个基因，将全长reads比对到基因区域，然后进行SNP的鉴定。之后使用全长reads的信息重构不同的亚型，使用简单的纠错方案获取两个等位基因。为了分清楚哪个是来自于母本哪个是来至于父本的等位基因，所有的read只能来自于同一个等位基因。只有双亲等位基因被鉴定出来，就得到了F1中每个等位基因的read数。对9000多个基因进行分型后，其中有6700多个基因存在至少一个SNP能够将它归类为B73或者Kill。</p>
+<p>使用二代数据进行验证后，其中有96%的SNP得到验证，而其他PacBio特异的SNPs可能二代测序数据对UTR区域的覆盖不够。</p>
+<h4 id="等位基因的特异性表达"><a href="#等位基因的特异性表达" class="headerlink" title="等位基因的特异性表达"></a>等位基因的特异性表达</h4><p><img data-src="https://s1.ax1x.com/2020/06/17/NA42DI.png" alt="等位基因表达"></p>
+<p>只有母本等位基因的表达，比较了两个双亲在等位基因的表达上的差异</p>
+<p>在F1杂交后代中，所有的isform都表达了，但是只有Kill检测出了出了一个isform。</p>
+<p>monoallelic genes感觉是纯合的等位基因，在不同组织中比较了这些基因在isform数目上的差异</p>
+<h4 id="对SNP进行功能注释"><a href="#对SNP进行功能注释" class="headerlink" title="对SNP进行功能注释"></a>对SNP进行功能注释</h4><p>其中有24%的SNP是同义突变，在非同义突变的SNP中，  22,093  多个SNP对  5140 genes  可能存在效应，有将近10~17%是在UTR区域，其中进行容忍度分析发现，0.05值为阀值，大约  2556 genes  SNP被认为是有害突变。同时在杂交后代中，isform的数目比父母中更高，但是在胚乳中两个杂交种表现不一致，说明不同的杂交组合影响胚乳的发育。</p>
+<h4 id="印记基因、顺式反式调节效应"><a href="#印记基因、顺式反式调节效应" class="headerlink" title="印记基因、顺式反式调节效应"></a>印记基因、顺式反式调节效应</h4><p>胚乳中26个父本印记基因，其中70%在之前的研究中被报道了；在胚中2个印记基因同样出现在胚乳中。在胚乳中30个母本印记基因，在根中没有发现印记基因。</p>
+<p>顺式、反式调控，通过比较父母本中等位基因表达比率与杂交后代中等位基因的杂交比例来区分。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
+<li><p>科学问题非常有趣，研究了不同等位基因特异性的表达，可能是造成杂种优势、印记基因等现象的原因</p>
+</li>
+<li><p>第一个利用全长转录组数据，在isforms水平对等位基因的特异性表达进行分析</p>
+</li>
+<li><p>每一个结果都结合了二代测序数据，说明了数据的真实性和可靠性</p>
+</li>
+<li><p>开发了一套基于全长转录本数据的分析流程IsoPhase</p>
+</li>
+</ol>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li>Variant phasing and haplotypic expression from long-read sequencing in maize</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+   
+   <div>
+     <div>
+  
+    <div style="text-align:center;color:#bfbfbf;font-size:16px;">
+      <span>------ 本文结束 </span>
+      <img src="https://s1.ax1x.com/2020/03/23/8HFzxH.png" 
+      style="display:inline-block;"
+      data-loaded="true"
+      alt="thankyou" border="0" 
+      width="100"
+      heigh="100"
+      />
+      <span> 感谢阅读 ------</span>
+
+    </div>
+    <p>
+    <a class="fancybox fancybox.image" 
+    href="https://s1.ax1x.com/2020/03/23/8HCEjI.jpg" 
+    itemscope="" itemtype="http://schema.org/ImageObject" 
+    itemprop="url" data-fancybox="default" 
+    rel="default" title="公众号" 
+    data-caption="公众号"
+    >
+    <img data-src="https://s1.ax1x.com/2020/03/23/8HCEjI.jpg" alt="公众号"
+     src="https://s1.ax1x.com/2020/03/23/8HCEjI.jpg" data-loaded="true">
+    </a>
+    <p  style="text-align:center;">
+     <sapn style="">欢迎扫一扫上面的微信二维码，订阅
+     <span style="color: #428bca;font-size:20px;">codeHub</span>
+     公众号</span>
+     </p>
+     </p>
+    
+  
+</div>
+   </div>
+  
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>zpliu
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://biocottonhub.github.io/codeHub/2020/06/17/2020-06/2020-06-01/" title="基于三代测序对等位基因进行分型">https://biocottonhub.github.io/codeHub/2020/06/17/2020-06/2020-06-01/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/codeHub/2020/05/31/2020-06%E4%BB%A5%E5%89%8D/27%E7%94%9F%E7%89%A9%E5%AD%A6%E6%9D%82%E5%BF%97%E6%B1%87%E6%80%BB/" rel="prev" title="生物学杂志汇总">
+      <i class="fa fa-chevron-left"></i> 生物学杂志汇总
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概括
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#introduction"><span class="nav-number">2.</span> <span class="nav-text">introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Result"><span class="nav-number">3.</span> <span class="nav-text">Result</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#全长转录组测序和生信分析流程"><span class="nav-number">3.1.</span> <span class="nav-text">全长转录组测序和生信分析流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Isoform-characterization"><span class="nav-number">3.2.</span> <span class="nav-text">Isoform characterization</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#全长转录本实现准确的亚型分型"><span class="nav-number">3.3.</span> <span class="nav-text">全长转录本实现准确的亚型分型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#等位基因的特异性表达"><span class="nav-number">3.4.</span> <span class="nav-text">等位基因的特异性表达</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对SNP进行功能注释"><span class="nav-number">3.5.</span> <span class="nav-text">对SNP进行功能注释</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#印记基因、顺式反式调节效应"><span class="nav-number">3.6.</span> <span class="nav-text">印记基因、顺式反式调节效应</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt=""
+      src="/codeHub/uploads/themeImg/logo.png">
+  <p class="site-author-name" itemprop="name"></p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/codeHub/archives">
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/codeHub/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/codeHub/tags/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/BiocottonHub/" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;BiocottonHub&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/codeHub/1944532210@qq.com" title="E-Mail → 1944532210@qq.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-cn" class="cc-opacity" rel="noopener" target="_blank"><img src="/codeHub/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://cotton.hzau.edu.cn/" title="http:&#x2F;&#x2F;cotton.hzau.edu.cn&#x2F;" rel="noopener" target="_blank">GCGI</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">codeHub</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        站点访问人次
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        总访问量<i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/codeHub/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/codeHub/lib/velocity/velocity.min.js"></script>
+  <script src="/codeHub/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/codeHub/js/utils.js"></script>
+
+<script src="/codeHub/js/motion.js"></script>
+
+
+<script src="/codeHub/js/schemes/pisces.js"></script>
+
+
+<script src="/codeHub/js/next-boot.js"></script>
+
+<script src="/codeHub/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      script.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/codeHub/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'd4VOUvNSU5WGIC3AjjM8UArx-gzGzoHsz',
+      appKey     : '5n9Xu8XStUzmAKyncMgSp0px',
+      placeholder: "有任何问题欢迎留言或者邮件告知",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/codeHub/uploads/themeImg/logo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/codeHub/uploads/themeImg/logo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/codeHub/uploads/themeImg/logo.png">
+  <link rel="mask-icon" href="/codeHub/uploads/themeImg/logo.png" color="#222">
+
+<link rel="stylesheet" href="/codeHub/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/codeHub/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"biocottonhub.github.io","root":"/codeHub/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Population Genomic Analysis and De Novo Assembly Reveal the Origin of Weedy Rice as an Evolutionary Game​    杂草水稻具有很强的入侵性、再生能力以及与栽培稻竞争资源；同时又缺乏有效的除草剂进行控制；使得它成为稻田里的主要威胁。但与此同时，作为栽培稻的近缘物质，杂草水稻又具有与野生水稻类似的特">
+<meta property="og:type" content="article">
+<meta property="og:title" content="杂草水稻的进化">
+<meta property="og:url" content="https://biocottonhub.github.io/codeHub/2020/04/24/2020-06%E4%BB%A5%E5%89%8D/26%E6%9D%82%E8%8D%89%E6%B0%B4%E7%A8%BB%E7%9A%84%E8%BF%9B%E5%8C%96/index.html">
+<meta property="og:site_name" content="Code Hub">
+<meta property="og:description" content="Population Genomic Analysis and De Novo Assembly Reveal the Origin of Weedy Rice as an Evolutionary Game​    杂草水稻具有很强的入侵性、再生能力以及与栽培稻竞争资源；同时又缺乏有效的除草剂进行控制；使得它成为稻田里的主要威胁。但与此同时，作为栽培稻的近缘物质，杂草水稻又具有与野生水稻类似的特">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s1.ax1x.com/2020/04/23/Jwctne.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/04/23/JwRWAH.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/04/23/JwOQSO.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/04/23/JwOky4.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/04/24/J0wuLR.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/04/24/J0wPZq.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/04/24/J02ShR.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/04/24/J02IbD.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/04/24/J0fIbT.png">
+<meta property="article:published_time" content="2020-04-24T02:19:41.000Z">
+<meta property="article:modified_time" content="2020-06-17T02:43:15.059Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s1.ax1x.com/2020/04/23/Jwctne.png">
+
+<link rel="canonical" href="https://biocottonhub.github.io/codeHub/2020/04/24/2020-06%E4%BB%A5%E5%89%8D/26%E6%9D%82%E8%8D%89%E6%B0%B4%E7%A8%BB%E7%9A%84%E8%BF%9B%E5%8C%96/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>杂草水稻的进化 | Code Hub</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/codeHub/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Code Hub</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">keeping learn</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-首页">
+
+    <a href="/codeHub/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-文章">
+
+    <a href="/codeHub/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>文章<span class="badge">27</span></a>
+
+  </li>
+        <li class="menu-item menu-item-分类">
+
+    <a href="/codeHub/categories" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-标签">
+
+    <a href="/codeHub/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">3</span></a>
+
+  </li>
+        <li class="menu-item menu-item-关于">
+
+    <a href="https://zpliu1126.github.io/About/" rel="noopener" target="_blank"><i class="fa fa-fw fa-heartbeat"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/BiocottonHub/" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="200" height="200" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2020/04/24/2020-06%E4%BB%A5%E5%89%8D/26%E6%9D%82%E8%8D%89%E6%B0%B4%E7%A8%BB%E7%9A%84%E8%BF%9B%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/codeHub/uploads/themeImg/logo.png">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Hub">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          杂草水稻的进化
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>发布于
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-24 10:19:41" itemprop="dateCreated datePublished" datetime="2020-04-24T10:19:41+08:00">2020-04-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>修改于
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-06-17 10:43:15" itemprop="dateModified" datetime="2020-06-17T10:43:15+08:00">2020-06-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  分类于<a href="/codeHub/categories/%E6%96%87%E7%8C%AE/" itemprop="url" rel="index"><span itemprop="name">文献</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                阅读量:<i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/codeHub/2020/04/24/2020-06%E4%BB%A5%E5%89%8D/26%E6%9D%82%E8%8D%89%E6%B0%B4%E7%A8%BB%E7%9A%84%E8%BF%9B%E5%8C%96/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2020/04/24/2020-06%E4%BB%A5%E5%89%8D/26%E6%9D%82%E8%8D%89%E6%B0%B4%E7%A8%BB%E7%9A%84%E8%BF%9B%E5%8C%96/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Population-Genomic-Analysis-and-De-Novo-Assembly-Reveal-the-Origin-of-Weedy-Rice-as-an-Evolutionary-Game"><a href="#Population-Genomic-Analysis-and-De-Novo-Assembly-Reveal-the-Origin-of-Weedy-Rice-as-an-Evolutionary-Game" class="headerlink" title="Population Genomic Analysis and De Novo Assembly Reveal the Origin of Weedy Rice as an Evolutionary Game"></a>Population Genomic Analysis and De Novo Assembly Reveal the Origin of Weedy Rice as an Evolutionary Game</h1><p>​    杂草水稻具有很强的入侵性、再生能力以及与栽培稻竞争资源；同时又缺乏有效的除草剂进行控制；使得它成为稻田里的主要威胁。但与此同时，作为栽培稻的近缘物质，杂草水稻又具有与野生水稻类似的特征；这就使得杂草水稻作为理解水稻驯化和改良的良好模型。对于杂草水稻的起源以及它的一些特有属性的形成仍旧是未知的，在对亚洲的低纬度地区的杂草水稻研究后，认为有一部分基因是从野生品种中流向杂草水稻的。</p>
+<p>​    在当前日益变化的气候和人口增长情况下，从杂草植物中克隆优良基因到作物中，能够提供农作物产量解决粮食安全问题。但是还存在一些限制因素，由于缺乏基因组信息，使得发掘优良基因和解析其遗传基础变得十分困难。</p>
+<p>​    高纬度地区的杂草水稻相比与栽培水稻经历着更强的自然选择压，因此可以用它的遗传资源来改良栽培稻的生态适应性。</p>
+<a id="more"></a>
+
+<h3 id="系统发生树分析"><a href="#系统发生树分析" class="headerlink" title="系统发生树分析"></a>系统发生树分析</h3><p>通过结合多个品种的SNP数据，构建系统发生树</p>
+<ul>
+<li>48个高纬度杂草水稻 WRAH</li>
+<li>43 个温带栽培粳稻   Japonica-C  </li>
+<li>26 个温带粳稻地方品种   Japonica-L  </li>
+<li>…</li>
+</ul>
+<p><img data-src="https://s1.ax1x.com/2020/04/23/Jwctne.png" alt="系统发生树"></p>
+<p>图中可以看出，高纬度杂草水稻与地方品种进化距离比较近，而与栽培品种距离较远。</p>
+<blockquote>
+<p><a href="http://www.biotrainee.com/thread-2253-1-1.html" target="_blank" rel="noopener">系统发生树</a></p>
+</blockquote>
+<h3 id="Selection-Features-in-the-WRAH-Genome"><a href="#Selection-Features-in-the-WRAH-Genome" class="headerlink" title="Selection Features in the WRAH Genome"></a>Selection Features in the WRAH Genome</h3><p>一般来说在驯化群体的选择区间中，一些比较关键的基因通常会表现出低的多态性、等位基因的偏好性。</p>
+<blockquote>
+<p>由于人为的选择某一性状，导致对应等位基因的多态性下降，同时某些等位基因的频率增加。衡量的指标有两个：</p>
+<ul>
+<li>π 值越大遗传多样性越高</li>
+<li>Tajima’s D   大于0表示群体稀有等位基因频率在逐渐下降，小于0表示群体稀有等位基因频率逐渐增加；等于0表示群体内选择达到平衡，等位基因频率维持不变</li>
+</ul>
+</blockquote>
+<p><img data-src="https://s1.ax1x.com/2020/04/23/JwRWAH.png" alt="选择区域的特征"></p>
+<p>通过将WRAH与栽培稻、地方品种比较，发现π值更低、而Tajima’s D  值更高一些。进一步的使用window-based方法扫描整个基因组π值和Tajima’s D值。发现一些具有驯化或者改良基因有的特征（π值小、Tajima’s D值大);同时WRAH中一些与逆境相关的基因表现出未驯化或改良特征。在WRAH中那些π值高、Tajima’s D值大的区域可以理解成：这个区域稀有变异丰富同时选择达到平衡。</p>
+<h3 id="Features-of-Domestication-in-WRAH"><a href="#Features-of-Domestication-in-WRAH" class="headerlink" title="Features of Domestication in WRAH"></a>Features of Domestication in WRAH</h3><p>基于WRAH群体的50k-SNP数据，计算了WRAH和  Japonica-M （栽培种和地方种的混合)的Fst值，同时将前5%Fst对应的SNP作为一个能够区分WRAH和Japonica-M 的数据集；这些Fst区域也是反映了WRAH和栽培品种间存在差异的地方。</p>
+<blockquote>
+<p>  Fst值越大，表明群体间分化越大</p>
+</blockquote>
+<p>紧接着，针对这两个数据集分别进行改良信号、和驯化信号的计算。发现在杂草和栽培稻之间存在差异的区域中受到的改良信号要高于整个区域的水平；而驯化信号在两个数据集中是相似的。</p>
+<blockquote>
+<p>说明遗传改良是造成杂草水稻和普通水稻分化的；</p>
+</blockquote>
+<p>使用这两个数据集，计算野生种和WRAH、 Japonica之间的遗传距离，发现同样没有区别。这些结果表明前5%Fst对应的区域与改良位点重合，而与驯化区域是不一样的，说明  WRAH 起源于栽培稻驯化后。</p>
+<h3 id="Parallel-Evolution-between-WRAH-and-WRSC"><a href="#Parallel-Evolution-between-WRAH-and-WRSC" class="headerlink" title="Parallel Evolution between WRAH and WRSC"></a>Parallel Evolution between WRAH and WRSC</h3><p><img data-src="https://s1.ax1x.com/2020/04/23/JwOQSO.png" alt="数目"></p>
+<p>为了检测WRAH（高纬度地区杂草)和WRSC(中纬度地区杂草),之间是否是独立的进化或者平行进化。分别检测了栽培稻与两个杂草稻的选择信号，以5%为阀值，发现了135和130个共享的离群值。同时检查了一些标记基因在1%的阀值、1Mb的窗口下，是否都会出现；发现了一些与驯化相关的基因在两个种群中同时出现。这些表明这两个杂草水稻物种经历的是平行的进化。</p>
+<p><img data-src="https://s1.ax1x.com/2020/04/23/JwOky4.png" alt="log π值"></p>
+<h3 id="QTL-Mapping-for-Weedy-Traits"><a href="#QTL-Mapping-for-Weedy-Traits" class="headerlink" title="QTL Mapping for Weedy Traits"></a>QTL Mapping for Weedy Traits</h3><p>杂草水稻存在一些特有的表型，例如较高株高、红色果皮等；对应它们的遗传基础仍旧是未知的。通过对这些数量性状位点进行定位，能够更好的理解杂草水稻的进化。构建了一个由杂草水稻和栽培稻杂交得到的重组自交系群体，并且双亲P1、P2在一些性状上具有明显的差异。</p>
+<p>总共5307个高质量的SNP被用于构建连锁图谱，覆盖了1804.16cM，平均每个标记间相距0.34cM；通过分析标记在染色体上的实际位置和遗传图谱上的相对位置，发现它们之间存在99%的相关性，说明这些遗传标记比较好。</p>
+<blockquote>
+<p>1cM ：表示在群体中，两个基因有1%的概率发生基因重组</p>
+</blockquote>
+<p><img data-src="https://s1.ax1x.com/2020/04/24/J0wuLR.png" alt="物理距离与遗传距离相关性"></p>
+<p>通过高密度的遗传图谱，将遗传标记分为一个个连锁群分别与性状进行关联，根据连锁群的大小设置一个显著性阀值，得到对应的连锁区段，映射到对应的染色体区间上。</p>
+<p>通过QTL定位，发现在1号染色体末端有着强烈的选择信号，说明这个区间存在一些优良基因用于改良栽培稻。</p>
+<p><a href="https://imgchr.com/i/J0wPZq" target="_blank" rel="noopener"><img data-src="https://s1.ax1x.com/2020/04/24/J0wPZq.png" alt="QTL定位区间"></a></p>
+<h3 id="Demographic-Scenario-Analysis"><a href="#Demographic-Scenario-Analysis" class="headerlink" title="Demographic Scenario Analysis"></a>Demographic Scenario Analysis</h3><p>基于近似贝叶斯方法估计WRAH起源的后验概率，</p>
+<blockquote>
+<p>后验概率计算：</p>
+<p>存在多个先验条件：比如A条件下事件发生的概率为80%，B条件下事件发生的概率为60%；A条件出现的概率为75%</p>
+<p>当事件发生的时候，推断是A条件下发生的概率    </p>
+</blockquote>
+<p>通过构建多个进化模型，计算每个模型的后验概率大小，确定了连个最有可能的两个模型1、模型3。结合以有的研究，栽培稻出现的时间，与模型3最接近。</p>
+<p><img data-src="https://s1.ax1x.com/2020/04/24/J02ShR.png" alt="进化模型"></p>
+<h3 id="Genome-Sequencing-Assembly-and-Gene-Annotation"><a href="#Genome-Sequencing-Assembly-and-Gene-Annotation" class="headerlink" title="Genome Sequencing, Assembly, and Gene Annotation"></a>Genome Sequencing, Assembly, and Gene Annotation</h3><p><img data-src="https://s1.ax1x.com/2020/04/24/J02IbD.png" alt="Hi-c辅助组装"></p>
+<p>使用Hi-c数据辅助基因组的组装</p>
+<blockquote>
+<p>原理: 染色质内部的互作大于染色质间的互作</p>
+</blockquote>
+<h3 id="比较不同水稻基因组中的基因家族"><a href="#比较不同水稻基因组中的基因家族" class="headerlink" title="比较不同水稻基因组中的基因家族"></a>比较不同水稻基因组中的基因家族</h3><p><img data-src="https://s1.ax1x.com/2020/04/24/J0fIbT.png" alt="Ka/Ks"></p>
+<p>与栽培稻相比，杂草水稻（WRAH）,Ka/Ks的值都比较大；说明杂草水稻受到更大的选择压。同时在ka/Ks值大于1的地方，比例也比栽培稻高，说明杂草水稻基因组中积累了更多的功能突变。</p>
+<blockquote>
+<p>Ka/Ks值： 非同义突变/同义突变</p>
+<p>在不存在选择的中行调节下，Ka/Ks值接近1</p>
+<p>由于纯化选择的作用，使一些非同义突变Ka产生的有害突变被消除，保持蛋白质功能不变，这样就会使得Ka/Ks值小于1</p>
+<p>在正向选择作用下，使得非同义突变产生的有利变异被保留，说明蛋白质逐渐在发生改变。</p>
+</blockquote>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>通过比较杂草水稻与栽培稻等物种的进化关系，解释了杂草水稻的形成及进化。通过对杂草水稻驯化和选择区间的分析证明了杂草水稻是在水稻驯化后逐渐形成的。根据杂草水稻中一些与野生稻独有的特征表现，进行QTL定位，将基因定位到1号染色体臂端；说明这个区域存在一些杂草水稻特异的遗传资源。进行人口情景模拟，进一步证实了杂草水稻的进化历史。对杂草水稻的基因组进行从头组装，比较了基因家族的选择压，发现杂草水稻中累积了更多的功能突变，相比与栽培稻。总而言之，通过对杂草水稻基因组的组装，将会为水稻的遗传改良提供许多有益的遗传资源，更好的解析一些复杂性状的遗传机理。</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li><a href="http://www.biotrainee.com/thread-2253-1-1.html" target="_blank" rel="noopener">系统发生树</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/52064863" target="_blank" rel="noopener">Tajima’s D</a>   </li>
+<li><a href="https://www.jianshu.com/p/88bd3b4d6c2f" target="_blank" rel="noopener">Ka/Ks</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+   
+   <div>
+     <div>
+  
+    <div style="text-align:center;color:#bfbfbf;font-size:16px;">
+      <span>------ 本文结束 </span>
+      <img src="https://s1.ax1x.com/2020/03/23/8HFzxH.png" 
+      style="display:inline-block;"
+      data-loaded="true"
+      alt="thankyou" border="0" 
+      width="100"
+      heigh="100"
+      />
+      <span> 感谢阅读 ------</span>
+
+    </div>
+    <p>
+    <a class="fancybox fancybox.image" 
+    href="https://s1.ax1x.com/2020/03/23/8HCEjI.jpg" 
+    itemscope="" itemtype="http://schema.org/ImageObject" 
+    itemprop="url" data-fancybox="default" 
+    rel="default" title="公众号" 
+    data-caption="公众号"
+    >
+    <img data-src="https://s1.ax1x.com/2020/03/23/8HCEjI.jpg" alt="公众号"
+     src="https://s1.ax1x.com/2020/03/23/8HCEjI.jpg" data-loaded="true">
+    </a>
+    <p  style="text-align:center;">
+     <sapn style="">欢迎扫一扫上面的微信二维码，订阅
+     <span style="color: #428bca;font-size:20px;">codeHub</span>
+     公众号</span>
+     </p>
+     </p>
+    
+  
+</div>
+   </div>
+  
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>zpliu
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://biocottonhub.github.io/codeHub/2020/04/24/2020-06%E4%BB%A5%E5%89%8D/26%E6%9D%82%E8%8D%89%E6%B0%B4%E7%A8%BB%E7%9A%84%E8%BF%9B%E5%8C%96/" title="杂草水稻的进化">https://biocottonhub.github.io/codeHub/2020/04/24/2020-06以前/26杂草水稻的进化/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/codeHub/2020/04/23/2020-06%E4%BB%A5%E5%89%8D/25%E7%99%8C%E7%97%87%E4%B8%AD%E5%9F%BA%E5%9B%A0%E7%BB%84%E7%9A%84%E9%87%8D%E6%8E%92%E5%AF%B9%E6%9F%93%E8%89%B2%E8%B4%A8%E6%8A%98%E5%8F%A0%E7%9A%84%E5%BD%B1%E5%93%8D/" rel="prev" title="癌症中基因组的重排对染色质折叠的影响">
+      <i class="fa fa-chevron-left"></i> 癌症中基因组的重排对染色质折叠的影响
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/codeHub/2020/05/31/2020-06%E4%BB%A5%E5%89%8D/27%E7%94%9F%E7%89%A9%E5%AD%A6%E6%9D%82%E5%BF%97%E6%B1%87%E6%80%BB/" rel="next" title="生物学杂志汇总">
+      生物学杂志汇总 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概括
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Population-Genomic-Analysis-and-De-Novo-Assembly-Reveal-the-Origin-of-Weedy-Rice-as-an-Evolutionary-Game"><span class="nav-number">1.</span> <span class="nav-text">Population Genomic Analysis and De Novo Assembly Reveal the Origin of Weedy Rice as an Evolutionary Game</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#系统发生树分析"><span class="nav-number">1.0.1.</span> <span class="nav-text">系统发生树分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Selection-Features-in-the-WRAH-Genome"><span class="nav-number">1.0.2.</span> <span class="nav-text">Selection Features in the WRAH Genome</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Features-of-Domestication-in-WRAH"><span class="nav-number">1.0.3.</span> <span class="nav-text">Features of Domestication in WRAH</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Parallel-Evolution-between-WRAH-and-WRSC"><span class="nav-number">1.0.4.</span> <span class="nav-text">Parallel Evolution between WRAH and WRSC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QTL-Mapping-for-Weedy-Traits"><span class="nav-number">1.0.5.</span> <span class="nav-text">QTL Mapping for Weedy Traits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Demographic-Scenario-Analysis"><span class="nav-number">1.0.6.</span> <span class="nav-text">Demographic Scenario Analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Genome-Sequencing-Assembly-and-Gene-Annotation"><span class="nav-number">1.0.7.</span> <span class="nav-text">Genome Sequencing, Assembly, and Gene Annotation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#比较不同水稻基因组中的基因家族"><span class="nav-number">1.0.8.</span> <span class="nav-text">比较不同水稻基因组中的基因家族</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">1.0.9.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">1.0.10.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt=""
+      src="/codeHub/uploads/themeImg/logo.png">
+  <p class="site-author-name" itemprop="name"></p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/codeHub/archives">
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/codeHub/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/codeHub/tags/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/BiocottonHub/" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;BiocottonHub&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/codeHub/1944532210@qq.com" title="E-Mail → 1944532210@qq.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-cn" class="cc-opacity" rel="noopener" target="_blank"><img src="/codeHub/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://cotton.hzau.edu.cn/" title="http:&#x2F;&#x2F;cotton.hzau.edu.cn&#x2F;" rel="noopener" target="_blank">GCGI</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">codeHub</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        站点访问人次
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        总访问量<i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/codeHub/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/codeHub/lib/velocity/velocity.min.js"></script>
+  <script src="/codeHub/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/codeHub/js/utils.js"></script>
+
+<script src="/codeHub/js/motion.js"></script>
+
+
+<script src="/codeHub/js/schemes/pisces.js"></script>
+
+
+<script src="/codeHub/js/next-boot.js"></script>
+
+<script src="/codeHub/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      script.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/codeHub/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'd4VOUvNSU5WGIC3AjjM8UArx-gzGzoHsz',
+      appKey     : '5n9Xu8XStUzmAKyncMgSp0px',
+      placeholder: "有任何问题欢迎留言或者邮件告知",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>
