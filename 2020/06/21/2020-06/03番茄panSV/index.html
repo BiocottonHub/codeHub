@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/codeHub/uploads/themeImg/logo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/codeHub/uploads/themeImg/logo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/codeHub/uploads/themeImg/logo.png">
+  <link rel="mask-icon" href="/codeHub/uploads/themeImg/logo.png" color="#222">
+
+<link rel="stylesheet" href="/codeHub/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/codeHub/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"biocottonhub.github.io","root":"/codeHub/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="本文通讯作者     1.研究植物开花和花的发育 2.整合遗传学、基因组学和基因编辑技术研究植物分生细胞发育成花中的分子机制 3.利用新的概念和工具进行遗传改良   冷泉巷实验室:Zachary Lippman   1.主要研究基因组的结构和功能 2.针对大规模生物数据，开发新的算法和软件 3.研究 single molecule sequencing，单细胞数据分析   约翰霍普金斯大学 Mic">
+<meta property="og:type" content="article">
+<meta property="og:title" content="番茄中广泛的结构变异对基因表达和性状改良中的作用">
+<meta property="og:url" content="https://biocottonhub.github.io/codeHub/2020/06/21/2020-06/03%E7%95%AA%E8%8C%84panSV/index.html">
+<meta property="og:site_name" content="Code Hub">
+<meta property="og:description" content="本文通讯作者     1.研究植物开花和花的发育 2.整合遗传学、基因组学和基因编辑技术研究植物分生细胞发育成花中的分子机制 3.利用新的概念和工具进行遗传改良   冷泉巷实验室:Zachary Lippman   1.主要研究基因组的结构和功能 2.针对大规模生物数据，开发新的算法和软件 3.研究 single molecule sequencing，单细胞数据分析   约翰霍普金斯大学 Mic">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://www.cshl.edu/wp-content/uploads/2018/10/Lippman-Zachary.jpg">
+<meta property="og:image" content="http://schatz-lab.org/images/2015-Schatz.JPG">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/20/NQkzND.png">
+<meta property="og:image" content="c:%5CUsers%5CPC%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200620075851305.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/20/NQEge0.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/20/NQVAk8.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/20/NQe0JO.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/20/NQmSl4.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/20/NQnd2D.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/20/NQQFJ0.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/20/NQlAAA.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/20/NQ3kWt.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/20/NQ31Wq.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/20/NQ85E4.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/20/NQJR7F.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/20/NQ0PRe.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/21/N3VaZR.png">
+<meta property="article:published_time" content="2020-06-21T05:22:19.000Z">
+<meta property="article:modified_time" content="2020-06-21T05:32:53.168Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.cshl.edu/wp-content/uploads/2018/10/Lippman-Zachary.jpg">
+
+<link rel="canonical" href="https://biocottonhub.github.io/codeHub/2020/06/21/2020-06/03%E7%95%AA%E8%8C%84panSV/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>番茄中广泛的结构变异对基因表达和性状改良中的作用 | Code Hub</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/codeHub/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Code Hub</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">keeping learn</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-首页">
+
+    <a href="/codeHub/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-文章">
+
+    <a href="/codeHub/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>文章<span class="badge">30</span></a>
+
+  </li>
+        <li class="menu-item menu-item-分类">
+
+    <a href="/codeHub/categories" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-标签">
+
+    <a href="/codeHub/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">3</span></a>
+
+  </li>
+        <li class="menu-item menu-item-关于">
+
+    <a href="https://zpliu1126.github.io/About/" rel="noopener" target="_blank"><i class="fa fa-fw fa-heartbeat"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/BiocottonHub/" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="200" height="200" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2020/06/21/2020-06/03%E7%95%AA%E8%8C%84panSV/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/codeHub/uploads/themeImg/logo.png">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Hub">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          番茄中广泛的结构变异对基因表达和性状改良中的作用
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>发布于
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-06-21 13:22:19 / Modified: 13:32:53" itemprop="dateCreated datePublished" datetime="2020-06-21T13:22:19+08:00">2020-06-21</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                阅读量:<i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/codeHub/2020/06/21/2020-06/03%E7%95%AA%E8%8C%84panSV/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2020/06/21/2020-06/03%E7%95%AA%E8%8C%84panSV/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本文通讯作者</p>
+<img data-src="https://www.cshl.edu/wp-content/uploads/2018/10/Lippman-Zachary.jpg"  style="zoom:25%;  float:left; margin-right:20px" />
+
+
+
+<p>1.研究植物开花和花的发育</p>
+<p>2.整合遗传学、基因组学和基因编辑技术研究植物分生细胞发育成花中的分子机制</p>
+<p>3.利用新的概念和工具进行遗传改良</p>
+<div style="clear:both"></div>
+
+<p>冷泉巷实验室:<a href="https://www.cshl.edu/research/faculty-staff/zachary-lippman/" target="_blank" rel="noopener"><strong>Zachary</strong> <strong>Lippman</strong></a></p>
+<img data-src="http://schatz-lab.org/images/2015-Schatz.JPG"  style="zoom:100%;  float:left; margin-right:20px" />
+
+<p>1.主要研究基因组的结构和功能</p>
+<p>2.针对大规模生物数据，开发新的算法和软件</p>
+<p>3.研究 single molecule sequencing，单细胞数据分析</p>
+<div style="clear:both"></div>
+
+<p>约翰霍普金斯大学 <a href="http://schatz-lab.org/" target="_blank" rel="noopener"><strong>Michael Schatz</strong></a></p>
+<h3 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h3><p>结构变异是一种基因组间的序列差别，构成了作物改良和驯化的基础。由于短序列测序技术的限制，分析SVs差异的程度以及量化对性状的影响程度，一直非常困难。通过对100个番茄野生株系使用nannpore测序，与标准基因组比较后鉴定到238490个SVs。结合这些panSv数据以及组织了14份新的参考基因组，表明不同基因型材料间存在大规模的混合，大量的SVs与基因区、cir-regulation区存在交集。与此同时数百个SV-gene表现出基因表达水平的改变，这可能影响数量性状位点。通过结合数量性状和基因组编辑技术，作者发现，多个SVs能够改变基因的剂量和表达水平，从而导致口感、大小、以及产量性状的改变。四个SVs影响3个相关的转录因子，使得一个产量性状的改变。该研究突出了SVs在基因型到表型关系中的作用，强调了在作物改良中的重要性和实用性。</p>
+<a id="more"></a>
+
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>作物的表型变异是受到来自野生祖先种种遗传变异的影响，同时人类的选择和保持一些突变集合同样会影响作物的表型。主要的变异是数量遗传变异，受到多个微效基因的控制，因此现在遗传学的目标主要是解析特定基因和变异对数量性状的影响。人们通过高通量的短读序列测序，在大多数农作物中鉴定了自然遗传变异，但是这种方法只能够使用SNP、或者小片段indel来描述遗传变异，往往忽略了其他因素，因此会带来一定的偏差。最近10几年来的研究，人们发现SVs(大片的的插入、缺失、重复、染色质重排)，对植物的进化以及一些重要的农艺性状产生巨大的影响，例如根尖结构、开花时间、果实大小、抗逆性。与SNP相比，SVs往往会造成cis调控区域产生大规模的扰动，进而有可能导致基因表达发生改变，表型发生变化。SVs同样可以通过直接改变基因的拷贝数，来改变基因的表达水平，尽管SVs如此重要，但是通过短读测序鉴定SVs非常困难，使得大多数SVs没有被鉴定出来，并且它们的分子机制和对表型的影响被隐藏起来。</p>
+<p>全长Nanopore 测序，使得我们能够广泛的研究，群体规模的SV图谱，鉴定出SVs之间的差异，结合表达量的数据和基因组编辑技术，使得我们能够快速而直接的推断出SVs的分子机制和对表型的影响。在此，我们提供了番茄中最全面的 panSV图谱，并且研究它在进化、循环、数量遗传、育种中的作用。</p>
+<ul>
+<li>作者使用nanopore测序了包含野生种和栽培种的100份材料，并且鉴定了SVs。对超过200000个SVs序列进行分析发现，主要是转座子和重复元件。</li>
+<li>对SVs的分布进行分析，发现群体水平内存在广泛的基因渗入</li>
+<li>RNA测序分析表明，SVs通过影响cis区域、编码区域来影响基因的表达</li>
+<li>重头组装的14份材料的基因组，使得我们能够更好的解析基因组的复杂性。</li>
+<li>结合CRISPR-Cas9技术，表明了基因的剂量效应和表型之间的关系。</li>
+</ul>
+<h3 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h3><h4 id="1-结合long-read测序，构建PanSV-genome"><a href="#1-结合long-read测序，构建PanSV-genome" class="headerlink" title="1.结合long-read测序，构建PanSV genome"></a>1.结合long-read测序，构建PanSV genome</h4><p>收集了具有代表性的800份番茄材料，使用二代数据鉴定了SVs，选择了其中51份来自早期和现代栽培品种，并且包含了最多的SV信息；同时选择了49份野生种。这些品种主要分为:</p>
+<ul>
+<li>SP CHE GAL</li>
+<li>SLC</li>
+<li>SLL</li>
+</ul>
+<p>对100份材料进行40X的long read测序，将序列比对到标准参考基因组上鉴定SVs，筛选&gt;30bp的SVs并且合并和作为panSV genome，经过确认发现大多数SVs在短读测序中没有鉴定到。</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/20/NQkzND.png" alt="NQkzND.png"></p>
+<ul>
+<li><p>B 图 单个材料鉴定的SVs范围在1928~45840之间，其中在野生种材料中包含有最多的SVs，在SVs的种类里出现最多的是插入与缺失，也有少量的易位于重复。</p>
+</li>
+<li><p>C图 基于SVs的有无，反应这些材料间的进化关系，可以发现在栽培种和半驯化品种中有一些栽培种与半驯化品种聚类在一起，说明他们之间有渗透。</p>
+</li>
+</ul>
+<p><img data-src="C:%5CUsers%5CPC%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200620075851305.png" alt="image-20200620075851305"></p>
+<ul>
+<li>D图 比较每个材料中SVs的数目，发现在野生种中SVs数量最多，同时栽培种中SLL最少，这样驯化过程中遗传资源的丢失是吻合的</li>
+<li>E图 表明这100份材料的SVs仍旧有许多的SVs没有被发现</li>
+<li>F图中可以发现很多SVs只在少数几个材料中被鉴定到。</li>
+<li>G图 评估SVs的长度分布，发现大多数的SVs是比较小的，只在30~50bp</li>
+</ul>
+<p><img data-src="https://s1.ax1x.com/2020/06/20/NQEge0.png" alt="NQEge0.png"></p>
+<h4 id="2-组装14份高质量的番茄参考基因组"><a href="#2-组装14份高质量的番茄参考基因组" class="headerlink" title="2.组装14份高质量的番茄参考基因组"></a>2.组装14份高质量的番茄参考基因组</h4><p>结合panSV genome和其他的genome信息，作者选择了14个差异比较大的材料，进行了基因组的组装和注释。组装的新的基因组叫MAS2.0，与最近发布的ITAG进行比较，发现了一些新的“pan-genome“ gene。</p>
+<h4 id="3-SV在材料间的分布，表明不同材料间发生看遗传渗透"><a href="#3-SV在材料间的分布，表明不同材料间发生看遗传渗透" class="headerlink" title="3.SV在材料间的分布，表明不同材料间发生看遗传渗透"></a>3.SV在材料间的分布，表明不同材料间发生看遗传渗透</h4><ul>
+<li><p>A图 中在栽培种SLL中SVs热点区域，同时由于野生材料SP具有更多的SVs，SVs热点区域可能反应的是品种驯化过程中，遗传资源从野生种中渗透到栽培种中的。在番茄的育种中，通过将一些抗病、理想性状从野生供体中引入到SLL中。</p>
+</li>
+<li><p>从B中可以 ，看到有5个SLL材料中共有的渗入区间，其中两个是M82 and EA02054  ，这两个材料在5号染色体与11号染色体还有大的渗入区间，这也解释了在构建的系统发生树中，这两个材料与栽培材料隔得远</p>
+</li>
+</ul>
+<p><img data-src="https://s1.ax1x.com/2020/06/20/NQVAk8.png" alt="NQVAk8.png"></p>
+<ul>
+<li>D图 对11份SLLs品种的育种历史进行考察，真菌性镰刀菌病，在1930年首次出现，在1930~1980年，从SP材料中导入了I I2 I3个抗性基因。对这些基因进行分子克隆，发现它们主要位于11号染色体两端的臂，与UFL 的渗入区间有交集，这个区间内部还有一些其他的抗性基因。Fla.8111B  材料同样包括了这些抗病基因，不过没有对应的渗透区间，说明这些材料经过了纯化选择，将这些区间给过滤了，只保留下了抗性基因。</li>
+</ul>
+<p><img data-src="https://s1.ax1x.com/2020/06/20/NQe0JO.png" alt="NQe0JO.png"></p>
+<h4 id="与基因有关的SVs，对表达有影响"><a href="#与基因有关的SVs，对表达有影响" class="headerlink" title="与基因有关的SVs，对表达有影响"></a>与基因有关的SVs，对表达有影响</h4><p>SVs通过改变基因序列、基因拷贝数、cis调控序列的位置或者组成，来改变富集基因的表达。</p>
+<ul>
+<li>有50%的SVs与gene或者两侧的调控区存在交集，在34075个注释的基因中，有95%的基因附近存在至少一个SVs，并且主要是在cis调控区域。</li>
+</ul>
+<p><img data-src="https://s1.ax1x.com/2020/06/20/NQmSl4.png" alt="NQmSl4.png"></p>
+<ul>
+<li>为了探讨SVs对gene表达的影响，选择23份材料进行RNA测序，共得到21,156  份gene-SV对，发现很多gene存在显著的改变。其中将近一半的SVs影响编码区的，表达发生显著的改变。</li>
+<li>cis-eQTL能够解释了群体中造成表达差异变异的很大部分，作者使用分类模型通过基因表达水平的变化，预测附近SVs的有无，量化基因表达水平的变化与SVs间的相关程度。从E图中可以通过AUROC指标，发现分类器在对编码区的SVs进行预测的效果最好，总的来说，SVs能够轻微的影响基因的表达。</li>
+</ul>
+<p><img data-src="https://s1.ax1x.com/2020/06/20/NQnd2D.png" alt="NQnd2D.png"></p>
+<h4 id="新组装的基因组发现了多个挥发性的单倍型基因"><a href="#新组装的基因组发现了多个挥发性的单倍型基因" class="headerlink" title="新组装的基因组发现了多个挥发性的单倍型基因"></a>新组装的基因组发现了多个挥发性的单倍型基因</h4><p>通过新组装的MAS2.0、表达谱的数据，帮助我们找到一些影响数量性状的变异位点。通过GWAS，已经鉴定出的具有水果挥发性香气的QTL，但很少一部分进行了功能研究。其中一个QTL编码水杨酸甲脂，对消费者的吸引产生负面影响。</p>
+<ul>
+<li>还有一个E8基因，在水果的成熟过程中，负调控乙烯的生物合成；敲除E8基因后又导致一些不好的挥发物质的积累。由于当时基因组中E8两侧存在gap，所以没有其他的变异被检测到。</li>
+<li>A图 另外一个研究对<strong>NSGT1</strong>和<strong>NSGT2</strong>突变后，造成愈创木酚的积累，NSGT1少量表达被认为是没有功能的，在成熟过程中NSGT2的上调表达，使得愈创木酚转化成三糖苷，从而预防了愈创木酚的挥发。为了研究NSGT1与挥发性物质的关系，检查了这个基因的物理位置。B图 发现在一起的基因组中这个基因的注释不完整，而在新组织的MAS2.0中，一共发现了5种组合C图</li>
+</ul>
+<p><img data-src="https://s1.ax1x.com/2020/06/20/NQQFJ0.png" alt="NQQFJ0.png"></p>
+<p>经过分析发现这些基因E8、NSGT1、NSGT2的变异构成了这个愈创木酚的变异。使用300份表达谱数据和代谢数据，计算了每种单倍型的关联程度。其中IV和V是在早期驯化品种SLCs中出现的。</p>
+<ul>
+<li>E图中有5个V型材料，NSGT2没有检测到表达</li>
+<li>在图F中，IV和V在统计上没有差异，但相比于I II III都变现出更高含量的愈创木酸</li>
+<li>G图使用一个新的群体包含SP、SLC进行关联分析后与F图结果类似</li>
+<li>H图使用两个SLC构建的F2群体，表明E8和NSGT1的缺失都导致愈创木酸含量的提高</li>
+</ul>
+<p>这个结果表明高质量的基因组，能够帮助我们解决一些复杂的单倍型基因，同时从QTL分析中解释基因型与表型</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/20/NQlAAA.png" alt="NQlAAA.png"></p>
+<h4 id="细胞色素P450基因与果实大小"><a href="#细胞色素P450基因与果实大小" class="headerlink" title="细胞色素P450基因与果实大小"></a>细胞色素P450基因与果实大小</h4><p>与果实大小有关的QTL已经被鉴定出来，其中最显著的fw3.2,是位于P450 <strong><em>SlKLUH</em></strong>启动子区域的一个SNP，这个SNP被认为能够提高SIKLUH基因的表达。</p>
+<ul>
+<li>通过将这个SNP位点与panSV genome比较发现这个地方有串连重复，其中有两个SIKLUH的相同拷贝，fw3.2 dup。</li>
+<li>通过分析这个重复基因的有无对内部三个基因表达的影响发现，在存在重复基因时，表达量更高；同时为了探究到底是启动子区域SNP还是这个重复基因对果实大小造成影响，作者构建了F2群体，通过分离重复基因，其他QTL仍旧固定，D图中发现共分离。而SNP的有无对果实大小没有影响。</li>
+</ul>
+<p><img data-src="https://s1.ax1x.com/2020/06/20/NQ3kWt.png" alt="NQ3kWt.png"></p>
+<ul>
+<li>作者认为fw3.2通过基因拷贝数的增加，造成剂量效应，从而使得果实变大。通过CRISPR-Cas9,造成大片段和小片段的缺失，进行PCR发现这些植株表型发生明显的改变</li>
+</ul>
+<p><img data-src="https://s1.ax1x.com/2020/06/20/NQ31Wq.png" alt="NQ31Wq.png"></p>
+<ul>
+<li>在T0-1植株中表型没有很大变化，都存在野生型和突变的等位基因，利于我们研究剂量效应。进行杂交，其中野生种LA1589具有2个拷贝，在A组杂交中参数3个拷贝的F1，在B组中只有一个有效的变异，在图H、I中它们的花序、果实大小都有明显的差异</li>
+</ul>
+<p><img data-src="https://s1.ax1x.com/2020/06/20/NQ85E4.png" alt="NQ85E4.png"></p>
+<p>这个结果也表明panSV genome 结合CRISPR-Cas9编辑揭示了基因的剂量效应导致果实大小发生改变</p>
+<h4 id="四个SVs造成的“无果柄”育种"><a href="#四个SVs造成的“无果柄”育种" class="headerlink" title="四个SVs造成的“无果柄”育种"></a>四个SVs造成的“无果柄”育种</h4><p>无果柄是番茄收获中重要的一个性状，使得果实从花卉中分离，研究表明它是由转座子的插入导致一个转录因子Js的表达下调。但是在引入无果柄后，又会导致过多的花序分支导致果实产量的下降。图A</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/20/NQJR7F.png" alt="NQJR7F.png"></p>
+<p>育种家们为了克服这个问题，找到了两个QTL位点 sb1和sb3，能够恢复正常花序的表型。</p>
+<ul>
+<li>作者发现sb3是一个包含ej2的83kb重复，通过剂量效应弱化由于转座子插入导致的ej2表达水平的下降。</li>
+<li>sb1则是一个抑制分支产生，定位到1号染色体6Mbp的区间;发现两个基因STM 、STM3；在分子数存在差异的两个亲本中SMT3在分支数比较多的材料里高量表达。这个基因的序列和调控区域没有明显的变化，而在原来的基因组中这里有gap，在MAS2.0中，揭示了这个地方存在22kb的串连重复拷贝，图D</li>
+</ul>
+<p>为了探究这个低拷贝的SMT3基因是否就是我们要找的sb1 QTL信号，作者使用CRISPR-Cas9技术打断了STM3和TM3基因座。两种CR-1和CR-del，两个突变体在花序表型上没有很大的变化 图F；在与多花序品种杂交产生的F2群体中考察花序的数目，发现SMT3敲除后，花序分枝发生减少</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/20/NQ0PRe.png" alt="NQ0PRe.png"></p>
+<p>通过分析发现STM3作为新的调控花序发育的基因，对sb1的分析表明4个SVs影响了三MADS-box genes 的表达，从而影响花序的发育和果柄，进一步说明结构变异对基因功能研究的重要性</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><img data-src="https://s1.ax1x.com/2020/06/21/N3VaZR.png" alt="N3VaZR.png"></p>
+<ol>
+<li><p>构建了植物panSV genome 数据，表明SV和基因差异表达相关</p>
+</li>
+<li><p>对3个具体功能的研究表明，结构变异是导致表型差异的原因</p>
+</li>
+<li><p>全面的植物结构变异数据，为精准的育种提供帮助</p>
+</li>
+</ol>
+<ol start="4">
+<li>利用基因编辑技术验证SV（拷贝数变异）的功能，对其他作物的研究具有指导意义</li>
+</ol>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li>Major Impacts of Widespread Structural Variation on Gene Expression and Crop Improvement in Tomato  </li>
+</ol>
+
+    </div>
+
+    
+    
+    
+   
+   <div>
+     <div>
+  
+    <div style="text-align:center;color:#bfbfbf;font-size:16px;">
+      <span>------ 本文结束 </span>
+      <img src="https://s1.ax1x.com/2020/03/23/8HFzxH.png" 
+      style="display:inline-block;"
+      data-loaded="true"
+      alt="thankyou" border="0" 
+      width="100"
+      heigh="100"
+      />
+      <span> 感谢阅读 ------</span>
+
+    </div>
+    <p>
+    <a class="fancybox fancybox.image" 
+    href="https://s1.ax1x.com/2020/03/23/8HCEjI.jpg" 
+    itemscope="" itemtype="http://schema.org/ImageObject" 
+    itemprop="url" data-fancybox="default" 
+    rel="default" title="公众号" 
+    data-caption="公众号"
+    >
+    <img data-src="https://s1.ax1x.com/2020/03/23/8HCEjI.jpg" alt="公众号"
+     src="https://s1.ax1x.com/2020/03/23/8HCEjI.jpg" data-loaded="true">
+    </a>
+    <p  style="text-align:center;">
+     <sapn style="">欢迎扫一扫上面的微信二维码，订阅
+     <span style="color: #428bca;font-size:20px;">codeHub</span>
+     公众号</span>
+     </p>
+     </p>
+    
+  
+</div>
+   </div>
+  
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>zpliu
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://biocottonhub.github.io/codeHub/2020/06/21/2020-06/03%E7%95%AA%E8%8C%84panSV/" title="番茄中广泛的结构变异对基因表达和性状改良中的作用">https://biocottonhub.github.io/codeHub/2020/06/21/2020-06/03番茄panSV/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/codeHub/2020/06/17/2020-06/02%E6%8B%9F%E5%8D%97%E8%8A%A5%E4%B8%AD%E8%BD%AC%E5%BD%95%E4%B8%8E%E5%89%AA%E5%88%87/" rel="prev" title="拟南芥中转录与剪切">
+      <i class="fa fa-chevron-left"></i> 拟南芥中转录与剪切
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概括
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#背景"><span class="nav-number">2.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结果"><span class="nav-number">3.</span> <span class="nav-text">结果</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-结合long-read测序，构建PanSV-genome"><span class="nav-number">3.1.</span> <span class="nav-text">1.结合long-read测序，构建PanSV genome</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-组装14份高质量的番茄参考基因组"><span class="nav-number">3.2.</span> <span class="nav-text">2.组装14份高质量的番茄参考基因组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-SV在材料间的分布，表明不同材料间发生看遗传渗透"><span class="nav-number">3.3.</span> <span class="nav-text">3.SV在材料间的分布，表明不同材料间发生看遗传渗透</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#与基因有关的SVs，对表达有影响"><span class="nav-number">3.4.</span> <span class="nav-text">与基因有关的SVs，对表达有影响</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#新组装的基因组发现了多个挥发性的单倍型基因"><span class="nav-number">3.5.</span> <span class="nav-text">新组装的基因组发现了多个挥发性的单倍型基因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#细胞色素P450基因与果实大小"><span class="nav-number">3.6.</span> <span class="nav-text">细胞色素P450基因与果实大小</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四个SVs造成的“无果柄”育种"><span class="nav-number">3.7.</span> <span class="nav-text">四个SVs造成的“无果柄”育种</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt=""
+      src="/codeHub/uploads/themeImg/logo.png">
+  <p class="site-author-name" itemprop="name"></p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/codeHub/archives">
+          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/codeHub/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/codeHub/tags/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/BiocottonHub/" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;BiocottonHub&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/codeHub/1944532210@qq.com" title="E-Mail → 1944532210@qq.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-cn" class="cc-opacity" rel="noopener" target="_blank"><img src="/codeHub/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://cotton.hzau.edu.cn/" title="http:&#x2F;&#x2F;cotton.hzau.edu.cn&#x2F;" rel="noopener" target="_blank">GCGI</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">codeHub</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        站点访问人次
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        总访问量<i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/codeHub/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/codeHub/lib/velocity/velocity.min.js"></script>
+  <script src="/codeHub/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/codeHub/js/utils.js"></script>
+
+<script src="/codeHub/js/motion.js"></script>
+
+
+<script src="/codeHub/js/schemes/pisces.js"></script>
+
+
+<script src="/codeHub/js/next-boot.js"></script>
+
+<script src="/codeHub/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      script.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/codeHub/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'd4VOUvNSU5WGIC3AjjM8UArx-gzGzoHsz',
+      appKey     : '5n9Xu8XStUzmAKyncMgSp0px',
+      placeholder: "有任何问题欢迎留言或者邮件告知",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>
