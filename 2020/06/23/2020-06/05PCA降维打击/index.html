@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/codeHub/uploads/themeImg/logo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/codeHub/uploads/themeImg/logo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/codeHub/uploads/themeImg/logo.png">
+  <link rel="mask-icon" href="/codeHub/uploads/themeImg/logo.png" color="#222">
+
+<link rel="stylesheet" href="/codeHub/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/codeHub/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"biocottonhub.github.io","root":"/codeHub/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="1.PCA的基本原理主成分分析（Principle component analysis）简称PCA，是常用的降维方法之一。通过将n维的数据集降维到n’低纬度空间；使得降维之后数据集尽可能的代表原数据集同时降维之后的损失尽可能的小。 如图1所示，在R中使用rnorm函数生成正态分布数据集在二维空间的分布；我们希望找到一个维度能够代表数据集在二维空间中的分布特征，而这样的维度有无数种.如何找到最好的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PCA降维打击">
+<meta property="og:url" content="https://biocottonhub.github.io/codeHub/2020/06/23/2020-06/05PCA%E9%99%8D%E7%BB%B4%E6%89%93%E5%87%BB/index.html">
+<meta property="og:site_name" content="Code Hub">
+<meta property="og:description" content="1.PCA的基本原理主成分分析（Principle component analysis）简称PCA，是常用的降维方法之一。通过将n维的数据集降维到n’低纬度空间；使得降维之后数据集尽可能的代表原数据集同时降维之后的损失尽可能的小。 如图1所示，在R中使用rnorm函数生成正态分布数据集在二维空间的分布；我们希望找到一个维度能够代表数据集在二维空间中的分布特征，而这样的维度有无数种.如何找到最好的">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/23/NtuZY4.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/23/Ntulm6.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/23/Ntu10K.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/23/NtusAS.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/23/Ntu6hQ.png">
+<meta property="article:published_time" content="2020-06-23T00:08:08.000Z">
+<meta property="article:modified_time" content="2020-06-23T00:47:36.631Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s1.ax1x.com/2020/06/23/NtuZY4.png">
+
+<link rel="canonical" href="https://biocottonhub.github.io/codeHub/2020/06/23/2020-06/05PCA%E9%99%8D%E7%BB%B4%E6%89%93%E5%87%BB/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>PCA降维打击 | Code Hub</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/codeHub/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Code Hub</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">keeping learn</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-首页">
+
+    <a href="/codeHub/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-文章">
+
+    <a href="/codeHub/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>文章<span class="badge">33</span></a>
+
+  </li>
+        <li class="menu-item menu-item-分类">
+
+    <a href="/codeHub/categories" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-标签">
+
+    <a href="/codeHub/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">3</span></a>
+
+  </li>
+        <li class="menu-item menu-item-关于">
+
+    <a href="https://zpliu1126.github.io/About/" rel="noopener" target="_blank"><i class="fa fa-fw fa-heartbeat"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/BiocottonHub/" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="200" height="200" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2020/06/23/2020-06/05PCA%E9%99%8D%E7%BB%B4%E6%89%93%E5%87%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/codeHub/uploads/themeImg/logo.png">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Hub">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          PCA降维打击
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>发布于
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-06-23 08:08:08 / Modified: 08:47:36" itemprop="dateCreated datePublished" datetime="2020-06-23T08:08:08+08:00">2020-06-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  分类于<a href="/codeHub/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                阅读量:<i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/codeHub/2020/06/23/2020-06/05PCA%E9%99%8D%E7%BB%B4%E6%89%93%E5%87%BB/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2020/06/23/2020-06/05PCA%E9%99%8D%E7%BB%B4%E6%89%93%E5%87%BB/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="1-PCA的基本原理"><a href="#1-PCA的基本原理" class="headerlink" title="1.PCA的基本原理"></a>1.PCA的基本原理</h3><p>主成分分析（Principle component analysis）简称PCA，是常用的降维方法之一。通过将n维的数据集降维到n’低纬度空间；使得降维之后数据集尽可能的代表原数据集同时降维之后的损失尽可能的小。</p>
+<p>如图1所示，在R中使用rnorm函数生成正态分布数据集在二维空间的分布；我们希望找到一个维度能够代表数据集在二维空间中的分布特征，而这样的维度有无数种.如何找到最好的那个维度使得数据集经过变换后尽可能的保留原始数据集的特征。</p>
+<a id="more"></a>
+
+<p>​    图1中有V1与V2两个一维的特征向量，从图1中可以看出在V1特征向量上能够更好的反应原始数据集的特征。数据集映射在V1的方向上进行映射后，映射后的数据集从低纬度重构出高纬度数据集D’，使得D’与原始数据集尽可能的相似，也就是D’中的点与原始数据集中的点的距离最小；或者可以从另一个角度理解为原始数据经过映射后在低纬空间中可以区分开来。这对应着PCA中两种优化目标：最近重构性与最大可分性。同样的当数据集从二维推广到任意维度时，我们的优化目标也就变成样本点在一个超平面进行重构后的距离最近或者在映射到超平面后样本内方差最大化。</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/23/NtuZY4.png" alt="图1:随机3类数据集的在二维平面的分布"></p>
+<h3 id="2-1基于最近重构性进行优化"><a href="#2-1基于最近重构性进行优化" class="headerlink" title="2.1基于最近重构性进行优化"></a>2.1基于最近重构性进行优化</h3><p>假定我们有一个m个n维的数据集 ，假定在每个维度上都进行了中心化，并且将原先的n维属性投影到新的坐标系使得这n个维度的属性构成标准的正交基向量 )，即任意两个w满足 ；进行正交化主要是考虑在降维的过程中，任意两个主成分之间应该尽可能的保留更多的信息，不存在相关性。</p>
+<p>假设将数据从n维降到k维（k&lt;n）,则第样本点 在k维的投影坐标  其中 表示样本i在降维后第j个维度上的投影坐标。通过投影坐标 与标准正交基向量 )重构出原始数据 。</p>
+<p>优化目标是使得所有重构出的样本与原始样本的累积距离最小。</p>
+<p><a href="http://211.69.141.138/wp-content/themes/begin%2Blts/inc/go.php?url=http://www.cnblogs.com/pinard/p/6239403.html" target="_blank" rel="noopener">具体的公式推导</a>可以看这个博主写的</p>
+<h3 id="2-2基于最大可分性进行优化"><a href="#2-2基于最大可分性进行优化" class="headerlink" title="2.2基于最大可分性进行优化"></a>2.2基于最大可分性进行优化</h3><p>​    从最大可分性角度出发，优化目标是使得样本点在降维后的平面的投影尽可能的分开，相当于投影后的样本方差最大。</p>
+<h3 id="3-算法流程"><a href="#3-算法流程" class="headerlink" title="3.算法流程"></a>3.算法流程</h3><p>​    假定数据集包含m个n维数据。</p>
+<ul>
+<li>将原始数据按照n行m列进行排列</li>
+<li>在每一个维度上进行中心化，也就是每个数据减去同一行中的均值方便后面的计算</li>
+<li>计算数据集的协方差矩阵</li>
+<li>对协方差求取特征值与特征向量</li>
+<li>将特征向量 按照其特征值大小从上至下排列成矩阵</li>
+<li>根据认为设定的K值，将数据集映射到K维的低纬空间</li>
+</ul>
+<h3 id="4-1实例"><a href="#4-1实例" class="headerlink" title="4.1实例"></a>4.1实例</h3><p>​    随机生成1000个3维数据集，并对其中的点打上标签如图2所示。当保留样本中65%的变异时，才使得数据集从3维降低到2维，如图3所示；而此时黄色和绿色样本之间仍旧没有完全区分开来可能是由于它们之间的区分确实不明显。同样从图3中也可以发现一些样本偏离比较远，在某种程度上可以认为是人为因素产生的噪声数据</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/23/Ntulm6.png" alt="图2：1000个随机数据集的分布，其中不同颜色代表不同的类型"></p>
+<p><img data-src="https://s1.ax1x.com/2020/06/23/Ntu10K.png" alt="图3：1000个数据在PCA降维后的分布"></p>
+<h3 id="4-2图片数据降维"><a href="#4-2图片数据降维" class="headerlink" title="4.2图片数据降维"></a>4.2图片数据降维</h3><p>使用UCI中的Yale数据集，数据集中包括了21个志愿者在四种心情状态，4种角度以及是否戴眼镜的图片数据。从中随机选取了10位志愿者，在某一种状态下进行图片数据的降维处理。从图4可以看出当保留原始数据90%的差异时，图片与原图的差异不是很大，但仍旧有一些图片还是与原始数据相比丢失的比较多；随着保留差异程度逐渐减少，重构数据相比原始数据丢失的越来越多，在图片上表现也就越来越不清晰。</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/23/NtusAS.png" alt="图4从左边拍摄10名志愿者愤怒时的图片分别保留其90%、80%、70%差异进行重构图片"></p>
+<p>对带上眼镜的图片数据进行同样的处理，如图4所示当保留90%的差异进行重构时，仍旧可以看出大概。通过PCA的简单降维，可以在保证图片质量的情况下牺牲图片的清晰度；一定程度上节省了带宽。</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/23/Ntu6hQ.png" alt="图5 从左边拍摄10名志愿者愤怒时带眼镜的图片分别保留其90%、80%、70%差异进行重构图片"></p>
+<h3 id="5总结"><a href="#5总结" class="headerlink" title="5总结"></a>5总结</h3><ul>
+<li>PCA计算方法简单，运用了矩阵特征值分解</li>
+<li>计算过程中使用协方差矩阵，保证了各个维度之间不会有相互影响，使得特征值分解时数据存在重叠的情况</li>
+<li>PCA降维后的特征值在解释程度上不如原始样本</li>
+<li>舍弃的一些方差信息，有时候可能是区分一些特定样本的重要信息</li>
+<li>使用核化的方法对复杂数据进行PCA</li>
+</ul>
+<h3 id="6数据集与代码"><a href="#6数据集与代码" class="headerlink" title="6数据集与代码"></a>6数据集与代码</h3><h4 id="6-1图片加载函数"><a href="#6-1图片加载函数" class="headerlink" title="6.1图片加载函数"></a>6.1图片加载函数</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">单张图片的读取与图片向矩阵数据的转换</span></span><br><span class="line"><span class="string">    #p2与p4可以正常读取</span></span><br><span class="line"><span class="string">    img = Image.open("D:\\pycharm\\project\\pca\\faces\\an2i\\an2i_left_angry_open_2.pgm")</span></span><br><span class="line"><span class="string">    #颜色变成黑白，本来就是黑白的就省去这一步就行了</span></span><br><span class="line"><span class="string">    img2=img.convert("L")</span></span><br><span class="line"><span class="string">    img2.show()</span></span><br><span class="line"><span class="string">    data=img.getdata()</span></span><br><span class="line"><span class="string">    data=np.matrix(data)</span></span><br><span class="line"><span class="string">    print(data)</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">loadpgm</span><span class="params">(filepath)</span>:</span></span><br><span class="line">    first_file=<span class="literal">True</span></span><br><span class="line">    <span class="keyword">for</span> root, dirs, files <span class="keyword">in</span> os.walk(filepath):</span><br><span class="line">        <span class="comment">#人名</span></span><br><span class="line">        rootpicture=root.split(<span class="string">"\\"</span>)[<span class="number">-1</span>]+<span class="string">".jpeg"</span></span><br><span class="line">        <span class="keyword">for</span> file <span class="keyword">in</span> files:</span><br><span class="line">            <span class="comment">#print(os.path.splitext(file)[0][-1])</span></span><br><span class="line">            <span class="comment">#文件后缀名</span></span><br><span class="line">            <span class="keyword">if</span> first_file:</span><br><span class="line">                <span class="keyword">if</span> os.path.splitext(file)[<span class="number">0</span>][<span class="number">-23</span>::] == <span class="string">"left_angry_sunglasses_2"</span>:</span><br><span class="line">                    img = Image.open((os.path.join(root, file)))</span><br><span class="line">                    oneperson = img.getdata()</span><br><span class="line">                    img.save(rootpicture)</span><br><span class="line">                    oneperson = np.array(oneperson).tolist()</span><br><span class="line">                    first_file=<span class="literal">False</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">if</span> os.path.splitext(file)[<span class="number">0</span>][<span class="number">-23</span>::] == <span class="string">"left_angry_sunglasses_2"</span>:</span><br><span class="line">                    img = Image.open((os.path.join(root, file)))</span><br><span class="line">                    rootimg = Image.fromarray(np.array(img.getdata())).convert(<span class="string">"RGB"</span>)</span><br><span class="line">                    rootimg.save(rootpicture)</span><br><span class="line">                    oneperson=oneperson+(np.array(img.getdata()).tolist())</span><br><span class="line">                <span class="comment">#img.show()</span></span><br><span class="line">                <span class="comment">#print(img.size)</span></span><br><span class="line">    <span class="keyword">return</span> np.array(oneperson)</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-2文件读取函数"><a href="#6-2文件读取函数" class="headerlink" title="6.2文件读取函数"></a>6.2文件读取函数</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">readfile</span><span class="params">(path)</span>:</span></span><br><span class="line">    file = open(path)</span><br><span class="line">    next(file)</span><br><span class="line">    first_else = <span class="literal">True</span></span><br><span class="line">    <span class="keyword">for</span> data <span class="keyword">in</span> file.readlines():</span><br><span class="line">        data = data.strip(<span class="string">"\n"</span>)</span><br><span class="line">        nums = data.split(<span class="string">"\t"</span>)[<span class="number">0</span>:<span class="number">3</span>]</span><br><span class="line">        <span class="keyword">if</span> first_else:</span><br><span class="line">            matrix = np.array(nums)</span><br><span class="line">            first_else = <span class="literal">False</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            matrix = np.c_[matrix, nums]</span><br><span class="line">    file.close()</span><br><span class="line">    <span class="comment"># 矩阵为n*m，m为样本数</span></span><br><span class="line">    <span class="keyword">return</span> np.mat(matrix).astype(float)</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-3数据中心化"><a href="#6-3数据中心化" class="headerlink" title="6.3数据中心化"></a>6.3数据中心化</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">zeroScale</span><span class="params">(dataset)</span>:</span></span><br><span class="line">    <span class="comment"># 对数据集按行求平均</span></span><br><span class="line">    meanVals = np.mean(dataset, axis=<span class="number">1</span>)</span><br><span class="line">    <span class="comment"># 中心化</span></span><br><span class="line">    zerodata = dataset - meanVals</span><br><span class="line">    <span class="keyword">return</span> zerodata</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-4特征值范围"><a href="#6-4特征值范围" class="headerlink" title="6.4特征值范围"></a>6.4特征值范围</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">eigvalPc</span><span class="params">(eigVals, precentages)</span>:</span></span><br><span class="line">    <span class="comment"># 特征值从大到小排序</span></span><br><span class="line">    sortArray = np.sort(eigVals)[::<span class="number">-1</span>]</span><br><span class="line">    <span class="comment"># 百分比</span></span><br><span class="line">    arrSum = sum(sortArray)</span><br><span class="line">    tmpSum = <span class="number">0</span></span><br><span class="line">    num = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> sortArray:</span><br><span class="line">        tmpSum += i</span><br><span class="line">        num += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> tmpSum/arrSum &amp;gt;= precentages:</span><br><span class="line">            <span class="comment">##返回最后的特征值下标</span></span><br><span class="line">            <span class="keyword">return</span> num</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-5PCA函数"><a href="#6-5PCA函数" class="headerlink" title="6.5PCA函数"></a>6.5PCA函数</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pca</span><span class="params">(dataset, precentages)</span>:</span></span><br><span class="line">    meanVals = np.mean(dataset, axis=<span class="number">1</span>)</span><br><span class="line">    <span class="comment"># 中心化</span></span><br><span class="line">    zerodata = zeroScale(dataset)</span><br><span class="line">    <span class="comment"># 计算协方差矩阵</span></span><br><span class="line">    covMat = np.cov(zerodata)</span><br><span class="line">    eigVals, eigVects = np.linalg.eig(np.mat(covMat))</span><br><span class="line">    k = eigvalPc(eigVals, precentages)</span><br><span class="line">    <span class="comment"># 获取对应的特征值排好序的下标</span></span><br><span class="line">    eigIndex = np.argsort(eigVals)[::<span class="number">-1</span>]</span><br><span class="line">    <span class="comment"># 获取对应的特征向量下标</span></span><br><span class="line">    eigIndex = eigIndex[<span class="number">0</span>:k + <span class="number">1</span>]</span><br><span class="line">    <span class="comment"># 获取主成分特征向量</span></span><br><span class="line">    eigPCA = eigVects[:, eigIndex]</span><br><span class="line">    <span class="comment"># 原始数据投影到低纬数据</span></span><br><span class="line">    lowDimdata = np.transpose(zerodata) * eigPCA</span><br><span class="line">    <span class="comment">#重构数据</span></span><br><span class="line">    reconMat=(lowDimdata*np.transpose(eigPCA))+np.transpose(meanVals)</span><br><span class="line">    <span class="comment">#np.savetxt(outfile, reconMat, delimiter="\t")</span></span><br><span class="line">    <span class="keyword">return</span>  reconMat</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-5图片生成与保存"><a href="#6-5图片生成与保存" class="headerlink" title="6.5图片生成与保存"></a>6.5图片生成与保存</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> loadpgm <span class="keyword">import</span> loadpgm</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    <span class="keyword">for</span> root, dirs, files <span class="keyword">in</span> os.walk(<span class="string">"D:\\pycharm\\project\\pca\\faces\\"</span>):</span><br><span class="line">        first_person = <span class="literal">True</span></span><br><span class="line">        <span class="keyword">for</span> dir <span class="keyword">in</span> dirs:</span><br><span class="line">            filepath = (os.path.join(root, dir))</span><br><span class="line">            <span class="keyword">if</span> first_person:</span><br><span class="line">                dataset = loadpgm(filepath)</span><br><span class="line">                first_person = <span class="literal">False</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                dataset = np.column_stack((dataset, loadpgm(filepath)))</span><br><span class="line">    <span class="comment">#数据矩阵化</span></span><br><span class="line">    dataset=np.mat(dataset)</span><br><span class="line">    out=pca(dataset,<span class="number">0.7</span>)</span><br><span class="line">    <span class="comment">#10张图片10*3840每张图片为60X64</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">10</span>):</span><br><span class="line">        outpicture=str(i)+<span class="string">".jpeg"</span></span><br><span class="line">        picture1 = (out[i].reshape(<span class="number">60</span>, <span class="number">64</span>))</span><br><span class="line">        <span class="comment"># 保存重构图片数据</span></span><br><span class="line">        picture1 = np.real(picture1)</span><br><span class="line">        picture1 = Image.fromarray(picture1).convert(<span class="string">"RGB"</span>)</span><br><span class="line">        picture1.save(outpicture)</span><br></pre></td></tr></table></figure>
+
+<p>图片数据与PCA源代码上传到我的<a href="http://211.69.141.138/wp-content/themes/begin%2Blts/inc/go.php?url=https://github.com/zpliu1126/Machine-Learn/tree/master/pca" target="_blank" rel="noopener">github仓库</a>中</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><strong>1.</strong>机器学习[周志华版]</p>
+<p><strong>2.</strong>PCA定义：<a href="http://211.69.141.138/wp-content/themes/begin%2Blts/inc/go.php?url=http://blog.codinglabs.org/articles/pca-tutorial.html" target="_blank" rel="noopener">http://blog.codinglabs.org/articles/pca-tutorial.html</a></p>
+<p><strong>3.</strong>公式推导：<a href="http://211.69.141.138/wp-content/themes/begin%2Blts/inc/go.php?url=http://www.cnblogs.com/pinard/p/6239403.html" target="_blank" rel="noopener">http://www.cnblogs.com/pinard/p/6239403.html</a></p>
+<p><strong>4.</strong>主要代码：<a href="http://211.69.141.138/wp-content/themes/begin%2Blts/inc/go.php?url=http://www.cnblogs.com/chenbjin/p/4200790.html" target="_blank" rel="noopener">http://www.cnblogs.com/chenbjin/p/4200790.html</a></p>
+<p><strong>5.</strong>pgm数据处理：<a href="http://211.69.141.138/wp-content/themes/begin%2Blts/inc/go.php?url=https://blog.csdn.net/xijuezhu8128/article/details/79661016" target="_blank" rel="noopener">https://blog.csdn.net/xijuezhu8128/article/details/79661016</a></p>
+<p><strong>6.</strong>numpy包处理：<a href="http://211.69.141.138/wp-content/themes/begin%2Blts/inc/go.php?url=https://blog.csdn.net/qq_43287650/article/details/83211898" target="_blank" rel="noopener">https://blog.csdn.net/qq_43287650/article/details/83211898</a></p>
+
+    </div>
+
+    
+    
+    
+   
+   <div>
+     <div>
+  
+    <div style="text-align:center;color:#bfbfbf;font-size:16px;">
+      <span>------ 本文结束 </span>
+      <img src="https://s1.ax1x.com/2020/03/23/8HFzxH.png" 
+      style="display:inline-block;"
+      data-loaded="true"
+      alt="thankyou" border="0" 
+      width="100"
+      heigh="100"
+      />
+      <span> 感谢阅读 ------</span>
+
+    </div>
+    <p>
+    <a class="fancybox fancybox.image" 
+    href="https://s1.ax1x.com/2020/03/23/8HCEjI.jpg" 
+    itemscope="" itemtype="http://schema.org/ImageObject" 
+    itemprop="url" data-fancybox="default" 
+    rel="default" title="公众号" 
+    data-caption="公众号"
+    >
+    <img data-src="https://s1.ax1x.com/2020/03/23/8HCEjI.jpg" alt="公众号"
+     src="https://s1.ax1x.com/2020/03/23/8HCEjI.jpg" data-loaded="true">
+    </a>
+    <p  style="text-align:center;">
+     <sapn style="">欢迎扫一扫上面的微信二维码，订阅
+     <span style="color: #428bca;font-size:20px;">codeHub</span>
+     公众号</span>
+     </p>
+     </p>
+    
+  
+</div>
+   </div>
+  
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>zpliu
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://biocottonhub.github.io/codeHub/2020/06/23/2020-06/05PCA%E9%99%8D%E7%BB%B4%E6%89%93%E5%87%BB/" title="PCA降维打击">https://biocottonhub.github.io/codeHub/2020/06/23/2020-06/05PCA降维打击/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/codeHub/2020/06/22/2020-06/04python%E5%A4%9A%E8%BF%9B%E7%A8%8B/" rel="prev" title="简单实现python多进程">
+      <i class="fa fa-chevron-left"></i> 简单实现python多进程
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/codeHub/2020/06/23/2020-06/06%E8%81%9A%E7%B1%BB/" rel="next" title="聚类">
+      聚类 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概括
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-PCA的基本原理"><span class="nav-number">1.</span> <span class="nav-text">1.PCA的基本原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1基于最近重构性进行优化"><span class="nav-number">2.</span> <span class="nav-text">2.1基于最近重构性进行优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2基于最大可分性进行优化"><span class="nav-number">3.</span> <span class="nav-text">2.2基于最大可分性进行优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-算法流程"><span class="nav-number">4.</span> <span class="nav-text">3.算法流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1实例"><span class="nav-number">5.</span> <span class="nav-text">4.1实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2图片数据降维"><span class="nav-number">6.</span> <span class="nav-text">4.2图片数据降维</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5总结"><span class="nav-number">7.</span> <span class="nav-text">5总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6数据集与代码"><span class="nav-number">8.</span> <span class="nav-text">6数据集与代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-1图片加载函数"><span class="nav-number">8.1.</span> <span class="nav-text">6.1图片加载函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-2文件读取函数"><span class="nav-number">8.2.</span> <span class="nav-text">6.2文件读取函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3数据中心化"><span class="nav-number">8.3.</span> <span class="nav-text">6.3数据中心化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-4特征值范围"><span class="nav-number">8.4.</span> <span class="nav-text">6.4特征值范围</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-5PCA函数"><span class="nav-number">8.5.</span> <span class="nav-text">6.5PCA函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-5图片生成与保存"><span class="nav-number">8.6.</span> <span class="nav-text">6.5图片生成与保存</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">9.</span> <span class="nav-text">参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt=""
+      src="/codeHub/uploads/themeImg/logo.png">
+  <p class="site-author-name" itemprop="name"></p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/codeHub/archives">
+          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/codeHub/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/codeHub/tags/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/BiocottonHub/" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;BiocottonHub&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/codeHub/1944532210@qq.com" title="E-Mail → 1944532210@qq.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-cn" class="cc-opacity" rel="noopener" target="_blank"><img src="/codeHub/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://cotton.hzau.edu.cn/" title="http:&#x2F;&#x2F;cotton.hzau.edu.cn&#x2F;" rel="noopener" target="_blank">GCGI</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">codeHub</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        站点访问人次
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        总访问量<i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/codeHub/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/codeHub/lib/velocity/velocity.min.js"></script>
+  <script src="/codeHub/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/codeHub/js/utils.js"></script>
+
+<script src="/codeHub/js/motion.js"></script>
+
+
+<script src="/codeHub/js/schemes/pisces.js"></script>
+
+
+<script src="/codeHub/js/next-boot.js"></script>
+
+<script src="/codeHub/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      script.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/codeHub/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'd4VOUvNSU5WGIC3AjjM8UArx-gzGzoHsz',
+      appKey     : '5n9Xu8XStUzmAKyncMgSp0px',
+      placeholder: "有任何问题欢迎留言或者邮件告知",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>

@@ -1,6 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>数据备份!</title>
+    <url>/codeHub/2020/06/23/2020-06/07%E6%95%B0%E6%8D%AE%E5%A4%87%E4%BB%BD/</url>
+    <content><![CDATA[<p>俗话说：不怕万一就怕一万一，数据备份真的很重要，经历了一次数据库数据的丢失，现在每次我都小心翼翼！</p>
+<p>数据库备份</p>
+<p>通常大家都是使用phpmyadmin直接图形化的界面进行数据的导入和导出，在数据库导入的时候要注意，mysql中要含有和你备份的数据库一样的名字，不然会报错</p>
+<h3 id="命令行下的mysql备份："><a href="#命令行下的mysql备份：" class="headerlink" title="命令行下的mysql备份："></a>命令行下的mysql备份：</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mysqldump -u root -p 数据库名 &gt;dump.sql（备份文件以sql为后缀）</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h3 id="wordpress文件的备份"><a href="#wordpress文件的备份" class="headerlink" title="wordpress文件的备份"></a>wordpress文件的备份</h3><p>这个比较简单粗暴，直接tar就行</p>
+<p><code>tar -cvzf 20190329wordpressbk.tar.gz ./*wordpress</code></p>
+<p>安装目录下的所有文件</p>
+<p>这里有一个小技巧，就是tar命令如何排除一些你不需要打包的目录</p>
+<p><code>tar -cvzf 20190329wordpressbk.tar.gz --exclude=./log ./*wordpress</code></p>
+<p>安装目录下的所有文件</p>
+<p>log为日志目录，就不备份了，注意这里的log后面的/</p>
+<h3 id="多个地方存放"><a href="#多个地方存放" class="headerlink" title="多个地方存放"></a>多个地方存放</h3><p>数据备份好了，那也不放心啊！俗话说狡兔三窟，我就备份在了三个地方</p>
+<p>1.服务器</p>
+<p>2.本地电脑</p>
+<p>3.github</p>
+<p>其他的备份方式我就不做介绍了，主要介绍github的备份方式</p>
+<h4 id="github备份"><a href="#github备份" class="headerlink" title="github备份"></a>github备份</h4><p>1.首先使用私匙与github账号关联</p>
+<p>2.创建仓库repositories</p>
+<p>3.命令行上传</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add ./back up file </span><br><span class="line">git commit -m <span class="string">"date"</span></span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+
+<p>我进行备份是文件大小超过了50M，github不给上传</p>
+<blockquote>
+<p>remote: warning: File sources/wordpress_bk20190330.tar.gz is 51.15 MB;<br>this is larger than GitHub’s recommended maximum file size of 50.00 MB</p>
+</blockquote>
+<p>看来还是得换个办法，就勉强用用我们不务正业的百度网盘进行备份，就是速度有点慢</p>
+<h4 id="流程如下："><a href="#流程如下：" class="headerlink" title="流程如下："></a>流程如下：</h4><p>1.克隆仓库代码</p>
+<p>2.将百度账户与服务器进行关联： <a href="http://211.69.141.138/wp-content/themes/begin%2Blts/inc/go.php?url=https://openapi.baidu.com/device" target="_blank" rel="noopener">设置链接</a></p>
+<p>3.使用上传脚本进行文件上传</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git init</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/oott123/bpcs_uploader.git</span><br><span class="line">chmod +x bpcs_uploader.php </span><br><span class="line">./bpcs_uploader.php quickinit</span><br><span class="line"><span class="comment">#脚本执行后，会告诉验证码</span></span><br><span class="line"><span class="comment">#Uploader initialization will be begin. If you have already configured the uploader before, your old settings will be overwritten.</span></span><br><span class="line">Continue? [y/N] y</span><br><span class="line">  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current</span><br><span class="line">                                 Dload  Upload   Total   Spent    Left  Speed</span><br><span class="line">100   344  100   264  100    80    332    100 --:--:-- --:--:-- --:--:--   332</span><br><span class="line">Launch your favorite web browser and visit https://openapi.baidu.com/device</span><br><span class="line">Input 验证码在这 as the user code <span class="keyword">if</span> asked.</span><br><span class="line">After granting access to the application, come back here and press Enter to <span class="built_in">continue</span>.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#执行文件上传</span></span><br><span class="line">./bpcs_uploader.php upload ../../Bioinformatic/sources/wordpressbk20190330.sql  wordpressbk20190330.sql</span><br><span class="line"></span><br><span class="line"><span class="comment">#执行文件下载</span></span><br><span class="line">./bpcs_uploader.php download [path_local] [path_remote]</span><br><span class="line"></span><br><span class="line"><span class="comment">#云端文件的删除</span></span><br><span class="line"></span><br><span class="line">./bpcs_uploader/bpcs_uploader.php delete [remote path]</span><br></pre></td></tr></table></figure>
+
+<p>备份后数数据默认是存在 <code>百度云/我的应用数据/bpcs_uploader/</code> 目录下；而且这个目录好像还不能修改</p>
+<h3 id="自动备份脚本"><a href="#自动备份脚本" class="headerlink" title="自动备份脚本"></a>自动备份脚本</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/bash</span></span><br><span class="line"><span class="comment">#author:zpliu</span></span><br><span class="line"><span class="comment">#date:20190331</span></span><br><span class="line"><span class="comment">#application for backup data to Baidu cloud</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"></span><br><span class="line">yesterday=`date -d <span class="string">"1 day ago"</span> +<span class="string">"%Y%m%d"</span>`</span><br><span class="line">today=`date +<span class="string">"%Y%m%d"</span>`</span><br><span class="line">mysqluser=登录数据库账户</span><br><span class="line">mysqlpassword=密码</span><br><span class="line"><span class="comment">#备份数据库文件</span></span><br><span class="line">/usr/bin/mysqldump -u <span class="variable">$mysqluser</span>  -p<span class="variable">$mysqlpassword</span>  wordpress &gt;/var/www/clound/wordpress<span class="variable">$&#123;today&#125;</span>_bk.sql 2&gt;/dev/null</span><br><span class="line"><span class="comment">#备份wordpress文件</span></span><br><span class="line"><span class="built_in">echo</span> 文件权限的问题提供的root密码|sudo -S /usr/bin/tar -cPzf /var/www/clound/wordpress<span class="variable">$&#123;today&#125;</span>_bk.tar.gz /var/www/html/*</span><br><span class="line"></span><br><span class="line"><span class="comment">#进行文件上传</span></span><br><span class="line"><span class="keyword">if</span> [ -f <span class="string">"/var/www/clound/wordpress<span class="variable">$&#123;today&#125;</span>_bk.sql"</span> -a -f <span class="string">"/var/www/clound/wordpress<span class="variable">$&#123;today&#125;</span>_bk.tar.gz"</span> ];<span class="keyword">then</span></span><br><span class="line">/var/www/clound/bpcs_uploader/bpcs_uploader.php upload /var/www/clound/wordpress<span class="variable">$&#123;today&#125;</span>_bk.sql wordpress<span class="variable">$&#123;today&#125;</span>_bk.sql 1&gt;&gt;/var/www/clound/upload.log 2&gt;/dev/null &amp;&amp;rm -rf wordpress<span class="variable">$&#123;yesterday&#125;</span>_bk.sql</span><br><span class="line">/var/www/clound/bpcs_uploader/bpcs_uploader.php upload /var/www/clound/wordpress<span class="variable">$&#123;today&#125;</span>_bk.tar.gz wordpress<span class="variable">$&#123;today&#125;</span>_bk.tar.gz 1&gt;&gt;/var/www/clound/upload.log 2&gt;/dev/null &amp;&amp;rm -rf wordpress<span class="variable">$&#123;yesterday&#125;</span>_bk.tar.gz</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+
+<p>脚本其实很简单就是，导出数据库以及对wordpress进行打包，最后对当前目录进行判断，同时删除以前的备份，节省空间</p>
+<p>而百度云盘是上的文件倒是可以想删就删，自己动动手一块删一个时间段的就行了</p>
+<h3 id="crontab-执行定时任务"><a href="#crontab-执行定时任务" class="headerlink" title="crontab 执行定时任务"></a>crontab 执行定时任务</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">crontab -e</span><br><span class="line"></span><br><span class="line">在vim中编写配置信息如下</span><br><span class="line"></span><br><span class="line">0 2 * * * bash  脚本执行路径</span><br></pre></td></tr></table></figure>
+
+<p>每天凌晨两点进行文件备份，明天来看看能不能备份好</p>
+<p>报错：<code>MAIL (mailed 144 bytes of output but got status 0x004b#012)</code></p>
+<p>原因有几点：</p>
+<p>1.命令执行过程中需要加上绝对路径</p>
+<p>2.在crontab -e 编辑模式中需要 加上bash 脚本绝对路径</p>
+<p>3.在与百度的进行连接的时候，报错了；重新获取验证码进行连接</p>
+<p><code>API calling error 100 : Invalid parameter</code></p>
+<h4 id="最后脚本每天定时在凌晨2点执行，并且在日志文件中记录着成功的记录"><a href="#最后脚本每天定时在凌晨2点执行，并且在日志文件中记录着成功的记录" class="headerlink" title="最后脚本每天定时在凌晨2点执行，并且在日志文件中记录着成功的记录"></a>最后脚本每天定时在凌晨2点执行，并且在日志文件中记录着成功的记录</h4><p><code>File /apps/bpcs_uploader/wordpress20190401_bk.sql uploaded.
+Size:1282.812K MD5 Sum:fd4b82eda2347f0979bcc395da11d000</code></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://blog.csdn.net/qq_31655965/article/details/53288316" target="_blank" rel="noopener">https://blog.csdn.net/qq_31655965/article/details/53288316</a></p>
+<p>crontab：<a href="http://211.69.141.138/wp-content/themes/begin%2Blts/inc/go.php?url=https://www.cnblogs.com/zoulongbin/p/6187238.html" target="_blank" rel="noopener">点击查看</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>聚类</title>
+    <url>/codeHub/2020/06/23/2020-06/06%E8%81%9A%E7%B1%BB/</url>
+    <content><![CDATA[<p>人以类聚，物以群分。在当今大数据的时代，利用机器学习的方法对大样本、大数据进行量化、根据每个数据的特征值进行分类，打标签；从而挖掘数据的价值，例如商家根据用户群体的分类，和标签定向的推送广告。对数据的聚类有多种方式，其中最经典的就是，基于数据密度和基于数据层次进行聚类。</p>
+<a id="more"></a>
+
+<h3 id="基于密度聚类"><a href="#基于密度聚类" class="headerlink" title="基于密度聚类"></a>基于密度聚类</h3><blockquote>
+<p>Density Base spatial clustering of application with noise</p>
+</blockquote>
+<h4 id="定义："><a href="#定义：" class="headerlink" title="定义："></a>定义：</h4><p>密度聚类算法：假设通过样本数据之间分布的紧密程度，能够反应数据的聚类结构；这是算法的假定前提。算法的具体实现通常基于样本之间的可连接性，将可以连接的样本聚在一类，并不断扩大聚类簇，获得最终的聚类结果</p>
+<p>1.ε-：定义一个样本的邻近区域：该区域包含在数据集D中与给定样本点Xj的距离小于ε-的样本点；</p>
+<p>2.核心对象： 样本点Xj邻域范围内包含的样本点数目，大于等于阀值MinPts</p>
+<p>3.密度直达：X1位于X2的邻域范围内，同时X2为核心对象（跟很多人有关系），则X1则由X2密度直达</p>
+<p>4.密度可达：两个样本点通过一系列密度直达样本对（Xi，Xi+1）建立联系</p>
+<p>5.密度相连：两个样本同时和某一个样本点密度可达</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/23/NtKcVK.png" alt="密度聚类概念"></p>
+<h4 id="优化目标"><a href="#优化目标" class="headerlink" title="优化目标"></a>优化目标</h4><p>密度聚类中，同一簇中密度相连数满足最大，密度可达满足最大；不难推出当同一类样本中密度可达达到最大时，就满足优化目标</p>
+<h4 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h4><p>1.假定邻域距离ε- 与Minpts样本数目</p>
+<p>2.计算样本中核心对象数据集Ω</p>
+<p>3.随机获取核心数据集中的一个核心对象最为种子</p>
+<p>4.根据递归迭代思想，对数据集进行迭代，当第一个随机核心对象组成的簇满足优化目标时，将第一簇数据从数据集中剔除，进入下一次迭代</p>
+<p>5.直至所有核心对象被迭代完毕，聚类就结束</p>
+<h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><p>1.MinPat设置的是整个数据集的邻域的最小样本数，但是并不是每一类中的密度都大于等于MinPat。</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/23/NtKf8H.png" alt="NtKf8H.png"></p>
+<p>当阀值提高后C3样本点会被当成噪音处理</p>
+<p>2.当一个数据点在两个核心数据对象之间时，算法默认将数据点归类到先迭代的核心对象；因此算法不稳定</p>
+<p>3.根据密度聚类的思想聚类时，有一些点与所有的核心对象都不相连时，会被算法默认为噪音</p>
+<h3 id="基于层次聚类"><a href="#基于层次聚类" class="headerlink" title="基于层次聚类"></a>基于层次聚类</h3><h4 id="定义：-1"><a href="#定义：-1" class="headerlink" title="定义："></a>定义：</h4><p>层次聚类：在不同层次之间对数据集进行划分；形成类似树形的聚类结果，在划分时可以采用“自底向上”与“自顶向下”进行聚类。</p>
+<p>1.自底向上：先将每个样本看成一类，接着对所有进行聚类</p>
+<p>2.自顶向下：所有样本看成一类，依次对数据集进行拆分聚类</p>
+<h4 id="AGNES算法"><a href="#AGNES算法" class="headerlink" title="AGNES算法"></a>AGNES算法</h4><p>不同类之间的距离度量：</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/23/NtKIKI.png" alt="NtKIKI.png"></p>
+<p>其中最小距离由两个簇中最近的样本点决定；最大距离则由最远样本点决定；平均距离有所有样本共同决定。也被形象的称为“单链接”、“全链接”、“均链接”。</p>
+<h4 id="应用范围："><a href="#应用范围：" class="headerlink" title="应用范围："></a>应用范围：</h4><p>最小值: 这种方法容易受到极端值的影响。</p>
+<p>最大值:容易受到极端值的影响.</p>
+<p>均值:这种方法计算量比较大，但结果比前两种方法更合理。</p>
+<h4 id="算法流程："><a href="#算法流程：" class="headerlink" title="算法流程："></a>算法流程：</h4><p>1.计算所有样本点两两之间的距离矩阵</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/23/NtKort.png" alt="距离矩阵"></p>
+<h4 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h4><p>1.主要应用在数据量比较小的时候</p>
+<p>2.算法稳定性比较好</p>
+<p>3.选择不同的距离衡量，往往有不同的结果</p>
+<h3 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h3><p>机器学习[周志华版]</p>
+<p><a href="http://211.69.141.138/wp-content/themes/begin%2Blts/inc/go.php?url=https://www.cnblogs.com/zongfa/p/9344769.html" target="_blank" rel="noopener">层次聚类</a></p>
+<p><a href="http://211.69.141.138/wp-content/themes/begin%2Blts/inc/go.php?url=https://www.jianshu.com/p/0f33ed1c38b9" target="_blank" rel="noopener">密度聚类</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>PCA降维打击</title>
+    <url>/codeHub/2020/06/23/2020-06/05PCA%E9%99%8D%E7%BB%B4%E6%89%93%E5%87%BB/</url>
+    <content><![CDATA[<h3 id="1-PCA的基本原理"><a href="#1-PCA的基本原理" class="headerlink" title="1.PCA的基本原理"></a>1.PCA的基本原理</h3><p>主成分分析（Principle component analysis）简称PCA，是常用的降维方法之一。通过将n维的数据集降维到n’低纬度空间；使得降维之后数据集尽可能的代表原数据集同时降维之后的损失尽可能的小。</p>
+<p>如图1所示，在R中使用rnorm函数生成正态分布数据集在二维空间的分布；我们希望找到一个维度能够代表数据集在二维空间中的分布特征，而这样的维度有无数种.如何找到最好的那个维度使得数据集经过变换后尽可能的保留原始数据集的特征。</p>
+<a id="more"></a>
+
+<p>​    图1中有V1与V2两个一维的特征向量，从图1中可以看出在V1特征向量上能够更好的反应原始数据集的特征。数据集映射在V1的方向上进行映射后，映射后的数据集从低纬度重构出高纬度数据集D’，使得D’与原始数据集尽可能的相似，也就是D’中的点与原始数据集中的点的距离最小；或者可以从另一个角度理解为原始数据经过映射后在低纬空间中可以区分开来。这对应着PCA中两种优化目标：最近重构性与最大可分性。同样的当数据集从二维推广到任意维度时，我们的优化目标也就变成样本点在一个超平面进行重构后的距离最近或者在映射到超平面后样本内方差最大化。</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/23/NtuZY4.png" alt="图1:随机3类数据集的在二维平面的分布"></p>
+<h3 id="2-1基于最近重构性进行优化"><a href="#2-1基于最近重构性进行优化" class="headerlink" title="2.1基于最近重构性进行优化"></a>2.1基于最近重构性进行优化</h3><p>假定我们有一个m个n维的数据集 ，假定在每个维度上都进行了中心化，并且将原先的n维属性投影到新的坐标系使得这n个维度的属性构成标准的正交基向量 )，即任意两个w满足 ；进行正交化主要是考虑在降维的过程中，任意两个主成分之间应该尽可能的保留更多的信息，不存在相关性。</p>
+<p>假设将数据从n维降到k维（k&lt;n）,则第样本点 在k维的投影坐标  其中 表示样本i在降维后第j个维度上的投影坐标。通过投影坐标 与标准正交基向量 )重构出原始数据 。</p>
+<p>优化目标是使得所有重构出的样本与原始样本的累积距离最小。</p>
+<p><a href="http://211.69.141.138/wp-content/themes/begin%2Blts/inc/go.php?url=http://www.cnblogs.com/pinard/p/6239403.html" target="_blank" rel="noopener">具体的公式推导</a>可以看这个博主写的</p>
+<h3 id="2-2基于最大可分性进行优化"><a href="#2-2基于最大可分性进行优化" class="headerlink" title="2.2基于最大可分性进行优化"></a>2.2基于最大可分性进行优化</h3><p>​    从最大可分性角度出发，优化目标是使得样本点在降维后的平面的投影尽可能的分开，相当于投影后的样本方差最大。</p>
+<h3 id="3-算法流程"><a href="#3-算法流程" class="headerlink" title="3.算法流程"></a>3.算法流程</h3><p>​    假定数据集包含m个n维数据。</p>
+<ul>
+<li>将原始数据按照n行m列进行排列</li>
+<li>在每一个维度上进行中心化，也就是每个数据减去同一行中的均值方便后面的计算</li>
+<li>计算数据集的协方差矩阵</li>
+<li>对协方差求取特征值与特征向量</li>
+<li>将特征向量 按照其特征值大小从上至下排列成矩阵</li>
+<li>根据认为设定的K值，将数据集映射到K维的低纬空间</li>
+</ul>
+<h3 id="4-1实例"><a href="#4-1实例" class="headerlink" title="4.1实例"></a>4.1实例</h3><p>​    随机生成1000个3维数据集，并对其中的点打上标签如图2所示。当保留样本中65%的变异时，才使得数据集从3维降低到2维，如图3所示；而此时黄色和绿色样本之间仍旧没有完全区分开来可能是由于它们之间的区分确实不明显。同样从图3中也可以发现一些样本偏离比较远，在某种程度上可以认为是人为因素产生的噪声数据</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/23/Ntulm6.png" alt="图2：1000个随机数据集的分布，其中不同颜色代表不同的类型"></p>
+<p><img data-src="https://s1.ax1x.com/2020/06/23/Ntu10K.png" alt="图3：1000个数据在PCA降维后的分布"></p>
+<h3 id="4-2图片数据降维"><a href="#4-2图片数据降维" class="headerlink" title="4.2图片数据降维"></a>4.2图片数据降维</h3><p>使用UCI中的Yale数据集，数据集中包括了21个志愿者在四种心情状态，4种角度以及是否戴眼镜的图片数据。从中随机选取了10位志愿者，在某一种状态下进行图片数据的降维处理。从图4可以看出当保留原始数据90%的差异时，图片与原图的差异不是很大，但仍旧有一些图片还是与原始数据相比丢失的比较多；随着保留差异程度逐渐减少，重构数据相比原始数据丢失的越来越多，在图片上表现也就越来越不清晰。</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/23/NtusAS.png" alt="图4从左边拍摄10名志愿者愤怒时的图片分别保留其90%、80%、70%差异进行重构图片"></p>
+<p>对带上眼镜的图片数据进行同样的处理，如图4所示当保留90%的差异进行重构时，仍旧可以看出大概。通过PCA的简单降维，可以在保证图片质量的情况下牺牲图片的清晰度；一定程度上节省了带宽。</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/23/Ntu6hQ.png" alt="图5 从左边拍摄10名志愿者愤怒时带眼镜的图片分别保留其90%、80%、70%差异进行重构图片"></p>
+<h3 id="5总结"><a href="#5总结" class="headerlink" title="5总结"></a>5总结</h3><ul>
+<li>PCA计算方法简单，运用了矩阵特征值分解</li>
+<li>计算过程中使用协方差矩阵，保证了各个维度之间不会有相互影响，使得特征值分解时数据存在重叠的情况</li>
+<li>PCA降维后的特征值在解释程度上不如原始样本</li>
+<li>舍弃的一些方差信息，有时候可能是区分一些特定样本的重要信息</li>
+<li>使用核化的方法对复杂数据进行PCA</li>
+</ul>
+<h3 id="6数据集与代码"><a href="#6数据集与代码" class="headerlink" title="6数据集与代码"></a>6数据集与代码</h3><h4 id="6-1图片加载函数"><a href="#6-1图片加载函数" class="headerlink" title="6.1图片加载函数"></a>6.1图片加载函数</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">单张图片的读取与图片向矩阵数据的转换</span></span><br><span class="line"><span class="string">    #p2与p4可以正常读取</span></span><br><span class="line"><span class="string">    img = Image.open("D:\\pycharm\\project\\pca\\faces\\an2i\\an2i_left_angry_open_2.pgm")</span></span><br><span class="line"><span class="string">    #颜色变成黑白，本来就是黑白的就省去这一步就行了</span></span><br><span class="line"><span class="string">    img2=img.convert("L")</span></span><br><span class="line"><span class="string">    img2.show()</span></span><br><span class="line"><span class="string">    data=img.getdata()</span></span><br><span class="line"><span class="string">    data=np.matrix(data)</span></span><br><span class="line"><span class="string">    print(data)</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">loadpgm</span><span class="params">(filepath)</span>:</span></span><br><span class="line">    first_file=<span class="literal">True</span></span><br><span class="line">    <span class="keyword">for</span> root, dirs, files <span class="keyword">in</span> os.walk(filepath):</span><br><span class="line">        <span class="comment">#人名</span></span><br><span class="line">        rootpicture=root.split(<span class="string">"\\"</span>)[<span class="number">-1</span>]+<span class="string">".jpeg"</span></span><br><span class="line">        <span class="keyword">for</span> file <span class="keyword">in</span> files:</span><br><span class="line">            <span class="comment">#print(os.path.splitext(file)[0][-1])</span></span><br><span class="line">            <span class="comment">#文件后缀名</span></span><br><span class="line">            <span class="keyword">if</span> first_file:</span><br><span class="line">                <span class="keyword">if</span> os.path.splitext(file)[<span class="number">0</span>][<span class="number">-23</span>::] == <span class="string">"left_angry_sunglasses_2"</span>:</span><br><span class="line">                    img = Image.open((os.path.join(root, file)))</span><br><span class="line">                    oneperson = img.getdata()</span><br><span class="line">                    img.save(rootpicture)</span><br><span class="line">                    oneperson = np.array(oneperson).tolist()</span><br><span class="line">                    first_file=<span class="literal">False</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">if</span> os.path.splitext(file)[<span class="number">0</span>][<span class="number">-23</span>::] == <span class="string">"left_angry_sunglasses_2"</span>:</span><br><span class="line">                    img = Image.open((os.path.join(root, file)))</span><br><span class="line">                    rootimg = Image.fromarray(np.array(img.getdata())).convert(<span class="string">"RGB"</span>)</span><br><span class="line">                    rootimg.save(rootpicture)</span><br><span class="line">                    oneperson=oneperson+(np.array(img.getdata()).tolist())</span><br><span class="line">                <span class="comment">#img.show()</span></span><br><span class="line">                <span class="comment">#print(img.size)</span></span><br><span class="line">    <span class="keyword">return</span> np.array(oneperson)</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-2文件读取函数"><a href="#6-2文件读取函数" class="headerlink" title="6.2文件读取函数"></a>6.2文件读取函数</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">readfile</span><span class="params">(path)</span>:</span></span><br><span class="line">    file = open(path)</span><br><span class="line">    next(file)</span><br><span class="line">    first_else = <span class="literal">True</span></span><br><span class="line">    <span class="keyword">for</span> data <span class="keyword">in</span> file.readlines():</span><br><span class="line">        data = data.strip(<span class="string">"\n"</span>)</span><br><span class="line">        nums = data.split(<span class="string">"\t"</span>)[<span class="number">0</span>:<span class="number">3</span>]</span><br><span class="line">        <span class="keyword">if</span> first_else:</span><br><span class="line">            matrix = np.array(nums)</span><br><span class="line">            first_else = <span class="literal">False</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            matrix = np.c_[matrix, nums]</span><br><span class="line">    file.close()</span><br><span class="line">    <span class="comment"># 矩阵为n*m，m为样本数</span></span><br><span class="line">    <span class="keyword">return</span> np.mat(matrix).astype(float)</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-3数据中心化"><a href="#6-3数据中心化" class="headerlink" title="6.3数据中心化"></a>6.3数据中心化</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">zeroScale</span><span class="params">(dataset)</span>:</span></span><br><span class="line">    <span class="comment"># 对数据集按行求平均</span></span><br><span class="line">    meanVals = np.mean(dataset, axis=<span class="number">1</span>)</span><br><span class="line">    <span class="comment"># 中心化</span></span><br><span class="line">    zerodata = dataset - meanVals</span><br><span class="line">    <span class="keyword">return</span> zerodata</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-4特征值范围"><a href="#6-4特征值范围" class="headerlink" title="6.4特征值范围"></a>6.4特征值范围</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">eigvalPc</span><span class="params">(eigVals, precentages)</span>:</span></span><br><span class="line">    <span class="comment"># 特征值从大到小排序</span></span><br><span class="line">    sortArray = np.sort(eigVals)[::<span class="number">-1</span>]</span><br><span class="line">    <span class="comment"># 百分比</span></span><br><span class="line">    arrSum = sum(sortArray)</span><br><span class="line">    tmpSum = <span class="number">0</span></span><br><span class="line">    num = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> sortArray:</span><br><span class="line">        tmpSum += i</span><br><span class="line">        num += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> tmpSum/arrSum &amp;gt;= precentages:</span><br><span class="line">            <span class="comment">##返回最后的特征值下标</span></span><br><span class="line">            <span class="keyword">return</span> num</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-5PCA函数"><a href="#6-5PCA函数" class="headerlink" title="6.5PCA函数"></a>6.5PCA函数</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pca</span><span class="params">(dataset, precentages)</span>:</span></span><br><span class="line">    meanVals = np.mean(dataset, axis=<span class="number">1</span>)</span><br><span class="line">    <span class="comment"># 中心化</span></span><br><span class="line">    zerodata = zeroScale(dataset)</span><br><span class="line">    <span class="comment"># 计算协方差矩阵</span></span><br><span class="line">    covMat = np.cov(zerodata)</span><br><span class="line">    eigVals, eigVects = np.linalg.eig(np.mat(covMat))</span><br><span class="line">    k = eigvalPc(eigVals, precentages)</span><br><span class="line">    <span class="comment"># 获取对应的特征值排好序的下标</span></span><br><span class="line">    eigIndex = np.argsort(eigVals)[::<span class="number">-1</span>]</span><br><span class="line">    <span class="comment"># 获取对应的特征向量下标</span></span><br><span class="line">    eigIndex = eigIndex[<span class="number">0</span>:k + <span class="number">1</span>]</span><br><span class="line">    <span class="comment"># 获取主成分特征向量</span></span><br><span class="line">    eigPCA = eigVects[:, eigIndex]</span><br><span class="line">    <span class="comment"># 原始数据投影到低纬数据</span></span><br><span class="line">    lowDimdata = np.transpose(zerodata) * eigPCA</span><br><span class="line">    <span class="comment">#重构数据</span></span><br><span class="line">    reconMat=(lowDimdata*np.transpose(eigPCA))+np.transpose(meanVals)</span><br><span class="line">    <span class="comment">#np.savetxt(outfile, reconMat, delimiter="\t")</span></span><br><span class="line">    <span class="keyword">return</span>  reconMat</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-5图片生成与保存"><a href="#6-5图片生成与保存" class="headerlink" title="6.5图片生成与保存"></a>6.5图片生成与保存</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> loadpgm <span class="keyword">import</span> loadpgm</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    <span class="keyword">for</span> root, dirs, files <span class="keyword">in</span> os.walk(<span class="string">"D:\\pycharm\\project\\pca\\faces\\"</span>):</span><br><span class="line">        first_person = <span class="literal">True</span></span><br><span class="line">        <span class="keyword">for</span> dir <span class="keyword">in</span> dirs:</span><br><span class="line">            filepath = (os.path.join(root, dir))</span><br><span class="line">            <span class="keyword">if</span> first_person:</span><br><span class="line">                dataset = loadpgm(filepath)</span><br><span class="line">                first_person = <span class="literal">False</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                dataset = np.column_stack((dataset, loadpgm(filepath)))</span><br><span class="line">    <span class="comment">#数据矩阵化</span></span><br><span class="line">    dataset=np.mat(dataset)</span><br><span class="line">    out=pca(dataset,<span class="number">0.7</span>)</span><br><span class="line">    <span class="comment">#10张图片10*3840每张图片为60X64</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">10</span>):</span><br><span class="line">        outpicture=str(i)+<span class="string">".jpeg"</span></span><br><span class="line">        picture1 = (out[i].reshape(<span class="number">60</span>, <span class="number">64</span>))</span><br><span class="line">        <span class="comment"># 保存重构图片数据</span></span><br><span class="line">        picture1 = np.real(picture1)</span><br><span class="line">        picture1 = Image.fromarray(picture1).convert(<span class="string">"RGB"</span>)</span><br><span class="line">        picture1.save(outpicture)</span><br></pre></td></tr></table></figure>
+
+<p>图片数据与PCA源代码上传到我的<a href="http://211.69.141.138/wp-content/themes/begin%2Blts/inc/go.php?url=https://github.com/zpliu1126/Machine-Learn/tree/master/pca" target="_blank" rel="noopener">github仓库</a>中</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><strong>1.</strong>机器学习[周志华版]</p>
+<p><strong>2.</strong>PCA定义：<a href="http://211.69.141.138/wp-content/themes/begin%2Blts/inc/go.php?url=http://blog.codinglabs.org/articles/pca-tutorial.html" target="_blank" rel="noopener">http://blog.codinglabs.org/articles/pca-tutorial.html</a></p>
+<p><strong>3.</strong>公式推导：<a href="http://211.69.141.138/wp-content/themes/begin%2Blts/inc/go.php?url=http://www.cnblogs.com/pinard/p/6239403.html" target="_blank" rel="noopener">http://www.cnblogs.com/pinard/p/6239403.html</a></p>
+<p><strong>4.</strong>主要代码：<a href="http://211.69.141.138/wp-content/themes/begin%2Blts/inc/go.php?url=http://www.cnblogs.com/chenbjin/p/4200790.html" target="_blank" rel="noopener">http://www.cnblogs.com/chenbjin/p/4200790.html</a></p>
+<p><strong>5.</strong>pgm数据处理：<a href="http://211.69.141.138/wp-content/themes/begin%2Blts/inc/go.php?url=https://blog.csdn.net/xijuezhu8128/article/details/79661016" target="_blank" rel="noopener">https://blog.csdn.net/xijuezhu8128/article/details/79661016</a></p>
+<p><strong>6.</strong>numpy包处理：<a href="http://211.69.141.138/wp-content/themes/begin%2Blts/inc/go.php?url=https://blog.csdn.net/qq_43287650/article/details/83211898" target="_blank" rel="noopener">https://blog.csdn.net/qq_43287650/article/details/83211898</a></p>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+  </entry>
+  <entry>
     <title>简单实现python多进程</title>
     <url>/codeHub/2020/06/22/2020-06/04python%E5%A4%9A%E8%BF%9B%E7%A8%8B/</url>
     <content><![CDATA[<p>在处理特别大的数据的时候，尤其是多重循环。例如对2万个基因进行一个计算，每个基因的计算需要进行1亿次比较。仅仅使用一个主进程进行计算就显得十分吃力；于是学习了python多进程的的处理，极大的缩短了脚本的运行时间。</p>
@@ -224,11 +388,6 @@
       <categories>
         <category>文献</category>
       </categories>
-  </entry>
-  <entry>
-    <title>02拟南芥中转录与剪切</title>
-    <url>/codeHub/2020/06/17/02%E6%8B%9F%E5%8D%97%E8%8A%A5%E4%B8%AD%E8%BD%AC%E5%BD%95%E4%B8%8E%E5%89%AA%E5%88%87/</url>
-    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>基于三代测序对等位基因进行分型</title>

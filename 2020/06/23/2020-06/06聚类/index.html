@@ -21,14 +21,23 @@
     var CONFIG = {"hostname":"biocottonhub.github.io","root":"/codeHub/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Code Hub">
-<meta property="og:url" content="https://biocottonhub.github.io/codeHub/archives/2020/06/index.html">
+  <meta name="description" content="人以类聚，物以群分。在当今大数据的时代，利用机器学习的方法对大样本、大数据进行量化、根据每个数据的特征值进行分类，打标签；从而挖掘数据的价值，例如商家根据用户群体的分类，和标签定向的推送广告。对数据的聚类有多种方式，其中最经典的就是，基于数据密度和基于数据层次进行聚类。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="聚类">
+<meta property="og:url" content="https://biocottonhub.github.io/codeHub/2020/06/23/2020-06/06%E8%81%9A%E7%B1%BB/index.html">
 <meta property="og:site_name" content="Code Hub">
+<meta property="og:description" content="人以类聚，物以群分。在当今大数据的时代，利用机器学习的方法对大样本、大数据进行量化、根据每个数据的特征值进行分类，打标签；从而挖掘数据的价值，例如商家根据用户群体的分类，和标签定向的推送广告。对数据的聚类有多种方式，其中最经典的就是，基于数据密度和基于数据层次进行聚类。">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/23/NtKcVK.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/23/NtKf8H.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/23/NtKIKI.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/23/NtKort.png">
+<meta property="article:published_time" content="2020-06-23T00:19:11.000Z">
+<meta property="article:modified_time" content="2020-06-23T00:47:44.330Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s1.ax1x.com/2020/06/23/NtKcVK.png">
 
-<link rel="canonical" href="https://biocottonhub.github.io/codeHub/archives/2020/06/">
+<link rel="canonical" href="https://biocottonhub.github.io/codeHub/2020/06/23/2020-06/06%E8%81%9A%E7%B1%BB/">
 
 
 <script id="page-configurations">
@@ -36,12 +45,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>Archive | Code Hub</title>
+  <title>聚类 | Code Hub</title>
   
 
 
@@ -186,174 +195,203 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2020/06/23/2020-06/06%E8%81%9A%E7%B1%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/codeHub/uploads/themeImg/logo.png">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Hub">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          聚类
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>发布于
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-06-23 08:19:11 / Modified: 08:47:44" itemprop="dateCreated datePublished" datetime="2020-06-23T08:19:11+08:00">2020-06-23</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                阅读量:<i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
   
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        
-        <span class="collection-header">恩..！目前共计 33 篇文章。 继续努力。</span>
-      </div>
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/codeHub/2020/06/23/2020-06/06%E8%81%9A%E7%B1%BB/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2020/06/23/2020-06/06%E8%81%9A%E7%B1%BB/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2020</span>
-    </div>
+        <p>人以类聚，物以群分。在当今大数据的时代，利用机器学习的方法对大样本、大数据进行量化、根据每个数据的特征值进行分类，打标签；从而挖掘数据的价值，例如商家根据用户群体的分类，和标签定向的推送广告。对数据的聚类有多种方式，其中最经典的就是，基于数据密度和基于数据层次进行聚类。</p>
+<a id="more"></a>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-06-23T08:35:40+08:00"
-              content="2020-06-23">
-          06-23
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/codeHub/2020/06/23/2020-06/07%E6%95%B0%E6%8D%AE%E5%A4%87%E4%BB%BD/" itemprop="url">
-            <span itemprop="name">数据备份!</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-06-23T08:19:11+08:00"
-              content="2020-06-23">
-          06-23
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/codeHub/2020/06/23/2020-06/06%E8%81%9A%E7%B1%BB/" itemprop="url">
-            <span itemprop="name">聚类</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-06-23T08:08:08+08:00"
-              content="2020-06-23">
-          06-23
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/codeHub/2020/06/23/2020-06/05PCA%E9%99%8D%E7%BB%B4%E6%89%93%E5%87%BB/" itemprop="url">
-            <span itemprop="name">PCA降维打击</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-06-22T17:11:04+08:00"
-              content="2020-06-22">
-          06-22
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/codeHub/2020/06/22/2020-06/04python%E5%A4%9A%E8%BF%9B%E7%A8%8B/" itemprop="url">
-            <span itemprop="name">简单实现python多进程</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-06-21T13:22:19+08:00"
-              content="2020-06-21">
-          06-21
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/codeHub/2020/06/21/2020-06/03%E7%95%AA%E8%8C%84panSV/" itemprop="url">
-            <span itemprop="name">番茄中广泛的结构变异对基因表达和性状改良中的作用</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-06-17T20:00:19+08:00"
-              content="2020-06-17">
-          06-17
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/codeHub/2020/06/17/2020-06/02%E6%8B%9F%E5%8D%97%E8%8A%A5%E4%B8%AD%E8%BD%AC%E5%BD%95%E4%B8%8E%E5%89%AA%E5%88%87/" itemprop="url">
-            <span itemprop="name">拟南芥中转录与剪切</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-06-17T10:47:28+08:00"
-              content="2020-06-17">
-          06-17
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/codeHub/2020/06/17/2020-06/2020-06-01/" itemprop="url">
-            <span itemprop="name">基于三代测序对等位基因进行分型</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
+<h3 id="基于密度聚类"><a href="#基于密度聚类" class="headerlink" title="基于密度聚类"></a>基于密度聚类</h3><blockquote>
+<p>Density Base spatial clustering of application with noise</p>
+</blockquote>
+<h4 id="定义："><a href="#定义：" class="headerlink" title="定义："></a>定义：</h4><p>密度聚类算法：假设通过样本数据之间分布的紧密程度，能够反应数据的聚类结构；这是算法的假定前提。算法的具体实现通常基于样本之间的可连接性，将可以连接的样本聚在一类，并不断扩大聚类簇，获得最终的聚类结果</p>
+<p>1.ε-：定义一个样本的邻近区域：该区域包含在数据集D中与给定样本点Xj的距离小于ε-的样本点；</p>
+<p>2.核心对象： 样本点Xj邻域范围内包含的样本点数目，大于等于阀值MinPts</p>
+<p>3.密度直达：X1位于X2的邻域范围内，同时X2为核心对象（跟很多人有关系），则X1则由X2密度直达</p>
+<p>4.密度可达：两个样本点通过一系列密度直达样本对（Xi，Xi+1）建立联系</p>
+<p>5.密度相连：两个样本同时和某一个样本点密度可达</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/23/NtKcVK.png" alt="密度聚类概念"></p>
+<h4 id="优化目标"><a href="#优化目标" class="headerlink" title="优化目标"></a>优化目标</h4><p>密度聚类中，同一簇中密度相连数满足最大，密度可达满足最大；不难推出当同一类样本中密度可达达到最大时，就满足优化目标</p>
+<h4 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h4><p>1.假定邻域距离ε- 与Minpts样本数目</p>
+<p>2.计算样本中核心对象数据集Ω</p>
+<p>3.随机获取核心数据集中的一个核心对象最为种子</p>
+<p>4.根据递归迭代思想，对数据集进行迭代，当第一个随机核心对象组成的簇满足优化目标时，将第一簇数据从数据集中剔除，进入下一次迭代</p>
+<p>5.直至所有核心对象被迭代完毕，聚类就结束</p>
+<h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><p>1.MinPat设置的是整个数据集的邻域的最小样本数，但是并不是每一类中的密度都大于等于MinPat。</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/23/NtKf8H.png" alt="NtKf8H.png"></p>
+<p>当阀值提高后C3样本点会被当成噪音处理</p>
+<p>2.当一个数据点在两个核心数据对象之间时，算法默认将数据点归类到先迭代的核心对象；因此算法不稳定</p>
+<p>3.根据密度聚类的思想聚类时，有一些点与所有的核心对象都不相连时，会被算法默认为噪音</p>
+<h3 id="基于层次聚类"><a href="#基于层次聚类" class="headerlink" title="基于层次聚类"></a>基于层次聚类</h3><h4 id="定义：-1"><a href="#定义：-1" class="headerlink" title="定义："></a>定义：</h4><p>层次聚类：在不同层次之间对数据集进行划分；形成类似树形的聚类结果，在划分时可以采用“自底向上”与“自顶向下”进行聚类。</p>
+<p>1.自底向上：先将每个样本看成一类，接着对所有进行聚类</p>
+<p>2.自顶向下：所有样本看成一类，依次对数据集进行拆分聚类</p>
+<h4 id="AGNES算法"><a href="#AGNES算法" class="headerlink" title="AGNES算法"></a>AGNES算法</h4><p>不同类之间的距离度量：</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/23/NtKIKI.png" alt="NtKIKI.png"></p>
+<p>其中最小距离由两个簇中最近的样本点决定；最大距离则由最远样本点决定；平均距离有所有样本共同决定。也被形象的称为“单链接”、“全链接”、“均链接”。</p>
+<h4 id="应用范围："><a href="#应用范围：" class="headerlink" title="应用范围："></a>应用范围：</h4><p>最小值: 这种方法容易受到极端值的影响。</p>
+<p>最大值:容易受到极端值的影响.</p>
+<p>均值:这种方法计算量比较大，但结果比前两种方法更合理。</p>
+<h4 id="算法流程："><a href="#算法流程：" class="headerlink" title="算法流程："></a>算法流程：</h4><p>1.计算所有样本点两两之间的距离矩阵</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/23/NtKort.png" alt="距离矩阵"></p>
+<h4 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h4><p>1.主要应用在数据量比较小的时候</p>
+<p>2.算法稳定性比较好</p>
+<p>3.选择不同的距离衡量，往往有不同的结果</p>
+<h3 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h3><p>机器学习[周志华版]</p>
+<p><a href="http://211.69.141.138/wp-content/themes/begin%2Blts/inc/go.php?url=https://www.cnblogs.com/zongfa/p/9344769.html" target="_blank" rel="noopener">层次聚类</a></p>
+<p><a href="http://211.69.141.138/wp-content/themes/begin%2Blts/inc/go.php?url=https://www.jianshu.com/p/0f33ed1c38b9" target="_blank" rel="noopener">密度聚类</a></p>
 
     </div>
+
+    
+    
+    
+   
+   <div>
+     <div>
+  
+    <div style="text-align:center;color:#bfbfbf;font-size:16px;">
+      <span>------ 本文结束 </span>
+      <img src="https://s1.ax1x.com/2020/03/23/8HFzxH.png" 
+      style="display:inline-block;"
+      data-loaded="true"
+      alt="thankyou" border="0" 
+      width="100"
+      heigh="100"
+      />
+      <span> 感谢阅读 ------</span>
+
+    </div>
+    <p>
+    <a class="fancybox fancybox.image" 
+    href="https://s1.ax1x.com/2020/03/23/8HCEjI.jpg" 
+    itemscope="" itemtype="http://schema.org/ImageObject" 
+    itemprop="url" data-fancybox="default" 
+    rel="default" title="公众号" 
+    data-caption="公众号"
+    >
+    <img data-src="https://s1.ax1x.com/2020/03/23/8HCEjI.jpg" alt="公众号"
+     src="https://s1.ax1x.com/2020/03/23/8HCEjI.jpg" data-loaded="true">
+    </a>
+    <p  style="text-align:center;">
+     <sapn style="">欢迎扫一扫上面的微信二维码，订阅
+     <span style="color: #428bca;font-size:20px;">codeHub</span>
+     公众号</span>
+     </p>
+     </p>
+    
+  
+</div>
+   </div>
+  
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>zpliu
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://biocottonhub.github.io/codeHub/2020/06/23/2020-06/06%E8%81%9A%E7%B1%BB/" title="聚类">https://biocottonhub.github.io/codeHub/2020/06/23/2020-06/06聚类/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/codeHub/2020/06/23/2020-06/05PCA%E9%99%8D%E7%BB%B4%E6%89%93%E5%87%BB/" rel="prev" title="PCA降维打击">
+      <i class="fa fa-chevron-left"></i> PCA降维打击
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/codeHub/2020/06/23/2020-06/07%E6%95%B0%E6%8D%AE%E5%A4%87%E4%BB%BD/" rel="next" title="数据备份!">
+      数据备份! <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
   </div>
-  
-  
-  
-
-  
-
 
 
           </div>
           
+    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -400,6 +438,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于密度聚类"><span class="nav-number">1.</span> <span class="nav-text">基于密度聚类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义："><span class="nav-number">1.1.</span> <span class="nav-text">定义：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优化目标"><span class="nav-number">1.2.</span> <span class="nav-text">优化目标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#算法流程"><span class="nav-number">1.3.</span> <span class="nav-text">算法流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#特点"><span class="nav-number">1.4.</span> <span class="nav-text">特点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于层次聚类"><span class="nav-number">2.</span> <span class="nav-text">基于层次聚类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义：-1"><span class="nav-number">2.1.</span> <span class="nav-text">定义：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AGNES算法"><span class="nav-number">2.2.</span> <span class="nav-text">AGNES算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用范围："><span class="nav-number">2.3.</span> <span class="nav-text">应用范围：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#算法流程："><span class="nav-number">2.4.</span> <span class="nav-text">算法流程：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#特点："><span class="nav-number">2.5.</span> <span class="nav-text">特点：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考："><span class="nav-number">3.</span> <span class="nav-text">参考：</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
