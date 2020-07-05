@@ -42,16 +42,12 @@
 <p><code>plt.subplots()</code>函数返回两个对象</p>
 <ul>
 <li>fig 图形对象</li>
-<li>ax 坐标轴对象<br>当然如果不需要操作坐标轴的话，也可以直接使用<code>plot</code>函数<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">plt.plot([<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">6</span>],[<span class="number">2</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>])</span><br></pre></td></tr></table></figure>
-
+<li>ax 坐标轴对象<br>当然如果不需要操作坐标轴的话，也可以直接使用<code>plot</code>函数<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">plt.plot([<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">6</span>],[<span class="number">2</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>])</span><br><span class="line">plt.plot([<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">6</span>],[<span class="number">2</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]) <span class="comment">#直接使用plot函数</span></span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
-<p>​```python<br>plt.plot([2,3,5,6],[2,4,5,6]) #直接使用plot函数</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">#### 更加深入的理解图片的构造</span><br><span class="line">![figure图片构造](https:&#x2F;&#x2F;matplotlib.org&#x2F;_images&#x2F;anatomy.png)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;python</span><br><span class="line">figure&#x3D;plt.figure() ##没有坐标轴的空白图片,啥也看不到</span><br></pre></td></tr></table></figure>
-
-
-<pre><code>&lt;Figure size 432x288 with 0 Axes&gt;</code></pre><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">fig,ax=plt.subplots() <span class="comment">##带坐标轴的空白图片,只有单个坐标轴</span></span><br></pre></td></tr></table></figure>
+<h4 id="更加深入的理解图片的构造"><a href="#更加深入的理解图片的构造" class="headerlink" title="更加深入的理解图片的构造"></a>更加深入的理解图片的构造</h4><p><img data-src="https://matplotlib.org/_images/anatomy.png" alt="figure图片构造"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">figure=plt.figure() <span class="comment">##没有坐标轴的空白图片,啥也看不到</span></span><br><span class="line">fig,ax=plt.subplots() <span class="comment">##带坐标轴的空白图片,只有单个坐标轴</span></span><br></pre></td></tr></table></figure>
 
 
 <p><img data-src="https://s1.ax1x.com/2020/07/05/U91uzd.png" alt="U91uzd.png"></p>
