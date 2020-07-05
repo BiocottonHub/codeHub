@@ -1,6 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>经典Hi-C文献</title>
+    <url>/codeHub/2020/07/05/2020-07/03%E7%BB%8F%E5%85%B8Hic/</url>
+    <content><![CDATA[<blockquote>
+<p> A 3D Map of the Human Genome at Kilobase Resolution Reveals Principles of Chromatin Looping  </p>
+</blockquote>
+<h3 id="highlight"><a href="#highlight" class="headerlink" title="highlight"></a>highlight</h3><p>这篇文章通过改进了Hi-C的实验后，提高了分辨率，并且得到了以下结果:</p>
+<ol>
+<li>将genome中 交互contact domains 的大小定位到185kb左右</li>
+<li>根据组蛋白修饰将compartment细分成6个subcompartment</li>
+<li>在不同组织中鉴定到了~10000个染色质 loops</li>
+<li>loops与基因启动子、增强子有关，并且能够促进基因的表达</li>
+<li>在不同细胞和不同物种间，loops有着比较高的保守性</li>
+<li>发现大部分loops与compartment的边界重合现象</li>
+</ol>
+<a id="more"></a>
+
+<h3 id="根据highlight思考"><a href="#根据highlight思考" class="headerlink" title="根据highlight思考"></a>根据highlight思考</h3><ol>
+<li>首先相比于之前的Hi-C，suit Hi-C做了哪些改进</li>
+<li>Hi-C分析中，怎么计算domain的分辨率</li>
+<li>如何划分subcompartment</li>
+<li>怎么鉴定loops</li>
+</ol>
+<h3 id="Hi-C实验的改进"><a href="#Hi-C实验的改进" class="headerlink" title="Hi-C实验的改进"></a>Hi-C实验的改进</h3><p><img data-src="https://s1.ax1x.com/2020/07/05/Uptrbn.png" alt="Uptrbn.png"></p>
+<p>一代Hi-C技术 <code>dilution Hi-C</code>:</p>
+<ul>
+<li>通过将细胞核打碎后，在溶液中进行胶联</li>
+<li>使用6碱基的HindIII内切酶</li>
+<li>胶联时间比较长</li>
+</ul>
+<p><code>suit Hi-C</code>技术:</p>
+<ul>
+<li>在细胞核内进行胶联，减少一定的假阳性</li>
+<li>使用4碱基DNA内切酶，酶切效率更高</li>
+<li>胶联时间缩短，由7d变为3d</li>
+</ul>
+<h3 id="Hi-C中的一些概念和图片"><a href="#Hi-C中的一些概念和图片" class="headerlink" title="Hi-C中的一些概念和图片"></a>Hi-C中的一些概念和图片</h3><p><img data-src="https://s1.ax1x.com/2020/07/05/UpdCI1.png" alt="UpdCI1.png"></p>
+<p><code>matrix resolution</code>： 在Hi-C热图中人为定义的窗口的大小</p>
+<p><code>map resolution</code>：在基因组中的片段中，80%的位置存在至少1000次交互，这些片段中最小的那个片段长度；一般也就代表了Hi-C实验的最高分辨率了</p>
+<p>通过将染色体拆分成固定大小（10K，100K，1M）的连续片段，通过统计两两片段间交互的频率就可以得到一个二维矩阵M<del>i,j</del>，i和j当然代表染色体不同的两个位置</p>
+<p><code>interva</code>：是一窜连续的位置，如果两个interva发生了交互，那么在热图中就显示成一个矩形或者正方形</p>
+<p>例如图中 第一行是在500KB 的matrix resolution精度下，第二行是在50kb的精度下；其中数字21表示的就是interva的数目</p>
+<h3 id="得到contact-domain的大小"><a href="#得到contact-domain的大小" class="headerlink" title="得到contact domain的大小"></a>得到contact domain的大小</h3><p><img data-src="https://s1.ax1x.com/2020/07/05/UpdLTA.png" alt="UpdLTA.png"></p>
+<p>大致就是根据Hi-C构建的交互矩阵结果，通过分析interva，在图中也可以看出热图可以被区分成一个一个小方块。使用<code>Arrowhead algorithm</code>算法，得到这些方块的大小在40Kb~3M之间，中位数大致185kb</p>
+<h3 id="根据组蛋白修饰分成6个sub-compartment"><a href="#根据组蛋白修饰分成6个sub-compartment" class="headerlink" title="根据组蛋白修饰分成6个sub compartment"></a>根据组蛋白修饰分成6个sub compartment</h3><p><img data-src="https://s1.ax1x.com/2020/07/05/Upww0H.png" alt="Upww0H.png"></p>
+<p>通过使用随机聚类的算法，将concat Domains分成6个subcompartment，其中A1、A2亚组有更多高表达的基因，活跃型组蛋白修饰H3K36me3, H3K79me2 也很多。</p>
+<h3 id="鉴定染色质loops"><a href="#鉴定染色质loops" class="headerlink" title="鉴定染色质loops"></a>鉴定染色质loops</h3><p><img data-src="https://s1.ax1x.com/2020/07/05/Up06a9.png" alt="Up06a9.png"></p>
+<blockquote>
+<p>Such pairs correspond to pixels with higher contact frequency than typical pixels in their neighborhood  </p>
+</blockquote>
+<p>通过比较与局部比对的read进行比较，发现显著性的peak,这里的pixels也就对应了一个<code>matrix resolution</code>的大小，与此同时作者开发了一套鉴定染色体loop的流程<code>juicer-tools</code>。</p>
+<p>试了一下，感觉软件挺好用。</p>
+<p>juicer-tools 教程：<a href="https://github.com/BiocottonHub/BioSoftware/wiki/juicer-tools" target="_blank" rel="noopener">https://github.com/BiocottonHub/BioSoftware/wiki/juicer-tools</a></p>
+<h3 id="Loops保守性分析"><a href="#Loops保守性分析" class="headerlink" title="Loops保守性分析"></a>Loops保守性分析</h3><p>分析了不同细胞类型和不同物种中保守的loops后，发现在不同细胞中loops大多数是保守的，在老鼠和人中大约有50%的loops是保守的</p>
+<h3 id="loops与启动子、增强子"><a href="#loops与启动子、增强子" class="headerlink" title="loops与启动子、增强子"></a>loops与启动子、增强子</h3><p>通过对基因启动子进行分类，分层在loop区域和不在loop区域。发现启动子在loop区域的表达水平比没有loop的高出6倍之多</p>
+<p>同时分析了人类和老鼠中的一个基因SELL，在人类中SELL存在loop（左图，蓝圈）；而老鼠中不存在loop；人类中SELL是表达的，而老鼠中不表达。</p>
+<ul>
+<li>loops可能在3维空间上使得启动子和增强子靠近促进基因表达</li>
+</ul>
+<p><img data-src="https://s1.ax1x.com/2020/07/05/UpDm1P.png" alt="UpDm1P.png"></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li>A 3D Map of the Human Genome at Kilobase Resolution Reveals Principles of Chromatin Looping  </li>
+</ol>
+]]></content>
+      <categories>
+        <category>文献</category>
+      </categories>
+  </entry>
+  <entry>
     <title>多进程2.0</title>
     <url>/codeHub/2020/07/05/2020-07/02%E5%A4%9A%E8%BF%9B%E7%A8%8B/</url>
     <content><![CDATA[<p>在使用多线程并没有实质性的提速后，果断放弃了多线程；最后还是使用多进程的方式处理这个50G的大文件</p>
