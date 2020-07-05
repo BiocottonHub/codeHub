@@ -1,6 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>matplotlib入门</title>
+    <url>/codeHub/2020/07/05/2020-07/04matplotlib%E5%85%A5%E9%97%A8/</url>
+    <content><![CDATA[<p><strong>matplotlib</strong> 做基于python的一款可视化神器，类似于 <code>ggplot2</code>，它基本能涵盖常见的一些图形。同时得益于强大的python社区支持，这个包的功能也在不断增加。有时候写多了python，再写R，一时半会还想不起代码咋写。同时python中用于统计的包也比较全面，自己对python了解的还是多一些，准备在数据可视化方面用<code>matplotlib</code>。</p>
+<p><strong>matplotlib支持一些常见的图形例如:</strong></p>
+<ul>
+<li>线图;</li>
+<li>散点图;</li>
+<li>等高线图;</li>
+<li>条形图;</li>
+<li>柱状图;</li>
+<li>3D 图形,</li>
+<li>甚至是图形动画等等.</li>
+</ul>
+<a id="more"></a>
+
+<p><strong>官网网页</strong><br><a href="https://matplotlib.org/" target="_blank" rel="noopener">https://matplotlib.org/</a></p>
+<p><strong>学习视频教程:</strong> 莫烦的</p>
+<p><a href="https://morvanzhou.github.io/tutorials/data-manipulation/plt/1-1-why/" target="_blank" rel="noopener">https://morvanzhou.github.io/tutorials/data-manipulation/plt/1-1-why/</a></p>
+<p>话不多说，先上几张漂亮的图片，压压场</p>
+<p><img data-src="https://morvanzhou.github.io/static/results/plt/1_1_3.png" alt="3D"></p>
+<p><img data-src="https://matplotlib.org/_images/sphx_glr_span_regions_001.png" alt=""></p>
+<p><img data-src="https://matplotlib.org/_images/sphx_glr_hexbin_demo_001.png" alt=""></p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ul>
+<li>使用<code>pip</code>安装</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python -m pip install -U pip</span><br><span class="line">python -m pip install -U matplotlib</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#pip install matplotlib --user</span></span><br><span class="line"><span class="comment">#引入matplotlib包</span></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">fig, ax = plt.subplots()  <span class="comment"># Create a figure containing a single axes.</span></span><br><span class="line">ax.plot([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>], [<span class="number">1</span>, <span class="number">4</span>, <span class="number">2</span>, <span class="number">3</span>])  <span class="comment"># Plot some data on the axes.</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>[&lt;matplotlib.lines.Line2D at 0x7f34ca8c95e0&gt;]</code></pre><p><img data-src="https://s1.ax1x.com/2020/07/05/U91mJe.png" alt="U91mJe.png"></p>
+<p><code>plt.subplots()</code>函数返回两个对象</p>
+<ul>
+<li>fig 图形对象</li>
+<li>ax 坐标轴对象<br>当然如果不需要操作坐标轴的话，也可以直接使用<code>plot</code>函数<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">plt.plot([<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">6</span>],[<span class="number">2</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>])</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<p>​```python<br>plt.plot([2,3,5,6],[2,4,5,6]) #直接使用plot函数</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">#### 更加深入的理解图片的构造</span><br><span class="line">![figure图片构造](https:&#x2F;&#x2F;matplotlib.org&#x2F;_images&#x2F;anatomy.png)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;python</span><br><span class="line">figure&#x3D;plt.figure() ##没有坐标轴的空白图片,啥也看不到</span><br></pre></td></tr></table></figure>
+
+
+<pre><code>&lt;Figure size 432x288 with 0 Axes&gt;</code></pre><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">fig,ax=plt.subplots() <span class="comment">##带坐标轴的空白图片,只有单个坐标轴</span></span><br></pre></td></tr></table></figure>
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/05/U91uzd.png" alt="U91uzd.png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">fig,axs=plt.subplots(<span class="number">2</span>,<span class="number">2</span>) <span class="comment">##2x2的四坐标轴图片</span></span><br></pre></td></tr></table></figure>
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/05/U91nRH.png" alt="U91nRH.png"></p>
+<h2 id="Axes对象"><a href="#Axes对象" class="headerlink" title="Axes对象"></a>Axes对象</h2><ul>
+<li>通常Axes就是包含data的一个图片</li>
+<li>一张figure可以有多个Axes</li>
+<li>而一个Axes只属于某一个figure</li>
+<li>Axes包含有两个或者3个Axis（坐标轴）</li>
+<li>Axes类似于ggplot分面中的一个分面</li>
+</ul>
+<p>对坐标轴中显示数据范围的控制</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">axes.Axes.set_xlim() <span class="comment">##控制X轴显示范围</span></span><br><span class="line">axes.Axes.set_ylim() <span class="comment">##控制y轴显示范围</span></span><br></pre></td></tr></table></figure>
+<p>控制坐标轴标签与图形标签</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">axes.Axes.set_title() <span class="comment">##图片标签</span></span><br><span class="line">axes.Axes.set_xlabel() <span class="comment">##x轴标签</span></span><br><span class="line">axes.Axes.set_ylabel() <span class="comment">##y轴标签</span></span><br></pre></td></tr></table></figure>
+<p>控制图例名称和显示图例</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">axes.plot(data,label=<span class="string">"图例名"</span>)</span><br><span class="line">axes.legend()</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">matplotlib.use(<span class="string">'qt5agg'</span>)</span><br><span class="line">fig,axs=plt.subplots(<span class="number">2</span>,<span class="number">1</span>) <span class="comment">## 绘制2X1 图片</span></span><br><span class="line">axs[<span class="number">0</span>].plot([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>],label=<span class="string">"liner1"</span>) <span class="comment">#第一张图，以及图例</span></span><br><span class="line">axs[<span class="number">0</span>].plot([<span class="number">2</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>],[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>],label=<span class="string">"liner2"</span>) <span class="comment">#第一张图，以及图例</span></span><br><span class="line">axs[<span class="number">1</span>].plot([<span class="number">1</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>],[<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>],label=<span class="string">"test"</span>) <span class="comment"># 第二张图 以及图例</span></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> axs:   <span class="comment">#批量设置标题 和图例</span></span><br><span class="line">    item.set_xlim(<span class="number">0</span>,<span class="number">10</span>)</span><br><span class="line">    item.set_xlabel(<span class="string">'x label'</span>)</span><br><span class="line">    item.set_ylabel(<span class="string">'y label'</span>)</span><br><span class="line">    item.set_title(<span class="string">'test'</span>)</span><br><span class="line">    item.legend()</span><br><span class="line">plt.savefig(<span class="string">"test.png"</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="Axis对象"><a href="#Axis对象" class="headerlink" title="Axis对象"></a>Axis对象</h1><ul>
+<li>用于设置坐标轴范围</li>
+<li>控制坐标轴上显示的标记，<code>Locator</code>对象</li>
+<li>控制坐标轴上显示的字符 <code>Formatter</code>对象</li>
+</ul>
+<h1 id="Artist"><a href="#Artist" class="headerlink" title="Artist"></a>Artist</h1><p>基本上所有的figure都会用到Artist对象，并且Artist是与Axes对象绑定在一起使用的。Artist对象就包含以下几个对象</p>
+<ul>
+<li>Text</li>
+<li>Line2D</li>
+<li>collection</li>
+<li>Patch</li>
+</ul>
+<h1 id="输入数据格式"><a href="#输入数据格式" class="headerlink" title="输入数据格式"></a>输入数据格式</h1><p>所有的绘图数据都是基于<code>numpy.array</code>类型进行的，当然有些类似array的数据类型，例如<code>pandas</code>中的dataFrame,<code>numpy</code>中的matrix;这些数据类型作为输入数据时，可能不能够正常的工作，所有还是将它们转换成<code>numpy.array</code>之后再绘制图片吧</p>
+<ul>
+<li><h4 id="将panda-数据框转换"><a href="#将panda-数据框转换" class="headerlink" title="将panda 数据框转换"></a>将panda 数据框转换</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas</span><br><span class="line">a=pandas.DataFrame(np.random.rand(<span class="number">4</span>,<span class="number">5</span>), columns = list(<span class="string">'abcde'</span>)) <span class="comment">##获取4x5的随机数据框</span></span><br><span class="line">print(a)</span><br><span class="line">          a         b         c         d         e</span><br><span class="line"><span class="number">0</span>  <span class="number">0.505938</span>  <span class="number">0.742418</span>  <span class="number">0.732312</span>  <span class="number">0.008823</span>  <span class="number">0.559201</span></span><br><span class="line"><span class="number">1</span>  <span class="number">0.834437</span>  <span class="number">0.657429</span>  <span class="number">0.136503</span>  <span class="number">0.654495</span>  <span class="number">0.841873</span></span><br><span class="line"><span class="number">2</span>  <span class="number">0.725788</span>  <span class="number">0.746307</span>  <span class="number">0.240214</span>  <span class="number">0.732954</span>  <span class="number">0.119796</span></span><br><span class="line"><span class="number">3</span>  <span class="number">0.452142</span>  <span class="number">0.172521</span>  <span class="number">0.103506</span>  <span class="number">0.472862</span>  <span class="number">0.744575</span></span><br><span class="line">a_array=a.values</span><br><span class="line">print(a) <span class="comment">##看起来没变化，实质上一个是数据框，一个是数组</span></span><br><span class="line">          a         b         c         d         e</span><br><span class="line"><span class="number">0</span>  <span class="number">0.505938</span>  <span class="number">0.742418</span>  <span class="number">0.732312</span>  <span class="number">0.008823</span>  <span class="number">0.559201</span></span><br><span class="line"><span class="number">1</span>  <span class="number">0.834437</span>  <span class="number">0.657429</span>  <span class="number">0.136503</span>  <span class="number">0.654495</span>  <span class="number">0.841873</span></span><br><span class="line"><span class="number">2</span>  <span class="number">0.725788</span>  <span class="number">0.746307</span>  <span class="number">0.240214</span>  <span class="number">0.732954</span>  <span class="number">0.119796</span></span><br><span class="line"><span class="number">3</span>  <span class="number">0.452142</span>  <span class="number">0.172521</span>  <span class="number">0.103506</span>  <span class="number">0.472862</span>  <span class="number">0.744575</span></span><br></pre></td></tr></table></figure></li>
+<li><h4 id="将numpy-matrix转换"><a href="#将numpy-matrix转换" class="headerlink" title="将numpy.matrix转换"></a>将numpy.matrix转换</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">b = np.matrix([[<span class="number">1</span>, <span class="number">2</span>], [<span class="number">3</span>, <span class="number">4</span>]])</span><br><span class="line">print(b)</span><br><span class="line">[[<span class="number">1</span> <span class="number">2</span>]</span><br><span class="line"> [<span class="number">3</span> <span class="number">4</span>]]</span><br><span class="line">b_asarray = np.asarray(b)</span><br><span class="line">print(b)</span><br><span class="line">[[<span class="number">1</span> <span class="number">2</span>]</span><br><span class="line"> [<span class="number">3</span> <span class="number">4</span>]]</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<h1 id="pyplot两种绘图方式"><a href="#pyplot两种绘图方式" class="headerlink" title="pyplot两种绘图方式"></a>pyplot两种绘图方式</h1><ul>
+<li><h4 id="面向对象的方式"><a href="#面向对象的方式" class="headerlink" title="面向对象的方式"></a>面向对象的方式</h4>这种在写脚本的时候，可以封装成函数，在不修改代码的情况下，仅仅改变数据就可以获得不同的图片。用的比较多；不涉及与用户的交互</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">x=np.linspace(<span class="number">0</span>, <span class="number">2</span>, <span class="number">100</span>)</span><br><span class="line">fig,ax=plt.subplots()</span><br><span class="line">ax.plot(x,x,label=<span class="string">'liner'</span>)</span><br><span class="line">ax.legend()</span><br></pre></td></tr></table></figure>
+<ul>
+<li><h4 id="直接调用pyplot方法"><a href="#直接调用pyplot方法" class="headerlink" title="直接调用pyplot方法"></a>直接调用pyplot方法</h4>这个有点类似ggplot2，在jupyter中用的频繁。不过个人还是比较喜欢用第一种面向对象的方式，毕竟对象嘛..</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">x=np.linspace(<span class="number">0</span>, <span class="number">2</span>, <span class="number">100</span>)</span><br><span class="line">plt.plot(x,x,label=<span class="string">"liner"</span>)</span><br><span class="line">plt.legend()</span><br></pre></td></tr></table></figure>
+<ul>
+<li><h4 id="还有第三种，之后遇到在看吧"><a href="#还有第三种，之后遇到在看吧" class="headerlink" title="还有第三种，之后遇到在看吧"></a>还有<a href="https://matplotlib.org/tutorials/introductory/usage.html#the-object-oriented-interface-and-the-pyplot-interface" target="_blank" rel="noopener">第三种</a>，之后遇到在看吧</h4></li>
+</ul>
+<h1 id="如何导出图片"><a href="#如何导出图片" class="headerlink" title="如何导出图片"></a>如何导出图片</h1><p>文档里用了一个词<code>BacKends</code>，意思就是针对不同的需求，导出不同类型的图片</p>
+<ul>
+<li><h4 id="AGG-支持png"><a href="#AGG-支持png" class="headerlink" title="AGG 支持png"></a>AGG 支持png</h4></li>
+<li><h4 id="PS-支持ps、eps"><a href="#PS-支持ps、eps" class="headerlink" title="PS 支持ps、eps"></a>PS 支持ps、eps</h4></li>
+<li><h4 id="PDF-支持pdf"><a href="#PDF-支持pdf" class="headerlink" title="PDF 支持pdf"></a>PDF 支持pdf</h4></li>
+<li><h4 id="SVG-支持svg"><a href="#SVG-支持svg" class="headerlink" title="SVG 支持svg"></a>SVG 支持svg</h4></li>
+<li><h4 id="Cairo-支持png-ps-pdf-svg"><a href="#Cairo-支持png-ps-pdf-svg" class="headerlink" title="Cairo 支持png ps pdf svg"></a>Cairo 支持png ps pdf svg</h4></li>
+</ul>
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>一般来说不用配置，能够根据系统自动检测，<br>linux中配置一下环境变量即可</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">export</span> MPLBACKEND=qt5agg</span><br><span class="line">$ python simple_plot.py</span><br><span class="line"><span class="comment">##或者</span></span><br><span class="line">$ MPLBACKEND=qt5agg python simple_plot.py</span><br></pre></td></tr></table></figure>
+<p>在脚本内部配置</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib</span><br><span class="line">matplotlib.use(<span class="string">'qt5agg'</span>)</span><br><span class="line"><span class="comment">##导出图片</span></span><br><span class="line">matplotlib.pyplot.savefig(<span class="string">'filename'</span>)</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+  </entry>
+  <entry>
     <title>经典Hi-C文献</title>
     <url>/codeHub/2020/07/05/2020-07/03%E7%BB%8F%E5%85%B8Hic/</url>
     <content><![CDATA[<blockquote>
