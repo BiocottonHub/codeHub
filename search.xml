@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>05HiC-Pro的安装与使用</title>
+    <title>HiC-Pro的安装与使用</title>
     <url>/codeHub/2020/07/11/2020-07/05HiC-Pro%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/</url>
     <content><![CDATA[<h1 id="HiC-Pro安装与使用"><a href="#HiC-Pro安装与使用" class="headerlink" title="HiC-Pro安装与使用"></a>HiC-Pro安装与使用</h1><p>HiC-Pro可以用来处理Hi-C数据，从原始的fastq文件(配对端Illumina数据)到标准化的交互图谱。简单的来说就是将Hi-C数据比对到拼装好的参考基因组上，并形成交互文件去存储Hi-C数据。下面我们就来介绍一下HiC-Pro的安装与使用。</p>
 <a id="more"></a>
