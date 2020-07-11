@@ -1,8 +1,868 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>05HiC-Pro的安装与使用</title>
+    <url>/codeHub/2020/07/11/2020-07/05HiC-Pro%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<h1 id="HiC-Pro安装与使用"><a href="#HiC-Pro安装与使用" class="headerlink" title="HiC-Pro安装与使用"></a>HiC-Pro安装与使用</h1><p>HiC-Pro可以用来处理Hi-C数据，从原始的fastq文件(配对端Illumina数据)到标准化的交互图谱。简单的来说就是将Hi-C数据比对到拼装好的参考基因组上，并形成交互文件去存储Hi-C数据。下面我们就来介绍一下HiC-Pro的安装与使用。</p>
+<a id="more"></a>
+
+<h2 id="HiC-Pro的安装"><a href="#HiC-Pro的安装" class="headerlink" title="HiC-Pro的安装"></a>HiC-Pro的安装</h2><hr>
+<h3 id="HiC-Pro所需要的这些依赖"><a href="#HiC-Pro所需要的这些依赖" class="headerlink" title="HiC-Pro所需要的这些依赖"></a>HiC-Pro所需要的这些依赖</h3><p><a href="https://imgchr.com/i/UldOCd" target="_blank" rel="noopener"><img data-src="https://s1.ax1x.com/2020/07/11/UldOCd.png" alt="依赖.png"></a></p>
+<h3 id="1-使用conda安装依赖"><a href="#1-使用conda安装依赖" class="headerlink" title="1.使用conda安装依赖"></a><strong>1.使用conda安装依赖</strong></h3><p>python版本为<code>2.7</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">conda create -n hicpro python=2.7	<span class="comment">#强烈推荐安装一个新的环境</span></span><br><span class="line">conda install -y samtools bowtie2 R</span><br><span class="line">conda install -y pysam bx-python numpy scipy</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-安装对应的R包"><a href="#2-安装对应的R包" class="headerlink" title="2.安装对应的R包"></a><strong>2.安装对应的R包</strong></h3><p>在当前conda环境下运行R</p>
+<p>也可以绝对路径运行R</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">R</span><br><span class="line">install.packages(c(<span class="string">'ggplot2'</span>,<span class="string">'RColorBrewer'</span>))</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-配置confir-install-txt安装文件"><a href="#3-配置confir-install-txt安装文件" class="headerlink" title="3.配置confir-install.txt安装文件"></a>3.配置confir-install.txt安装文件</h3><p><code>PREFIX</code>软件安装路径，会在该路径创建一个<code>HiC-Pro_2.11.1</code>目录</p>
+<p><code>R_PATH</code>指定conda环境下的R</p>
+<p><code>PYTHON_PATH</code>指定conda环境下的python</p>
+<p><code>CLUSTER_SYSCLUSTER_SYS</code>集群调度系统为<code>TORQUE,SGE,SLURM,LSF</code>四个中的一种</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">PREFIX = /public/home/yxlong/yxlong/app/	<span class="comment">#HiC-Pro所在目录</span></span><br><span class="line">BOWTIE2_PATH = /public/home/yxlong/miniconda3/bin/bowtie2	<span class="comment">#bowtie2所在目录</span></span><br><span class="line">SAMTOOLS_PATH = /public/home/yxlong/miniconda3/bin/samtools	<span class="comment">#samtools所在的目录</span></span><br><span class="line">R_PATH = /public/home/yxlong/miniconda3/envs/hicpro/bin/R	<span class="comment">#R包所在目录</span></span><br><span class="line">PYTHON_PATH = /public/home/yxlong/miniconda3/envs/hicpro/bin/python	<span class="comment">#python所在目录</span></span><br><span class="line">CLUSTER_SYS = LSF	<span class="comment">#TORQUE,SGE,SLURM,LSF四个中的一种</span></span><br></pre></td></tr></table></figure>
+
+<p>这些路径可以which+对应的依赖（如: which bowtie2）获得</p>
+<h3 id="4-安装"><a href="#4-安装" class="headerlink" title="4.安装"></a>4.安装</h3><p>配置文件修改完成之后运行下列指令即可完成安装</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make configure</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="HiC-Pro的使用"><a href="#HiC-Pro的使用" class="headerlink" title="HiC-Pro的使用"></a>HiC-Pro的使用</h2><hr>
+<h3 id="1-文件的处理"><a href="#1-文件的处理" class="headerlink" title="1.文件的处理"></a>1.文件的处理</h3><h4 id="1-1文件夹的创建"><a href="#1-1文件夹的创建" class="headerlink" title="1.1文件夹的创建"></a>1.1文件夹的创建</h4><p>建议创建两个文件夹命名为<code>sample.reads</code>和<code>sample.ref</code>（sample为自己的物种名字即可，下面以亚洲棉Ga为例）</p>
+<h4 id="1-2Ga-reads的的目录结构"><a href="#1-2Ga-reads的的目录结构" class="headerlink" title="1.2Ga.reads的的目录结构"></a>1.2<code>Ga.reads</code>的的目录结构</h4><p>目录结构如下（依据自己的研究修改物种名即可，Ga_1、Ga_2…为不同的生物学重复）</p>
+<p><img data-src="https://s1.ax1x.com/2020/07/11/UldbUe.png" alt="reads.png"></p>
+<h4 id="1-3Ga-ref的相关文件"><a href="#1-3Ga-ref的相关文件" class="headerlink" title="1.3Ga.ref的相关文件"></a>1.3<code>Ga.ref</code>的相关文件</h4><p><img data-src="https://s1.ax1x.com/2020/07/11/Uldq4H.png" alt="ref.png"></p>
+<p>Ga.fasta文件是一个link文件，链接的是拼装好的参考基因组</p>
+<p>建立索引 （索引的命名为物种名）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/PATH/TO/bowtie2-build --threads 20 /Ga.ref/Ga.fasta /Ga.ref/Ga</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-4酶切信息文件的获得"><a href="#1-4酶切信息文件的获得" class="headerlink" title="1.4酶切信息文件的获得"></a>1.4酶切信息文件的获得</h4><p>采用HiC-Pro自带的digest_genome.py程序酶切位点信息文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/PATH/TO/HiC-Pro_2.11.1/bin/utils/digest_genome.py -r hindiii -o Ga.HindIII.txt /Ga.ref/Ga.fasta</span><br><span class="line"><span class="comment">#-r指定酶的名称或者序列（如下图）</span></span><br><span class="line"><span class="comment">#-o指定酶切信息文件的输出目录</span></span><br><span class="line"><span class="comment">#最后的fasta文件是组装的参考基因组</span></span><br></pre></td></tr></table></figure>
+
+<p><img data-src="https://s1.ax1x.com/2020/07/11/UldjgI.png" alt="酶切.png"></p>
+<h4 id="1-5基因组中序列大小文件"><a href="#1-5基因组中序列大小文件" class="headerlink" title="1.5基因组中序列大小文件"></a>1.5基因组中序列大小文件</h4><p>序列大小文件格式如下 contig1[TAB]contig1_length</p>
+<p><img data-src="https://s1.ax1x.com/2020/07/11/UldX8A.png" alt="size.png"></p>
+<p>可以用如下指令获得</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">samtools faidx /Ga.ref/Ga.fasta &amp;&amp; awk <span class="string">'&#123;print $1"\t"$2&#125;'</span> /PATH/TO/Ga.fasta.fai &gt; Ga.fasta.size <span class="comment">#注意生成的.fai在.fasta文件所在的目录下面</span></span><br></pre></td></tr></table></figure>
+
+<p>至此，相关文件的准备就结束了。</p>
+<h3 id="2-配置文件的书写"><a href="#2-配置文件的书写" class="headerlink" title="2.配置文件的书写"></a>2.配置文件的书写</h3><p>首先将配置文件复制一份到当前目录下</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cp &#x2F;PATH&#x2F;TO&#x2F;HiC-Pro_2.11.1&#x2F;config-hicpro.txt .</span><br></pre></td></tr></table></figure>
+
+<p>然后，进行修改（以下为通常需要修改的参数，其他的参数的修改请参考官网）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># N_CPU，例如N_CPU = 24</span></span><br><span class="line"><span class="comment"># JOB_NAME，例如JOB_NAME = Ga</span></span><br><span class="line"><span class="comment"># JOB_WALLTIME，例如JOB_WALLTIME = 11:00:00</span></span><br><span class="line"><span class="comment"># JOB_QUEUE，例如JOB_QUEUE = normal</span></span><br><span class="line"><span class="comment"># JOB_MAIL，例如JOB_MAIL = 1570447120@qq.com</span></span><br><span class="line"><span class="comment"># BOWTIE2_IDX_PATH填写用bowtie2对reference建立索引的目录，注意是目录，而不是索引路径!如/PATH/to/Ga.ref</span></span><br><span class="line"><span class="comment"># REFERENCE_GENOME，例如Ga 注意：这里REFERENCE_GENOME一定要和bowtie2建立的索引对应上,名字为物种名</span></span><br><span class="line"><span class="comment"># GENOME_SIZE，即生成的文件Ga.fasta.size（最好使用绝对路径）</span></span><br><span class="line"><span class="comment"># GENOME_FRAGMENT，用digest_genome.py程序生成的文件Ga.HindIII.txt</span></span><br><span class="line"><span class="comment"># LIGATION_SITE，酶的序列，例如HindIII，则为AAGCTAGCTT；如果是MboI则序列为GATCGATC。</span></span><br><span class="line"><span class="comment"># MIN_FRAG_SIZE，例如MIN_FRAG_SIZE = 100</span></span><br><span class="line"><span class="comment"># MAX_FRAG_SIZE，例如MAX_FRAG_SIZE = 160000</span></span><br><span class="line"><span class="comment"># MIN_INSERT_SIZE，例如MIN_INSERT_SIZE = 200</span></span><br><span class="line"><span class="comment"># MAX_INSERT_SIZE，例如MAX_INSERT_SIZE = 600</span></span><br><span class="line"><span class="comment"># GET_PROCESS_SAM，例如GET_PROCESS_SAM = 1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-运行HiC-Pro"><a href="#3-运行HiC-Pro" class="headerlink" title="3.运行HiC-Pro"></a>3.运行HiC-Pro</h3><p>HiC-Pro的使用很简单，主要就是三个参数，指令如下（单线程运行）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/PATH/TO/HiC-Pro_2.11.1/bin/HiC-Pro --input Ga.reads --output hicpro_output --conf config-hicpro.txt </span><br><span class="line"><span class="comment"># --input reads所在的文件</span></span><br><span class="line"><span class="comment"># --output 输出的文件夹</span></span><br><span class="line"><span class="comment"># --conf 配置文件</span></span><br></pre></td></tr></table></figure>
+
+<p>如果想多线程运行，要加上-p参数，输入指令后会在输出文件中生成两个文件<code>HiCPro_step1.sh</code>、<code>HiCPro_step2.sh</code>。先运行step1，step1执行完成后，再执行step2即可。</p>
+]]></content>
+      <categories>
+        <category>Hi-C</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>matplotlib入门</title>
+    <url>/codeHub/2020/07/05/2020-07/04matplotlib%E5%85%A5%E9%97%A8/</url>
+    <content><![CDATA[<p><strong>matplotlib</strong> 做基于python的一款可视化神器，类似于 <code>ggplot2</code>，它基本能涵盖常见的一些图形。同时得益于强大的python社区支持，这个包的功能也在不断增加。有时候写多了python，再写R，一时半会还想不起代码咋写。同时python中用于统计的包也比较全面，自己对python了解的还是多一些，准备在数据可视化方面用<code>matplotlib</code>。</p>
+<p><strong>matplotlib支持一些常见的图形例如:</strong></p>
+<ul>
+<li>线图;</li>
+<li>散点图;</li>
+<li>等高线图;</li>
+<li>条形图;</li>
+<li>柱状图;</li>
+<li>3D 图形,</li>
+<li>甚至是图形动画等等.</li>
+</ul>
+<a id="more"></a>
+
+<p><strong>官网网页</strong><br><a href="https://matplotlib.org/" target="_blank" rel="noopener">https://matplotlib.org/</a></p>
+<p><strong>学习视频教程:</strong> 莫烦的</p>
+<p><a href="https://morvanzhou.github.io/tutorials/data-manipulation/plt/1-1-why/" target="_blank" rel="noopener">https://morvanzhou.github.io/tutorials/data-manipulation/plt/1-1-why/</a></p>
+<p>话不多说，先上几张漂亮的图片，压压场</p>
+<p><img data-src="https://morvanzhou.github.io/static/results/plt/1_1_3.png" alt="3D"></p>
+<p><img data-src="https://matplotlib.org/_images/sphx_glr_span_regions_001.png" alt=""></p>
+<p><img data-src="https://matplotlib.org/_images/sphx_glr_hexbin_demo_001.png" alt=""></p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ul>
+<li>使用<code>pip</code>安装</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python -m pip install -U pip</span><br><span class="line">python -m pip install -U matplotlib</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#pip install matplotlib --user</span></span><br><span class="line"><span class="comment">#引入matplotlib包</span></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">fig, ax = plt.subplots()  <span class="comment"># Create a figure containing a single axes.</span></span><br><span class="line">ax.plot([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>], [<span class="number">1</span>, <span class="number">4</span>, <span class="number">2</span>, <span class="number">3</span>])  <span class="comment"># Plot some data on the axes.</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>[&lt;matplotlib.lines.Line2D at 0x7f34ca8c95e0&gt;]</code></pre><p><img data-src="https://s1.ax1x.com/2020/07/05/U91mJe.png" alt="U91mJe.png"></p>
+<p><code>plt.subplots()</code>函数返回两个对象</p>
+<ul>
+<li>fig 图形对象</li>
+<li>ax 坐标轴对象<br>当然如果不需要操作坐标轴的话，也可以直接使用<code>plot</code>函数<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">plt.plot([<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">6</span>],[<span class="number">2</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>])</span><br><span class="line">plt.plot([<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">6</span>],[<span class="number">2</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]) <span class="comment">#直接使用plot函数</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="更加深入的理解图片的构造"><a href="#更加深入的理解图片的构造" class="headerlink" title="更加深入的理解图片的构造"></a>更加深入的理解图片的构造</h4><p><img data-src="https://matplotlib.org/_images/anatomy.png" alt="figure图片构造"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">figure=plt.figure() <span class="comment">##没有坐标轴的空白图片,啥也看不到</span></span><br><span class="line">fig,ax=plt.subplots() <span class="comment">##带坐标轴的空白图片,只有单个坐标轴</span></span><br></pre></td></tr></table></figure>
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/05/U91uzd.png" alt="U91uzd.png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">fig,axs=plt.subplots(<span class="number">2</span>,<span class="number">2</span>) <span class="comment">##2x2的四坐标轴图片</span></span><br></pre></td></tr></table></figure>
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/05/U91nRH.png" alt="U91nRH.png"></p>
+<h2 id="Axes对象"><a href="#Axes对象" class="headerlink" title="Axes对象"></a>Axes对象</h2><ul>
+<li>通常Axes就是包含data的一个图片</li>
+<li>一张figure可以有多个Axes</li>
+<li>而一个Axes只属于某一个figure</li>
+<li>Axes包含有两个或者3个Axis（坐标轴）</li>
+<li>Axes类似于ggplot分面中的一个分面</li>
+</ul>
+<p>对坐标轴中显示数据范围的控制</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">axes.Axes.set_xlim() <span class="comment">##控制X轴显示范围</span></span><br><span class="line">axes.Axes.set_ylim() <span class="comment">##控制y轴显示范围</span></span><br></pre></td></tr></table></figure>
+<p>控制坐标轴标签与图形标签</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">axes.Axes.set_title() <span class="comment">##图片标签</span></span><br><span class="line">axes.Axes.set_xlabel() <span class="comment">##x轴标签</span></span><br><span class="line">axes.Axes.set_ylabel() <span class="comment">##y轴标签</span></span><br></pre></td></tr></table></figure>
+<p>控制图例名称和显示图例</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">axes.plot(data,label=<span class="string">"图例名"</span>)</span><br><span class="line">axes.legend()</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">matplotlib.use(<span class="string">'qt5agg'</span>)</span><br><span class="line">fig,axs=plt.subplots(<span class="number">2</span>,<span class="number">1</span>) <span class="comment">## 绘制2X1 图片</span></span><br><span class="line">axs[<span class="number">0</span>].plot([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>],label=<span class="string">"liner1"</span>) <span class="comment">#第一张图，以及图例</span></span><br><span class="line">axs[<span class="number">0</span>].plot([<span class="number">2</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>],[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>],label=<span class="string">"liner2"</span>) <span class="comment">#第一张图，以及图例</span></span><br><span class="line">axs[<span class="number">1</span>].plot([<span class="number">1</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>],[<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>],label=<span class="string">"test"</span>) <span class="comment"># 第二张图 以及图例</span></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> axs:   <span class="comment">#批量设置标题 和图例</span></span><br><span class="line">    item.set_xlim(<span class="number">0</span>,<span class="number">10</span>)</span><br><span class="line">    item.set_xlabel(<span class="string">'x label'</span>)</span><br><span class="line">    item.set_ylabel(<span class="string">'y label'</span>)</span><br><span class="line">    item.set_title(<span class="string">'test'</span>)</span><br><span class="line">    item.legend()</span><br><span class="line">plt.savefig(<span class="string">"test.png"</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="Axis对象"><a href="#Axis对象" class="headerlink" title="Axis对象"></a>Axis对象</h1><ul>
+<li>用于设置坐标轴范围</li>
+<li>控制坐标轴上显示的标记，<code>Locator</code>对象</li>
+<li>控制坐标轴上显示的字符 <code>Formatter</code>对象</li>
+</ul>
+<h1 id="Artist"><a href="#Artist" class="headerlink" title="Artist"></a>Artist</h1><p>基本上所有的figure都会用到Artist对象，并且Artist是与Axes对象绑定在一起使用的。Artist对象就包含以下几个对象</p>
+<ul>
+<li>Text</li>
+<li>Line2D</li>
+<li>collection</li>
+<li>Patch</li>
+</ul>
+<h1 id="输入数据格式"><a href="#输入数据格式" class="headerlink" title="输入数据格式"></a>输入数据格式</h1><p>所有的绘图数据都是基于<code>numpy.array</code>类型进行的，当然有些类似array的数据类型，例如<code>pandas</code>中的dataFrame,<code>numpy</code>中的matrix;这些数据类型作为输入数据时，可能不能够正常的工作，所有还是将它们转换成<code>numpy.array</code>之后再绘制图片吧</p>
+<ul>
+<li><h4 id="将panda-数据框转换"><a href="#将panda-数据框转换" class="headerlink" title="将panda 数据框转换"></a>将panda 数据框转换</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas</span><br><span class="line">a=pandas.DataFrame(np.random.rand(<span class="number">4</span>,<span class="number">5</span>), columns = list(<span class="string">'abcde'</span>)) <span class="comment">##获取4x5的随机数据框</span></span><br><span class="line">print(a)</span><br><span class="line">          a         b         c         d         e</span><br><span class="line"><span class="number">0</span>  <span class="number">0.505938</span>  <span class="number">0.742418</span>  <span class="number">0.732312</span>  <span class="number">0.008823</span>  <span class="number">0.559201</span></span><br><span class="line"><span class="number">1</span>  <span class="number">0.834437</span>  <span class="number">0.657429</span>  <span class="number">0.136503</span>  <span class="number">0.654495</span>  <span class="number">0.841873</span></span><br><span class="line"><span class="number">2</span>  <span class="number">0.725788</span>  <span class="number">0.746307</span>  <span class="number">0.240214</span>  <span class="number">0.732954</span>  <span class="number">0.119796</span></span><br><span class="line"><span class="number">3</span>  <span class="number">0.452142</span>  <span class="number">0.172521</span>  <span class="number">0.103506</span>  <span class="number">0.472862</span>  <span class="number">0.744575</span></span><br><span class="line">a_array=a.values</span><br><span class="line">print(a) <span class="comment">##看起来没变化，实质上一个是数据框，一个是数组</span></span><br><span class="line">          a         b         c         d         e</span><br><span class="line"><span class="number">0</span>  <span class="number">0.505938</span>  <span class="number">0.742418</span>  <span class="number">0.732312</span>  <span class="number">0.008823</span>  <span class="number">0.559201</span></span><br><span class="line"><span class="number">1</span>  <span class="number">0.834437</span>  <span class="number">0.657429</span>  <span class="number">0.136503</span>  <span class="number">0.654495</span>  <span class="number">0.841873</span></span><br><span class="line"><span class="number">2</span>  <span class="number">0.725788</span>  <span class="number">0.746307</span>  <span class="number">0.240214</span>  <span class="number">0.732954</span>  <span class="number">0.119796</span></span><br><span class="line"><span class="number">3</span>  <span class="number">0.452142</span>  <span class="number">0.172521</span>  <span class="number">0.103506</span>  <span class="number">0.472862</span>  <span class="number">0.744575</span></span><br></pre></td></tr></table></figure></li>
+<li><h4 id="将numpy-matrix转换"><a href="#将numpy-matrix转换" class="headerlink" title="将numpy.matrix转换"></a>将numpy.matrix转换</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">b = np.matrix([[<span class="number">1</span>, <span class="number">2</span>], [<span class="number">3</span>, <span class="number">4</span>]])</span><br><span class="line">print(b)</span><br><span class="line">[[<span class="number">1</span> <span class="number">2</span>]</span><br><span class="line"> [<span class="number">3</span> <span class="number">4</span>]]</span><br><span class="line">b_asarray = np.asarray(b)</span><br><span class="line">print(b)</span><br><span class="line">[[<span class="number">1</span> <span class="number">2</span>]</span><br><span class="line"> [<span class="number">3</span> <span class="number">4</span>]]</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<h1 id="pyplot两种绘图方式"><a href="#pyplot两种绘图方式" class="headerlink" title="pyplot两种绘图方式"></a>pyplot两种绘图方式</h1><ul>
+<li><h4 id="面向对象的方式"><a href="#面向对象的方式" class="headerlink" title="面向对象的方式"></a>面向对象的方式</h4>这种在写脚本的时候，可以封装成函数，在不修改代码的情况下，仅仅改变数据就可以获得不同的图片。用的比较多；不涉及与用户的交互</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">x=np.linspace(<span class="number">0</span>, <span class="number">2</span>, <span class="number">100</span>)</span><br><span class="line">fig,ax=plt.subplots()</span><br><span class="line">ax.plot(x,x,label=<span class="string">'liner'</span>)</span><br><span class="line">ax.legend()</span><br></pre></td></tr></table></figure>
+<ul>
+<li><h4 id="直接调用pyplot方法"><a href="#直接调用pyplot方法" class="headerlink" title="直接调用pyplot方法"></a>直接调用pyplot方法</h4>这个有点类似ggplot2，在jupyter中用的频繁。不过个人还是比较喜欢用第一种面向对象的方式，毕竟对象嘛..</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">x=np.linspace(<span class="number">0</span>, <span class="number">2</span>, <span class="number">100</span>)</span><br><span class="line">plt.plot(x,x,label=<span class="string">"liner"</span>)</span><br><span class="line">plt.legend()</span><br></pre></td></tr></table></figure>
+<ul>
+<li><h4 id="还有第三种，之后遇到在看吧"><a href="#还有第三种，之后遇到在看吧" class="headerlink" title="还有第三种，之后遇到在看吧"></a>还有<a href="https://matplotlib.org/tutorials/introductory/usage.html#the-object-oriented-interface-and-the-pyplot-interface" target="_blank" rel="noopener">第三种</a>，之后遇到在看吧</h4></li>
+</ul>
+<h1 id="如何导出图片"><a href="#如何导出图片" class="headerlink" title="如何导出图片"></a>如何导出图片</h1><p>文档里用了一个词<code>BacKends</code>，意思就是针对不同的需求，导出不同类型的图片</p>
+<ul>
+<li><h4 id="AGG-支持png"><a href="#AGG-支持png" class="headerlink" title="AGG 支持png"></a>AGG 支持png</h4></li>
+<li><h4 id="PS-支持ps、eps"><a href="#PS-支持ps、eps" class="headerlink" title="PS 支持ps、eps"></a>PS 支持ps、eps</h4></li>
+<li><h4 id="PDF-支持pdf"><a href="#PDF-支持pdf" class="headerlink" title="PDF 支持pdf"></a>PDF 支持pdf</h4></li>
+<li><h4 id="SVG-支持svg"><a href="#SVG-支持svg" class="headerlink" title="SVG 支持svg"></a>SVG 支持svg</h4></li>
+<li><h4 id="Cairo-支持png-ps-pdf-svg"><a href="#Cairo-支持png-ps-pdf-svg" class="headerlink" title="Cairo 支持png ps pdf svg"></a>Cairo 支持png ps pdf svg</h4></li>
+</ul>
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>一般来说不用配置，能够根据系统自动检测，<br>linux中配置一下环境变量即可</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">export</span> MPLBACKEND=qt5agg</span><br><span class="line">$ python simple_plot.py</span><br><span class="line"><span class="comment">##或者</span></span><br><span class="line">$ MPLBACKEND=qt5agg python simple_plot.py</span><br></pre></td></tr></table></figure>
+<p>在脚本内部配置</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib</span><br><span class="line">matplotlib.use(<span class="string">'qt5agg'</span>)</span><br><span class="line"><span class="comment">##导出图片</span></span><br><span class="line">matplotlib.pyplot.savefig(<span class="string">'filename'</span>)</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>经典Hi-C文献</title>
+    <url>/codeHub/2020/07/05/2020-07/03%E7%BB%8F%E5%85%B8Hic/</url>
+    <content><![CDATA[<blockquote>
+<p> A 3D Map of the Human Genome at Kilobase Resolution Reveals Principles of Chromatin Looping  </p>
+</blockquote>
+<h3 id="highlight"><a href="#highlight" class="headerlink" title="highlight"></a>highlight</h3><p>这篇文章通过改进了Hi-C的实验后，提高了分辨率，并且得到了以下结果:</p>
+<ol>
+<li>将genome中 交互contact domains 的大小定位到185kb左右</li>
+<li>根据组蛋白修饰将compartment细分成6个subcompartment</li>
+<li>在不同组织中鉴定到了~10000个染色质 loops</li>
+<li>loops与基因启动子、增强子有关，并且能够促进基因的表达</li>
+<li>在不同细胞和不同物种间，loops有着比较高的保守性</li>
+<li>发现大部分loops与compartment的边界重合现象</li>
+</ol>
+<a id="more"></a>
+
+<h3 id="根据highlight思考"><a href="#根据highlight思考" class="headerlink" title="根据highlight思考"></a>根据highlight思考</h3><ol>
+<li>首先相比于之前的Hi-C，suit Hi-C做了哪些改进</li>
+<li>Hi-C分析中，怎么计算domain的分辨率</li>
+<li>如何划分subcompartment</li>
+<li>怎么鉴定loops</li>
+</ol>
+<h3 id="Hi-C实验的改进"><a href="#Hi-C实验的改进" class="headerlink" title="Hi-C实验的改进"></a>Hi-C实验的改进</h3><p><img data-src="https://s1.ax1x.com/2020/07/05/Uptrbn.png" alt="Uptrbn.png"></p>
+<p>一代Hi-C技术 <code>dilution Hi-C</code>:</p>
+<ul>
+<li>通过将细胞核打碎后，在溶液中进行胶联</li>
+<li>使用6碱基的HindIII内切酶</li>
+<li>胶联时间比较长</li>
+</ul>
+<p><code>suit Hi-C</code>技术:</p>
+<ul>
+<li>在细胞核内进行胶联，减少一定的假阳性</li>
+<li>使用4碱基DNA内切酶，酶切效率更高</li>
+<li>胶联时间缩短，由7d变为3d</li>
+</ul>
+<h3 id="Hi-C中的一些概念和图片"><a href="#Hi-C中的一些概念和图片" class="headerlink" title="Hi-C中的一些概念和图片"></a>Hi-C中的一些概念和图片</h3><p><img data-src="https://s1.ax1x.com/2020/07/05/UpdCI1.png" alt="UpdCI1.png"></p>
+<p><code>matrix resolution</code>： 在Hi-C热图中人为定义的窗口的大小</p>
+<p><code>map resolution</code>：在基因组中的片段中，80%的位置存在至少1000次交互，这些片段中最小的那个片段长度；一般也就代表了Hi-C实验的最高分辨率了</p>
+<p>通过将染色体拆分成固定大小（10K，100K，1M）的连续片段，通过统计两两片段间交互的频率就可以得到一个二维矩阵M<del>i,j</del>，i和j当然代表染色体不同的两个位置</p>
+<p><code>interva</code>：是一窜连续的位置，如果两个interva发生了交互，那么在热图中就显示成一个矩形或者正方形</p>
+<p>例如图中 第一行是在500KB 的matrix resolution精度下，第二行是在50kb的精度下；其中数字21表示的就是interva的数目</p>
+<h3 id="得到contact-domain的大小"><a href="#得到contact-domain的大小" class="headerlink" title="得到contact domain的大小"></a>得到contact domain的大小</h3><p><img data-src="https://s1.ax1x.com/2020/07/05/UpdLTA.png" alt="UpdLTA.png"></p>
+<p>大致就是根据Hi-C构建的交互矩阵结果，通过分析interva，在图中也可以看出热图可以被区分成一个一个小方块。使用<code>Arrowhead algorithm</code>算法，得到这些方块的大小在40Kb~3M之间，中位数大致185kb</p>
+<h3 id="根据组蛋白修饰分成6个sub-compartment"><a href="#根据组蛋白修饰分成6个sub-compartment" class="headerlink" title="根据组蛋白修饰分成6个sub compartment"></a>根据组蛋白修饰分成6个sub compartment</h3><p><img data-src="https://s1.ax1x.com/2020/07/05/Upww0H.png" alt="Upww0H.png"></p>
+<p>通过使用随机聚类的算法，将concat Domains分成6个subcompartment，其中A1、A2亚组有更多高表达的基因，活跃型组蛋白修饰H3K36me3, H3K79me2 也很多。</p>
+<h3 id="鉴定染色质loops"><a href="#鉴定染色质loops" class="headerlink" title="鉴定染色质loops"></a>鉴定染色质loops</h3><p><img data-src="https://s1.ax1x.com/2020/07/05/Up06a9.png" alt="Up06a9.png"></p>
+<blockquote>
+<p>Such pairs correspond to pixels with higher contact frequency than typical pixels in their neighborhood  </p>
+</blockquote>
+<p>通过比较与局部比对的read进行比较，发现显著性的peak,这里的pixels也就对应了一个<code>matrix resolution</code>的大小，与此同时作者开发了一套鉴定染色体loop的流程<code>juicer-tools</code>。</p>
+<p>试了一下，感觉软件挺好用。</p>
+<p>juicer-tools 教程：<a href="https://github.com/BiocottonHub/BioSoftware/wiki/juicer-tools" target="_blank" rel="noopener">https://github.com/BiocottonHub/BioSoftware/wiki/juicer-tools</a></p>
+<h3 id="Loops保守性分析"><a href="#Loops保守性分析" class="headerlink" title="Loops保守性分析"></a>Loops保守性分析</h3><p>分析了不同细胞类型和不同物种中保守的loops后，发现在不同细胞中loops大多数是保守的，在老鼠和人中大约有50%的loops是保守的</p>
+<h3 id="loops与启动子、增强子"><a href="#loops与启动子、增强子" class="headerlink" title="loops与启动子、增强子"></a>loops与启动子、增强子</h3><p>通过对基因启动子进行分类，分层在loop区域和不在loop区域。发现启动子在loop区域的表达水平比没有loop的高出6倍之多</p>
+<p>同时分析了人类和老鼠中的一个基因SELL，在人类中SELL存在loop（左图，蓝圈）；而老鼠中不存在loop；人类中SELL是表达的，而老鼠中不表达。</p>
+<ul>
+<li>loops可能在3维空间上使得启动子和增强子靠近促进基因表达</li>
+</ul>
+<p><img data-src="https://s1.ax1x.com/2020/07/05/UpDm1P.png" alt="UpDm1P.png"></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li>A 3D Map of the Human Genome at Kilobase Resolution Reveals Principles of Chromatin Looping  </li>
+</ol>
+]]></content>
+      <categories>
+        <category>文献</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>多进程2.0</title>
+    <url>/codeHub/2020/07/05/2020-07/02%E5%A4%9A%E8%BF%9B%E7%A8%8B/</url>
+    <content><![CDATA[<p>在使用多线程并没有实质性的提速后，果断放弃了多线程；最后还是使用多进程的方式处理这个50G的大文件</p>
+<h3 id="多线程和多进程区别"><a href="#多线程和多进程区别" class="headerlink" title="多线程和多进程区别"></a>多线程和多进程区别</h3><ol>
+<li>进程是分配资源的基本单位；</li>
+<li>线程是系统调度和分派的基本单位。</li>
+<li>属于同一进程的线程，堆是共享的，栈是私有的。</li>
+<li>属于同一进程的所有线程都具有相同的地址空间。</li>
+</ol>
+<a id="more"></a>
+
+<h4 id="多进程的优点："><a href="#多进程的优点：" class="headerlink" title="多进程的优点："></a>多进程的优点：</h4><p>①编程相对容易；通常不需要考虑锁和同步资源的问题。<br>②更强的容错性：比起多线程的一个好处是一个进程崩溃了不会影响其他进程。<br>③有内核保证的隔离：数据和错误隔离。 对于使用如C/C++这些语言编写的本地代码，错误隔离是非常有用的：采用多进程架构的程序一般可以做到一定程度的自恢复；（master守护进程监控所有worker进程，发现进程挂掉后将其重启）。</p>
+<h4 id="多线程的优点："><a href="#多线程的优点：" class="headerlink" title="多线程的优点："></a>多线程的优点：</h4><p>①创建速度快，方便高效的数据共享<br>共享数据：多线程间可以共享同一虚拟地址空间；多进程间的数据共享就需要用到共享内存、信号量等IPC技术。<br>②较轻的上下文切换开销 - 不用切换地址空间，不用更改寄存器，不用刷新TLB。<br>③提供非均质的服务。如果全都是计算任务，但每个任务的耗时不都为1s，而是1ms-1s之间波动；这样，多线程相比多进程的优势就体现出来，它能有效降低“简单任务被复杂任务压住”的概率。</p>
+<h3 id="1-文件分块类"><a href="#1-文件分块类" class="headerlink" title="1.文件分块类"></a>1.文件分块类</h3><p>通过初始化一个文件分块类，并调用<code>partion</code>函数，获得每个进程所需要读取的区间</p>
+<p><code>pos_list = PartitionFile(fileName, ProcessNum).partion() # *存放所有文件指针坐标*</code></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PartitionFile</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, fileName, jobsNum)</span>:</span></span><br><span class="line">        self.fileName = fileName</span><br><span class="line">        self.blockNum = jobsNum</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">partion</span><span class="params">(self)</span>:</span></span><br><span class="line">        fd = open(self.fileName, <span class="string">'r'</span>)</span><br><span class="line">        fd.seek(<span class="number">0</span>, <span class="number">2</span>)  <span class="comment"># 移动文件指针到文件尾,用于获取文件大小</span></span><br><span class="line">        fileSize = fd.tell()  <span class="comment"># 获取文件字符数</span></span><br><span class="line">        Pos_list = []  <span class="comment"># 指针坐标，数组</span></span><br><span class="line">        blockSize = int(fileSize/self.blockNum)</span><br><span class="line">        start_Pos = <span class="number">0</span>  <span class="comment"># 文件初始指针</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(self.blockNum):</span><br><span class="line">            <span class="keyword">if</span> i == self.blockNum<span class="number">-1</span>:</span><br><span class="line">                end_Pos = fileSize<span class="number">-1</span>  <span class="comment"># 最后一个文件区块为文件结尾</span></span><br><span class="line">                Pos_list.append((start_Pos, end_Pos))</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            end_Pos = start_Pos+blockSize<span class="number">-1</span>  <span class="comment"># 均匀分配每个区块</span></span><br><span class="line">            Pos_list.append((start_Pos, end_Pos))</span><br><span class="line">            start_Pos = end_Pos+<span class="number">1</span>  <span class="comment"># 下一个区块的开始坐标</span></span><br><span class="line">        fd.close()</span><br><span class="line">        <span class="keyword">return</span> Pos_list</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-读取进程"><a href="#2-读取进程" class="headerlink" title="2.读取进程"></a>2.读取进程</h3><p>因为python中字典和列表都是引用类型数据，所以使用函数对其直接操作，可以改变原字典；这里只有文件的读取，不涉及子进程间的通信，所以不使用<code>Queue</code></p>
+<ul>
+<li>进程类中定义一个<code>self.outData</code>用于存储每行结果</li>
+<li><code>processFunction</code>函数会对每行结果进行处理后存进<code>self.outData</code>内</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">def reader(self):</span><br><span class="line">    fd = open(self.fileName, <span class="string">'r'</span>)</span><br><span class="line">    <span class="keyword">if</span> self.start_Pos != 0:</span><br><span class="line">        fd.seek(self.start_Pos-1)</span><br><span class="line">        <span class="keyword">if</span> fd.read(1) != <span class="string">'\n'</span>:  <span class="comment"># 当前初始位置不是行首,移动到下一行行首</span></span><br><span class="line">            fd.readline()</span><br><span class="line">            self.start_Pos = fd.tell()</span><br><span class="line">    fd.seek(self.start_Pos)  <span class="comment"># 将文件指针定位到区块的行首</span></span><br><span class="line">    <span class="keyword">while</span> self.start_Pos &lt;= self.end_Pos:  <span class="comment"># 开始按行读取文件并且进行操作</span></span><br><span class="line">        tmp = fd.readline()</span><br><span class="line">        processFunction(tmp, self.outData)  <span class="comment"># 将每行结果存进字典内</span></span><br><span class="line">        self.start_Pos = fd.tell()  <span class="comment"># 读完一行后，自动调整开始位置</span></span><br><span class="line">    fd.close()</span><br><span class="line">    <span class="built_in">return</span></span><br></pre></td></tr></table></figure>
+
+<p>子进程写入文件</p>
+<p>这里没有直接使用<code>生产者-消费者</code>模型，是因为基本没有子进程间的通信；只有主进程和子进程的通信；我当时还直接将所有的子进程读到的文件数据写入<code>Queue</code>，然后再从主进程中读取，结果最后子进程一直被挂起了。原因可能是，队列容量达到系统上限，生成者太多了，消费者只有主进程一个</p>
+<p>参考：<a href="https://www.zhihu.com/question/63265466" target="_blank" rel="noopener">https://www.zhihu.com/question/63265466</a></p>
+<ul>
+<li>遍历<code>self.outData</code>数据，将结果写入文件</li>
+<li>由于涉及到多个进程对文件的写，这里使用了文件锁</li>
+<li>将写入的文件名通过<code>Queue</code>传递给主进程</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></span><br><span class="line">    print(<span class="string">"Process: "</span> + self.name+<span class="string">": reading file..."</span>)</span><br><span class="line">    self.reader()</span><br><span class="line">    print(<span class="string">"Process: "</span> + self.name+<span class="string">": begin to write temporary data to file..."</span>)</span><br><span class="line">    <span class="keyword">for</span> key <span class="keyword">in</span> self.outData.keys():</span><br><span class="line">        self.queue.put(key, block=<span class="literal">True</span>, timeout=<span class="literal">None</span>)</span><br><span class="line">        <span class="keyword">with</span> open(path+<span class="string">"/"</span>+key, <span class="string">'a'</span>) <span class="keyword">as</span> File:</span><br><span class="line">            fcntl.flock(File.fileno(), fcntl.LOCK_EX)</span><br><span class="line">            <span class="keyword">for</span> item <span class="keyword">in</span> self.outData[key]:</span><br><span class="line">                File.write(item[<span class="number">0</span>]+<span class="string">" "</span>+key+<span class="string">" "</span>+<span class="string">" "</span>.join(item[<span class="number">1</span>:])+<span class="string">"\n"</span>)</span><br><span class="line">    print(<span class="string">"Process: "</span> + self.name+<span class="string">": completed write..."</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-排序进程"><a href="#3-排序进程" class="headerlink" title="3.排序进程"></a>3.排序进程</h3><ul>
+<li>排序进程的文件名是，主进程从队列中获取得到的</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">def sortFile(self):</span><br><span class="line">    with open(path+<span class="string">"/"</span>+self.fileName, <span class="string">'r'</span>) as File:</span><br><span class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> File.readlines():</span><br><span class="line">            line = line.split(<span class="string">" "</span>)</span><br><span class="line">            try:</span><br><span class="line">                <span class="comment"># [tmpDict[line[3]], line[1],line[2], '0', tmpDict[line[6]], line[4], line[5], '0']</span></span><br><span class="line">                <span class="comment"># 都是同一条染色体对应的Chr1-Chr2 Chr1-Chr3</span></span><br><span class="line">                self.outData[line[5]].append(</span><br><span class="line">                    [line[0], line[2], line[3], line[4], line[6], line[7]])</span><br><span class="line">            except KeyError:</span><br><span class="line">                self.outData[line[5]] = [</span><br><span class="line">                    [line[0], line[2], line[3], line[4], line[6], line[7]]]</span><br><span class="line">    with open(path+<span class="string">"/"</span>+self.fileName+<span class="string">"_sorted"</span>, <span class="string">'w'</span>) as File:</span><br><span class="line">        sortKey = sorted(self.outData)</span><br><span class="line">        <span class="keyword">for</span> key <span class="keyword">in</span> sortKey:</span><br><span class="line">            <span class="keyword">for</span> item <span class="keyword">in</span> self.outData[key]:</span><br><span class="line">                File.write(item[0]+<span class="string">" "</span>+self.fileName+<span class="string">" "</span> +</span><br><span class="line">                           <span class="string">" "</span>.join(item[1:4])+<span class="string">" "</span>+key+<span class="string">" "</span>+item[-2]+<span class="string">" "</span>+item[-1])</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-封装后的函数"><a href="#4-封装后的函数" class="headerlink" title="4.封装后的函数"></a>4.封装后的函数</h3><ul>
+<li>主进程通过队列的方式从子进程中获取染色体编号</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">path = <span class="string">'tmp'</span>+str(int(time.time()))</span><br><span class="line">mkdir(path)</span><br><span class="line">workQueue = Queue()  <span class="comment"># 用于存放子进程文件数据</span></span><br><span class="line">read_jobs = []</span><br><span class="line">sort_jobs = []</span><br><span class="line">chrosomes = []</span><br><span class="line">pos_list = PartitionFile(fileName, ProcessNum).partion()  <span class="comment"># 存放所有文件指针坐标</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(ProcessNum):</span><br><span class="line">    position = pos_list[i]</span><br><span class="line">    myprocess = readProcess(</span><br><span class="line">        str(i), fileName, workQueue, position[<span class="number">0</span>], position[<span class="number">1</span>], processFunction)</span><br><span class="line">    myprocess.start()</span><br><span class="line">    read_jobs.append(myprocess)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> read_jobs:</span><br><span class="line">    i.join()</span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        chrosomes.append(workQueue.get(block=<span class="literal">True</span>, timeout=<span class="number">1</span>))  <span class="comment"># 获取子进程数据</span></span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> list(set(chrosomes)):</span><br><span class="line">    myprocess = sortProcess(str(i), i)  <span class="comment"># 排序进程</span></span><br><span class="line">    myprocess.start()</span><br><span class="line">    sort_jobs.append(myprocess)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> sort_jobs:</span><br><span class="line">    i.join()</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-性能测试"><a href="#5-性能测试" class="headerlink" title="5.性能测试"></a>5.性能测试</h3><ul>
+<li>单进程</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Process: 0: reading file...</span><br><span class="line">Process: 0: begin to write temporary data to file...</span><br><span class="line">Process: 0: completed write...</span><br><span class="line">sorting chrosome: Gbar_A01...</span><br><span class="line">chrosome: Gbar_A01ok...</span><br><span class="line">merge chrosomes to a single file...</span><br><span class="line">completed!</span><br><span class="line">there are some temporary file <span class="keyword">in</span> directory: &lt;./tmp1593916264&gt;</span><br><span class="line"><span class="keyword">if</span> you can remove it by yourself!</span><br><span class="line">Cost Time is 46.96</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>四个进程·</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Process: 1: reading file...</span><br><span class="line">Process: 0: reading file...</span><br><span class="line">Process: 3: reading file...</span><br><span class="line">Process: 2: reading file...</span><br><span class="line">Process: 3: begin to write temporary data to file...</span><br><span class="line">Process: 1: begin to write temporary data to file...</span><br><span class="line">Process: 3: completed write...</span><br><span class="line">Process: 2: begin to write temporary data to file...</span><br><span class="line">Process: 0: begin to write temporary data to file...</span><br><span class="line">Process: 1: completed write...</span><br><span class="line">Process: 2: completed write...</span><br><span class="line">Process: 0: completed write...</span><br><span class="line">sorting chrosome: Gbar_A01...</span><br><span class="line">chrosome: Gbar_A01  ok...</span><br><span class="line">merge chrosomes to a single file...</span><br><span class="line">completed!</span><br><span class="line">there are some temporary file <span class="keyword">in</span> directory: &lt;./tmp1593916319&gt;</span><br><span class="line"><span class="keyword">if</span> you can remove it by yourself!</span><br><span class="line">Cost Time is 18.70</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-源代码"><a href="#6-源代码" class="headerlink" title="6.源代码"></a>6.源代码</h3><p><a href="https://github.com/BiocottonHub/zpliuCode/blob/master/Hi-c/HiCProTojuicer.py" target="_blank" rel="noopener">https://github.com/BiocottonHub/zpliuCode/blob/master/Hi-c/HiCProTojuicer.py</a></p>
+<h3 id="7-参考"><a href="#7-参考" class="headerlink" title="7.参考"></a>7.参考</h3><ol>
+<li><a href="https://www.zhihu.com/question/63265466" target="_blank" rel="noopener">子进程挂起</a></li>
+<li><a href="https://www.cnblogs.com/qiangyuge/p/7460852.html" target="_blank" rel="noopener">并发队列</a></li>
+<li><a href="https://blog.csdn.net/onlyforr/article/details/52094581?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.nonecase" target="_blank" rel="noopener">文件分块</a></li>
+<li><a href="https://www.cnblogs.com/guguobao/p/9398653.html" target="_blank" rel="noopener">进程通信</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/64702600" target="_blank" rel="noopener">多进程</a></li>
+<li><a href="https://www.cnblogs.com/now-fighting/p/3534185.html" target="_blank" rel="noopener">OS模块</a></li>
+<li><a href="https://blog.csdn.net/lucyxu107/article/details/82837282" target="_blank" rel="noopener">文件锁</a></li>
+<li><a href="https://blog.csdn.net/weixin_39731083/article/details/82015830" target="_blank" rel="noopener">线程与进程区别</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>多线程读取文件</title>
+    <url>/codeHub/2020/07/05/2020-07/01%E5%A4%9A%E7%BA%BF%E7%A8%8B/</url>
+    <content><![CDATA[<p>血崩!! 今天写完一个多线程读取文件，发现多线程反而比但线程慢多了；最后还是改成了多进程版本。多线程向多进程的转换也非常的方便，</p>
+<blockquote>
+<h4 id="为什么Python多线程反而更慢了？"><a href="#为什么Python多线程反而更慢了？" class="headerlink" title="为什么Python多线程反而更慢了？"></a>为什么Python多线程反而更慢了？</h4><p>原因就在于 GIL ，在 Cpython 解释器（Python语言的主流解释器）中，有一把全局解释锁（Global Interpreter Lock），在解释器解释执行 Python 代码时，先要得到这把锁，意味着，任何时候只可能有一个线程在执行代码，其它线程要想获得 CPU 执行代码指令，就必须先获得这把锁，如果锁被其它线程占用了，那么该线程就只能等待，直到占有该锁的线程释放锁才有执行代码指令的可能。</p>
+<p>​    因此，这也就是为什么两个线程一起执行反而更加慢的原因，因为同一时刻，只有一个线程在运行，其它线程只能等待，即使是多核CPU，也没办法让多个线程「并行」地同时执行代码，只能是交替执行，因为多线程涉及到上下文切换、锁机制处理（获取锁，释放锁等），所以，多线程执行不快反慢。</p>
+</blockquote>
+<a id="more"></a>
+
+<h3 id="1-文件分块类"><a href="#1-文件分块类" class="headerlink" title="1.文件分块类"></a>1.文件分块类</h3><ul>
+<li>定义一个分块类</li>
+<li>根据线程数对文件进行分块</li>
+<li>获取每个线程需要读取的坐标</li>
+</ul>
+<p>定义类的时候<code>class PartitionFile(object)</code>这种方式表示<code>PartitionFile</code>继承自<code>Object</code>类</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">## 定义分块类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PartitionFile</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, fileName, threadNum)</span>:</span></span><br><span class="line">        self.fileName = fileName</span><br><span class="line">        self.blockNum = threadNum</span><br></pre></td></tr></table></figure>
+
+<p>定义对应的文件分块方法<code>partion</code>，最后返回每个区块文件的指针数组</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">def partion(self):</span><br><span class="line">     fd = open(self.fileName, <span class="string">'r'</span>)</span><br><span class="line">     fd.seek(0, 2)  <span class="comment"># 移动文件指针到文件尾,用于获取文件大小</span></span><br><span class="line">     fileSize = fd.tell()  <span class="comment"># 获取文件字符数</span></span><br><span class="line">     Pos_list = []  <span class="comment"># 指针坐标，数组</span></span><br><span class="line">     blockSize = int(fileSize/self.blockNum)</span><br><span class="line">     start_Pos = 0  <span class="comment"># 文件初始指针</span></span><br><span class="line">     <span class="keyword">for</span> i <span class="keyword">in</span> range(self.blockNum):</span><br><span class="line">         <span class="keyword">if</span> i == self.blockNum-1:</span><br><span class="line">             end_Pos = fileSize-1  <span class="comment"># 最后一个文件区块为文件结尾</span></span><br><span class="line">             Pos_list.append((start_Pos, end_Pos))</span><br><span class="line">             <span class="built_in">break</span></span><br><span class="line">         end_Pos = start_Pos+blockSize-1  <span class="comment"># 均匀分配每个区块</span></span><br><span class="line">         <span class="comment"># if end_Pos &gt;= fileSize:</span></span><br><span class="line">         <span class="comment">#   end_Pos=fileSize-1</span></span><br><span class="line">         <span class="comment"># if start_Pos &gt;= fileSize:</span></span><br><span class="line">         <span class="comment">#   break</span></span><br><span class="line">         Pos_list.append((start_Pos, end_Pos))</span><br><span class="line">         start_Pos = end_Pos+1  <span class="comment"># 下一个区块，开始坐标</span></span><br><span class="line">     fd.close()</span><br><span class="line">     <span class="built_in">return</span> Pos_list</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-读取文件线程类"><a href="#2-读取文件线程类" class="headerlink" title="2.读取文件线程类"></a>2.读取文件线程类</h3><p>类初始化需要传递6个参数</p>
+<ul>
+<li>线程编号</li>
+<li>线程所属队列</li>
+<li>文件名</li>
+<li>文件区块其实指针</li>
+<li>文件区块结束指针</li>
+<li>自定义处理函数</li>
+</ul>
+<p>读取文件线程也可以称作<strong>生产者</strong>，继承自Thread类，在初始化是调用，初始化一个线程</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">readThread</span><span class="params">(Thread)</span>:</span>  <span class="comment"># 这个括号表示继承threading.Thread类</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, thread_name, thread_queue, fileName, start_Pos, end_Pos, processFunction)</span>:</span></span><br><span class="line">        super(readThread, self).__init__()  <span class="comment"># 初始化一个线程</span></span><br><span class="line">        self.name = thread_name</span><br><span class="line">        self.queue = thread_queue</span><br><span class="line">        self.start_Pos = start_Pos</span><br><span class="line">        self.end_Pos = end_Pos</span><br><span class="line">        self.fileName = fileName</span><br><span class="line">        self.processFunction = processFunction</span><br></pre></td></tr></table></figure>
+
+<p>类中读取数据的函数<code>reader</code></p>
+<ul>
+<li>根据文件区块指针，进行一行一行读取</li>
+<li>将读取的数据交给<code>processFunction</code>自定义函数处理，过滤掉一些行或者转化一下格式</li>
+<li>将过滤后的结果存进队列中</li>
+</ul>
+<p><code>self.queue.put(tmp, block=True)</code>主要是当队列中数据已经满了，还来不及取出时，阻塞当前线程，等待队列闲置空间</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reader</span><span class="params">(self)</span>:</span></span><br><span class="line">    fd = open(self.fileName, <span class="string">'r'</span>)</span><br><span class="line">    <span class="keyword">if</span> self.start_Pos != <span class="number">0</span>:</span><br><span class="line">        fd.seek(self.start_Pos<span class="number">-1</span>)</span><br><span class="line">        <span class="keyword">if</span> fd.read(<span class="number">1</span>) != <span class="string">'\n'</span>:  <span class="comment"># 当前初始位置不是行首,移动到下一行行首</span></span><br><span class="line">            fd.readline()</span><br><span class="line">            self.start_Pos = fd.tell()</span><br><span class="line">    fd.seek(self.start_Pos)  <span class="comment"># 将文件指针定位到区块的行首</span></span><br><span class="line">    <span class="keyword">while</span> self.start_Pos &lt;= self.end_Pos:  <span class="comment"># 开始按行读取文件并且进行操作</span></span><br><span class="line">        line = fd.readline()</span><br><span class="line">        tmp = self.processFunction(line)</span><br><span class="line">        <span class="keyword">if</span> tmp:  <span class="comment"># 判断数据是否需要放进队列</span></span><br><span class="line">            self.queue.put(tmp, block=<span class="literal">True</span>)  <span class="comment"># 阻塞队列等待有位置时就插入</span></span><br><span class="line">        <span class="comment"># else:</span></span><br><span class="line">        <span class="comment">#     self.start_Pos = fd.tell()</span></span><br><span class="line">        <span class="comment">#     continue</span></span><br><span class="line">        self.start_Pos = fd.tell()  <span class="comment"># 读完一行后，自动调整开始位置</span></span><br><span class="line">    fd.close()</span><br><span class="line">    <span class="keyword">return</span></span><br></pre></td></tr></table></figure>
+
+<p>启动线程函数</p>
+<p>当线程启动是调用读取函数进行文件读取</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></span><br><span class="line">    print(<span class="string">"线程"</span> + self.name+<span class="string">": 开始读取文件..."</span>)</span><br><span class="line">    self.reader()</span><br><span class="line">    print(<span class="string">"线程"</span> + self.name+<span class="string">": 读取完成..."</span>)</span><br><span class="line">    <span class="keyword">return</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-获取队列数据线程类"><a href="#3-获取队列数据线程类" class="headerlink" title="3.获取队列数据线程类"></a>3.获取队列数据线程类</h3><p>也被称为<strong>消费者</strong>线程，</p>
+<p>初始化</p>
+<ul>
+<li>包含线程名</li>
+<li>所属队列</li>
+<li>以及初始化一个用于存放队列数据的数组</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">getThread</span><span class="params">(threading.Thread)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, queue)</span>:</span></span><br><span class="line">        super(getThread, self).__init__()</span><br><span class="line">        self.name = name</span><br><span class="line">        self.queue = queue</span><br><span class="line">        self.out = []</span><br></pre></td></tr></table></figure>
+
+<p>获取队列数据<code>run</code>方法</p>
+<ul>
+<li>当线程启动时，就开始向队列取数据</li>
+<li>如果在向队列取数据时，等待时间过长，之间关闭当前进程</li>
+</ul>
+<p><code>Queue.get</code>函数默认有一个<code>block=True</code>，的参数；当线程取不到数据时，就一直会进入等待</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            self.out.append(self.queue.get(timeout=<span class="number">2</span>))  <span class="comment"># 等待2s，读不到数据直接退出</span></span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-函数封装"><a href="#4-函数封装" class="headerlink" title="4.函数封装"></a>4.函数封装</h3><p>为了实现代码的可重复利用，可以将这几个模块一起封装成一个函数</p>
+<ul>
+<li><code>defaultProcessFunction</code>默认自定义函数，不会对文件中行进行处理</li>
+<li>定义生成者线程池</li>
+<li>定义消费者生成池</li>
+<li>等待所有线程池结束后，调用消费者线程的<code>getData</code>方法，获取所有数据</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">from</span> queue <span class="keyword">import</span> Queue</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">defaultProcessFunction</span><span class="params">(line)</span>:</span>  <span class="comment"># 对行数据不做处理的默认函数</span></span><br><span class="line">    <span class="keyword">return</span> line</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">readFileByThread</span><span class="params">(fileName, ThreadNum, processFunction=defaultProcessFunction)</span>:</span></span><br><span class="line">    out = []</span><br><span class="line">    <span class="comment"># 设置队列</span></span><br><span class="line">    workQueue = Queue()</span><br><span class="line">    <span class="comment"># 线程池</span></span><br><span class="line">    readThreads = []</span><br><span class="line">    getThreads = []</span><br><span class="line">    pos_list = PartitionFile(fileName, ThreadNum).partion()</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(pos_list)):</span><br><span class="line">        postion = pos_list[i]</span><br><span class="line">        mythread = readThread(str(i), workQueue, fileName,</span><br><span class="line">                              postion[<span class="number">0</span>], postion[<span class="number">1</span>], processFunction)  <span class="comment"># 初始化线程,设置预处理函数</span></span><br><span class="line">        mythread.start()  <span class="comment"># 启动线程</span></span><br><span class="line">        getdataThread = getThread(str(i), workQueue)</span><br><span class="line">        getdataThread.start()</span><br><span class="line">        readThreads.append(mythread)  <span class="comment"># 添加到线程池</span></span><br><span class="line">        getThreads.append(getdataThread)  <span class="comment"># 添加到线程池</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> readThreads:</span><br><span class="line">        i.join()  <span class="comment"># 等待所有线程完成</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> getThreads:</span><br><span class="line">        i.join()  <span class="comment"># 等待所有线程完成</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> getThreads:</span><br><span class="line">        out += i.getData()</span><br><span class="line">    <span class="keyword">return</span> out</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-性能测试"><a href="#5-性能测试" class="headerlink" title="5.性能测试"></a>5.性能测试</h3><p>由于测试文件只有20万行，进程间的调度也会消耗时间，所有有可能出现多进程比单进程慢一丢丢的情况</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    start_time = time.clock()</span><br><span class="line">    readFileByThread(sys.argv[<span class="number">1</span>], int(sys.argv[<span class="number">2</span>]))</span><br><span class="line">    end_time = time.clock()</span><br><span class="line">    print(<span class="string">'Cost Time is &#123;:.2f&#125;'</span>.format(end_time-start_time))</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>多线程模式下</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">##单个线程情况</span></span><br><span class="line">线程0: 开始读取文件...</span><br><span class="line">线程0: 读取完成...</span><br><span class="line">Cost Time is 2.61</span><br><span class="line"><span class="comment">## 4个线程情况</span></span><br><span class="line">线程0: 开始读取文件...</span><br><span class="line">线程1: 开始读取文件...</span><br><span class="line">线程2: 开始读取文件...</span><br><span class="line">线程3: 开始读取文件...</span><br><span class="line">线程2: 读取完成...</span><br><span class="line">线程1: 读取完成...</span><br><span class="line">线程0: 读取完成...</span><br><span class="line">线程3: 读取完成...</span><br><span class="line">Gbar_A01</span><br><span class="line">Cost Time is 17.77</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-源代码"><a href="#6-源代码" class="headerlink" title="6.源代码"></a>6.源代码</h3><p><a href="https://github.com/BiocottonHub/zpliuCode/blob/master/Hi-c/readFileByThread.py" target="_blank" rel="noopener">https://github.com/BiocottonHub/zpliuCode/blob/master/Hi-c/readFileByThread.py</a></p>
+<h3 id="7-参考"><a href="#7-参考" class="headerlink" title="7.参考"></a>7.参考</h3><ol>
+<li><a href="https://blog.csdn.net/GeekLeee/article/details/77883252" target="_blank" rel="noopener">Queue队列</a></li>
+<li><a href="https://blog.csdn.net/aa57255621/article/details/88965975" target="_blank" rel="noopener">多线程爬取数据</a></li>
+<li><a href="https://www.runoob.com/python/python-func-super.html" target="_blank" rel="noopener">super父类</a></li>
+<li><a href="https://www.runoob.com/python/file-seek.html" target="_blank" rel="noopener">文件指针</a></li>
+<li><a href="https://blog.csdn.net/onlyforr/article/details/52094581?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.nonecase" target="_blank" rel="noopener">文件分块</a></li>
+<li><a href="https://fishc.com.cn/thread-115047-1-1.html" target="_blank" rel="noopener">python继承类</a></li>
+<li><a href="https://www.cnblogs.com/xiangsikai/p/8185031.html" target="_blank" rel="noopener">Queue</a></li>
+<li><a href="https://www.cnblogs.com/wt11/p/5952500.html" target="_blank" rel="noopener">Queue取数据</a></li>
+<li><a href="https://www.zhihu.com/question/63265466" target="_blank" rel="noopener">子进程不结束</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>数据备份!</title>
+    <url>/codeHub/2020/06/23/2020-06/07%E6%95%B0%E6%8D%AE%E5%A4%87%E4%BB%BD/</url>
+    <content><![CDATA[<p>俗话说：不怕万一就怕一万一，数据备份真的很重要，经历了一次数据库数据的丢失，现在每次我都小心翼翼！</p>
+<p>数据库备份</p>
+<p>通常大家都是使用phpmyadmin直接图形化的界面进行数据的导入和导出，在数据库导入的时候要注意，mysql中要含有和你备份的数据库一样的名字，不然会报错</p>
+<h3 id="命令行下的mysql备份："><a href="#命令行下的mysql备份：" class="headerlink" title="命令行下的mysql备份："></a>命令行下的mysql备份：</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mysqldump -u root -p 数据库名 &gt;dump.sql（备份文件以sql为后缀）</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h3 id="wordpress文件的备份"><a href="#wordpress文件的备份" class="headerlink" title="wordpress文件的备份"></a>wordpress文件的备份</h3><p>这个比较简单粗暴，直接tar就行</p>
+<p><code>tar -cvzf 20190329wordpressbk.tar.gz ./*wordpress</code></p>
+<p>安装目录下的所有文件</p>
+<p>这里有一个小技巧，就是tar命令如何排除一些你不需要打包的目录</p>
+<p><code>tar -cvzf 20190329wordpressbk.tar.gz --exclude=./log ./*wordpress</code></p>
+<p>安装目录下的所有文件</p>
+<p>log为日志目录，就不备份了，注意这里的log后面的/</p>
+<h3 id="多个地方存放"><a href="#多个地方存放" class="headerlink" title="多个地方存放"></a>多个地方存放</h3><p>数据备份好了，那也不放心啊！俗话说狡兔三窟，我就备份在了三个地方</p>
+<p>1.服务器</p>
+<p>2.本地电脑</p>
+<p>3.github</p>
+<p>其他的备份方式我就不做介绍了，主要介绍github的备份方式</p>
+<h4 id="github备份"><a href="#github备份" class="headerlink" title="github备份"></a>github备份</h4><p>1.首先使用私匙与github账号关联</p>
+<p>2.创建仓库repositories</p>
+<p>3.命令行上传</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add ./back up file </span><br><span class="line">git commit -m <span class="string">"date"</span></span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+
+<p>我进行备份是文件大小超过了50M，github不给上传</p>
+<blockquote>
+<p>remote: warning: File sources/wordpress_bk20190330.tar.gz is 51.15 MB;<br>this is larger than GitHub’s recommended maximum file size of 50.00 MB</p>
+</blockquote>
+<p>看来还是得换个办法，就勉强用用我们不务正业的百度网盘进行备份，就是速度有点慢</p>
+<h4 id="流程如下："><a href="#流程如下：" class="headerlink" title="流程如下："></a>流程如下：</h4><p>1.克隆仓库代码</p>
+<p>2.将百度账户与服务器进行关联： <a href="http://211.69.141.138/wp-content/themes/begin%2Blts/inc/go.php?url=https://openapi.baidu.com/device" target="_blank" rel="noopener">设置链接</a></p>
+<p>3.使用上传脚本进行文件上传</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git init</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/oott123/bpcs_uploader.git</span><br><span class="line">chmod +x bpcs_uploader.php </span><br><span class="line">./bpcs_uploader.php quickinit</span><br><span class="line"><span class="comment">#脚本执行后，会告诉验证码</span></span><br><span class="line"><span class="comment">#Uploader initialization will be begin. If you have already configured the uploader before, your old settings will be overwritten.</span></span><br><span class="line">Continue? [y/N] y</span><br><span class="line">  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current</span><br><span class="line">                                 Dload  Upload   Total   Spent    Left  Speed</span><br><span class="line">100   344  100   264  100    80    332    100 --:--:-- --:--:-- --:--:--   332</span><br><span class="line">Launch your favorite web browser and visit https://openapi.baidu.com/device</span><br><span class="line">Input 验证码在这 as the user code <span class="keyword">if</span> asked.</span><br><span class="line">After granting access to the application, come back here and press Enter to <span class="built_in">continue</span>.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#执行文件上传</span></span><br><span class="line">./bpcs_uploader.php upload ../../Bioinformatic/sources/wordpressbk20190330.sql  wordpressbk20190330.sql</span><br><span class="line"></span><br><span class="line"><span class="comment">#执行文件下载</span></span><br><span class="line">./bpcs_uploader.php download [path_local] [path_remote]</span><br><span class="line"></span><br><span class="line"><span class="comment">#云端文件的删除</span></span><br><span class="line"></span><br><span class="line">./bpcs_uploader/bpcs_uploader.php delete [remote path]</span><br></pre></td></tr></table></figure>
+
+<p>备份后数数据默认是存在 <code>百度云/我的应用数据/bpcs_uploader/</code> 目录下；而且这个目录好像还不能修改</p>
+<h3 id="自动备份脚本"><a href="#自动备份脚本" class="headerlink" title="自动备份脚本"></a>自动备份脚本</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/bash</span></span><br><span class="line"><span class="comment">#author:zpliu</span></span><br><span class="line"><span class="comment">#date:20190331</span></span><br><span class="line"><span class="comment">#application for backup data to Baidu cloud</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"></span><br><span class="line">yesterday=`date -d <span class="string">"1 day ago"</span> +<span class="string">"%Y%m%d"</span>`</span><br><span class="line">today=`date +<span class="string">"%Y%m%d"</span>`</span><br><span class="line">mysqluser=登录数据库账户</span><br><span class="line">mysqlpassword=密码</span><br><span class="line"><span class="comment">#备份数据库文件</span></span><br><span class="line">/usr/bin/mysqldump -u <span class="variable">$mysqluser</span>  -p<span class="variable">$mysqlpassword</span>  wordpress &gt;/var/www/clound/wordpress<span class="variable">$&#123;today&#125;</span>_bk.sql 2&gt;/dev/null</span><br><span class="line"><span class="comment">#备份wordpress文件</span></span><br><span class="line"><span class="built_in">echo</span> 文件权限的问题提供的root密码|sudo -S /usr/bin/tar -cPzf /var/www/clound/wordpress<span class="variable">$&#123;today&#125;</span>_bk.tar.gz /var/www/html/*</span><br><span class="line"></span><br><span class="line"><span class="comment">#进行文件上传</span></span><br><span class="line"><span class="keyword">if</span> [ -f <span class="string">"/var/www/clound/wordpress<span class="variable">$&#123;today&#125;</span>_bk.sql"</span> -a -f <span class="string">"/var/www/clound/wordpress<span class="variable">$&#123;today&#125;</span>_bk.tar.gz"</span> ];<span class="keyword">then</span></span><br><span class="line">/var/www/clound/bpcs_uploader/bpcs_uploader.php upload /var/www/clound/wordpress<span class="variable">$&#123;today&#125;</span>_bk.sql wordpress<span class="variable">$&#123;today&#125;</span>_bk.sql 1&gt;&gt;/var/www/clound/upload.log 2&gt;/dev/null &amp;&amp;rm -rf wordpress<span class="variable">$&#123;yesterday&#125;</span>_bk.sql</span><br><span class="line">/var/www/clound/bpcs_uploader/bpcs_uploader.php upload /var/www/clound/wordpress<span class="variable">$&#123;today&#125;</span>_bk.tar.gz wordpress<span class="variable">$&#123;today&#125;</span>_bk.tar.gz 1&gt;&gt;/var/www/clound/upload.log 2&gt;/dev/null &amp;&amp;rm -rf wordpress<span class="variable">$&#123;yesterday&#125;</span>_bk.tar.gz</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+
+<p>脚本其实很简单就是，导出数据库以及对wordpress进行打包，最后对当前目录进行判断，同时删除以前的备份，节省空间</p>
+<p>而百度云盘是上的文件倒是可以想删就删，自己动动手一块删一个时间段的就行了</p>
+<h3 id="crontab-执行定时任务"><a href="#crontab-执行定时任务" class="headerlink" title="crontab 执行定时任务"></a>crontab 执行定时任务</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">crontab -e</span><br><span class="line"></span><br><span class="line">在vim中编写配置信息如下</span><br><span class="line"></span><br><span class="line">0 2 * * * bash  脚本执行路径</span><br></pre></td></tr></table></figure>
+
+<p>每天凌晨两点进行文件备份，明天来看看能不能备份好</p>
+<p>报错：<code>MAIL (mailed 144 bytes of output but got status 0x004b#012)</code></p>
+<p>原因有几点：</p>
+<p>1.命令执行过程中需要加上绝对路径</p>
+<p>2.在crontab -e 编辑模式中需要 加上bash 脚本绝对路径</p>
+<p>3.在与百度的进行连接的时候，报错了；重新获取验证码进行连接</p>
+<p><code>API calling error 100 : Invalid parameter</code></p>
+<h4 id="最后脚本每天定时在凌晨2点执行，并且在日志文件中记录着成功的记录"><a href="#最后脚本每天定时在凌晨2点执行，并且在日志文件中记录着成功的记录" class="headerlink" title="最后脚本每天定时在凌晨2点执行，并且在日志文件中记录着成功的记录"></a>最后脚本每天定时在凌晨2点执行，并且在日志文件中记录着成功的记录</h4><p><code>File /apps/bpcs_uploader/wordpress20190401_bk.sql uploaded.
+Size:1282.812K MD5 Sum:fd4b82eda2347f0979bcc395da11d000</code></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://blog.csdn.net/qq_31655965/article/details/53288316" target="_blank" rel="noopener">https://blog.csdn.net/qq_31655965/article/details/53288316</a></p>
+<p>crontab：<a href="http://211.69.141.138/wp-content/themes/begin%2Blts/inc/go.php?url=https://www.cnblogs.com/zoulongbin/p/6187238.html" target="_blank" rel="noopener">点击查看</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>聚类</title>
+    <url>/codeHub/2020/06/23/2020-06/06%E8%81%9A%E7%B1%BB/</url>
+    <content><![CDATA[<p>人以类聚，物以群分。在当今大数据的时代，利用机器学习的方法对大样本、大数据进行量化、根据每个数据的特征值进行分类，打标签；从而挖掘数据的价值，例如商家根据用户群体的分类，和标签定向的推送广告。对数据的聚类有多种方式，其中最经典的就是，基于数据密度和基于数据层次进行聚类。</p>
+<a id="more"></a>
+
+<h3 id="基于密度聚类"><a href="#基于密度聚类" class="headerlink" title="基于密度聚类"></a>基于密度聚类</h3><blockquote>
+<p>Density Base spatial clustering of application with noise</p>
+</blockquote>
+<h4 id="定义："><a href="#定义：" class="headerlink" title="定义："></a>定义：</h4><p>密度聚类算法：假设通过样本数据之间分布的紧密程度，能够反应数据的聚类结构；这是算法的假定前提。算法的具体实现通常基于样本之间的可连接性，将可以连接的样本聚在一类，并不断扩大聚类簇，获得最终的聚类结果</p>
+<p>1.ε-：定义一个样本的邻近区域：该区域包含在数据集D中与给定样本点Xj的距离小于ε-的样本点；</p>
+<p>2.核心对象： 样本点Xj邻域范围内包含的样本点数目，大于等于阀值MinPts</p>
+<p>3.密度直达：X1位于X2的邻域范围内，同时X2为核心对象（跟很多人有关系），则X1则由X2密度直达</p>
+<p>4.密度可达：两个样本点通过一系列密度直达样本对（Xi，Xi+1）建立联系</p>
+<p>5.密度相连：两个样本同时和某一个样本点密度可达</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/23/NtKcVK.png" alt="密度聚类概念"></p>
+<h4 id="优化目标"><a href="#优化目标" class="headerlink" title="优化目标"></a>优化目标</h4><p>密度聚类中，同一簇中密度相连数满足最大，密度可达满足最大；不难推出当同一类样本中密度可达达到最大时，就满足优化目标</p>
+<h4 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h4><p>1.假定邻域距离ε- 与Minpts样本数目</p>
+<p>2.计算样本中核心对象数据集Ω</p>
+<p>3.随机获取核心数据集中的一个核心对象最为种子</p>
+<p>4.根据递归迭代思想，对数据集进行迭代，当第一个随机核心对象组成的簇满足优化目标时，将第一簇数据从数据集中剔除，进入下一次迭代</p>
+<p>5.直至所有核心对象被迭代完毕，聚类就结束</p>
+<h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><p>1.MinPat设置的是整个数据集的邻域的最小样本数，但是并不是每一类中的密度都大于等于MinPat。</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/23/NtKf8H.png" alt="NtKf8H.png"></p>
+<p>当阀值提高后C3样本点会被当成噪音处理</p>
+<p>2.当一个数据点在两个核心数据对象之间时，算法默认将数据点归类到先迭代的核心对象；因此算法不稳定</p>
+<p>3.根据密度聚类的思想聚类时，有一些点与所有的核心对象都不相连时，会被算法默认为噪音</p>
+<h3 id="基于层次聚类"><a href="#基于层次聚类" class="headerlink" title="基于层次聚类"></a>基于层次聚类</h3><h4 id="定义：-1"><a href="#定义：-1" class="headerlink" title="定义："></a>定义：</h4><p>层次聚类：在不同层次之间对数据集进行划分；形成类似树形的聚类结果，在划分时可以采用“自底向上”与“自顶向下”进行聚类。</p>
+<p>1.自底向上：先将每个样本看成一类，接着对所有进行聚类</p>
+<p>2.自顶向下：所有样本看成一类，依次对数据集进行拆分聚类</p>
+<h4 id="AGNES算法"><a href="#AGNES算法" class="headerlink" title="AGNES算法"></a>AGNES算法</h4><p>不同类之间的距离度量：</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/23/NtKIKI.png" alt="NtKIKI.png"></p>
+<p>其中最小距离由两个簇中最近的样本点决定；最大距离则由最远样本点决定；平均距离有所有样本共同决定。也被形象的称为“单链接”、“全链接”、“均链接”。</p>
+<h4 id="应用范围："><a href="#应用范围：" class="headerlink" title="应用范围："></a>应用范围：</h4><p>最小值: 这种方法容易受到极端值的影响。</p>
+<p>最大值:容易受到极端值的影响.</p>
+<p>均值:这种方法计算量比较大，但结果比前两种方法更合理。</p>
+<h4 id="算法流程："><a href="#算法流程：" class="headerlink" title="算法流程："></a>算法流程：</h4><p>1.计算所有样本点两两之间的距离矩阵</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/23/NtKort.png" alt="距离矩阵"></p>
+<h4 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h4><p>1.主要应用在数据量比较小的时候</p>
+<p>2.算法稳定性比较好</p>
+<p>3.选择不同的距离衡量，往往有不同的结果</p>
+<h3 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h3><p>机器学习[周志华版]</p>
+<p><a href="http://211.69.141.138/wp-content/themes/begin%2Blts/inc/go.php?url=https://www.cnblogs.com/zongfa/p/9344769.html" target="_blank" rel="noopener">层次聚类</a></p>
+<p><a href="http://211.69.141.138/wp-content/themes/begin%2Blts/inc/go.php?url=https://www.jianshu.com/p/0f33ed1c38b9" target="_blank" rel="noopener">密度聚类</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>PCA降维打击</title>
+    <url>/codeHub/2020/06/23/2020-06/05PCA%E9%99%8D%E7%BB%B4%E6%89%93%E5%87%BB/</url>
+    <content><![CDATA[<h3 id="1-PCA的基本原理"><a href="#1-PCA的基本原理" class="headerlink" title="1.PCA的基本原理"></a>1.PCA的基本原理</h3><p>主成分分析（Principle component analysis）简称PCA，是常用的降维方法之一。通过将n维的数据集降维到n’低纬度空间；使得降维之后数据集尽可能的代表原数据集同时降维之后的损失尽可能的小。</p>
+<p>如图1所示，在R中使用rnorm函数生成正态分布数据集在二维空间的分布；我们希望找到一个维度能够代表数据集在二维空间中的分布特征，而这样的维度有无数种.如何找到最好的那个维度使得数据集经过变换后尽可能的保留原始数据集的特征。</p>
+<a id="more"></a>
+
+<p>​    图1中有V1与V2两个一维的特征向量，从图1中可以看出在V1特征向量上能够更好的反应原始数据集的特征。数据集映射在V1的方向上进行映射后，映射后的数据集从低纬度重构出高纬度数据集D’，使得D’与原始数据集尽可能的相似，也就是D’中的点与原始数据集中的点的距离最小；或者可以从另一个角度理解为原始数据经过映射后在低纬空间中可以区分开来。这对应着PCA中两种优化目标：最近重构性与最大可分性。同样的当数据集从二维推广到任意维度时，我们的优化目标也就变成样本点在一个超平面进行重构后的距离最近或者在映射到超平面后样本内方差最大化。</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/23/NtuZY4.png" alt="图1:随机3类数据集的在二维平面的分布"></p>
+<h3 id="2-1基于最近重构性进行优化"><a href="#2-1基于最近重构性进行优化" class="headerlink" title="2.1基于最近重构性进行优化"></a>2.1基于最近重构性进行优化</h3><p>假定我们有一个m个n维的数据集 ，假定在每个维度上都进行了中心化，并且将原先的n维属性投影到新的坐标系使得这n个维度的属性构成标准的正交基向量 )，即任意两个w满足 ；进行正交化主要是考虑在降维的过程中，任意两个主成分之间应该尽可能的保留更多的信息，不存在相关性。</p>
+<p>假设将数据从n维降到k维（k&lt;n）,则第样本点 在k维的投影坐标  其中 表示样本i在降维后第j个维度上的投影坐标。通过投影坐标 与标准正交基向量 )重构出原始数据 。</p>
+<p>优化目标是使得所有重构出的样本与原始样本的累积距离最小。</p>
+<p><a href="http://211.69.141.138/wp-content/themes/begin%2Blts/inc/go.php?url=http://www.cnblogs.com/pinard/p/6239403.html" target="_blank" rel="noopener">具体的公式推导</a>可以看这个博主写的</p>
+<h3 id="2-2基于最大可分性进行优化"><a href="#2-2基于最大可分性进行优化" class="headerlink" title="2.2基于最大可分性进行优化"></a>2.2基于最大可分性进行优化</h3><p>​    从最大可分性角度出发，优化目标是使得样本点在降维后的平面的投影尽可能的分开，相当于投影后的样本方差最大。</p>
+<h3 id="3-算法流程"><a href="#3-算法流程" class="headerlink" title="3.算法流程"></a>3.算法流程</h3><p>​    假定数据集包含m个n维数据。</p>
+<ul>
+<li>将原始数据按照n行m列进行排列</li>
+<li>在每一个维度上进行中心化，也就是每个数据减去同一行中的均值方便后面的计算</li>
+<li>计算数据集的协方差矩阵</li>
+<li>对协方差求取特征值与特征向量</li>
+<li>将特征向量 按照其特征值大小从上至下排列成矩阵</li>
+<li>根据认为设定的K值，将数据集映射到K维的低纬空间</li>
+</ul>
+<h3 id="4-1实例"><a href="#4-1实例" class="headerlink" title="4.1实例"></a>4.1实例</h3><p>​    随机生成1000个3维数据集，并对其中的点打上标签如图2所示。当保留样本中65%的变异时，才使得数据集从3维降低到2维，如图3所示；而此时黄色和绿色样本之间仍旧没有完全区分开来可能是由于它们之间的区分确实不明显。同样从图3中也可以发现一些样本偏离比较远，在某种程度上可以认为是人为因素产生的噪声数据</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/23/Ntulm6.png" alt="图2：1000个随机数据集的分布，其中不同颜色代表不同的类型"></p>
+<p><img data-src="https://s1.ax1x.com/2020/06/23/Ntu10K.png" alt="图3：1000个数据在PCA降维后的分布"></p>
+<h3 id="4-2图片数据降维"><a href="#4-2图片数据降维" class="headerlink" title="4.2图片数据降维"></a>4.2图片数据降维</h3><p>使用UCI中的Yale数据集，数据集中包括了21个志愿者在四种心情状态，4种角度以及是否戴眼镜的图片数据。从中随机选取了10位志愿者，在某一种状态下进行图片数据的降维处理。从图4可以看出当保留原始数据90%的差异时，图片与原图的差异不是很大，但仍旧有一些图片还是与原始数据相比丢失的比较多；随着保留差异程度逐渐减少，重构数据相比原始数据丢失的越来越多，在图片上表现也就越来越不清晰。</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/23/NtusAS.png" alt="图4从左边拍摄10名志愿者愤怒时的图片分别保留其90%、80%、70%差异进行重构图片"></p>
+<p>对带上眼镜的图片数据进行同样的处理，如图4所示当保留90%的差异进行重构时，仍旧可以看出大概。通过PCA的简单降维，可以在保证图片质量的情况下牺牲图片的清晰度；一定程度上节省了带宽。</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/23/Ntu6hQ.png" alt="图5 从左边拍摄10名志愿者愤怒时带眼镜的图片分别保留其90%、80%、70%差异进行重构图片"></p>
+<h3 id="5总结"><a href="#5总结" class="headerlink" title="5总结"></a>5总结</h3><ul>
+<li>PCA计算方法简单，运用了矩阵特征值分解</li>
+<li>计算过程中使用协方差矩阵，保证了各个维度之间不会有相互影响，使得特征值分解时数据存在重叠的情况</li>
+<li>PCA降维后的特征值在解释程度上不如原始样本</li>
+<li>舍弃的一些方差信息，有时候可能是区分一些特定样本的重要信息</li>
+<li>使用核化的方法对复杂数据进行PCA</li>
+</ul>
+<h3 id="6数据集与代码"><a href="#6数据集与代码" class="headerlink" title="6数据集与代码"></a>6数据集与代码</h3><h4 id="6-1图片加载函数"><a href="#6-1图片加载函数" class="headerlink" title="6.1图片加载函数"></a>6.1图片加载函数</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">单张图片的读取与图片向矩阵数据的转换</span></span><br><span class="line"><span class="string">    #p2与p4可以正常读取</span></span><br><span class="line"><span class="string">    img = Image.open("D:\\pycharm\\project\\pca\\faces\\an2i\\an2i_left_angry_open_2.pgm")</span></span><br><span class="line"><span class="string">    #颜色变成黑白，本来就是黑白的就省去这一步就行了</span></span><br><span class="line"><span class="string">    img2=img.convert("L")</span></span><br><span class="line"><span class="string">    img2.show()</span></span><br><span class="line"><span class="string">    data=img.getdata()</span></span><br><span class="line"><span class="string">    data=np.matrix(data)</span></span><br><span class="line"><span class="string">    print(data)</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">loadpgm</span><span class="params">(filepath)</span>:</span></span><br><span class="line">    first_file=<span class="literal">True</span></span><br><span class="line">    <span class="keyword">for</span> root, dirs, files <span class="keyword">in</span> os.walk(filepath):</span><br><span class="line">        <span class="comment">#人名</span></span><br><span class="line">        rootpicture=root.split(<span class="string">"\\"</span>)[<span class="number">-1</span>]+<span class="string">".jpeg"</span></span><br><span class="line">        <span class="keyword">for</span> file <span class="keyword">in</span> files:</span><br><span class="line">            <span class="comment">#print(os.path.splitext(file)[0][-1])</span></span><br><span class="line">            <span class="comment">#文件后缀名</span></span><br><span class="line">            <span class="keyword">if</span> first_file:</span><br><span class="line">                <span class="keyword">if</span> os.path.splitext(file)[<span class="number">0</span>][<span class="number">-23</span>::] == <span class="string">"left_angry_sunglasses_2"</span>:</span><br><span class="line">                    img = Image.open((os.path.join(root, file)))</span><br><span class="line">                    oneperson = img.getdata()</span><br><span class="line">                    img.save(rootpicture)</span><br><span class="line">                    oneperson = np.array(oneperson).tolist()</span><br><span class="line">                    first_file=<span class="literal">False</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">if</span> os.path.splitext(file)[<span class="number">0</span>][<span class="number">-23</span>::] == <span class="string">"left_angry_sunglasses_2"</span>:</span><br><span class="line">                    img = Image.open((os.path.join(root, file)))</span><br><span class="line">                    rootimg = Image.fromarray(np.array(img.getdata())).convert(<span class="string">"RGB"</span>)</span><br><span class="line">                    rootimg.save(rootpicture)</span><br><span class="line">                    oneperson=oneperson+(np.array(img.getdata()).tolist())</span><br><span class="line">                <span class="comment">#img.show()</span></span><br><span class="line">                <span class="comment">#print(img.size)</span></span><br><span class="line">    <span class="keyword">return</span> np.array(oneperson)</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-2文件读取函数"><a href="#6-2文件读取函数" class="headerlink" title="6.2文件读取函数"></a>6.2文件读取函数</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">readfile</span><span class="params">(path)</span>:</span></span><br><span class="line">    file = open(path)</span><br><span class="line">    next(file)</span><br><span class="line">    first_else = <span class="literal">True</span></span><br><span class="line">    <span class="keyword">for</span> data <span class="keyword">in</span> file.readlines():</span><br><span class="line">        data = data.strip(<span class="string">"\n"</span>)</span><br><span class="line">        nums = data.split(<span class="string">"\t"</span>)[<span class="number">0</span>:<span class="number">3</span>]</span><br><span class="line">        <span class="keyword">if</span> first_else:</span><br><span class="line">            matrix = np.array(nums)</span><br><span class="line">            first_else = <span class="literal">False</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            matrix = np.c_[matrix, nums]</span><br><span class="line">    file.close()</span><br><span class="line">    <span class="comment"># 矩阵为n*m，m为样本数</span></span><br><span class="line">    <span class="keyword">return</span> np.mat(matrix).astype(float)</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-3数据中心化"><a href="#6-3数据中心化" class="headerlink" title="6.3数据中心化"></a>6.3数据中心化</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">zeroScale</span><span class="params">(dataset)</span>:</span></span><br><span class="line">    <span class="comment"># 对数据集按行求平均</span></span><br><span class="line">    meanVals = np.mean(dataset, axis=<span class="number">1</span>)</span><br><span class="line">    <span class="comment"># 中心化</span></span><br><span class="line">    zerodata = dataset - meanVals</span><br><span class="line">    <span class="keyword">return</span> zerodata</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-4特征值范围"><a href="#6-4特征值范围" class="headerlink" title="6.4特征值范围"></a>6.4特征值范围</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">eigvalPc</span><span class="params">(eigVals, precentages)</span>:</span></span><br><span class="line">    <span class="comment"># 特征值从大到小排序</span></span><br><span class="line">    sortArray = np.sort(eigVals)[::<span class="number">-1</span>]</span><br><span class="line">    <span class="comment"># 百分比</span></span><br><span class="line">    arrSum = sum(sortArray)</span><br><span class="line">    tmpSum = <span class="number">0</span></span><br><span class="line">    num = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> sortArray:</span><br><span class="line">        tmpSum += i</span><br><span class="line">        num += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> tmpSum/arrSum &amp;gt;= precentages:</span><br><span class="line">            <span class="comment">##返回最后的特征值下标</span></span><br><span class="line">            <span class="keyword">return</span> num</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-5PCA函数"><a href="#6-5PCA函数" class="headerlink" title="6.5PCA函数"></a>6.5PCA函数</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pca</span><span class="params">(dataset, precentages)</span>:</span></span><br><span class="line">    meanVals = np.mean(dataset, axis=<span class="number">1</span>)</span><br><span class="line">    <span class="comment"># 中心化</span></span><br><span class="line">    zerodata = zeroScale(dataset)</span><br><span class="line">    <span class="comment"># 计算协方差矩阵</span></span><br><span class="line">    covMat = np.cov(zerodata)</span><br><span class="line">    eigVals, eigVects = np.linalg.eig(np.mat(covMat))</span><br><span class="line">    k = eigvalPc(eigVals, precentages)</span><br><span class="line">    <span class="comment"># 获取对应的特征值排好序的下标</span></span><br><span class="line">    eigIndex = np.argsort(eigVals)[::<span class="number">-1</span>]</span><br><span class="line">    <span class="comment"># 获取对应的特征向量下标</span></span><br><span class="line">    eigIndex = eigIndex[<span class="number">0</span>:k + <span class="number">1</span>]</span><br><span class="line">    <span class="comment"># 获取主成分特征向量</span></span><br><span class="line">    eigPCA = eigVects[:, eigIndex]</span><br><span class="line">    <span class="comment"># 原始数据投影到低纬数据</span></span><br><span class="line">    lowDimdata = np.transpose(zerodata) * eigPCA</span><br><span class="line">    <span class="comment">#重构数据</span></span><br><span class="line">    reconMat=(lowDimdata*np.transpose(eigPCA))+np.transpose(meanVals)</span><br><span class="line">    <span class="comment">#np.savetxt(outfile, reconMat, delimiter="\t")</span></span><br><span class="line">    <span class="keyword">return</span>  reconMat</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-5图片生成与保存"><a href="#6-5图片生成与保存" class="headerlink" title="6.5图片生成与保存"></a>6.5图片生成与保存</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> loadpgm <span class="keyword">import</span> loadpgm</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    <span class="keyword">for</span> root, dirs, files <span class="keyword">in</span> os.walk(<span class="string">"D:\\pycharm\\project\\pca\\faces\\"</span>):</span><br><span class="line">        first_person = <span class="literal">True</span></span><br><span class="line">        <span class="keyword">for</span> dir <span class="keyword">in</span> dirs:</span><br><span class="line">            filepath = (os.path.join(root, dir))</span><br><span class="line">            <span class="keyword">if</span> first_person:</span><br><span class="line">                dataset = loadpgm(filepath)</span><br><span class="line">                first_person = <span class="literal">False</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                dataset = np.column_stack((dataset, loadpgm(filepath)))</span><br><span class="line">    <span class="comment">#数据矩阵化</span></span><br><span class="line">    dataset=np.mat(dataset)</span><br><span class="line">    out=pca(dataset,<span class="number">0.7</span>)</span><br><span class="line">    <span class="comment">#10张图片10*3840每张图片为60X64</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">10</span>):</span><br><span class="line">        outpicture=str(i)+<span class="string">".jpeg"</span></span><br><span class="line">        picture1 = (out[i].reshape(<span class="number">60</span>, <span class="number">64</span>))</span><br><span class="line">        <span class="comment"># 保存重构图片数据</span></span><br><span class="line">        picture1 = np.real(picture1)</span><br><span class="line">        picture1 = Image.fromarray(picture1).convert(<span class="string">"RGB"</span>)</span><br><span class="line">        picture1.save(outpicture)</span><br></pre></td></tr></table></figure>
+
+<p>图片数据与PCA源代码上传到我的<a href="http://211.69.141.138/wp-content/themes/begin%2Blts/inc/go.php?url=https://github.com/zpliu1126/Machine-Learn/tree/master/pca" target="_blank" rel="noopener">github仓库</a>中</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><strong>1.</strong>机器学习[周志华版]</p>
+<p><strong>2.</strong>PCA定义：<a href="http://211.69.141.138/wp-content/themes/begin%2Blts/inc/go.php?url=http://blog.codinglabs.org/articles/pca-tutorial.html" target="_blank" rel="noopener">http://blog.codinglabs.org/articles/pca-tutorial.html</a></p>
+<p><strong>3.</strong>公式推导：<a href="http://211.69.141.138/wp-content/themes/begin%2Blts/inc/go.php?url=http://www.cnblogs.com/pinard/p/6239403.html" target="_blank" rel="noopener">http://www.cnblogs.com/pinard/p/6239403.html</a></p>
+<p><strong>4.</strong>主要代码：<a href="http://211.69.141.138/wp-content/themes/begin%2Blts/inc/go.php?url=http://www.cnblogs.com/chenbjin/p/4200790.html" target="_blank" rel="noopener">http://www.cnblogs.com/chenbjin/p/4200790.html</a></p>
+<p><strong>5.</strong>pgm数据处理：<a href="http://211.69.141.138/wp-content/themes/begin%2Blts/inc/go.php?url=https://blog.csdn.net/xijuezhu8128/article/details/79661016" target="_blank" rel="noopener">https://blog.csdn.net/xijuezhu8128/article/details/79661016</a></p>
+<p><strong>6.</strong>numpy包处理：<a href="http://211.69.141.138/wp-content/themes/begin%2Blts/inc/go.php?url=https://blog.csdn.net/qq_43287650/article/details/83211898" target="_blank" rel="noopener">https://blog.csdn.net/qq_43287650/article/details/83211898</a></p>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>简单实现python多进程</title>
+    <url>/codeHub/2020/06/22/2020-06/04python%E5%A4%9A%E8%BF%9B%E7%A8%8B/</url>
+    <content><![CDATA[<p>在处理特别大的数据的时候，尤其是多重循环。例如对2万个基因进行一个计算，每个基因的计算需要进行1亿次比较。仅仅使用一个主进程进行计算就显得十分吃力；于是学习了python多进程的的处理，极大的缩短了脚本的运行时间。</p>
+<img data-src="https://s1.ax1x.com/2020/06/22/NJ9bMd.png" alt="小猪" style="zoom:50%;" />
+
+<a id="more"></a>
+
+<ul>
+<li>首先根据进程数，来分配任务</li>
+<li>将所有的进程加入进程池</li>
+<li>启动多个进程任务时，阻塞当前主进程</li>
+<li>待多进程任务完成后，在主进程中将结果输出</li>
+</ul>
+<h3 id="分配任务"><a href="#分配任务" class="headerlink" title="分配任务"></a>分配任务</h3><ul>
+<li><code>ProcessNum</code>从命令行从获取进程数</li>
+<li>根据进程数，平均分配任务给每个进程；最后一个进程负责除不尽的任务</li>
+<li><code>p.apply_async</code>给每个进程指定调用的函数和参数</li>
+<li><code>p.close()</code>所有进程任务指定完毕，开始执行进程任务</li>
+<li><code>p.join()</code>阻塞主进程，等待子进程任务完成</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> multiprocessing</span><br><span class="line"><span class="keyword">with</span> open(args.AS, <span class="string">'r'</span>) <span class="keyword">as</span> File:</span><br><span class="line">    data = File.readlines()</span><br><span class="line">    ProcessNum = int(args.p)</span><br><span class="line">    average = int(len(data)/ProcessNum)</span><br><span class="line">    p = multiprocessing.Pool(<span class="number">16</span>)</span><br><span class="line">    <span class="keyword">for</span> processId <span class="keyword">in</span> range(<span class="number">0</span>, ProcessNum):</span><br><span class="line">        <span class="keyword">if</span> processId == ProcessNum<span class="number">-1</span>:</span><br><span class="line">            start = processId*average</span><br><span class="line">            end = len(data)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            start = processId*average</span><br><span class="line">            end = (processId+<span class="number">1</span>)*average</span><br><span class="line">        out.append(p.apply_async(mulProcessPSI,</span><br><span class="line">                                 (data[start:end], processId+<span class="number">1</span>)))</span><br><span class="line">    p.close()</span><br><span class="line">    p.join()</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取进程结果"><a href="#获取进程结果" class="headerlink" title="获取进程结果"></a>获取进程结果</h3><ul>
+<li><code>out</code>数组中存着每个进程计算的结果</li>
+<li><code>get()</code>对每个进程调用get方法获得结果</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">with</span> open(args.o, <span class="string">'w'</span>) <span class="keyword">as</span> File:</span><br><span class="line">    <span class="keyword">for</span> result <span class="keyword">in</span> out:</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> result.get():</span><br><span class="line">            File.write(item)</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="https://s1.ax1x.com/2020/06/22/NJA8P0.png" alt="运行结果"></p>
+<h3 id="仍需学习的"><a href="#仍需学习的" class="headerlink" title="仍需学习的"></a>仍需学习的</h3><ul>
+<li>多个进程进行文件写入时，涉及谁先写，谁后写的问题；需要使用到文件锁</li>
+<li>进程间通信问题</li>
+<li>内存溢出问题，多个进程的结果合并后太大了</li>
+</ul>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li><a href="https://zhuanlan.zhihu.com/p/64702600" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/64702600</a></li>
+<li><a href="https://www.cnblogs.com/jiangfan95/p/11439207.html" target="_blank" rel="noopener">https://www.cnblogs.com/jiangfan95/p/11439207.html</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>番茄中广泛的结构变异对基因表达和性状改良中的作用</title>
+    <url>/codeHub/2020/06/21/2020-06/03%E7%95%AA%E8%8C%84panSV/</url>
+    <content><![CDATA[<p>​    </p>
+<p>本文通讯作者</p>
+<img data-src="https://www.cshl.edu/wp-content/uploads/2018/10/Lippman-Zachary.jpg"  style="zoom:25%;  float:left; margin-right:20px" />
+
+
+
+<p>1.研究植物开花和花的发育</p>
+<p>2.整合遗传学、基因组学和基因编辑技术研究植物分生细胞发育成花中的分子机制</p>
+<p>3.利用新的概念和工具进行遗传改良</p>
+<div style="clear:both"></div>
+
+<p>冷泉巷实验室:<a href="https://www.cshl.edu/research/faculty-staff/zachary-lippman/" target="_blank" rel="noopener"><strong>Zachary</strong> <strong>Lippman</strong></a></p>
+<img data-src="http://schatz-lab.org/images/2015-Schatz.JPG"  style="zoom:100%;  float:left; margin-right:20px" />
+
+<p>1.主要研究基因组的结构和功能</p>
+<p>2.针对大规模生物数据，开发新的算法和软件</p>
+<p>3.研究 single molecule sequencing，单细胞数据分析</p>
+<div style="clear:both"></div>
+
+<p>约翰霍普金斯大学 <a href="http://schatz-lab.org/" target="_blank" rel="noopener"><strong>Michael Schatz</strong></a></p>
+<h3 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h3><p>结构变异是一种基因组间的序列差别，构成了作物改良和驯化的基础。由于短序列测序技术的限制，分析SVs差异的程度以及量化对性状的影响程度，一直非常困难。通过对100个番茄野生株系使用nannpore测序，与标准基因组比较后鉴定到238490个SVs。结合这些panSv数据以及组织了14份新的参考基因组，表明不同基因型材料间存在大规模的混合，大量的SVs与基因区、cir-regulation区存在交集。与此同时数百个SV-gene表现出基因表达水平的改变，这可能影响数量性状位点。通过结合数量性状和基因组编辑技术，作者发现，多个SVs能够改变基因的剂量和表达水平，从而导致口感、大小、以及产量性状的改变。四个SVs影响3个相关的转录因子，使得一个产量性状的改变。该研究突出了SVs在基因型到表型关系中的作用，强调了在作物改良中的重要性和实用性。</p>
+<a id="more"></a>
+
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>作物的表型变异是受到来自野生祖先种种遗传变异的影响，同时人类的选择和保持一些突变集合同样会影响作物的表型。主要的变异是数量遗传变异，受到多个微效基因的控制，因此现在遗传学的目标主要是解析特定基因和变异对数量性状的影响。人们通过高通量的短读序列测序，在大多数农作物中鉴定了自然遗传变异，但是这种方法只能够使用SNP、或者小片段indel来描述遗传变异，往往忽略了其他因素，因此会带来一定的偏差。最近10几年来的研究，人们发现SVs(大片的的插入、缺失、重复、染色质重排)，对植物的进化以及一些重要的农艺性状产生巨大的影响，例如根尖结构、开花时间、果实大小、抗逆性。与SNP相比，SVs往往会造成cis调控区域产生大规模的扰动，进而有可能导致基因表达发生改变，表型发生变化。SVs同样可以通过直接改变基因的拷贝数，来改变基因的表达水平，尽管SVs如此重要，但是通过短读测序鉴定SVs非常困难，使得大多数SVs没有被鉴定出来，并且它们的分子机制和对表型的影响被隐藏起来。</p>
+<p>全长Nanopore 测序，使得我们能够广泛的研究，群体规模的SV图谱，鉴定出SVs之间的差异，结合表达量的数据和基因组编辑技术，使得我们能够快速而直接的推断出SVs的分子机制和对表型的影响。在此，我们提供了番茄中最全面的 panSV图谱，并且研究它在进化、循环、数量遗传、育种中的作用。</p>
+<ul>
+<li>作者使用nanopore测序了包含野生种和栽培种的100份材料，并且鉴定了SVs。对超过200000个SVs序列进行分析发现，主要是转座子和重复元件。</li>
+<li>对SVs的分布进行分析，发现群体水平内存在广泛的基因渗入</li>
+<li>RNA测序分析表明，SVs通过影响cis区域、编码区域来影响基因的表达</li>
+<li>重头组装的14份材料的基因组，使得我们能够更好的解析基因组的复杂性。</li>
+<li>结合CRISPR-Cas9技术，表明了基因的剂量效应和表型之间的关系。</li>
+</ul>
+<h3 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h3><h4 id="1-结合long-read测序，构建PanSV-genome"><a href="#1-结合long-read测序，构建PanSV-genome" class="headerlink" title="1.结合long-read测序，构建PanSV genome"></a>1.结合long-read测序，构建PanSV genome</h4><p>收集了具有代表性的800份番茄材料，使用二代数据鉴定了SVs，选择了其中51份来自早期和现代栽培品种，并且包含了最多的SV信息；同时选择了49份野生种。这些品种主要分为:</p>
+<ul>
+<li>SP CHE GAL</li>
+<li>SLC</li>
+<li>SLL</li>
+</ul>
+<p>对100份材料进行40X的long read测序，将序列比对到标准参考基因组上鉴定SVs，筛选&gt;30bp的SVs并且合并和作为panSV genome，经过确认发现大多数SVs在短读测序中没有鉴定到。</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/20/NQkzND.png" alt="NQkzND.png"></p>
+<ul>
+<li><p>B 图 单个材料鉴定的SVs范围在1928~45840之间，其中在野生种材料中包含有最多的SVs，在SVs的种类里出现最多的是插入与缺失，也有少量的易位于重复。</p>
+</li>
+<li><p>C图 基于SVs的有无，反应这些材料间的进化关系，可以发现在栽培种和半驯化品种中有一些栽培种与半驯化品种聚类在一起，说明他们之间有渗透。</p>
+</li>
+</ul>
+<p><img data-src="C:%5CUsers%5CPC%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200620075851305.png" alt="image-20200620075851305"></p>
+<ul>
+<li>D图 比较每个材料中SVs的数目，发现在野生种中SVs数量最多，同时栽培种中SLL最少，这样驯化过程中遗传资源的丢失是吻合的</li>
+<li>E图 表明这100份材料的SVs仍旧有许多的SVs没有被发现</li>
+<li>F图中可以发现很多SVs只在少数几个材料中被鉴定到。</li>
+<li>G图 评估SVs的长度分布，发现大多数的SVs是比较小的，只在30~50bp</li>
+</ul>
+<p><img data-src="https://s1.ax1x.com/2020/06/20/NQEge0.png" alt="NQEge0.png"></p>
+<h4 id="2-组装14份高质量的番茄参考基因组"><a href="#2-组装14份高质量的番茄参考基因组" class="headerlink" title="2.组装14份高质量的番茄参考基因组"></a>2.组装14份高质量的番茄参考基因组</h4><p>结合panSV genome和其他的genome信息，作者选择了14个差异比较大的材料，进行了基因组的组装和注释。组装的新的基因组叫MAS2.0，与最近发布的ITAG进行比较，发现了一些新的“pan-genome“ gene。</p>
+<h4 id="3-SV在材料间的分布，表明不同材料间发生看遗传渗透"><a href="#3-SV在材料间的分布，表明不同材料间发生看遗传渗透" class="headerlink" title="3.SV在材料间的分布，表明不同材料间发生看遗传渗透"></a>3.SV在材料间的分布，表明不同材料间发生看遗传渗透</h4><ul>
+<li><p>A图 中在栽培种SLL中SVs热点区域，同时由于野生材料SP具有更多的SVs，SVs热点区域可能反应的是品种驯化过程中，遗传资源从野生种中渗透到栽培种中的。在番茄的育种中，通过将一些抗病、理想性状从野生供体中引入到SLL中。</p>
+</li>
+<li><p>从B中可以 ，看到有5个SLL材料中共有的渗入区间，其中两个是M82 and EA02054  ，这两个材料在5号染色体与11号染色体还有大的渗入区间，这也解释了在构建的系统发生树中，这两个材料与栽培材料隔得远</p>
+</li>
+</ul>
+<p><img data-src="https://s1.ax1x.com/2020/06/20/NQVAk8.png" alt="NQVAk8.png"></p>
+<ul>
+<li>D图 对11份SLLs品种的育种历史进行考察，真菌性镰刀菌病，在1930年首次出现，在1930~1980年，从SP材料中导入了I I2 I3个抗性基因。对这些基因进行分子克隆，发现它们主要位于11号染色体两端的臂，与UFL 的渗入区间有交集，这个区间内部还有一些其他的抗性基因。Fla.8111B  材料同样包括了这些抗病基因，不过没有对应的渗透区间，说明这些材料经过了纯化选择，将这些区间给过滤了，只保留下了抗性基因。</li>
+</ul>
+<p><img data-src="https://s1.ax1x.com/2020/06/20/NQe0JO.png" alt="NQe0JO.png"></p>
+<h4 id="与基因有关的SVs，对表达有影响"><a href="#与基因有关的SVs，对表达有影响" class="headerlink" title="与基因有关的SVs，对表达有影响"></a>与基因有关的SVs，对表达有影响</h4><p>SVs通过改变基因序列、基因拷贝数、cis调控序列的位置或者组成，来改变富集基因的表达。</p>
+<ul>
+<li>有50%的SVs与gene或者两侧的调控区存在交集，在34075个注释的基因中，有95%的基因附近存在至少一个SVs，并且主要是在cis调控区域。</li>
+</ul>
+<p><img data-src="https://s1.ax1x.com/2020/06/20/NQmSl4.png" alt="NQmSl4.png"></p>
+<ul>
+<li>为了探讨SVs对gene表达的影响，选择23份材料进行RNA测序，共得到21,156  份gene-SV对，发现很多gene存在显著的改变。其中将近一半的SVs影响编码区的，表达发生显著的改变。</li>
+<li>cis-eQTL能够解释了群体中造成表达差异变异的很大部分，作者使用分类模型通过基因表达水平的变化，预测附近SVs的有无，量化基因表达水平的变化与SVs间的相关程度。从E图中可以通过AUROC指标，发现分类器在对编码区的SVs进行预测的效果最好，总的来说，SVs能够轻微的影响基因的表达。</li>
+</ul>
+<p><img data-src="https://s1.ax1x.com/2020/06/20/NQnd2D.png" alt="NQnd2D.png"></p>
+<h4 id="新组装的基因组发现了多个挥发性的单倍型基因"><a href="#新组装的基因组发现了多个挥发性的单倍型基因" class="headerlink" title="新组装的基因组发现了多个挥发性的单倍型基因"></a>新组装的基因组发现了多个挥发性的单倍型基因</h4><p>通过新组装的MAS2.0、表达谱的数据，帮助我们找到一些影响数量性状的变异位点。通过GWAS，已经鉴定出的具有水果挥发性香气的QTL，但很少一部分进行了功能研究。其中一个QTL编码水杨酸甲脂，对消费者的吸引产生负面影响。</p>
+<ul>
+<li>还有一个E8基因，在水果的成熟过程中，负调控乙烯的生物合成；敲除E8基因后又导致一些不好的挥发物质的积累。由于当时基因组中E8两侧存在gap，所以没有其他的变异被检测到。</li>
+<li>A图 另外一个研究对<strong>NSGT1</strong>和<strong>NSGT2</strong>突变后，造成愈创木酚的积累，NSGT1少量表达被认为是没有功能的，在成熟过程中NSGT2的上调表达，使得愈创木酚转化成三糖苷，从而预防了愈创木酚的挥发。为了研究NSGT1与挥发性物质的关系，检查了这个基因的物理位置。B图 发现在一起的基因组中这个基因的注释不完整，而在新组织的MAS2.0中，一共发现了5种组合C图</li>
+</ul>
+<p><img data-src="https://s1.ax1x.com/2020/06/20/NQQFJ0.png" alt="NQQFJ0.png"></p>
+<p>经过分析发现这些基因E8、NSGT1、NSGT2的变异构成了这个愈创木酚的变异。使用300份表达谱数据和代谢数据，计算了每种单倍型的关联程度。其中IV和V是在早期驯化品种SLCs中出现的。</p>
+<ul>
+<li>E图中有5个V型材料，NSGT2没有检测到表达</li>
+<li>在图F中，IV和V在统计上没有差异，但相比于I II III都变现出更高含量的愈创木酸</li>
+<li>G图使用一个新的群体包含SP、SLC进行关联分析后与F图结果类似</li>
+<li>H图使用两个SLC构建的F2群体，表明E8和NSGT1的缺失都导致愈创木酸含量的提高</li>
+</ul>
+<p>这个结果表明高质量的基因组，能够帮助我们解决一些复杂的单倍型基因，同时从QTL分析中解释基因型与表型</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/20/NQlAAA.png" alt="NQlAAA.png"></p>
+<h4 id="细胞色素P450基因与果实大小"><a href="#细胞色素P450基因与果实大小" class="headerlink" title="细胞色素P450基因与果实大小"></a>细胞色素P450基因与果实大小</h4><p>与果实大小有关的QTL已经被鉴定出来，其中最显著的fw3.2,是位于P450 <strong><em>SlKLUH</em></strong>启动子区域的一个SNP，这个SNP被认为能够提高SIKLUH基因的表达。</p>
+<ul>
+<li>通过将这个SNP位点与panSV genome比较发现这个地方有串连重复，其中有两个SIKLUH的相同拷贝，fw3.2 dup。</li>
+<li>通过分析这个重复基因的有无对内部三个基因表达的影响发现，在存在重复基因时，表达量更高；同时为了探究到底是启动子区域SNP还是这个重复基因对果实大小造成影响，作者构建了F2群体，通过分离重复基因，其他QTL仍旧固定，D图中发现共分离。而SNP的有无对果实大小没有影响。</li>
+</ul>
+<p><img data-src="https://s1.ax1x.com/2020/06/20/NQ3kWt.png" alt="NQ3kWt.png"></p>
+<ul>
+<li>作者认为fw3.2通过基因拷贝数的增加，造成剂量效应，从而使得果实变大。通过CRISPR-Cas9,造成大片段和小片段的缺失，进行PCR发现这些植株表型发生明显的改变</li>
+</ul>
+<p><img data-src="https://s1.ax1x.com/2020/06/20/NQ31Wq.png" alt="NQ31Wq.png"></p>
+<ul>
+<li>在T0-1植株中表型没有很大变化，都存在野生型和突变的等位基因，利于我们研究剂量效应。进行杂交，其中野生种LA1589具有2个拷贝，在A组杂交中参数3个拷贝的F1，在B组中只有一个有效的变异，在图H、I中它们的花序、果实大小都有明显的差异</li>
+</ul>
+<p><img data-src="https://s1.ax1x.com/2020/06/20/NQ85E4.png" alt="NQ85E4.png"></p>
+<p>这个结果也表明panSV genome 结合CRISPR-Cas9编辑揭示了基因的剂量效应导致果实大小发生改变</p>
+<h4 id="四个SVs造成的“无果柄”育种"><a href="#四个SVs造成的“无果柄”育种" class="headerlink" title="四个SVs造成的“无果柄”育种"></a>四个SVs造成的“无果柄”育种</h4><p>无果柄是番茄收获中重要的一个性状，使得果实从花卉中分离，研究表明它是由转座子的插入导致一个转录因子Js的表达下调。但是在引入无果柄后，又会导致过多的花序分支导致果实产量的下降。图A</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/20/NQJR7F.png" alt="NQJR7F.png"></p>
+<p>育种家们为了克服这个问题，找到了两个QTL位点 sb1和sb3，能够恢复正常花序的表型。</p>
+<ul>
+<li>作者发现sb3是一个包含ej2的83kb重复，通过剂量效应弱化由于转座子插入导致的ej2表达水平的下降。</li>
+<li>sb1则是一个抑制分支产生，定位到1号染色体6Mbp的区间;发现两个基因STM 、STM3；在分子数存在差异的两个亲本中SMT3在分支数比较多的材料里高量表达。这个基因的序列和调控区域没有明显的变化，而在原来的基因组中这里有gap，在MAS2.0中，揭示了这个地方存在22kb的串连重复拷贝，图D</li>
+</ul>
+<p>为了探究这个低拷贝的SMT3基因是否就是我们要找的sb1 QTL信号，作者使用CRISPR-Cas9技术打断了STM3和TM3基因座。两种CR-1和CR-del，两个突变体在花序表型上没有很大的变化 图F；在与多花序品种杂交产生的F2群体中考察花序的数目，发现SMT3敲除后，花序分枝发生减少</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/20/NQ0PRe.png" alt="NQ0PRe.png"></p>
+<p>通过分析发现STM3作为新的调控花序发育的基因，对sb1的分析表明4个SVs影响了三MADS-box genes 的表达，从而影响花序的发育和果柄，进一步说明结构变异对基因功能研究的重要性</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><img data-src="https://s1.ax1x.com/2020/06/21/N3VaZR.png" alt="N3VaZR.png"></p>
+<ol>
+<li><p>构建了植物panSV genome 数据，表明SV和基因差异表达相关</p>
+</li>
+<li><p>对3个具体功能的研究表明，结构变异是导致表型差异的原因</p>
+</li>
+<li><p>全面的植物结构变异数据，为精准的育种提供帮助</p>
+</li>
+</ol>
+<ol start="4">
+<li>利用基因编辑技术验证SV（拷贝数变异）的功能，对其他作物的研究具有指导意义</li>
+</ol>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li>Major Impacts of Widespread Structural Variation on Gene Expression and Crop Improvement in Tomato  </li>
+</ol>
+]]></content>
+      <categories>
+        <category>文献</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>拟南芥中转录与剪切</title>
+    <url>/codeHub/2020/06/17/2020-06/02%E6%8B%9F%E5%8D%97%E8%8A%A5%E4%B8%AD%E8%BD%AC%E5%BD%95%E4%B8%8E%E5%89%AA%E5%88%87/</url>
+    <content><![CDATA[<h3 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h3><p>在真核生物中，基因在RNA聚合酶II的作用下被转录成成mRNA，其中多数时候intron是在转录的过程中被剪切复合体剪切掉。在酵母的long-read sequencing研究中发现，当聚合酶II越过内含子时，剪切随即发生。本文基于Nanopore测序技术，绘制了结合在染色质上的RNA图谱，与此同时能够在全基因组范围检测剪切状态、聚合酶II的位置、多聚腺苷酸化。通过分析发现，在聚合酶II越过3‘剪切位点1Kb后，仍旧有超过半数的intron仍旧保持未剪切的状态；相比于酵母，植物中的剪切速率慢的多。许多全长的chromatin-bound RNA在多聚腺苷化后，仍旧包含有未剪切的内含子。而这些内含子在细胞质中几乎是不存在的，对nonsense-mediate decay具有抵抗力，表明这些RNA是在转录完成后、被释放到细胞质之前完成剪切的；作者给这类intron下了一个定义，post-transcriptionally splice intron <strong>pts intron</strong>.对来自公共数据库中6500份RNA-sequencing分析后，发现pts intron的剪切依赖于剪切相关蛋白<strong>PRMT5</strong>、<strong>SKIP</strong>同时又受到各种环境信号的影响。在拟南芥中大多数内含子保留事件是发生在pts introns，表明pts intron是内含子保留事件的主要来源，也可能是机体产生有功能的mRA的一种快速响应机制。</p>
+<a id="more"></a>
+
+<h3 id="introduction"><a href="#introduction" class="headerlink" title="introduction"></a>introduction</h3><p>在真核生物中，pre-mRNA的剪切是mRNA成熟中一个基本的过程，并且剪切是转录往往同时进行。之前的研究通过人工合成pre-mRNA，在体外重构了剪切事件这一过程，帮助我们很好的理解了剪切位点的识别以及剪切复合体的组装。随着高通量测序技术的绘制新生RNA的图谱，极大的促进了在全基因组水平量化剪切事件，同时精准的追踪聚合酶II。但是研究剪切和转录之间的关系存在很大的困难，因为在同一个转录本上描述剪切和转录很困难。</p>
+<p>通过long-read sequence可以发现大多数intron的剪切是在转录时发生的，当然这种现象也因组织而异。除了共转录剪切，也存在大量的转录后剪切，这些mRNA在多聚腺苷酸化后bound在染色质上。</p>
+<p>通过对chromatin-bound RNA进行捕获后发现，处于延伸中的RNA占了70%，而多聚腺苷酸化的RNA只有30%。有了这些数据后，进一步的研究剪切和转录的关系。</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/17/NEjmOf.png" alt="NEjmOf.png"></p>
+<p>进一步对处于elongating中的full-read 分析发现，有将近20%的read，存在至少一个已经剪切的intron，而有50%的内含子，在聚合酶II跨过3’剪切位点1100bp后,仍旧没有被剪切掉。</p>
+<blockquote>
+<p>不同颜色代表不同类型的mRNA，和对应的比例</p>
+</blockquote>
+<p><img data-src="https://s1.ax1x.com/2020/06/17/NExRFe.png" alt="NExRFe.png"></p>
+<p>由于文章的方法能够同时追踪来自同一个转录本的多个intron的状态，作者比较了任意两个相邻的intron的剪切顺序，发现有70%是上游的intron先发生剪切。</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/17/NVSwK1.png" alt="NVSwK1.png"></p>
+<p>进一步比较了包含多个intron 的基因转录动态过程，发现上游intron被剪切的比例更高一些，同时又一部分的上游intron已经被剪切掉了，在聚合酶II越过下游内含子时，也有一部分上游内含子在下游内含子都剪切掉的情况、多聚腺苷酸化后仍旧没有被剪切。</p>
+<p>还存在相邻两个intron协助剪切的情况，可能是由于位于同一个transcript上的intron通过招募一些剪切复合物来帮助其他intron剪切。</p>
+<blockquote>
+<p>柱状图中恒坐标表示第几个外显子，例如S2中当聚合酶II越过第2个内含子时，两个intron就有4中可能，对应4种比例</p>
+</blockquote>
+<p><img data-src="https://s1.ax1x.com/2020/06/17/NV9VpQ.png" alt="NV9VpQ.png"></p>
+<p>研究多聚腺苷酸化的transcript的剪切情况，其中有30%没有完全的剪切掉内含子，并且大多数为剪切的转录本只包含了一个或少数未剪切的intron。分析这些未完全剪切的transcript是否会从染色质上释放，</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/17/NVF8V1.png" alt="NVF8V1.png"></p>
+<p>通过分析那些未剪切比例大于0,.1的transcript在细胞核和细胞质中的含量，表明这些transcript仍旧bound在chromatin上，在多聚腺苷酸化后，同时FPKM分析也表明，驻留在chromatin上的表达量相比于细胞核、细胞质中的更高。unspliced的intron如果释放到细胞质中会被NMD降解，通过<strong><em>upf1</em></strong>敲除后，没有NMD发现unspliced的含量没有变化。</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/17/NVZT8P.png" alt="NVZT8P.png"></p>
+<p>当分析RNA-seq数据时，内含子错误的注释是很常见的，因此作者选择了constitutively spliced introns  进行了下一步的分析。为了研究pts intron中调控内含子剪切的因素，作者选择了6521份RNA-seq数据进行分析，其中包括一些突变体、不同调节处理的材料。其中有10份突变材料中，500个intron的保留率相比于野生型有所提高。其中就包括已经报导的<strong>*PRMT5  *</strong>、**<em>SKIP  *</em>两个基因。这两个基因主要是促进pts transcript 中Intron的剪切，当然对于非pts也有一定的影响。</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/17/NV4Ege.png" alt="NV4Ege.png"></p>
+<blockquote>
+<p>PRMT5 is implicated in various developmental processes, such as flowering time control, stress response and circadian rhythm, by promoting the recruitment of NineTeen Complex to the spliceosome and modulating pre-mRNA splicing of diverse genes  </p>
+</blockquote>
+<p>在细胞核中保留的已经多聚腺苷酸化，但是没有完全剪切的transcript，被存储在细胞核中防止被NMD降解，可能是在机体受到环境刺激时，激活剪切机制，产生具有功能的mRNA。</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/17/NVIMp8.png" alt="NVIMp8.png"></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li>Post-transcriptional splicing of nascent RNA contributes to widespread intron retention in plants  </li>
+</ol>
+]]></content>
+      <categories>
+        <category>文献</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>基于三代测序对等位基因进行分型</title>
+    <url>/codeHub/2020/06/17/2020-06/2020-06-01/</url>
+    <content><![CDATA[<h3 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h3><p>区分玉米不同单倍型的遗传变异对研究等位基因的功能和群体遗传分析，基因组的解析有着重要的作用。使用全长cDNA测序，在isform水平对两个玉米自交系品种和对应的杂交品种进行分析。通过使用IsoPhase方法，在胚胎、胚乳和根组织中验证了大多数从二代数据called SNP；并且在自交系与杂交后代之间鉴定了在等位基因间特异的、基因水平、isform水平的差异表达。在互惠杂交后代中，经过分型后对6907个基因注释了SNP，鉴定了大效应基因。并且，在不同的组织中鉴定了亲本起源的isform，杂交后代中独特的isform，印记基因。最后，作者表征了顺式和反式调节作用的变化。</p>
+<a id="more"></a>
+
+<h3 id="introduction"><a href="#introduction" class="headerlink" title="introduction"></a>introduction</h3><p>对遗传变异进行分型，对于鉴定出潜在的致病变异，表征遗传变异和表型之间的关系有着重要的作用。玉米作为一个二倍体物种，虽然不同基因组之间存在很高的相似性，但是仍旧表现出等位基因的特异性表达ASE（等位基因间表达水平不相同)。并且ASE随着不同组织、不同发育阶段、不同生长环境中变化。等位基因在序列水平上产生不同的转录本，为了更好的解析玉米的转录图谱，因此有必要分析ASE。之前的研究是通过二代数据，在SNP水平对等位基因的表达进行量化，但是不能够提供全长的单倍型信息。</p>
+<p>PacBio和Nenopore则通过对全长转录本进行测序，广泛的被应用于基因组注释中；但是只有少量的研究使用long reads进行isform水平的亚型研究。本研究中使用PacBio和RNA-seq测序，并且开发了一套流程IsoPhase，对杂交种中等位基因的亚型进行分型。第一个在玉米中实验IsoPhase方法进行研究，这套流程同样适用于多倍体物种。这套流程不需要父母本的信息，虽然父母本的信息可以区分母本还是父本的等位基因。并且isform水平可以确定到底是那个等位基因在转录，可以产生特定的等位基因转录组。</p>
+<h3 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h3><h4 id="全长转录组测序和生信分析流程"><a href="#全长转录组测序和生信分析流程" class="headerlink" title="全长转录组测序和生信分析流程"></a>全长转录组测序和生信分析流程</h4><p><img data-src="https://s1.ax1x.com/2020/06/17/NAhv1H.png" alt="流程图"></p>
+<p>首先两个亲本在一些性状上存在巨大的差异，使得这两个亲本的杂交非常的适合研究等位基因的杂种优势。同时为了量化不同组织中基因表达谱，作者提取了不同物种、不同组织的RNA进行反转录，加上组织特异的barcode进行混池测序，将得到的环形共识序列使用Isoseq3分析流程。其中有76.3的read被归类为全长的转录本，根据barcode和ployA是否出现。经过Isoseq处理后，产生了25万个高质量的全长转录本。将这些全长转录本比对到玉米参考基因组上，约有99.3%被比对到参考基因组上，根据覆盖度和相似度进行筛选后，仅仅保留91.8%，这些序列进一步  collapsed  成9万多个非冗余的转录本。将没有比对上的全长转录本比对到  RefSeq NR database  数据库中其中约有50%的比对到了其他生物中，说明这些在文库制备的时候来至于质粒或者其他来源。</p>
+<h4 id="Isoform-characterization"><a href="#Isoform-characterization" class="headerlink" title="Isoform characterization"></a>Isoform characterization</h4><p>使用  SQANTI   将转录本与参考基因组注释进行比较，其中有  3344  被认为是新的没有被注释的转录本。其中有95.5%是位于基因间区的。</p>
+<p>SQANTI  将转录本进行了分类</p>
+<p><img data-src="https://s1.ax1x.com/2020/06/17/NA4iAf.png" alt="isform分类"></p>
+<ol>
+<li>FSM 与参考基因组注释的剪切完全匹配</li>
+<li>ISM  不完全匹配</li>
+<li>NIC 全新的在分类内</li>
+<li>NNC全新的不在分类内</li>
+<li>反义链</li>
+<li>基因间区</li>
+</ol>
+<p>并且全长转录本测序的转录本长度能达到10kb以上。并且新鉴定出的基因主要是多外显子。</p>
+<ul>
+<li>对于剪切位点完全匹配的isform，发生了起始和终止位点的改变。</li>
+</ul>
+<p>将转录本进行分池，也就是分组织的分析。当一个组织中的转录本有一条全长转录本的read支持，就认为它已经表达了。每个组织中包含有20000到30000个表达的转录本。为了验证数据的饱和，对样本进行二次采样，Isoseq数据在基因水平上已经达到饱和。</p>
+<p>在基因和isform水平比较双亲和杂交种，没有发现明显的模式。与此同时在比较双亲与两个杂交种时，发现一些共享的和品种特异的基因、isform；这个发现同样被二代测序的数据所确认。对这四个品种的剪切模式进行探讨发现，内含子保守时最主要的模式；使用二代数据进行定量分析发现，在三个组织中大多数基因表现出一种加性效应。同时比较了两个杂交种，发现它们在加性基因的数目上存在差异。这也可能是导致两个杂交种间存在差异的原因。在加性基因与非加性基因的比较中isform的数目上没有存在明显的差异。</p>
+<h4 id="全长转录本实现准确的亚型分型"><a href="#全长转录本实现准确的亚型分型" class="headerlink" title="全长转录本实现准确的亚型分型"></a>全长转录本实现准确的亚型分型</h4><p><img data-src="https://s1.ax1x.com/2020/06/17/NA4aHx.png" alt="基于SNP进行分型"></p>
+<p>为了对Iso-seq转录本进行分型，作者开发了一套IsoPhase流程，对于每个基因，将全长reads比对到基因区域，然后进行SNP的鉴定。之后使用全长reads的信息重构不同的亚型，使用简单的纠错方案获取两个等位基因。为了分清楚哪个是来自于母本哪个是来至于父本的等位基因，所有的read只能来自于同一个等位基因。只有双亲等位基因被鉴定出来，就得到了F1中每个等位基因的read数。对9000多个基因进行分型后，其中有6700多个基因存在至少一个SNP能够将它归类为B73或者Kill。</p>
+<p>使用二代数据进行验证后，其中有96%的SNP得到验证，而其他PacBio特异的SNPs可能二代测序数据对UTR区域的覆盖不够。</p>
+<h4 id="等位基因的特异性表达"><a href="#等位基因的特异性表达" class="headerlink" title="等位基因的特异性表达"></a>等位基因的特异性表达</h4><p><img data-src="https://s1.ax1x.com/2020/06/17/NA42DI.png" alt="等位基因表达"></p>
+<p>只有母本等位基因的表达，比较了两个双亲在等位基因的表达上的差异</p>
+<p>在F1杂交后代中，所有的isform都表达了，但是只有Kill检测出了出了一个isform。</p>
+<p>monoallelic genes感觉是纯合的等位基因，在不同组织中比较了这些基因在isform数目上的差异</p>
+<h4 id="对SNP进行功能注释"><a href="#对SNP进行功能注释" class="headerlink" title="对SNP进行功能注释"></a>对SNP进行功能注释</h4><p>其中有24%的SNP是同义突变，在非同义突变的SNP中，  22,093  多个SNP对  5140 genes  可能存在效应，有将近10~17%是在UTR区域，其中进行容忍度分析发现，0.05值为阀值，大约  2556 genes  SNP被认为是有害突变。同时在杂交后代中，isform的数目比父母中更高，但是在胚乳中两个杂交种表现不一致，说明不同的杂交组合影响胚乳的发育。</p>
+<h4 id="印记基因、顺式反式调节效应"><a href="#印记基因、顺式反式调节效应" class="headerlink" title="印记基因、顺式反式调节效应"></a>印记基因、顺式反式调节效应</h4><p>胚乳中26个父本印记基因，其中70%在之前的研究中被报道了；在胚中2个印记基因同样出现在胚乳中。在胚乳中30个母本印记基因，在根中没有发现印记基因。</p>
+<p>顺式、反式调控，通过比较父母本中等位基因表达比率与杂交后代中等位基因的杂交比例来区分。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
+<li><p>科学问题非常有趣，研究了不同等位基因特异性的表达，可能是造成杂种优势、印记基因等现象的原因</p>
+</li>
+<li><p>第一个利用全长转录组数据，在isforms水平对等位基因的特异性表达进行分析</p>
+</li>
+<li><p>每一个结果都结合了二代测序数据，说明了数据的真实性和可靠性</p>
+</li>
+<li><p>开发了一套基于全长转录本数据的分析流程IsoPhase</p>
+</li>
+</ol>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li>Variant phasing and haplotypic expression from long-read sequencing in maize</li>
+</ol>
+]]></content>
+      <categories>
+        <category>文献</category>
+      </categories>
+  </entry>
+  <entry>
     <title>生物学杂志汇总</title>
-    <url>/codeHub/2020/05/31/27%E7%94%9F%E7%89%A9%E5%AD%A6%E6%9D%82%E5%BF%97%E6%B1%87%E6%80%BB/</url>
+    <url>/codeHub/2020/05/31/2020-06%E4%BB%A5%E5%89%8D/27%E7%94%9F%E7%89%A9%E5%AD%A6%E6%9D%82%E5%BF%97%E6%B1%87%E6%80%BB/</url>
     <content><![CDATA[<p>Cell系列</p>
 <ul>
 <li><a href="https://www.cell.com/cell/home" target="_blank" rel="noopener">Cell</a></li>
@@ -39,7 +899,7 @@
   </entry>
   <entry>
     <title>杂草水稻的进化</title>
-    <url>/codeHub/2020/04/24/26%E6%9D%82%E8%8D%89%E6%B0%B4%E7%A8%BB%E7%9A%84%E8%BF%9B%E5%8C%96/</url>
+    <url>/codeHub/2020/04/24/2020-06%E4%BB%A5%E5%89%8D/26%E6%9D%82%E8%8D%89%E6%B0%B4%E7%A8%BB%E7%9A%84%E8%BF%9B%E5%8C%96/</url>
     <content><![CDATA[<h1 id="Population-Genomic-Analysis-and-De-Novo-Assembly-Reveal-the-Origin-of-Weedy-Rice-as-an-Evolutionary-Game"><a href="#Population-Genomic-Analysis-and-De-Novo-Assembly-Reveal-the-Origin-of-Weedy-Rice-as-an-Evolutionary-Game" class="headerlink" title="Population Genomic Analysis and De Novo Assembly Reveal the Origin of Weedy Rice as an Evolutionary Game"></a>Population Genomic Analysis and De Novo Assembly Reveal the Origin of Weedy Rice as an Evolutionary Game</h1><p>​    杂草水稻具有很强的入侵性、再生能力以及与栽培稻竞争资源；同时又缺乏有效的除草剂进行控制；使得它成为稻田里的主要威胁。但与此同时，作为栽培稻的近缘物质，杂草水稻又具有与野生水稻类似的特征；这就使得杂草水稻作为理解水稻驯化和改良的良好模型。对于杂草水稻的起源以及它的一些特有属性的形成仍旧是未知的，在对亚洲的低纬度地区的杂草水稻研究后，认为有一部分基因是从野生品种中流向杂草水稻的。</p>
 <p>​    在当前日益变化的气候和人口增长情况下，从杂草植物中克隆优良基因到作物中，能够提供农作物产量解决粮食安全问题。但是还存在一些限制因素，由于缺乏基因组信息，使得发掘优良基因和解析其遗传基础变得十分困难。</p>
 <p>​    高纬度地区的杂草水稻相比与栽培水稻经历着更强的自然选择压，因此可以用它的遗传资源来改良栽培稻的生态适应性。</p>
@@ -122,7 +982,7 @@
   </entry>
   <entry>
     <title>癌症中基因组的重排对染色质折叠的影响</title>
-    <url>/codeHub/2020/04/23/25%E7%99%8C%E7%97%87%E4%B8%AD%E5%9F%BA%E5%9B%A0%E7%BB%84%E7%9A%84%E9%87%8D%E6%8E%92%E5%AF%B9%E6%9F%93%E8%89%B2%E8%B4%A8%E6%8A%98%E5%8F%A0%E7%9A%84%E5%BD%B1%E5%93%8D/</url>
+    <url>/codeHub/2020/04/23/2020-06%E4%BB%A5%E5%89%8D/25%E7%99%8C%E7%97%87%E4%B8%AD%E5%9F%BA%E5%9B%A0%E7%BB%84%E7%9A%84%E9%87%8D%E6%8E%92%E5%AF%B9%E6%9F%93%E8%89%B2%E8%B4%A8%E6%8A%98%E5%8F%A0%E7%9A%84%E5%BD%B1%E5%93%8D/</url>
     <content><![CDATA[<h1 id="癌症中基因组的重排对染色质折叠的影响"><a href="#癌症中基因组的重排对染色质折叠的影响" class="headerlink" title="癌症中基因组的重排对染色质折叠的影响"></a>癌症中基因组的重排对染色质折叠的影响</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>基因组的构象在细胞核内是分层次的，其中TAD被认为是最能代表功能的区域，因为在TAD内部包含着可以去调控基因的调控元件，TAD边界区域的扰动可能会使相邻的TAD发生异常的交互从而去影响相邻基因的调控，相关的一些研究表明，基因组的重排现象会使得TAD的结构发生改变从而影响基因的调控，这篇文章就去探究在不同的肿瘤组织中不同的结构变异对于TAD以及基因表达的影响，从而帮助我们更好的理解染色质的折叠和基因组的重排之间的关系。</p>
 <a id="more"></a>
 
@@ -241,7 +1101,7 @@
   </entry>
   <entry>
     <title>指导植物RNA聚合酶II转录的‘GPS’</title>
-    <url>/codeHub/2020/04/19/24%E6%8C%87%E5%AF%BC%E6%A4%8D%E7%89%A9RNA%E8%81%9A%E5%90%88%E9%85%B6II%E8%BD%AC%E5%BD%95%E7%9A%84%E2%80%98GPS%E2%80%99/</url>
+    <url>/codeHub/2020/04/19/2020-06%E4%BB%A5%E5%89%8D/24%E6%8C%87%E5%AF%BC%E6%A4%8D%E7%89%A9RNA%E8%81%9A%E5%90%88%E9%85%B6II%E8%BD%AC%E5%BD%95%E7%9A%84%E2%80%98GPS%E2%80%99/</url>
     <content><![CDATA[<h1 id="指导植物RNA聚合酶II转录的‘GPS’"><a href="#指导植物RNA聚合酶II转录的‘GPS’" class="headerlink" title="指导植物RNA聚合酶II转录的‘GPS’"></a>指导植物RNA聚合酶II转录的‘GPS’</h1><p>组蛋白翻译后的修饰，通过调节转录过程中RNA聚合酶II的动态变化，塑造了基因的表达图谱。转录分为转录起始、延伸和终止等阶段，在植物中能够标识特定转录阶段的组蛋白修饰仍旧比较模糊。通过CHIP-seq技术，能够得到全基因组上组蛋白修饰的分布；并且发现了一些能够指导RNAII转录的基因组位置信号（GPS）。同时阐明了一些组蛋白修饰因子（readers、weiters、erasers），在基因表达和生物学上的作用。在不同的转录阶段，RNAPII有着不同的功能，这可能与组蛋白修饰存在一定的关联。</p>
 <h3 id="组蛋白作为基因转录的坐标"><a href="#组蛋白作为基因转录的坐标" class="headerlink" title="组蛋白作为基因转录的坐标"></a>组蛋白作为基因转录的坐标</h3><p>基因的表达依赖于转录过程中RNA聚合酶II的不同功能，根据功能的不同将转录分成了3个阶段：1.转录起始、2.延伸、3.终止。那么问题来了，RNA聚合酶II是如何识别基因不同的位置信号来执行不同的功能的呢？</p>
 <p><img data-src="https://s1.ax1x.com/2020/04/19/JKjSRU.png" alt="RNAPII转录周期"></p>
@@ -269,7 +1129,7 @@
   </entry>
   <entry>
     <title>Promise源码解析</title>
-    <url>/codeHub/2020/04/19/23Promise%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</url>
+    <url>/codeHub/2020/04/19/2020-06%E4%BB%A5%E5%89%8D/23Promise%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</url>
     <content><![CDATA[<p>众所周知javascript是一门单线程语言，这种设计有效的避免了多线程带来的复杂同步问题。但有时候单线程模式遇到耗时较长的任务时，会拖延整个程序的进度，造成浏览器长时间无响应。为了解决这个问题，js将任务分为两种执行模式：</p>
 <ul>
 <li>异步模式</li>
@@ -348,7 +1208,7 @@
   </entry>
   <entry>
     <title>Tweenjs动画插件</title>
-    <url>/codeHub/2020/04/17/22Tweenjs%E5%8A%A8%E7%94%BB%E6%8F%92%E4%BB%B6/</url>
+    <url>/codeHub/2020/04/17/2020-06%E4%BB%A5%E5%89%8D/22Tweenjs%E5%8A%A8%E7%94%BB%E6%8F%92%E4%BB%B6/</url>
     <content><![CDATA[<p>TweenJS允许你以一种平滑的方式来改变对象的属性。所有的动画处理函数都封装成了API，你需要做的仅仅是告诉它哪些属性需要被修改，修改的值的范围，修改所经历的时间、轨迹的选择。</p>
 <h3 id="1-快速入门"><a href="#1-快速入门" class="headerlink" title="1.快速入门"></a>1.快速入门</h3><ul>
 <li>首先给<code>TWEEN</code>对象传递一个对象，里面包含了需要修改的属性</li>
@@ -388,7 +1248,7 @@
   </entry>
   <entry>
     <title>植物DNA甲基化机制和靶向操纵工具</title>
-    <url>/codeHub/2020/04/17/21%E6%A4%8D%E7%89%A9DNA%E7%94%B2%E5%9F%BA%E5%8C%96%E6%9C%BA%E5%88%B6%E5%92%8C%E9%9D%B6%E5%90%91%E6%93%8D%E7%BA%B5%E5%B7%A5%E5%85%B7/</url>
+    <url>/codeHub/2020/04/17/2020-06%E4%BB%A5%E5%89%8D/21%E6%A4%8D%E7%89%A9DNA%E7%94%B2%E5%9F%BA%E5%8C%96%E6%9C%BA%E5%88%B6%E5%92%8C%E9%9D%B6%E5%90%91%E6%93%8D%E7%BA%B5%E5%B7%A5%E5%85%B7/</url>
     <content><![CDATA[<h3 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h3><p>DNA甲基化是表观遗传中的一种，它能够调控多种生物途径，例如：基因的表达、基因组的稳定性。在植物中对某个位点突变或者使用药物的方法被用来研究DNA甲基化的作用。许多工具就能够直接的对特定位点的DNA甲基化进行操作，从而评估DNA甲基化在特定途径中的直接效应。最近研究者们，通过改造DNA-binding蛋白，实现对甲基化机器的招募，从而改变特定位点的DNA甲基化水平。</p>
 <a id="more"></a>
 
@@ -420,7 +1280,7 @@
   </entry>
   <entry>
     <title>sgRNAcase9设计</title>
-    <url>/codeHub/2020/04/16/20sgRNAcase9%E8%AE%BE%E8%AE%A1/</url>
+    <url>/codeHub/2020/04/16/2020-06%E4%BB%A5%E5%89%8D/20sgRNAcase9%E8%AE%BE%E8%AE%A1/</url>
     <content><![CDATA[<p>使用<code>sgRNAcas9</code>软件包进行基于参考基因组的sgRNA 设计：针对每条给定的query 序列首先搜索<code>NGG</code>的PAM结构，找到对应的motif后，在全基因组范围内评估<code>on-target</code>和<code>off-target</code>值。如果有多条质量比较好的<code>on-target</code>sgRNA，后面还可以根据基因注释文件筛选那些距离5’端更近的sgRNA。</p>
 <blockquote>
 <p> <a href="http://www.biootools.com/software.html#tab1" target="_blank" rel="noopener">软件包地址</a></p>
@@ -485,7 +1345,7 @@
   </entry>
   <entry>
     <title>python基于模块化编程</title>
-    <url>/codeHub/2020/04/16/19python%E6%A8%A1%E5%9D%97%E5%8C%96/</url>
+    <url>/codeHub/2020/04/16/2020-06%E4%BB%A5%E5%89%8D/19python%E6%A8%A1%E5%9D%97%E5%8C%96/</url>
     <content><![CDATA[<img data-src="https://pypi.org/static/images/logo-large.svg" alt=" python模块化" style="zoom:80%;  float:left; margin-right:20px" />
 
 <p>代码模块化是进行大型项目的必经之路，通过将代码进行模块化、解耦将功能进行模块化。在C语言中通过<code>include</code>语法，将不同模块的头文件进行重复利用；在javascript中使用<code>module export||require</code>语法实现模块的引入。同样在python中也可以引入自定义模块，简化代码。</p>
@@ -536,7 +1396,7 @@
   </entry>
   <entry>
     <title>三维基因组中的结构变异</title>
-    <url>/codeHub/2020/04/15/18%E4%B8%89%E7%BB%B4%E5%9F%BA%E5%9B%A0%E7%BB%84%E4%B8%AD%E7%9A%84%E7%BB%93%E6%9E%84%E5%8F%98%E5%BC%82/</url>
+    <url>/codeHub/2020/04/15/2020-06%E4%BB%A5%E5%89%8D/18%E4%B8%89%E7%BB%B4%E5%9F%BA%E5%9B%A0%E7%BB%84%E4%B8%AD%E7%9A%84%E7%BB%93%E6%9E%84%E5%8F%98%E5%BC%82/</url>
     <content><![CDATA[<h1 id="三维基因组中的结构变异"><a href="#三维基因组中的结构变异" class="headerlink" title="三维基因组中的结构变异"></a>三维基因组中的结构变异</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>染色体在结构和数量上的重排统称为结构变异（SV），它在很大程度上对人类的遗传多样性做出了贡献，因此其与癌症、罕见疾病和进化具有高度的相关性，近来的研究表明，SVs不仅仅可以影响基因剂量，还能影响基因的调控，SVs可以通过扰动TAD（topologically associating domains）来改变调控元件的拷贝数或对三维基因组造成影响，由于这些位置效应，SVs会影响距离SVs断点较远的基因的表达，从而导致疾病的发生，所以在解释这些疾病的病理的时候，必须要考虑SVs对三维基因组和基因表达调控的影响。</p>
 <a id="more"></a>
 
@@ -654,7 +1514,7 @@
   </entry>
   <entry>
     <title>棉属A基因组起源与进化</title>
-    <url>/codeHub/2020/04/15/17%E6%A3%89%E5%B1%9EA%E5%9F%BA%E5%9B%A0%E7%BB%84%E8%BF%9B%E5%8C%96/</url>
+    <url>/codeHub/2020/04/15/2020-06%E4%BB%A5%E5%89%8D/17%E6%A3%89%E5%B1%9EA%E5%9F%BA%E5%9B%A0%E7%BB%84%E8%BF%9B%E5%8C%96/</url>
     <content><![CDATA[<h1 id="棉属A基因组的起源与进化"><a href="#棉属A基因组的起源与进化" class="headerlink" title="棉属A基因组的起源与进化"></a>棉属A基因组的起源与进化</h1><h3 id="Abstarct"><a href="#Abstarct" class="headerlink" title="Abstarct"></a>Abstarct</h3><p>在完成非洲棉 A1基因组、亚洲棉A2基因组、四倍体陆地棉（AD）1基因组组装后，表明A基因组可能起源于一个共同的A0基因组，同时在系统发生树上A1相比与A2更加接近于祖先A0基因组；同时异源四倍体的形成可能早于A1和A2基因组的分化。通过高斯密度分布函数估计表明，大约570万年前~61万年前出现的几次转座子爆发事件极大的促进了A基因组的扩张、物种的形成和进化。同时在基因区域大量的物种特异性的结构变异，改变了许多重要基因的表达，这些有可能是导致四倍体（AD）1中棉纤维品质得到改良。该研究不仅解决了长期以来颇具争议的概念：关于A基因组起源；同时为棉花的遗传改良提供了有价值的基因组资源。</p>
 <a id="more"></a>
 
@@ -677,7 +1537,7 @@
   </entry>
   <entry>
     <title>ggplot-直方图</title>
-    <url>/codeHub/2020/04/12/16ggplot-%E7%9B%B4%E6%96%B9%E5%9B%BE/</url>
+    <url>/codeHub/2020/04/12/2020-06%E4%BB%A5%E5%89%8D/16ggplot-%E7%9B%B4%E6%96%B9%E5%9B%BE/</url>
     <content><![CDATA[<h2 id="1-频数直方图"><a href="#1-频数直方图" class="headerlink" title="1.频数直方图"></a>1.频数直方图</h2><h3 id="数据准备"><a href="#数据准备" class="headerlink" title="数据准备"></a>数据准备</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt; head(pacBioData)</span><br><span class="line">               V1 V2</span><br><span class="line">1 Ghir_A01G000010  1</span><br><span class="line">2 Ghir_A01G000030  1</span><br><span class="line">3 Ghir_A01G000040  3</span><br><span class="line">4 Ghir_A01G000070  3</span><br><span class="line">5 Ghir_A01G000080  1</span><br><span class="line">6 Ghir_A01G000100  2</span><br></pre></td></tr></table></figure>
 
 <p>如果你同时含有两个样本的频数信息，需要针对不同的样本画不同的的柱子；只需要在数据框中添加一个字段即可。例如我的数据中含有PacBio测序数据和参考基因组数据两个文件</p>
@@ -760,7 +1620,7 @@
   </entry>
   <entry>
     <title>三维基因组之TAD的形成机制以及其特征</title>
-    <url>/codeHub/2020/04/08/15%E4%B8%89%E7%BB%B4%E5%9F%BA%E5%9B%A0%E7%BB%84%E4%B9%8BTAD%E7%9A%84%E5%BD%A2%E6%88%90%E6%9C%BA%E5%88%B6%E4%BB%A5%E5%8F%8A%E5%85%B6%E7%89%B9%E5%BE%81/</url>
+    <url>/codeHub/2020/04/08/2020-06%E4%BB%A5%E5%89%8D/15%E4%B8%89%E7%BB%B4%E5%9F%BA%E5%9B%A0%E7%BB%84%E4%B9%8BTAD%E7%9A%84%E5%BD%A2%E6%88%90%E6%9C%BA%E5%88%B6%E4%BB%A5%E5%8F%8A%E5%85%B6%E7%89%B9%E5%BE%81/</url>
     <content><![CDATA[<ul>
 <li><h1 id="三维基因组之TAD的形成机制以及其特征"><a href="#三维基因组之TAD的形成机制以及其特征" class="headerlink" title="三维基因组之TAD的形成机制以及其特征"></a>三维基因组之TAD的形成机制以及其特征</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>了解细胞核内染色体折叠的机制对于确定基因组结构和功能之间的关系至关重要。最近应用的“染色体构象捕获”技术揭示了许多物种的基因组被组织成频繁交互的染色质区域，称为TADs。这种染色体区域化已成为高阶基因组结构和功能的重要特征。虽然TADs现在已经被广泛的研究于各种生物体中，但它们在大小、结构和形成过程中所涉及的蛋白质方面似乎有特定的特征。在此，我们描述了这些跨物种染色质区域的主要特征，并讨论了染色质结构、基因组活性和表观基因组之间的关系，着重讲述了TAD形成的机制原理。还涉及到了TADs在基因组进化中的潜在影响。</p>
 <a id="more"></a>
@@ -872,7 +1732,7 @@
   </entry>
   <entry>
     <title>Blast+网页</title>
-    <url>/codeHub/2020/04/08/14Blast-%E7%BD%91%E9%A1%B5/</url>
+    <url>/codeHub/2020/04/08/2020-06%E4%BB%A5%E5%89%8D/14Blast-%E7%BD%91%E9%A1%B5/</url>
     <content><![CDATA[<h1 id="Blast-网页实现"><a href="#Blast-网页实现" class="headerlink" title="Blast+ 网页实现"></a>Blast+ 网页实现</h1><img data-src="http://image.sciencenet.cn/album/201311/28/073831c6zann9dznas78pw.jpg" alt=" Stephen Altschul, PhD " style="zoom:80%;  float:left; margin-right:20px" />
 
 <span class="label success">BLAST</span>( Basic Local Alignment Search Tool ),基于局部比对算法的搜索工具，实现比较两段核酸序列或者蛋白序列之间的同源性的功能，快速找到序列之间的同源区域，并且进行打分来区分同源性的高低。BLAST的作者 斯蒂芬·弗兰克·阿尔丘尔 **Stephen Frank  Altschul**，是一位著名数学家，同时本科期间对生物学有着浓厚的兴趣。因此他阅读了一些关于DNA的书籍其中包括詹姆斯.沃森撰写的《The Double Helix 》；同时选修了《进化生物学》；在博士期间为X射线晶体学项目写过计算机代码。1994年至今在美国国家生物信息中心NCBI从事计算生物学的工作。
@@ -944,7 +1804,7 @@
   </entry>
   <entry>
     <title>fasta文件校验</title>
-    <url>/codeHub/2020/04/06/13fasta%E6%96%87%E4%BB%B6%E6%A0%A1%E9%AA%8C/</url>
+    <url>/codeHub/2020/04/06/2020-06%E4%BB%A5%E5%89%8D/13fasta%E6%96%87%E4%BB%B6%E6%A0%A1%E9%AA%8C/</url>
     <content><![CDATA[<h1 id="fasta文件校验"><a href="#fasta文件校验" class="headerlink" title="fasta文件校验"></a>fasta文件校验</h1><p>最近在利用javascripte构建网页blast时候，涉及到客户端文件和表单的提交。因此结合vue与element-ui框架封装了一个上传并对fasta文件进行校验的插件</p>
 <a id="more"></a>
 
@@ -1029,7 +1889,7 @@
   </entry>
   <entry>
     <title>circos模块安装</title>
-    <url>/codeHub/2020/03/27/11circos%E6%A8%A1%E5%9D%97%E5%AE%89%E8%A3%85/</url>
+    <url>/codeHub/2020/03/27/2020-06%E4%BB%A5%E5%89%8D/11circos%E6%A8%A1%E5%9D%97%E5%AE%89%E8%A3%85/</url>
     <content><![CDATA[<h2 id="Circos安装"><a href="#Circos安装" class="headerlink" title="Circos安装"></a>Circos安装</h2><ol>
 <li><p>下载软件包</p>
 <blockquote>
@@ -1104,7 +1964,7 @@
   </entry>
   <entry>
     <title>circos进阶之link图</title>
-    <url>/codeHub/2020/03/26/10circos%E8%BF%9B%E9%98%B6%E4%B9%8Blink%E5%9B%BE/</url>
+    <url>/codeHub/2020/03/26/2020-06%E4%BB%A5%E5%89%8D/10circos%E8%BF%9B%E9%98%B6%E4%B9%8Blink%E5%9B%BE/</url>
     <content><![CDATA[<h1 id="circos进阶之link图"><a href="#circos进阶之link图" class="headerlink" title="circos进阶之link图"></a>circos进阶之link图</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>Links主要试图利用连线关系，表明染色体上不同位置之间的联系。这在实际生物学问题中很常用，尤其是在表示基因和基因之间的共线性的时候，link图是我们的不二选择，之前我们一起学习了使用MCScanX进行共线性分析，下游分析中可以画一个圈图，但是本人认为那个圈图无论是配色还是布局都不是特别好看，今天我们就来学习如何处理MCScanX的结果文件然后用circos去画出我们想要的圈图</p>
 <a id="more"></a>
 
@@ -1155,7 +2015,7 @@
   </entry>
   <entry>
     <title>拟南芥中co-transcriptional splicing</title>
-    <url>/codeHub/2020/03/26/09%E6%8B%9F%E5%8D%97%E8%8A%A5%E4%B8%ADco-transcriptional-splicing/</url>
+    <url>/codeHub/2020/03/26/2020-06%E4%BB%A5%E5%89%8D/09%E6%8B%9F%E5%8D%97%E8%8A%A5%E4%B8%ADco-transcriptional-splicing/</url>
     <content><![CDATA[<blockquote>
 <p>  The Features and Regulation of Co-transcriptional Splicing in Arabidopsis  </p>
 </blockquote>
@@ -1205,7 +2065,7 @@
   </entry>
   <entry>
     <title>ExonSkipDB 数据库</title>
-    <url>/codeHub/2020/03/26/08ExonSkipDB-%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
+    <url>/codeHub/2020/03/26/2020-06%E4%BB%A5%E5%89%8D/08ExonSkipDB-%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
     <content><![CDATA[<blockquote>
 <p>  ExonSkipDB: functional annotation of exon skipping event in human  </p>
 </blockquote>
@@ -1258,7 +2118,7 @@
   </entry>
   <entry>
     <title>白血病中T细胞3维染色质图谱</title>
-    <url>/codeHub/2020/03/24/07T%E7%BB%86%E8%83%9E3%E7%BB%B4%E6%9F%93%E8%89%B2%E8%B4%A8%E5%9B%BE%E8%B0%B1/</url>
+    <url>/codeHub/2020/03/24/2020-06%E4%BB%A5%E5%89%8D/07T%E7%BB%86%E8%83%9E3%E7%BB%B4%E6%9F%93%E8%89%B2%E8%B4%A8%E5%9B%BE%E8%B0%B1/</url>
     <content><![CDATA[<blockquote>
 <p>Three-dimensional chromatin landscapes in T cell acute lymphoblastic leukemia</p>
 </blockquote>
@@ -1317,7 +2177,7 @@
   </entry>
   <entry>
     <title>MCScanX共线性分析</title>
-    <url>/codeHub/2020/03/24/06MCScanX%E5%85%B1%E7%BA%BF%E6%80%A7%E5%88%86%E6%9E%90/</url>
+    <url>/codeHub/2020/03/24/2020-06%E4%BB%A5%E5%89%8D/06MCScanX%E5%85%B1%E7%BA%BF%E6%80%A7%E5%88%86%E6%9E%90/</url>
     <content><![CDATA[<h2 id="MCScanX的简介"><a href="#MCScanX的简介" class="headerlink" title="MCScanX的简介"></a>MCScanX的简介</h2><p>MCScanX：Multiple Collinearity Scan toolkit是一种算法，扫描多个基因组或亚基因组，以识别假定的同源染色体区域，然后使用基因定位这些区域。它的速度很快，操作简单，便于使用，是我们在进行基因共线性分析时的一个利器。</p>
 <p>今天我们就来学习一下如何使用这个利器来帮助我们分析生物学问题</p>
 <a id="more"></a>
@@ -1429,7 +2289,7 @@
   </entry>
   <entry>
     <title>hexo文章书写规范</title>
-    <url>/codeHub/2020/03/23/05hexo%E6%96%87%E7%AB%A0%E5%8F%91%E5%B8%83/</url>
+    <url>/codeHub/2020/03/23/2020-06%E4%BB%A5%E5%89%8D/05hexo%E6%96%87%E7%AB%A0%E5%8F%91%E5%B8%83/</url>
     <content><![CDATA[<h2 id="文章书写规范"><a href="#文章书写规范" class="headerlink" title="文章书写规范"></a>文章书写规范</h2><h3 id="1-生成一篇空白markdown文件"><a href="#1-生成一篇空白markdown文件" class="headerlink" title="1.生成一篇空白markdown文件"></a>1.生成一篇空白markdown文件</h3><ul>
 <li>在生成新的markdown时，加上数字编号，以便以后方便查看</li>
 <li>当然在文章属性栏，把数字去掉这样在网页上就不会看到这个编号了</li>
@@ -1491,7 +2351,7 @@
   </entry>
   <entry>
     <title>vscode与服务端R交互</title>
-    <url>/codeHub/2020/03/22/04vscode%E4%B8%8E%E6%9C%8D%E5%8A%A1%E7%AB%AFR%E4%BA%A4%E4%BA%92/</url>
+    <url>/codeHub/2020/03/22/2020-06%E4%BB%A5%E5%89%8D/04vscode%E4%B8%8E%E6%9C%8D%E5%8A%A1%E7%AB%AFR%E4%BA%A4%E4%BA%92/</url>
     <content><![CDATA[<span class="label success">vscode</span> 一款让人爱不释手的IDE，也是前端工程师一大杀器。在window上使用R对数据进行操作，当数据量太大的时候，电脑就会吃不消；而服务端的R一看起来就灰常的枯燥。加上最近vscode增加了对R语言的支持，使得在vscode中编写R脚本变成现实，vscode多session的特点使得能够同时打开多个窗口使用服务端的R进行大数据的计算。
 
 <a id="more"></a>
@@ -1574,7 +2434,7 @@
   </entry>
   <entry>
     <title>circos作图基础</title>
-    <url>/codeHub/2020/03/22/03circos%E4%BD%9C%E5%9B%BE%E5%9F%BA%E7%A1%80/</url>
+    <url>/codeHub/2020/03/22/2020-06%E4%BB%A5%E5%89%8D/03circos%E4%BD%9C%E5%9B%BE%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[<h2 id="circos的简介"><a href="#circos的简介" class="headerlink" title="circos的简介"></a>circos的简介</h2><p>​    众所周知，生物信息学是一个以庞大的数据量为基础的学科，这也就是使得结果的可视化变得有些困难，随着生物信息的发展，其辅助分析工具也迅速增多，Martin Krzywinski等人开发的Circos就在一定程度上解决了可视化困难这个问题。Circos是一个可视化数据和信息的软件包。它以圆形布局可视化数据——这使得Circos非常适合探索对象或位置之间的关系。它是创建高质量信息图表和插图的理想工具，具有丰富的分层数据和令人愉快的对称性。你可以根据你的受众调整其焦点和细节并且可以很好地控制图中的每个元素，此外，其具备高度自动化的特点，是由纯文本配置文件控制，十分的方便快捷。</p>
 <a id="more"></a>
 
@@ -1627,7 +2487,7 @@
   </entry>
   <entry>
     <title>基因差异表达分析</title>
-    <url>/codeHub/2020/03/22/02%E5%9F%BA%E5%9B%A0%E5%B7%AE%E5%BC%82%E8%A1%A8%E8%BE%BE%E5%88%86%E6%9E%90/</url>
+    <url>/codeHub/2020/03/22/2020-06%E4%BB%A5%E5%89%8D/02%E5%9F%BA%E5%9B%A0%E5%B7%AE%E5%BC%82%E8%A1%A8%E8%BE%BE%E5%88%86%E6%9E%90/</url>
     <content><![CDATA[<h1 id="差异表达基因"><a href="#差异表达基因" class="headerlink" title="差异表达基因"></a>差异表达基因</h1><p>​    生物学上不同样本之间的表达差异时服从负二项分布的，RNA-seq中得到的基因表达水平是抽样过程中的一种离散形式。在测得的reads总量一定的情况下，表达水平越高的基因在抽样过程中所占的比例就越高，有些低表达的基因也有可能无法被检测出来。在得到基因的表达量之后，根据实验设计对不同样本之间基因进行差异表达分析</p>
 <ol>
 <li>同物种、不同组织间的比较</li>
@@ -1721,7 +2581,7 @@
   </entry>
   <entry>
     <title>hexo服务搭建</title>
-    <url>/codeHub/2020/03/21/01hexo%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/</url>
+    <url>/codeHub/2020/03/21/2020-06%E4%BB%A5%E5%89%8D/01hexo%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/</url>
     <content><![CDATA[<h1 id="hexo服务搭建"><a href="#hexo服务搭建" class="headerlink" title="hexo服务搭建"></a>hexo服务搭建</h1><span class="label success">Hexo</span>  一款简洁并且高效的博客框架，结合markdown语法，让你的想法展现的淋漓尽致。通过本地编译markdown文件生成html 静态文件，部署到云端；使得笔记得到永久保存。利用Github、腾讯云等免费代码仓库存储服务，让你能够随时随地编辑；不受设备影响。
 
 <a id="more"></a>
