@@ -21,21 +21,24 @@
     var CONFIG = {"hostname":"biocottonhub.github.io","root":"/codeHub/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="TweenJS允许你以一种平滑的方式来改变对象的属性。所有的动画处理函数都封装成了API，你需要做的仅仅是告诉它哪些属性需要被修改，修改的值的范围，修改所经历的时间、轨迹的选择。 1.快速入门 首先给TWEEN对象传递一个对象，里面包含了需要修改的属性 传递属性范围值 激活TWEEN实例 使用主函数进行渲染">
+  <meta name="description" content="HiC-Pro安装与使用HiC-Pro可以用来处理Hi-C数据，从原始的fastq文件(配对端Illumina数据)到标准化的交互图谱。简单的来说就是将Hi-C数据比对到拼装好的参考基因组上，并形成交互文件去存储Hi-C数据。下面我们就来介绍一下HiC-Pro的安装与使用。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Tweenjs动画插件">
-<meta property="og:url" content="https://biocottonhub.github.io/codeHub/2020/04/17/2020-06%E4%BB%A5%E5%89%8D/22Tweenjs%E5%8A%A8%E7%94%BB%E6%8F%92%E4%BB%B6/index.html">
+<meta property="og:title" content="HiC-Pro的安装与使用">
+<meta property="og:url" content="https://biocottonhub.github.io/codeHub/2020/07/11/2020-07/05HiC-Pro%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="Code Hub">
-<meta property="og:description" content="TweenJS允许你以一种平滑的方式来改变对象的属性。所有的动画处理函数都封装成了API，你需要做的仅仅是告诉它哪些属性需要被修改，修改的值的范围，修改所经历的时间、轨迹的选择。 1.快速入门 首先给TWEEN对象传递一个对象，里面包含了需要修改的属性 传递属性范围值 激活TWEEN实例 使用主函数进行渲染">
+<meta property="og:description" content="HiC-Pro安装与使用HiC-Pro可以用来处理Hi-C数据，从原始的fastq文件(配对端Illumina数据)到标准化的交互图谱。简单的来说就是将Hi-C数据比对到拼装好的参考基因组上，并形成交互文件去存储Hi-C数据。下面我们就来介绍一下HiC-Pro的安装与使用。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://s1.ax1x.com/2020/04/17/JZzUN8.gif">
-<meta property="og:image" content="https://s1.ax1x.com/2020/04/17/JZza4S.gif">
-<meta property="article:published_time" content="2020-04-17T14:51:26.000Z">
-<meta property="article:modified_time" content="2020-06-17T02:43:15.058Z">
+<meta property="og:image" content="https://s1.ax1x.com/2020/07/11/UldOCd.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/07/11/UldbUe.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/07/11/Uldq4H.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/07/11/UldjgI.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/07/11/UldX8A.png">
+<meta property="article:published_time" content="2020-07-11T10:12:16.000Z">
+<meta property="article:modified_time" content="2020-07-12T05:06:48.843Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://s1.ax1x.com/2020/04/17/JZzUN8.gif">
+<meta name="twitter:image" content="https://s1.ax1x.com/2020/07/11/UldOCd.png">
 
-<link rel="canonical" href="https://biocottonhub.github.io/codeHub/2020/04/17/2020-06%E4%BB%A5%E5%89%8D/22Tweenjs%E5%8A%A8%E7%94%BB%E6%8F%92%E4%BB%B6/">
+<link rel="canonical" href="https://biocottonhub.github.io/codeHub/2020/07/11/2020-07/05HiC-Pro%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/">
 
 
 <script id="page-configurations">
@@ -48,7 +51,7 @@
   };
 </script>
 
-  <title>Tweenjs动画插件 | Code Hub</title>
+  <title>HiC-Pro的安装与使用 | Code Hub</title>
   
 
 
@@ -198,7 +201,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
-    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2020/04/17/2020-06%E4%BB%A5%E5%89%8D/22Tweenjs%E5%8A%A8%E7%94%BB%E6%8F%92%E4%BB%B6/">
+    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2020/07/11/2020-07/05HiC-Pro%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/codeHub/uploads/themeImg/logo.png">
@@ -211,7 +214,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Tweenjs动画插件
+          HiC-Pro的安装与使用
         </h1>
 
         <div class="post-meta">
@@ -222,14 +225,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-04-17 22:51:26" itemprop="dateCreated datePublished" datetime="2020-04-17T22:51:26+08:00">2020-04-17</time>
+              <time title="Created: 2020-07-11 18:12:16" itemprop="dateCreated datePublished" datetime="2020-07-11T18:12:16+08:00">2020-07-11</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>修改于
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-17 10:43:15" itemprop="dateModified" datetime="2020-06-17T10:43:15+08:00">2020-06-17</time>
+                <time title="Modified: 2020-07-12 13:06:48" itemprop="dateModified" datetime="2020-07-12T13:06:48+08:00">2020-07-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -237,7 +240,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  分类于<a href="/codeHub/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a>
+                  分类于<a href="/codeHub/categories/Hi-C/" itemprop="url" rel="index"><span itemprop="name">Hi-C</span></a>
                 </span>
             </span>
 
@@ -257,8 +260,8 @@
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/codeHub/2020/04/17/2020-06%E4%BB%A5%E5%89%8D/22Tweenjs%E5%8A%A8%E7%94%BB%E6%8F%92%E4%BB%B6/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2020/04/17/2020-06%E4%BB%A5%E5%89%8D/22Tweenjs%E5%8A%A8%E7%94%BB%E6%8F%92%E4%BB%B6/" itemprop="commentCount"></span>
+    <a title="valine" href="/codeHub/2020/07/11/2020-07/05HiC-Pro%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2020/07/11/2020-07/05HiC-Pro%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -273,38 +276,59 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>TweenJS允许你以一种平滑的方式来改变对象的属性。所有的动画处理函数都封装成了API，你需要做的仅仅是告诉它哪些属性需要被修改，修改的值的范围，修改所经历的时间、轨迹的选择。</p>
-<h3 id="1-快速入门"><a href="#1-快速入门" class="headerlink" title="1.快速入门"></a>1.快速入门</h3><ul>
-<li>首先给<code>TWEEN</code>对象传递一个对象，里面包含了需要修改的属性</li>
-<li>传递属性范围值</li>
-<li>激活TWEEN实例</li>
-<li>使用主函数进行渲染</li>
-</ul>
+        <h1 id="HiC-Pro安装与使用"><a href="#HiC-Pro安装与使用" class="headerlink" title="HiC-Pro安装与使用"></a>HiC-Pro安装与使用</h1><p>HiC-Pro可以用来处理Hi-C数据，从原始的fastq文件(配对端Illumina数据)到标准化的交互图谱。简单的来说就是将Hi-C数据比对到拼装好的参考基因组上，并形成交互文件去存储Hi-C数据。下面我们就来介绍一下HiC-Pro的安装与使用。</p>
 <a id="more"></a>
 
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 首先为位置创建一个补间(tween)</span></span><br><span class="line"><span class="keyword">var</span> tween = <span class="keyword">new</span> TWEEN.Tween(position);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 然后告诉 tween 我们想要在1000毫秒内以动画的形式移动 x 的位置</span></span><br><span class="line">tween.to(&#123; <span class="attr">x</span>: <span class="number">200</span> &#125;, <span class="number">1000</span>);</span><br><span class="line"><span class="comment">// 启动</span></span><br><span class="line">tween.start();</span><br><span class="line"><span class="comment">//进行渲染</span></span><br><span class="line">animate();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">animate</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	requestAnimationFrame(animate);</span><br><span class="line">	<span class="comment">// [...]</span></span><br><span class="line">	TWEEN.update();</span><br><span class="line">	<span class="comment">// [...]</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//属性更新时所做的操作</span></span><br><span class="line">tween.onUpdate(<span class="function"><span class="keyword">function</span>(<span class="params">object</span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(object.x);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="HiC-Pro的安装"><a href="#HiC-Pro的安装" class="headerlink" title="HiC-Pro的安装"></a>HiC-Pro的安装</h2><hr>
+<h3 id="HiC-Pro所需要的这些依赖"><a href="#HiC-Pro所需要的这些依赖" class="headerlink" title="HiC-Pro所需要的这些依赖"></a>HiC-Pro所需要的这些依赖</h3><p><a href="https://imgchr.com/i/UldOCd" target="_blank" rel="noopener"><img data-src="https://s1.ax1x.com/2020/07/11/UldOCd.png" alt="依赖.png"></a></p>
+<h3 id="1-使用conda安装依赖"><a href="#1-使用conda安装依赖" class="headerlink" title="1.使用conda安装依赖"></a><strong>1.使用conda安装依赖</strong></h3><p>python版本为<code>2.7</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda create -n hicpro python=2.7	<span class="comment">#强烈推荐安装一个新的环境</span></span><br><span class="line">conda install -y samtools bowtie2 R</span><br><span class="line">conda install -y pysam bx-python numpy scipy</span><br></pre></td></tr></table></figure>
 
-<h3 id="2-进度条展示"><a href="#2-进度条展示" class="headerlink" title="2.进度条展示"></a>2.进度条展示</h3><p><img data-src="https://s1.ax1x.com/2020/04/17/JZzUN8.gif" alt="进度条"></p>
-<p>使用SVG绘制对应的圆形图片，这里使用两个圆进行重叠展示，其中一个圆充当背景色，另外一个充当进度条；数字的累积同样使用动画效果。</p>
-<p>在<code>Vue</code>中通过this获取到DOM中的样式</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.$refs.$bar.style.strokeDashoffset</span><br></pre></td></tr></table></figure>
+<h3 id="2-安装对应的R包"><a href="#2-安装对应的R包" class="headerlink" title="2.安装对应的R包"></a><strong>2.安装对应的R包</strong></h3><p>在当前conda环境下运行R</p>
+<p>也可以绝对路径运行R</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">R</span><br><span class="line">install.packages(c(<span class="string">'ggplot2'</span>,<span class="string">'RColorBrewer'</span>))</span><br></pre></td></tr></table></figure>
 
-<h4 id="TWEENJS动态修改样式"><a href="#TWEENJS动态修改样式" class="headerlink" title="TWEENJS动态修改样式"></a>TWEENJS动态修改样式</h4><p>同时对两个属性进行操作，在动画<code>onUpdate</code>回调函数中分别去渲染对应的DOM节点</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> TWEEN.Tween(</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="string">'strokeDashoffset'</span>: (<span class="keyword">this</span>.width - <span class="keyword">this</span>.radius) * <span class="number">3.14</span>,</span><br><span class="line">    <span class="string">'showProgress'</span>: <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">).to(&#123;</span><br><span class="line">  <span class="string">'strokeDashoffset'</span>: (<span class="keyword">this</span>.width - <span class="keyword">this</span>.radius) * <span class="number">3.14</span> * (<span class="number">100</span> - <span class="keyword">this</span>.progress) / <span class="number">100</span>,</span><br><span class="line">  <span class="string">'showProgress'</span>: <span class="keyword">this</span>.progress</span><br><span class="line">&#125;, <span class="keyword">this</span>.duration).onUpdate(<span class="function">(<span class="params">tween</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">this</span>.$refs.$bar.style.strokeDashoffset = tween.strokeDashoffset</span><br><span class="line">  <span class="keyword">this</span>.showprogress = tween.showProgress.toFixed(<span class="number">0</span>)</span><br><span class="line">&#125;).start()</span><br></pre></td></tr></table></figure>
+<h3 id="3-配置confir-install-txt安装文件"><a href="#3-配置confir-install-txt安装文件" class="headerlink" title="3.配置confir-install.txt安装文件"></a>3.配置confir-install.txt安装文件</h3><p><code>PREFIX</code>软件安装路径，会在该路径创建一个<code>HiC-Pro_2.11.1</code>目录</p>
+<p><code>R_PATH</code>指定conda环境下的R</p>
+<p><code>PYTHON_PATH</code>指定conda环境下的python</p>
+<p><code>CLUSTER_SYSCLUSTER_SYS</code>集群调度系统为<code>TORQUE,SGE,SLURM,LSF</code>四个中的一种</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">PREFIX = /public/home/yxlong/yxlong/app/	<span class="comment">#HiC-Pro所在目录</span></span><br><span class="line">BOWTIE2_PATH = /public/home/yxlong/miniconda3/bin/bowtie2	<span class="comment">#bowtie2所在目录</span></span><br><span class="line">SAMTOOLS_PATH = /public/home/yxlong/miniconda3/bin/samtools	<span class="comment">#samtools所在的目录</span></span><br><span class="line">R_PATH = /public/home/yxlong/miniconda3/envs/hicpro/bin/R	<span class="comment">#R包所在目录</span></span><br><span class="line">PYTHON_PATH = /public/home/yxlong/miniconda3/envs/hicpro/bin/python	<span class="comment">#python所在目录</span></span><br><span class="line">CLUSTER_SYS = LSF	<span class="comment">#TORQUE,SGE,SLURM,LSF四个中的一种</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="3-无限链式"><a href="#3-无限链式" class="headerlink" title="3.无限链式"></a>3.无限链式</h3><p><img data-src="https://s1.ax1x.com/2020/04/17/JZza4S.gif" alt="无限链式调用"></p>
-<ul>
-<li>创建两个<code>TWEEN</code>实例对象</li>
-<li>使用<code>chain</code>相互链起来，实现无限循环动画</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义下降动画</span></span><br><span class="line"><span class="keyword">var</span> tweenDown = <span class="keyword">new</span> TWEEN.Tween(</span><br><span class="line">        &#123;</span><br><span class="line">          top: <span class="number">10</span></span><br><span class="line">        &#125;</span><br><span class="line">      )</span><br><span class="line">      tweenDown.to(&#123;</span><br><span class="line">        top: <span class="number">15</span></span><br><span class="line">      &#125;, <span class="number">1000</span>).onUpdate(<span class="function">(<span class="params">tween</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.$refs.Nextbutton.style.top = tween.top + <span class="string">"px"</span></span><br><span class="line">        <span class="comment">// this.$refs.Nextbutton.style.top = tween.top</span></span><br><span class="line">      &#125;).start()</span><br><span class="line"><span class="comment">//定义下降动画</span></span><br><span class="line">      <span class="keyword">var</span> tweenUp = <span class="keyword">new</span> TWEEN.Tween(</span><br><span class="line">        &#123;</span><br><span class="line">          top: <span class="number">15</span></span><br><span class="line">        &#125;</span><br><span class="line">      )</span><br><span class="line">      tweenUp.to(&#123;</span><br><span class="line">        top: <span class="number">10</span></span><br><span class="line">      &#125;, <span class="number">800</span>).onUpdate(<span class="function">(<span class="params">tween</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.$refs.Nextbutton.style.top = tween.top + <span class="string">"px"</span></span><br><span class="line">        <span class="comment">// this.$refs.Nextbutton.style.top = tween.top</span></span><br><span class="line">      &#125;).start()</span><br><span class="line"><span class="comment">//无限链式调用</span></span><br><span class="line">tweenDown.chain(tweenUp)</span><br><span class="line">tweenUp.chain(tweenDown)</span><br></pre></td></tr></table></figure>
+<p>这些路径可以which+对应的依赖（如: which bowtie2）获得</p>
+<h3 id="4-安装"><a href="#4-安装" class="headerlink" title="4.安装"></a>4.安装</h3><p>配置文件修改完成之后运行下列指令即可完成安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">make configure</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
 
-<h3 id="4-参考"><a href="#4-参考" class="headerlink" title="4.参考"></a>4.参考</h3><ol>
-<li><a href="https://github.com/tweenjs/tween.js/blob/master/docs/user_guide_zh-CN.md" target="_blank" rel="noopener">https://github.com/tweenjs/tween.js/blob/master/docs/user_guide_zh-CN.md</a> </li>
-<li><a href="https://codepen.io/jackpan/pen/pdVVzE/" target="_blank" rel="noopener">https://codepen.io/jackpan/pen/pdVVzE/</a> </li>
-<li><a href="https://segmentfault.com/a/1190000013219501" target="_blank" rel="noopener">https://segmentfault.com/a/1190000013219501</a> </li>
-<li><a href="https://www.cnblogs.com/createGod/p/6941340.html" target="_blank" rel="noopener">https://www.cnblogs.com/createGod/p/6941340.html</a> </li>
-</ol>
+
+
+<h2 id="HiC-Pro的使用"><a href="#HiC-Pro的使用" class="headerlink" title="HiC-Pro的使用"></a>HiC-Pro的使用</h2><hr>
+<h3 id="1-文件的处理"><a href="#1-文件的处理" class="headerlink" title="1.文件的处理"></a>1.文件的处理</h3><h4 id="1-1文件夹的创建"><a href="#1-1文件夹的创建" class="headerlink" title="1.1文件夹的创建"></a>1.1文件夹的创建</h4><p>建议创建两个文件夹命名为<code>sample.reads</code>和<code>sample.ref</code>（sample为自己的物种名字即可，下面以亚洲棉Ga为例）</p>
+<h4 id="1-2Ga-reads的的目录结构"><a href="#1-2Ga-reads的的目录结构" class="headerlink" title="1.2Ga.reads的的目录结构"></a>1.2<code>Ga.reads</code>的的目录结构</h4><p>目录结构如下（依据自己的研究修改物种名即可，Ga_1、Ga_2…为不同的生物学重复）</p>
+<p><img data-src="https://s1.ax1x.com/2020/07/11/UldbUe.png" alt="reads.png"></p>
+<h4 id="1-3Ga-ref的相关文件"><a href="#1-3Ga-ref的相关文件" class="headerlink" title="1.3Ga.ref的相关文件"></a>1.3<code>Ga.ref</code>的相关文件</h4><p><img data-src="https://s1.ax1x.com/2020/07/11/Uldq4H.png" alt="ref.png"></p>
+<p>Ga.fasta文件是一个link文件，链接的是拼装好的参考基因组</p>
+<p>建立索引 （索引的命名为物种名）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/PATH/TO/bowtie2-build --threads 20 /Ga.ref/Ga.fasta /Ga.ref/Ga</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-4酶切信息文件的获得"><a href="#1-4酶切信息文件的获得" class="headerlink" title="1.4酶切信息文件的获得"></a>1.4酶切信息文件的获得</h4><p>采用HiC-Pro自带的digest_genome.py程序酶切位点信息文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/PATH/TO/HiC-Pro_2.11.1/bin/utils/digest_genome.py -r hindiii -o Ga.HindIII.txt /Ga.ref/Ga.fasta</span><br><span class="line"><span class="comment">#-r指定酶的名称或者序列（如下图）</span></span><br><span class="line"><span class="comment">#-o指定酶切信息文件的输出目录</span></span><br><span class="line"><span class="comment">#最后的fasta文件是组装的参考基因组</span></span><br></pre></td></tr></table></figure>
+
+<p><img data-src="https://s1.ax1x.com/2020/07/11/UldjgI.png" alt="酶切.png"></p>
+<h4 id="1-5基因组中序列大小文件"><a href="#1-5基因组中序列大小文件" class="headerlink" title="1.5基因组中序列大小文件"></a>1.5基因组中序列大小文件</h4><p>序列大小文件格式如下 contig1[TAB]contig1_length</p>
+<p><img data-src="https://s1.ax1x.com/2020/07/11/UldX8A.png" alt="size.png"></p>
+<p>可以用如下指令获得</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">samtools faidx /Ga.ref/Ga.fasta &amp;&amp; awk <span class="string">'&#123;print $1"\t"$2&#125;'</span> /PATH/TO/Ga.fasta.fai &gt; Ga.fasta.size <span class="comment">#注意生成的.fai在.fasta文件所在的目录下面</span></span><br></pre></td></tr></table></figure>
+
+<p>至此，相关文件的准备就结束了。</p>
+<h3 id="2-配置文件的书写"><a href="#2-配置文件的书写" class="headerlink" title="2.配置文件的书写"></a>2.配置文件的书写</h3><p>首先将配置文件复制一份到当前目录下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp &#x2F;PATH&#x2F;TO&#x2F;HiC-Pro_2.11.1&#x2F;config-hicpro.txt .</span><br></pre></td></tr></table></figure>
+
+<p>然后，进行修改（以下为通常需要修改的参数，其他的参数的修改请参考官网）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># N_CPU，例如N_CPU = 24</span></span><br><span class="line"><span class="comment"># JOB_NAME，例如JOB_NAME = Ga</span></span><br><span class="line"><span class="comment"># JOB_WALLTIME，例如JOB_WALLTIME = 11:00:00</span></span><br><span class="line"><span class="comment"># JOB_QUEUE，例如JOB_QUEUE = normal</span></span><br><span class="line"><span class="comment"># JOB_MAIL，例如JOB_MAIL = 1570447120@qq.com</span></span><br><span class="line"><span class="comment"># BOWTIE2_IDX_PATH填写用bowtie2对reference建立索引的目录，注意是目录，而不是索引路径!如/PATH/to/Ga.ref</span></span><br><span class="line"><span class="comment"># REFERENCE_GENOME，例如Ga 注意：这里REFERENCE_GENOME一定要和bowtie2建立的索引对应上,名字为物种名</span></span><br><span class="line"><span class="comment"># GENOME_SIZE，即生成的文件Ga.fasta.size（最好使用绝对路径）</span></span><br><span class="line"><span class="comment"># GENOME_FRAGMENT，用digest_genome.py程序生成的文件Ga.HindIII.txt</span></span><br><span class="line"><span class="comment"># LIGATION_SITE，酶的序列，例如HindIII，则为AAGCTAGCTT；如果是MboI则序列为GATCGATC。</span></span><br><span class="line"><span class="comment"># MIN_FRAG_SIZE，例如MIN_FRAG_SIZE = 100</span></span><br><span class="line"><span class="comment"># MAX_FRAG_SIZE，例如MAX_FRAG_SIZE = 160000</span></span><br><span class="line"><span class="comment"># MIN_INSERT_SIZE，例如MIN_INSERT_SIZE = 200</span></span><br><span class="line"><span class="comment"># MAX_INSERT_SIZE，例如MAX_INSERT_SIZE = 600</span></span><br><span class="line"><span class="comment"># GET_PROCESS_SAM，例如GET_PROCESS_SAM = 1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-运行HiC-Pro"><a href="#3-运行HiC-Pro" class="headerlink" title="3.运行HiC-Pro"></a>3.运行HiC-Pro</h3><p>HiC-Pro的使用很简单，主要就是三个参数，指令如下（单线程运行）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/PATH/TO/HiC-Pro_2.11.1/bin/HiC-Pro --input Ga.reads --output hicpro_output --conf config-hicpro.txt </span><br><span class="line"><span class="comment"># --input reads所在的文件</span></span><br><span class="line"><span class="comment"># --output 输出的文件夹</span></span><br><span class="line"><span class="comment"># --conf 配置文件</span></span><br></pre></td></tr></table></figure>
+
+<p>如果想多线程运行，要加上-p参数，输入指令后会在输出文件中生成两个文件<code>HiCPro_step1.sh</code>、<code>HiCPro_step2.sh</code>。先运行step1，step1执行完成后，再执行step2即可。</p>
 
     </div>
 
@@ -354,11 +378,11 @@
 <div>
 <ul class="post-copyright">
   <li class="post-copyright-author">
-    <strong>Post author:  </strong>zpliu
+    <strong>Post author:  </strong>yxlong
   </li>
   <li class="post-copyright-link">
     <strong>Post link: </strong>
-    <a href="https://biocottonhub.github.io/codeHub/2020/04/17/2020-06%E4%BB%A5%E5%89%8D/22Tweenjs%E5%8A%A8%E7%94%BB%E6%8F%92%E4%BB%B6/" title="Tweenjs动画插件">https://biocottonhub.github.io/codeHub/2020/04/17/2020-06以前/22Tweenjs动画插件/</a>
+    <a href="https://biocottonhub.github.io/codeHub/2020/07/11/2020-07/05HiC-Pro%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/" title="HiC-Pro的安装与使用">https://biocottonhub.github.io/codeHub/2020/07/11/2020-07/05HiC-Pro的安装与使用/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
@@ -375,13 +399,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/codeHub/2020/04/17/2020-06%E4%BB%A5%E5%89%8D/21%E6%A4%8D%E7%89%A9DNA%E7%94%B2%E5%9F%BA%E5%8C%96%E6%9C%BA%E5%88%B6%E5%92%8C%E9%9D%B6%E5%90%91%E6%93%8D%E7%BA%B5%E5%B7%A5%E5%85%B7/" rel="prev" title="植物DNA甲基化机制和靶向操纵工具">
-      <i class="fa fa-chevron-left"></i> 植物DNA甲基化机制和靶向操纵工具
+    <a href="/codeHub/2020/07/07/2020-07/05pyplot%E5%AF%B9%E8%B1%A1/" rel="prev" title="pyplot对象学习">
+      <i class="fa fa-chevron-left"></i> pyplot对象学习
     </a></div>
-      <div class="post-nav-item">
-    <a href="/codeHub/2020/04/19/2020-06%E4%BB%A5%E5%89%8D/23Promise%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" rel="next" title="Promise源码解析">
-      Promise源码解析 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -442,7 +463,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-快速入门"><span class="nav-number">1.</span> <span class="nav-text">1.快速入门</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-进度条展示"><span class="nav-number">2.</span> <span class="nav-text">2.进度条展示</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#TWEENJS动态修改样式"><span class="nav-number">2.1.</span> <span class="nav-text">TWEENJS动态修改样式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-无限链式"><span class="nav-number">3.</span> <span class="nav-text">3.无限链式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-参考"><span class="nav-number">4.</span> <span class="nav-text">4.参考</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HiC-Pro安装与使用"><span class="nav-number">1.</span> <span class="nav-text">HiC-Pro安装与使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HiC-Pro的安装"><span class="nav-number">1.1.</span> <span class="nav-text">HiC-Pro的安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HiC-Pro所需要的这些依赖"><span class="nav-number">1.1.1.</span> <span class="nav-text">HiC-Pro所需要的这些依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-使用conda安装依赖"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.使用conda安装依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-安装对应的R包"><span class="nav-number">1.1.3.</span> <span class="nav-text">2.安装对应的R包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-配置confir-install-txt安装文件"><span class="nav-number">1.1.4.</span> <span class="nav-text">3.配置confir-install.txt安装文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-安装"><span class="nav-number">1.1.5.</span> <span class="nav-text">4.安装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HiC-Pro的使用"><span class="nav-number">1.2.</span> <span class="nav-text">HiC-Pro的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-文件的处理"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.文件的处理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1文件夹的创建"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">1.1文件夹的创建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2Ga-reads的的目录结构"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">1.2Ga.reads的的目录结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3Ga-ref的相关文件"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">1.3Ga.ref的相关文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4酶切信息文件的获得"><span class="nav-number">1.2.1.4.</span> <span class="nav-text">1.4酶切信息文件的获得</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5基因组中序列大小文件"><span class="nav-number">1.2.1.5.</span> <span class="nav-text">1.5基因组中序列大小文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-配置文件的书写"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.配置文件的书写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-运行HiC-Pro"><span class="nav-number">1.2.3.</span> <span class="nav-text">3.运行HiC-Pro</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
