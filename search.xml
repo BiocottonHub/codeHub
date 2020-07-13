@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>TAD的鉴定方法（二）——TAD的鉴定</title>
-    <url>/codeHub/2020/07/13/2020-07/07TAD%E7%9A%84%E9%89%B4%E5%AE%9A%E6%96%B9%E6%B3%95%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94TAD%E7%9A%84%E9%89%B4%E5%AE%9A/</url>
+    <title>TAD的鉴定方法（一）——cool格式的转换</title>
+    <url>/codeHub/2020/07/13/2020-07/07TAD%E7%9A%84%E9%89%B4%E5%AE%9A%E6%96%B9%E6%B3%95%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94cool%E6%A0%BC%E5%BC%8F%E7%9A%84%E8%BD%AC%E6%8D%A2/</url>
     <content><![CDATA[<h1 id="TAD的鉴定方法（一）——cool格式的转换"><a href="#TAD的鉴定方法（一）——cool格式的转换" class="headerlink" title="TAD的鉴定方法（一）——cool格式的转换"></a>TAD的鉴定方法（一）——cool格式的转换</h1><p>上次我们使用HiC-Pro将HiC数据比对到了参考基因组上，并且得到了bin水平的HiC数据（交互文件），我们这里介绍一下TAD的鉴定方法（使用HiCPeaks和TADLib中的两个程序），大致分为以下两步（我们会分）</p>
 <ul>
 <li>cool格式的转换</li>
@@ -72,8 +72,8 @@
       </categories>
   </entry>
   <entry>
-    <title>TAD的鉴定方法（一）——cool格式的转换</title>
-    <url>/codeHub/2020/07/13/2020-07/08TAD%E7%9A%84%E9%89%B4%E5%AE%9A%E6%96%B9%E6%B3%95%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94cool%E6%A0%BC%E5%BC%8F%E7%9A%84%E8%BD%AC%E6%8D%A2/</url>
+    <title>TAD的鉴定方法（二）——TAD的鉴定</title>
+    <url>/codeHub/2020/07/13/2020-07/08TAD%E7%9A%84%E9%89%B4%E5%AE%9A%E6%96%B9%E6%B3%95%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94TAD%E7%9A%84%E9%89%B4%E5%AE%9A/</url>
     <content><![CDATA[<h1 id="TAD的鉴定方法（二）——TAD的鉴定"><a href="#TAD的鉴定方法（二）——TAD的鉴定" class="headerlink" title="TAD的鉴定方法（二）——TAD的鉴定"></a>TAD的鉴定方法（二）——TAD的鉴定</h1><p>上一篇文章我们详细介绍了cool格式的转化，格式的转化是为了更好地进行数据的分析，这次，我们就来详细学习使用TADLib进行TAD的鉴定。</p>
 <a id="more"></a>
 
