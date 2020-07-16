@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/codeHub/uploads/themeImg/logo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/codeHub/uploads/themeImg/logo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/codeHub/uploads/themeImg/logo.png">
+  <link rel="mask-icon" href="/codeHub/uploads/themeImg/logo.png" color="#222">
+
+<link rel="stylesheet" href="/codeHub/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/codeHub/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"biocottonhub.github.io","root":"/codeHub/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="本教程主要讲，如何使用matplotlib绘制image图片；这里的image不是我们平时见到的RGB编码的图片，matplotlib绘制的image是基于矩阵数据进行绘制的；也可以将RGB的图片转码成numpy矩阵，然后对矩阵进行操作就  需要注意的是matplotlib中只支持png图片的加载，如果要获得其他类型图片的数据，则需要Pillow包的支持">
+<meta property="og:type" content="article">
+<meta property="og:title" content="matplotlib-image">
+<meta property="og:url" content="https://biocottonhub.github.io/codeHub/2020/07/16/2020-07/07matplotlib-image/index.html">
+<meta property="og:site_name" content="Code Hub">
+<meta property="og:description" content="本教程主要讲，如何使用matplotlib绘制image图片；这里的image不是我们平时见到的RGB编码的图片，matplotlib绘制的image是基于矩阵数据进行绘制的；也可以将RGB的图片转码成numpy矩阵，然后对矩阵进行操作就  需要注意的是matplotlib中只支持png图片的加载，如果要获得其他类型图片的数据，则需要Pillow包的支持">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://matplotlib.org/_images/stinkbug.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/07/16/UBLaBq.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/07/16/UBLJ3Q.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/07/16/UBLUun.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/07/16/UBLtjs.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/07/16/UBLYcj.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/07/16/UBL0EV.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/07/16/UBLD4U.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/07/16/UBLBNT.png">
+<meta property="article:published_time" content="2020-07-16T06:31:33.000Z">
+<meta property="article:modified_time" content="2020-07-16T06:43:07.806Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://matplotlib.org/_images/stinkbug.png">
+
+<link rel="canonical" href="https://biocottonhub.github.io/codeHub/2020/07/16/2020-07/07matplotlib-image/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>matplotlib-image | Code Hub</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/codeHub/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Code Hub</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">keeping learn</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-首页">
+
+    <a href="/codeHub/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-文章">
+
+    <a href="/codeHub/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>文章<span class="badge">43</span></a>
+
+  </li>
+        <li class="menu-item menu-item-分类">
+
+    <a href="/codeHub/categories" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">10</span></a>
+
+  </li>
+        <li class="menu-item menu-item-标签">
+
+    <a href="/codeHub/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">3</span></a>
+
+  </li>
+        <li class="menu-item menu-item-关于">
+
+    <a href="https://zpliu1126.github.io/About/" rel="noopener" target="_blank"><i class="fa fa-fw fa-heartbeat"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/BiocottonHub/" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="200" height="200" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2020/07/16/2020-07/07matplotlib-image/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/codeHub/uploads/themeImg/logo.png">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Hub">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          matplotlib-image
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>发布于
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-07-16 14:31:33 / Modified: 14:43:07" itemprop="dateCreated datePublished" datetime="2020-07-16T14:31:33+08:00">2020-07-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  分类于<a href="/codeHub/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                阅读量:<i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/codeHub/2020/07/16/2020-07/07matplotlib-image/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2020/07/16/2020-07/07matplotlib-image/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本教程主要讲，如何使用matplotlib绘制image图片；这里的<code>image</code>不是我们平时见到的RGB编码的图片，matplotlib绘制的<code>image</code>是基于矩阵数据进行绘制的；也可以将RGB的图片转码成numpy矩阵，然后对矩阵进行操作就</p>
+<blockquote>
+<p>需要注意的是matplotlib中只支持png图片的加载，如果要获得其他类型图片的数据，则需要<code>Pillow</code>包的支持</p>
+</blockquote>
+<a id="more"></a>
+
+<h3 id="下面让我们来对这张小虫子的图片来一番操作"><a href="#下面让我们来对这张小虫子的图片来一番操作" class="headerlink" title="下面让我们来对这张小虫子的图片来一番操作"></a>下面让我们来对这张小虫子的图片来一番操作</h3><p><img data-src="https://matplotlib.org/_images/stinkbug.png" alt="虫子"></p>
+<blockquote>
+<p> RGB色彩模式是工业界的一种颜色标准，是通过对红(R)、绿(G)、蓝(B)三个颜色通道的变化以及它们相互之间的叠加来得到各式各样的颜色的，RGB即是代表红、绿、蓝三个通道的颜色，这个标准几乎包括了人类视力所能感知的所有颜色，是运用最广的颜色系统之一。&lt;引自百度百科&gt;</p>
+</blockquote>
+<p>这是一种RGB的PNG图片，它的分辨率为500x375;通俗的讲就是这张PNG的图片数据包含有<code>500X375</code>个点；每个点通过一个RGB代码表示出一种颜色。这张图片的每个点是一个24位的二进制代码,其中每8位二进制代码表示一个颜色的编码；如果是RGB是32位的编码的话，matplotlib会将它缩放到24位，在计算每种颜色的编码，颜色编码范围在<code>0~1</code>之间。</p>
+<p>例如通过matplotlib读取png图片后，每个像素的RGB代码表示成一个数组<code>[0.40784314 0.40784314 0.40784314]</code></p>
+<p>​                                        </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> matplotlib.image <span class="keyword">as</span> mping </span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">导入Image 所需要的包</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line">img=mping.imread(<span class="string">"../stinkbug.png"</span>)</span><br><span class="line"><span class="comment">#print(img.shape)</span></span><br><span class="line"><span class="comment">#(375, 500, 3)</span></span><br><span class="line">print(img)</span><br></pre></td></tr></table></figure>
+
+<pre><code>[[[0.40784314 0.40784314 0.40784314]
+  [0.40784314 0.40784314 0.40784314]
+  [0.40784314 0.40784314 0.40784314]
+  ...
+  [0.42745098 0.42745098 0.42745098]
+  [0.42745098 0.42745098 0.42745098]
+  [0.42745098 0.42745098 0.42745098]]
+]]</code></pre><h3 id="打印矩阵数据"><a href="#打印矩阵数据" class="headerlink" title="打印矩阵数据"></a>打印矩阵数据</h3><p>在使用<code>mping.imread</code>获取到PNG图片的编码矩阵后，可以使用<code>plt.imshow()</code>将矩阵数据显示成图片，并且多了两个坐标轴，坐标轴的刻度是以像素为单位的。</p>
+<ul>
+<li>横坐标是图片原始的宽度</li>
+<li>纵坐标是图片高度</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.imshow(img) <span class="comment">##显示图片</span></span><br></pre></td></tr></table></figure>
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/16/UBLaBq.png" alt="UBLaBq.png"></p>
+<h3 id="对原始矩阵进行操作"><a href="#对原始矩阵进行操作" class="headerlink" title="对原始矩阵进行操作"></a>对原始矩阵进行操作</h3><ul>
+<li>截取部分图片</li>
+<li>改变图片原始的RGB代码</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="comment">##截取200行，400列的矩阵；实际上相当于图片高度变成200，宽度变成400</span></span><br><span class="line">plt.imshow(img[<span class="number">0</span>:<span class="number">200</span>,<span class="number">0</span>:<span class="number">600</span>,]) <span class="comment">##矩阵的切片操作</span></span><br></pre></td></tr></table></figure>
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/16/UBLJ3Q.png" alt="UBLJ3Q.png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 改变RGB编码，我这里只截取了RGB数组中的一个维度</span></span><br><span class="line"><span class="comment">## 对于图片大小我没有进行修改</span></span><br><span class="line">plt.imshow(img[:,:,<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/16/UBLUun.png" alt="UBLUun.png"></p>
+<h3 id="将颜色进行映射"><a href="#将颜色进行映射" class="headerlink" title="将颜色进行映射"></a>将颜色进行映射</h3><p>如果你的每个像素点中，只有一个数字代表它是什么颜色，同样可以使用<code>imshow</code>函数中封装好的映射函数将一维的数据映射成3维的数据点</p>
+<p>例如我将img矩阵中的RGB编码，压缩到一维空间，再使用<code>cmap=hot</code>，&lt; color maping &gt;的缩写将一维空间重新映射到三维空间后的图片，搞了两种映射。<br>既可以使用函数中的参数进行设置，也可以使用对象的属性进行设置</p>
+<ul>
+<li><code>Greys</code>这个有点像x光片</li>
+<li><code>hot</code> 这个有点像热成像</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.imshow(img[:,:,<span class="number">1</span>],cmap=<span class="string">'Greys'</span>) <span class="comment">##按照灰色进行映射</span></span><br></pre></td></tr></table></figure>
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/16/UBLtjs.png" alt="UBLtjs.png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">imgplot=plt.imshow(img[:,:,<span class="number">1</span>]) <span class="comment">##返回一个image对象</span></span><br><span class="line">imgplot.set_cmap(<span class="string">'hot'</span>)  <span class="comment">##调用属性进行设置hot映射</span></span><br></pre></td></tr></table></figure>
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/16/UBLYcj.png" alt="UBLYcj.png"></p>
+<h3 id="添加图例，描述颜色深浅"><a href="#添加图例，描述颜色深浅" class="headerlink" title="添加图例，描述颜色深浅"></a>添加图例，描述颜色深浅</h3><p>直接使用<code>plt.colorbar()</code>函数即可；<br>当然有时候我们可以通过设置颜色映射时的上下限，来增加我们感兴趣的地方的对比度；从而突出重点</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">imgplot=plt.imshow(img[:,:,<span class="number">1</span>]) <span class="comment">##返回一个image对象</span></span><br><span class="line">imgplot.set_cmap(<span class="string">'nipy_spectral'</span>)  <span class="comment">##调用属性进行设置hot映射</span></span><br><span class="line">plt.colorbar()  <span class="comment">##添加图例</span></span><br></pre></td></tr></table></figure>
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/16/UBL0EV.png" alt="UBL0EV.png"></p>
+<h3 id="改变颜色映射规则"><a href="#改变颜色映射规则" class="headerlink" title="改变颜色映射规则"></a>改变颜色映射规则</h3><p>当然有时候我们可以通过设置颜色映射时的上下限，来增加我们感兴趣的地方的对比度；从而突出重点<br>使用<code>clim</code>函数进行操作，同样可以使用对象的方法<code>set_clim</code></p>
+<p>在设置了颜色的映射范围之后，增强你感兴趣的地方的对比度；可以发现在经过调整后，B图中有些peak值出，对比度更亮了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">fig=plt.figure(figsize=(<span class="number">10</span>,<span class="number">10</span>)) <span class="comment">##创建一个画板</span></span><br><span class="line">a=plt.subplot2grid((<span class="number">1</span>,<span class="number">2</span>),(<span class="number">0</span>,<span class="number">0</span>),rowspan=<span class="number">1</span>,colspan=<span class="number">1</span>) <span class="comment">##创建一个图层</span></span><br><span class="line">imgplot=plt.imshow(img[:,:,<span class="number">1</span>])</span><br><span class="line">a.set_title(<span class="string">'Before'</span>)</span><br><span class="line">plt.colorbar(ticks=[<span class="number">0.1</span>, <span class="number">0.3</span>, <span class="number">0.5</span>, <span class="number">0.7</span>], orientation=<span class="string">'horizontal'</span>) <span class="comment">##设置图例位置和刻度线</span></span><br><span class="line">b=plt.subplot2grid((<span class="number">1</span>,<span class="number">2</span>),(<span class="number">0</span>,<span class="number">1</span>),rowspan=<span class="number">1</span>,colspan=<span class="number">1</span>) <span class="comment">## 创建一个图层</span></span><br><span class="line">imgplot=plt.imshow(img[:,:,<span class="number">1</span>])</span><br><span class="line">imgplot.set_clim(<span class="number">0</span>,<span class="number">0.7</span>)</span><br><span class="line">b.set_title(<span class="string">'After'</span>)</span><br><span class="line">plt.colorbar(ticks=[<span class="number">0.1</span>, <span class="number">0.3</span>, <span class="number">0.5</span>, <span class="number">0.7</span>], orientation=<span class="string">'horizontal'</span>)</span><br></pre></td></tr></table></figure>
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/16/UBLD4U.png" alt="UBLD4U.png"></p>
+<h3 id="打马赛克"><a href="#打马赛克" class="headerlink" title="打马赛克"></a>打马赛克</h3><p>使用<code>Pillow</code>包对图片的RGB数据进行扰动。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install pillow</span><br></pre></td></tr></table></figure>
+
+<p>例如当图片像素发生改变时，必然会有像素点的丢失和新像素点的获得。在保持图片的整体特征不变的情况下，对图片的像素点进行处理方案又有好多种；在图片缩小时，丢弃掉一些像素点；在图片放大时，插入一些像素点。</p>
+<p>这里借助<code>pillow</code>包将图片缩小64x48个像素；但是当你以原有的尺寸来看这张图片，就相当于打了一层马赛克；因为有原图中的一些像素被丢弃了。如果图片缩写这看，估计也就是个缩略图</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line">img = Image.open(<span class="string">'../stinkbug.png'</span>)</span><br><span class="line">print(img.size)</span><br><span class="line">(<span class="number">500</span>, <span class="number">375</span>)</span><br><span class="line">img.thumbnail((<span class="number">64</span>, <span class="number">64</span>), Image.ANTIALIAS)  <span class="comment"># resizes image in-place</span></span><br><span class="line">print(img.size)</span><br><span class="line"><span class="comment">#(64, 48)</span></span><br><span class="line">imgplot = plt.imshow(img)</span><br><span class="line">fig=plt.figure(figsize=(<span class="number">0.64</span>,<span class="number">0.48</span>))</span><br><span class="line">imgplot = plt.imshow(img)</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="https://s1.ax1x.com/2020/07/16/UBLBNT.png" alt="UBLBNT.png"></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li><a href="https://matplotlib.org/tutorials/introductory/images.html#sphx-glr-tutorials-introductory-images-py" target="_blank" rel="noopener">matplotlib</a></li>
+<li><a href="https://www.cnblogs.com/Sinte-Beuve/p/6573246.html" target="_blank" rel="noopener">数组切片</a></li>
+<li><a href="https://blog.csdn.net/MiniCatTwo/article/details/80557109" target="_blank" rel="noopener">pillow</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+   
+   <div>
+     <div>
+  
+    <div style="text-align:center;color:#bfbfbf;font-size:16px;">
+      <span>------ 本文结束 </span>
+      <img src="https://s1.ax1x.com/2020/03/23/8HFzxH.png" 
+      style="display:inline-block;"
+      data-loaded="true"
+      alt="thankyou" border="0" 
+      width="100"
+      heigh="100"
+      />
+      <span> 感谢阅读 ------</span>
+
+    </div>
+    <p>
+    <a class="fancybox fancybox.image" 
+    href="https://s1.ax1x.com/2020/03/23/8HCEjI.jpg" 
+    itemscope="" itemtype="http://schema.org/ImageObject" 
+    itemprop="url" data-fancybox="default" 
+    rel="default" title="公众号" 
+    data-caption="公众号"
+    >
+    <img data-src="https://s1.ax1x.com/2020/03/23/8HCEjI.jpg" alt="公众号"
+     src="https://s1.ax1x.com/2020/03/23/8HCEjI.jpg" data-loaded="true">
+    </a>
+    <p  style="text-align:center;">
+     <sapn style="">欢迎扫一扫上面的微信二维码，订阅
+     <span style="color: #428bca;font-size:20px;">codeHub</span>
+     公众号</span>
+     </p>
+     </p>
+    
+  
+</div>
+   </div>
+  
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>zpliu
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://biocottonhub.github.io/codeHub/2020/07/16/2020-07/07matplotlib-image/" title="matplotlib-image">https://biocottonhub.github.io/codeHub/2020/07/16/2020-07/07matplotlib-image/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/codeHub/2020/07/13/2020-07/07TAD%E7%9A%84%E9%89%B4%E5%AE%9A%E6%96%B9%E6%B3%95%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94cool%E6%A0%BC%E5%BC%8F%E7%9A%84%E8%BD%AC%E6%8D%A2/" rel="prev" title="TAD的鉴定方法（一）——cool格式的转换">
+      <i class="fa fa-chevron-left"></i> TAD的鉴定方法（一）——cool格式的转换
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概括
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#下面让我们来对这张小虫子的图片来一番操作"><span class="nav-number">1.</span> <span class="nav-text">下面让我们来对这张小虫子的图片来一番操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打印矩阵数据"><span class="nav-number">2.</span> <span class="nav-text">打印矩阵数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对原始矩阵进行操作"><span class="nav-number">3.</span> <span class="nav-text">对原始矩阵进行操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将颜色进行映射"><span class="nav-number">4.</span> <span class="nav-text">将颜色进行映射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加图例，描述颜色深浅"><span class="nav-number">5.</span> <span class="nav-text">添加图例，描述颜色深浅</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#改变颜色映射规则"><span class="nav-number">6.</span> <span class="nav-text">改变颜色映射规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打马赛克"><span class="nav-number">7.</span> <span class="nav-text">打马赛克</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">8.</span> <span class="nav-text">参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt=""
+      src="/codeHub/uploads/themeImg/logo.png">
+  <p class="site-author-name" itemprop="name"></p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/codeHub/archives">
+          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/codeHub/categories/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/codeHub/tags/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/BiocottonHub/" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;BiocottonHub&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/codeHub/1944532210@qq.com" title="E-Mail → 1944532210@qq.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-cn" class="cc-opacity" rel="noopener" target="_blank"><img src="/codeHub/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://cotton.hzau.edu.cn/" title="http:&#x2F;&#x2F;cotton.hzau.edu.cn&#x2F;" rel="noopener" target="_blank">GCGI</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">codeHub</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        站点访问人次
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        总访问量<i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/codeHub/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/codeHub/lib/velocity/velocity.min.js"></script>
+  <script src="/codeHub/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/codeHub/js/utils.js"></script>
+
+<script src="/codeHub/js/motion.js"></script>
+
+
+<script src="/codeHub/js/schemes/pisces.js"></script>
+
+
+<script src="/codeHub/js/next-boot.js"></script>
+
+<script src="/codeHub/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      script.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/codeHub/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'd4VOUvNSU5WGIC3AjjM8UArx-gzGzoHsz',
+      appKey     : '5n9Xu8XStUzmAKyncMgSp0px',
+      placeholder: "有任何问题欢迎留言或者邮件告知",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>

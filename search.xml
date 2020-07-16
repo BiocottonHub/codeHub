@@ -1,6 +1,214 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>matplotlib-image</title>
+    <url>/codeHub/2020/07/16/2020-07/07matplotlib-image/</url>
+    <content><![CDATA[<p>本教程主要讲，如何使用matplotlib绘制image图片；这里的<code>image</code>不是我们平时见到的RGB编码的图片，matplotlib绘制的<code>image</code>是基于矩阵数据进行绘制的；也可以将RGB的图片转码成numpy矩阵，然后对矩阵进行操作就</p>
+<blockquote>
+<p>需要注意的是matplotlib中只支持png图片的加载，如果要获得其他类型图片的数据，则需要<code>Pillow</code>包的支持</p>
+</blockquote>
+<a id="more"></a>
+
+<h3 id="下面让我们来对这张小虫子的图片来一番操作"><a href="#下面让我们来对这张小虫子的图片来一番操作" class="headerlink" title="下面让我们来对这张小虫子的图片来一番操作"></a>下面让我们来对这张小虫子的图片来一番操作</h3><p><img data-src="https://matplotlib.org/_images/stinkbug.png" alt="虫子"></p>
+<blockquote>
+<p> RGB色彩模式是工业界的一种颜色标准，是通过对红(R)、绿(G)、蓝(B)三个颜色通道的变化以及它们相互之间的叠加来得到各式各样的颜色的，RGB即是代表红、绿、蓝三个通道的颜色，这个标准几乎包括了人类视力所能感知的所有颜色，是运用最广的颜色系统之一。&lt;引自百度百科&gt;</p>
+</blockquote>
+<p>这是一种RGB的PNG图片，它的分辨率为500x375;通俗的讲就是这张PNG的图片数据包含有<code>500X375</code>个点；每个点通过一个RGB代码表示出一种颜色。这张图片的每个点是一个24位的二进制代码,其中每8位二进制代码表示一个颜色的编码；如果是RGB是32位的编码的话，matplotlib会将它缩放到24位，在计算每种颜色的编码，颜色编码范围在<code>0~1</code>之间。</p>
+<p>例如通过matplotlib读取png图片后，每个像素的RGB代码表示成一个数组<code>[0.40784314 0.40784314 0.40784314]</code></p>
+<p>​                                        </p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> matplotlib.image <span class="keyword">as</span> mping </span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">导入Image 所需要的包</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line">img=mping.imread(<span class="string">"../stinkbug.png"</span>)</span><br><span class="line"><span class="comment">#print(img.shape)</span></span><br><span class="line"><span class="comment">#(375, 500, 3)</span></span><br><span class="line">print(img)</span><br></pre></td></tr></table></figure>
+
+<pre><code>[[[0.40784314 0.40784314 0.40784314]
+  [0.40784314 0.40784314 0.40784314]
+  [0.40784314 0.40784314 0.40784314]
+  ...
+  [0.42745098 0.42745098 0.42745098]
+  [0.42745098 0.42745098 0.42745098]
+  [0.42745098 0.42745098 0.42745098]]
+]]</code></pre><h3 id="打印矩阵数据"><a href="#打印矩阵数据" class="headerlink" title="打印矩阵数据"></a>打印矩阵数据</h3><p>在使用<code>mping.imread</code>获取到PNG图片的编码矩阵后，可以使用<code>plt.imshow()</code>将矩阵数据显示成图片，并且多了两个坐标轴，坐标轴的刻度是以像素为单位的。</p>
+<ul>
+<li>横坐标是图片原始的宽度</li>
+<li>纵坐标是图片高度</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">plt.imshow(img) <span class="comment">##显示图片</span></span><br></pre></td></tr></table></figure>
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/16/UBLaBq.png" alt="UBLaBq.png"></p>
+<h3 id="对原始矩阵进行操作"><a href="#对原始矩阵进行操作" class="headerlink" title="对原始矩阵进行操作"></a>对原始矩阵进行操作</h3><ul>
+<li>截取部分图片</li>
+<li>改变图片原始的RGB代码</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="comment">##截取200行，400列的矩阵；实际上相当于图片高度变成200，宽度变成400</span></span><br><span class="line">plt.imshow(img[<span class="number">0</span>:<span class="number">200</span>,<span class="number">0</span>:<span class="number">600</span>,]) <span class="comment">##矩阵的切片操作</span></span><br></pre></td></tr></table></figure>
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/16/UBLJ3Q.png" alt="UBLJ3Q.png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">## 改变RGB编码，我这里只截取了RGB数组中的一个维度</span></span><br><span class="line"><span class="comment">## 对于图片大小我没有进行修改</span></span><br><span class="line">plt.imshow(img[:,:,<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/16/UBLUun.png" alt="UBLUun.png"></p>
+<h3 id="将颜色进行映射"><a href="#将颜色进行映射" class="headerlink" title="将颜色进行映射"></a>将颜色进行映射</h3><p>如果你的每个像素点中，只有一个数字代表它是什么颜色，同样可以使用<code>imshow</code>函数中封装好的映射函数将一维的数据映射成3维的数据点</p>
+<p>例如我将img矩阵中的RGB编码，压缩到一维空间，再使用<code>cmap=hot</code>，&lt; color maping &gt;的缩写将一维空间重新映射到三维空间后的图片，搞了两种映射。<br>既可以使用函数中的参数进行设置，也可以使用对象的属性进行设置</p>
+<ul>
+<li><code>Greys</code>这个有点像x光片</li>
+<li><code>hot</code> 这个有点像热成像</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">plt.imshow(img[:,:,<span class="number">1</span>],cmap=<span class="string">'Greys'</span>) <span class="comment">##按照灰色进行映射</span></span><br></pre></td></tr></table></figure>
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/16/UBLtjs.png" alt="UBLtjs.png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">imgplot=plt.imshow(img[:,:,<span class="number">1</span>]) <span class="comment">##返回一个image对象</span></span><br><span class="line">imgplot.set_cmap(<span class="string">'hot'</span>)  <span class="comment">##调用属性进行设置hot映射</span></span><br></pre></td></tr></table></figure>
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/16/UBLYcj.png" alt="UBLYcj.png"></p>
+<h3 id="添加图例，描述颜色深浅"><a href="#添加图例，描述颜色深浅" class="headerlink" title="添加图例，描述颜色深浅"></a>添加图例，描述颜色深浅</h3><p>直接使用<code>plt.colorbar()</code>函数即可；<br>当然有时候我们可以通过设置颜色映射时的上下限，来增加我们感兴趣的地方的对比度；从而突出重点</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">imgplot=plt.imshow(img[:,:,<span class="number">1</span>]) <span class="comment">##返回一个image对象</span></span><br><span class="line">imgplot.set_cmap(<span class="string">'nipy_spectral'</span>)  <span class="comment">##调用属性进行设置hot映射</span></span><br><span class="line">plt.colorbar()  <span class="comment">##添加图例</span></span><br></pre></td></tr></table></figure>
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/16/UBL0EV.png" alt="UBL0EV.png"></p>
+<h3 id="改变颜色映射规则"><a href="#改变颜色映射规则" class="headerlink" title="改变颜色映射规则"></a>改变颜色映射规则</h3><p>当然有时候我们可以通过设置颜色映射时的上下限，来增加我们感兴趣的地方的对比度；从而突出重点<br>使用<code>clim</code>函数进行操作，同样可以使用对象的方法<code>set_clim</code></p>
+<p>在设置了颜色的映射范围之后，增强你感兴趣的地方的对比度；可以发现在经过调整后，B图中有些peak值出，对比度更亮了</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">fig=plt.figure(figsize=(<span class="number">10</span>,<span class="number">10</span>)) <span class="comment">##创建一个画板</span></span><br><span class="line">a=plt.subplot2grid((<span class="number">1</span>,<span class="number">2</span>),(<span class="number">0</span>,<span class="number">0</span>),rowspan=<span class="number">1</span>,colspan=<span class="number">1</span>) <span class="comment">##创建一个图层</span></span><br><span class="line">imgplot=plt.imshow(img[:,:,<span class="number">1</span>])</span><br><span class="line">a.set_title(<span class="string">'Before'</span>)</span><br><span class="line">plt.colorbar(ticks=[<span class="number">0.1</span>, <span class="number">0.3</span>, <span class="number">0.5</span>, <span class="number">0.7</span>], orientation=<span class="string">'horizontal'</span>) <span class="comment">##设置图例位置和刻度线</span></span><br><span class="line">b=plt.subplot2grid((<span class="number">1</span>,<span class="number">2</span>),(<span class="number">0</span>,<span class="number">1</span>),rowspan=<span class="number">1</span>,colspan=<span class="number">1</span>) <span class="comment">## 创建一个图层</span></span><br><span class="line">imgplot=plt.imshow(img[:,:,<span class="number">1</span>])</span><br><span class="line">imgplot.set_clim(<span class="number">0</span>,<span class="number">0.7</span>)</span><br><span class="line">b.set_title(<span class="string">'After'</span>)</span><br><span class="line">plt.colorbar(ticks=[<span class="number">0.1</span>, <span class="number">0.3</span>, <span class="number">0.5</span>, <span class="number">0.7</span>], orientation=<span class="string">'horizontal'</span>)</span><br></pre></td></tr></table></figure>
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/16/UBLD4U.png" alt="UBLD4U.png"></p>
+<h3 id="打马赛克"><a href="#打马赛克" class="headerlink" title="打马赛克"></a>打马赛克</h3><p>使用<code>Pillow</code>包对图片的RGB数据进行扰动。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pip3 install pillow</span><br></pre></td></tr></table></figure>
+
+<p>例如当图片像素发生改变时，必然会有像素点的丢失和新像素点的获得。在保持图片的整体特征不变的情况下，对图片的像素点进行处理方案又有好多种；在图片缩小时，丢弃掉一些像素点；在图片放大时，插入一些像素点。</p>
+<p>这里借助<code>pillow</code>包将图片缩小64x48个像素；但是当你以原有的尺寸来看这张图片，就相当于打了一层马赛克；因为有原图中的一些像素被丢弃了。如果图片缩写这看，估计也就是个缩略图</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line">img = Image.open(<span class="string">'../stinkbug.png'</span>)</span><br><span class="line">print(img.size)</span><br><span class="line">(<span class="number">500</span>, <span class="number">375</span>)</span><br><span class="line">img.thumbnail((<span class="number">64</span>, <span class="number">64</span>), Image.ANTIALIAS)  <span class="comment"># resizes image in-place</span></span><br><span class="line">print(img.size)</span><br><span class="line"><span class="comment">#(64, 48)</span></span><br><span class="line">imgplot = plt.imshow(img)</span><br><span class="line">fig=plt.figure(figsize=(<span class="number">0.64</span>,<span class="number">0.48</span>))</span><br><span class="line">imgplot = plt.imshow(img)</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="https://s1.ax1x.com/2020/07/16/UBLBNT.png" alt="UBLBNT.png"></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li><a href="https://matplotlib.org/tutorials/introductory/images.html#sphx-glr-tutorials-introductory-images-py" target="_blank" rel="noopener">matplotlib</a></li>
+<li><a href="https://www.cnblogs.com/Sinte-Beuve/p/6573246.html" target="_blank" rel="noopener">数组切片</a></li>
+<li><a href="https://blog.csdn.net/MiniCatTwo/article/details/80557109" target="_blank" rel="noopener">pillow</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>TAD的鉴定方法（一）——cool格式的转换</title>
+    <url>/codeHub/2020/07/13/2020-07/07TAD%E7%9A%84%E9%89%B4%E5%AE%9A%E6%96%B9%E6%B3%95%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94cool%E6%A0%BC%E5%BC%8F%E7%9A%84%E8%BD%AC%E6%8D%A2/</url>
+    <content><![CDATA[<h1 id="TAD的鉴定方法（一）——cool格式的转换"><a href="#TAD的鉴定方法（一）——cool格式的转换" class="headerlink" title="TAD的鉴定方法（一）——cool格式的转换"></a>TAD的鉴定方法（一）——cool格式的转换</h1><p>上次我们使用HiC-Pro将HiC数据比对到了参考基因组上，并且得到了bin水平的HiC数据（交互文件），我们这里介绍一下TAD的鉴定方法（使用HiCPeaks和TADLib中的两个程序），大致分为以下两步（我们会分）</p>
+<ul>
+<li>cool格式的转换</li>
+<li>TAD的鉴定</li>
+</ul>
+<p>注：TAD的相关介绍请看本博客之前的文章：三维基因组之TAD的形成机制以及其特征</p>
+<a id="more"></a>
+
+<h2 id="1-cool格式的转化——HiCPeaks"><a href="#1-cool格式的转化——HiCPeaks" class="headerlink" title="1.cool格式的转化——HiCPeaks"></a>1.cool格式的转化——HiCPeaks</h2><p>HiC-Pro所得到的bin水平的HiC数据是TXT/NPZ bin水平的HiC数据，不能直接进行TAD的鉴定，HiCPeaks中的toCooler是将TXT/NPZ bin水平的HiC数据转化成cool格式，以便后续的分析。</p>
+<h3 id="1-1-HiCPeaks的安装"><a href="#1-1-HiCPeaks的安装" class="headerlink" title="1.1 HiCPeaks的安装"></a>1.1 HiCPeaks的安装</h3><p>HiCPeaks的安装需要使用conda进行，操作也十分的简单</p>
+<ul>
+<li>其需要一些python要求 <code>Python 2.7/3.5+、Multiprocess、Numpy、Scipy、Matplotlib、Pandas、Statsmodels、Scikit-Learn、H5py、Cooler</code></li>
+<li>还需要<code>ucsc-fetchchromsizes</code></li>
+</ul>
+<p>具体安装操作如下</p>
+<p>首先设置通道，使上面列出的所有包都可访问(注意，顺序很重要，以确保正确的优先级)</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">conda config --add channels defaults</span><br><span class="line">conda config --add channels bioconda</span><br><span class="line">conda config --add channels conda-forge</span><br></pre></td></tr></table></figure>
+
+<p>然后就进行依赖的安装</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">conda install numpy scipy matplotlib pandas statsmodels scikit-learn h5py multiprocess cooler ucsc-fetchchromsizes</span><br></pre></td></tr></table></figure>
+
+<p>最后进行hicpeaks的安装</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python setup.py install</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-HiCPeakst之oCooler的使用"><a href="#1-2-HiCPeakst之oCooler的使用" class="headerlink" title="1.2 HiCPeakst之oCooler的使用"></a>1.2 HiCPeakst之oCooler的使用</h3><h4 id="1-2-1-原始数据的处理"><a href="#1-2-1-原始数据的处理" class="headerlink" title="1.2.1 原始数据的处理"></a>1.2.1 原始数据的处理</h4><p>首先我们依据bin的编号文件<code>Ga_1_40000_abs.bed</code>将交互文件<code>Ga_1_40000.matrix</code>进行处理，提取出来研究中关注的两条染色体的交互数据，这里就以染色体内的交互进行说明（以前五号染色体为例）</p>
+<p><code>Ga_1_40000_abs.bed</code>文件内容如下，四列分别是：染色体编号、bin起始、bin终止、bin编号</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Chr01   0       40000   1</span><br><span class="line">Chr01   40000   80000   2</span><br><span class="line">Chr01   80000   120000  3</span><br><span class="line">Chr01   120000  160000  4</span><br><span class="line">Chr01   160000  200000  5</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>这里我们需要批量提取所有的染色体起始和终止bin的编号，可以用bash脚本实现，脚本如下</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> 1 2 3 4 5 	<span class="comment">#提取每个染色体的起始和终止bin编号 </span></span><br><span class="line"><span class="keyword">do</span> </span><br><span class="line">grep <span class="string">"Chr0"</span><span class="variable">$i</span><span class="string">""</span> Ga_1_40000_abs.bed|awk <span class="string">'NR==1&#123;printf "'</span><span class="variable">$i</span><span class="string">'" "\t" $4 "\t"&#125;END&#123;print $4&#125;'</span>&gt;&gt;Ga.bed</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<p>然后我们就根据染色体的起始和终止编号进行染色体内交互的提取</p>
+<p><code>Ga_1_40000.matrix</code>文件如下</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1       1       75</span><br><span class="line">1       2       112</span><br><span class="line">1       3       93</span><br><span class="line">1       4       33</span><br><span class="line">1       5       18</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>交互提取的bash脚本如下</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">a=($(cut -f2 Ga.bed))	<span class="comment">#bed文件是每个染色体的起始和终止bin编号</span></span><br><span class="line">b=($(cut -f3 Ga.bed))</span><br><span class="line">mkdir 40K <span class="comment">#交互文件要放进这个文件夹里，文件夹得命名为bin的大小</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> $(seq 1 5)	<span class="comment">#生成每个染色体内的交互文件命名为 染色体号_染色体号.txt（染色体号为自然数字1、2、3...），并且让bin编号从0开始（这个很重要）</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">awk -v x=<span class="variable">$&#123;a[i-1]&#125;</span> -v y=<span class="variable">$&#123;b[i-1]&#125;</span> <span class="string">'&#123;if(x&lt;=$1&amp;&amp;$1&lt;=y&amp;&amp;$2&gt;=x&amp;&amp;$2&lt;=y)&#123;print $0&#125;&#125;'</span> Ga_1_40000.matrix |awk -v x=<span class="variable">$&#123;a[i-1]&#125;</span> <span class="string">'&#123;print $1-x "\t" $2-x "\t" $3&#125;'</span>  &gt;./40K/<span class="string">"<span class="variable">$i</span>"</span>_<span class="string">"<span class="variable">$i</span>"</span>.txt</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<p>至此，原始文件的处理就结束了。</p>
+<h4 id="1-2-2染色体大小文件的获取"><a href="#1-2-2染色体大小文件的获取" class="headerlink" title="1.2.2染色体大小文件的获取"></a>1.2.2染色体大小文件的获取</h4><p>我们需要创建一个文档记录交互文件中涉及染色体的大小，内容如下</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1	123408337</span><br><span class="line">2	115147059</span><br><span class="line">3	139243608</span><br><span class="line">4	122505728</span><br><span class="line">5	93157762</span><br></pre></td></tr></table></figure>
+
+<p>染色体大小的获得可以用如下指令</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">samtools faidx &#x2F;Ga.ref&#x2F;Ga.fasta</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-2-3配置文件的书写"><a href="#1-2-3配置文件的书写" class="headerlink" title="1.2.3配置文件的书写"></a>1.2.3配置文件的书写</h4><p>我们还需要创建一个文件，命名为<code>datasets</code>，内容如下</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">res:40000</span><br><span class="line">  .&#x2F;40K</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第一行是指定分辨率（bin的大小）</li>
+<li>第二行是指定交互文件所在的文件夹（绝对路径、相对路径都可以）</li>
+</ul>
+<p>到现在为止我们的准备工作就正式完成啦，我们得到的文件目录结构如下</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.</span><br><span class="line">├── 40K</span><br><span class="line">│   ├── 1_1.txt</span><br><span class="line">│   ├── 2_2.txt</span><br><span class="line">│   ├── 3_3.txt</span><br><span class="line">│   ├── 4_4.txt</span><br><span class="line">│   └── 5_5.txt</span><br><span class="line">├── datasets</span><br><span class="line">└── Ga.fasta.size</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-2-4-程序的运行"><a href="#1-2-4-程序的运行" class="headerlink" title="1.2.4 程序的运行"></a>1.2.4 程序的运行</h4><p>命令很简单</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">toCooler -O Ga.40000.cool -d datasets --chromsizes-file Ga.fasta.size --nproc 1</span><br><span class="line"><span class="comment"># 主要参数解释如下</span></span><br><span class="line"><span class="comment"># -O cooler文件的输出路径及名称</span></span><br><span class="line"><span class="comment"># -d 指定配置文件datasets</span></span><br><span class="line"><span class="comment"># --chromsizes-file 指定染色体大小文件</span></span><br><span class="line"><span class="comment"># --nproc ICE时使用的进程数</span></span><br><span class="line"><span class="comment"># --no-balance 跳过ICE平衡</span></span><br><span class="line"><span class="comment"># --logFile 指定log文件名</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>好了至此我们的cool格式转化就完成了，程序成功运行之后就会生成一个二进制cool文件<code>A2.40000.cool</code>，这个文件就是我们接下来进行TAD鉴定的输入文件，下一篇我们将会详细介绍使用TADLib去进行TAD的鉴定。</p>
+<ul>
+<li>参考 Github <a href="https://github.com/XiaoTaoWang/HiCPeaks" target="_blank" rel="noopener">https://github.com/XiaoTaoWang/HiCPeaks</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Hi-C</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>TAD的鉴定方法（二）——TAD的鉴定</title>
+    <url>/codeHub/2020/07/13/2020-07/08TAD%E7%9A%84%E9%89%B4%E5%AE%9A%E6%96%B9%E6%B3%95%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94TAD%E7%9A%84%E9%89%B4%E5%AE%9A/</url>
+    <content><![CDATA[<h1 id="TAD的鉴定方法（二）——TAD的鉴定"><a href="#TAD的鉴定方法（二）——TAD的鉴定" class="headerlink" title="TAD的鉴定方法（二）——TAD的鉴定"></a>TAD的鉴定方法（二）——TAD的鉴定</h1><p>上一篇文章我们详细介绍了cool格式的转化，格式的转化是为了更好地进行数据的分析，这次，我们就来详细学习使用TADLib进行TAD的鉴定。</p>
+<a id="more"></a>
+
+<h2 id="2-TAD的鉴定——TADLib的使用"><a href="#2-TAD的鉴定——TADLib的使用" class="headerlink" title="2.TAD的鉴定——TADLib的使用"></a>2.TAD的鉴定——TADLib的使用</h2><h3 id="2-1-TADLib的安装"><a href="#2-1-TADLib的安装" class="headerlink" title="2.1 TADLib的安装"></a>2.1 TADLib的安装</h3><p>TADLib的安装可以使用conda进行，操作也十分的简单</p>
+<ul>
+<li>其需要一些python要求 <code>Python 3.5+、Numpy、Scipy、Matplotlib、Scikit-Learn、H5py、Cooler、pomegranate 0.10.0+、networkx 1.x (not compatible with networkx 2.0 yet)</code></li>
+</ul>
+<p>具体安装操作如下</p>
+<p>首先设置通道，使上面列出的所有包都可访问(注意，顺序很重要，以确保正确的优先级)</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">conda config --add channels defaults</span><br><span class="line">conda config --add channels bioconda</span><br><span class="line">conda config --add channels conda-forge</span><br></pre></td></tr></table></figure>
+
+<p>然后就进行依赖的安装</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">conda install setuptools numpy scipy matplotlib scikit-learn cooler pomegranate=0.10.0 networkx=1</span><br></pre></td></tr></table></figure>
+
+<p>最后进行TADLib的安装</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install TADLib</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-TADLib之Hierarchical-TAD的使用"><a href="#1-2-TADLib之Hierarchical-TAD的使用" class="headerlink" title="1.2 TADLib之Hierarchical TAD的使用"></a>1.2 TADLib之Hierarchical TAD的使用</h3><h4 id="1-2-1-初始文件的准备"><a href="#1-2-1-初始文件的准备" class="headerlink" title="1.2.1 初始文件的准备"></a>1.2.1 初始文件的准备</h4><p>初始输入文件为cool格式的交互文件，cool文件的获取推荐使用HiC-Pro+HiCPeaks来获得，之前的文章都有介绍。</p>
+<h4 id="1-2-2-配置文件的书写"><a href="#1-2-2-配置文件的书写" class="headerlink" title="1.2.2 配置文件的书写"></a>1.2.2 配置文件的书写</h4><p>我们需要一个配置文件去指定分辨率、重复标签和cool URI信息，命名为<code>meta_file</code></p>
+<p>文件规范格式如下</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">res:40000</span><br><span class="line">  rep1:&#x2F;HiC&#x2F;A2&#x2F;TAD&#x2F;rep1&#x2F;A2.40000.cool::&#x2F;40000</span><br><span class="line">  rep2:&#x2F;HiC&#x2F;A2&#x2F;TAD&#x2F;rep2&#x2F;A2.40000.cool::&#x2F;40000</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第一行指定分辨率</li>
+<li>第二行及以后是指定不同的生物学重复对应的cool URI</li>
+</ul>
+<h4 id="1-2-3-程序的运行"><a href="#1-2-3-程序的运行" class="headerlink" title="1.2.3 程序的运行"></a>1.2.3 程序的运行</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hitad -O test.txt -d meta_file --logFile hitad.log</span><br><span class="line"><span class="comment"># -O 指定输出文件名称</span></span><br><span class="line"><span class="comment"># -d 指定配置文件</span></span><br><span class="line"><span class="comment"># --logFile 指定log文件名称</span></span><br><span class="line"><span class="comment"># --maxsize 指定最后的domain大小</span></span><br><span class="line"><span class="comment"># -p 指定线程数</span></span><br><span class="line"><span class="comment"># -W WEIGHT_COL 使用标准化后的矩阵文件（默认）</span></span><br><span class="line"><span class="comment"># -W RAW 使用非标准化的矩阵文件</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3-结果文件的解读"><a href="#1-3-结果文件的解读" class="headerlink" title="1.3 结果文件的解读"></a>1.3 结果文件的解读</h3><p>软件运行结束后，会生成一个后缀为.txt的文本文件，文本中记录了不同的domain的信息，如下所示</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1       0       1200000 2</span><br><span class="line">1       0       1680000 1</span><br><span class="line">1       0       3960000 0</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第一列为染色体编号</li>
+<li>第二列为domain的起始位置</li>
+<li>第三列为domain的终止位置</li>
+<li>第四列为domain的类型，0代表TAD、1代表sub-TAD、2代表subsequent domain</li>
+</ul>
+<hr>
+<p>至此，我们就从原始的HiC数据经过HiC-Pro+HiCPeaks+TADLib成功鉴定出了TAD。</p>
+<p>参考：<a href="https://xiaotaowang.github.io/TADLib/hitad.html" target="_blank" rel="noopener">https://xiaotaowang.github.io/TADLib/hitad.html</a></p>
+]]></content>
+      <categories>
+        <category>Hi-C</category>
+      </categories>
+  </entry>
+  <entry>
     <title>一文了解：CPU核、多线程、多进程</title>
     <url>/codeHub/2020/07/12/2020-07/06CPU%E6%A0%B8%E5%BF%83/</url>
     <content><![CDATA[<p>在1945年，美国科学家冯诺依曼，提出了冯诺依曼计算机结构，计算机主要由运算器、控制器、存储器、输入输出设备组成。这一理论一直延续至今，并且构成所有现代电子计算机的模板。简单的将这些术语翻译成我们日常听到的就是：</p>
@@ -130,7 +338,7 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cp &#x2F;PATH&#x2F;TO&#x2F;HiC-Pro_2.11.1&#x2F;config-hicpro.txt .</span><br></pre></td></tr></table></figure>
 
 <p>然后，进行修改（以下为通常需要修改的参数，其他的参数的修改请参考官网）</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># N_CPU，例如N_CPU = 24</span></span><br><span class="line"><span class="comment"># JOB_NAME，例如JOB_NAME = Ga</span></span><br><span class="line"><span class="comment"># JOB_WALLTIME，例如JOB_WALLTIME = 11:00:00</span></span><br><span class="line"><span class="comment"># JOB_QUEUE，例如JOB_QUEUE = normal</span></span><br><span class="line"><span class="comment"># JOB_MAIL，例如JOB_MAIL = 1570447120@qq.com</span></span><br><span class="line"><span class="comment"># BOWTIE2_IDX_PATH填写用bowtie2对reference建立索引的目录，注意是目录，而不是索引路径!如/PATH/to/Ga.ref</span></span><br><span class="line"><span class="comment"># REFERENCE_GENOME，例如Ga 注意：这里REFERENCE_GENOME一定要和bowtie2建立的索引对应上,名字为物种名</span></span><br><span class="line"><span class="comment"># GENOME_SIZE，即生成的文件Ga.fasta.size（最好使用绝对路径）</span></span><br><span class="line"><span class="comment"># GENOME_FRAGMENT，用digest_genome.py程序生成的文件Ga.HindIII.txt</span></span><br><span class="line"><span class="comment"># LIGATION_SITE，酶的序列，例如HindIII，则为AAGCTAGCTT；如果是MboI则序列为GATCGATC。</span></span><br><span class="line"><span class="comment"># MIN_FRAG_SIZE，例如MIN_FRAG_SIZE = 100</span></span><br><span class="line"><span class="comment"># MAX_FRAG_SIZE，例如MAX_FRAG_SIZE = 160000</span></span><br><span class="line"><span class="comment"># MIN_INSERT_SIZE，例如MIN_INSERT_SIZE = 200</span></span><br><span class="line"><span class="comment"># MAX_INSERT_SIZE，例如MAX_INSERT_SIZE = 600</span></span><br><span class="line"><span class="comment"># GET_PROCESS_SAM，例如GET_PROCESS_SAM = 1</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># N_CPU，例如N_CPU = 24</span></span><br><span class="line"><span class="comment"># JOB_NAME，例如JOB_NAME = Ga</span></span><br><span class="line"><span class="comment"># JOB_WALLTIME，例如JOB_WALLTIME = 11:00:00</span></span><br><span class="line"><span class="comment"># JOB_QUEUE，例如JOB_QUEUE = normal</span></span><br><span class="line"><span class="comment"># JOB_MAIL，例如JOB_MAIL = 1570447120@qq.com</span></span><br><span class="line"><span class="comment"># BOWTIE2_IDX_PATH，填写用bowtie2对reference建立索引的目录，注意是目录，而不是索引路径!如/PATH/to/Ga.ref</span></span><br><span class="line"><span class="comment"># REFERENCE_GENOME，例如Ga 注意：这里REFERENCE_GENOME一定要和bowtie2建立的索引对应上,名字为物种名</span></span><br><span class="line"><span class="comment"># GENOME_SIZE，即生成的文件Ga.fasta.size（最好使用绝对路径）</span></span><br><span class="line"><span class="comment"># GENOME_FRAGMENT，用digest_genome.py程序生成的文件Ga.HindIII.txt</span></span><br><span class="line"><span class="comment"># LIGATION_SITE，酶的序列，例如HindIII，则为AAGCTAGCTT；如果是MboI则序列为GATCGATC。</span></span><br><span class="line"><span class="comment"># MIN_FRAG_SIZE，例如MIN_FRAG_SIZE = 100</span></span><br><span class="line"><span class="comment"># MAX_FRAG_SIZE，例如MAX_FRAG_SIZE = 160000</span></span><br><span class="line"><span class="comment"># MIN_INSERT_SIZE，例如MIN_INSERT_SIZE = 200</span></span><br><span class="line"><span class="comment"># MAX_INSERT_SIZE，例如MAX_INSERT_SIZE = 600</span></span><br><span class="line"><span class="comment"># GET_PROCESS_SAM，例如GET_PROCESS_SAM = 1</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="3-运行HiC-Pro"><a href="#3-运行HiC-Pro" class="headerlink" title="3.运行HiC-Pro"></a>3.运行HiC-Pro</h3><p>HiC-Pro的使用很简单，主要就是三个参数，指令如下（单线程运行）</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/PATH/TO/HiC-Pro_2.11.1/bin/HiC-Pro --input Ga.reads --output hicpro_output --conf config-hicpro.txt </span><br><span class="line"><span class="comment"># --input reads所在的文件</span></span><br><span class="line"><span class="comment"># --output 输出的文件夹</span></span><br><span class="line"><span class="comment"># --conf 配置文件</span></span><br></pre></td></tr></table></figure>
