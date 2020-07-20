@@ -1,6 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>node搭建后台</title>
+    <url>/codeHub/2020/07/20/2020-07/09node%E5%90%8E%E5%8F%B0/</url>
+    <content><![CDATA[<p>最近在使用<code>SMTP</code>邮件系统的时候，用的是网易163的账号，结果账号被封了导致服务器在给用户批量发送邮件时失败，而且又没有报错提示，整的我一脸懵逼。出于无奈，我使用之前学习的<code>node</code>、<code>mysql</code>知识搭建了一个后台系统；再使用<code>APPache</code>反向代理将内网中node服务器信息，转发到公网服务器。同时node操作<code>mysql</code>时，使用到了之前学习的<code>Promise</code>知识 ，解决了异步操作的问题。涉及到的知识点主要包含以下方面：</p>
+<ol>
+<li><code>log4js</code>记录node日志</li>
+<li><code>PowerDesigner</code>设计数据表</li>
+<li><code>Promise</code>解决mysql异步操作</li>
+</ol>
+<p><img data-src="https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif" alt="404"></p>
+<a id="more"></a>
+
+<h3 id="1-log4js记录日志"><a href="#1-log4js记录日志" class="headerlink" title="1.log4js记录日志"></a>1.log4js记录日志</h3><p>使用npm 下载<code>log4js</code>插件后，配置对应的信息。</p>
+<p>这里我使用了两个记录器：</p>
+<ul>
+<li>按照天数记录node运行日志</li>
+<li>同时将日志打印到标准输出</li>
+</ul>
+<p>最终生成的文件将会以<code>log_date.2020-07-20.log</code>文件的形式进行保存</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> log4js = <span class="built_in">require</span>(<span class="string">'log4js'</span>)</span><br><span class="line">log4js.configure(&#123;</span><br><span class="line">  appenders: &#123;</span><br><span class="line">    dateFile: &#123;</span><br><span class="line">      type: <span class="string">'dateFile'</span>,</span><br><span class="line">      filename: path.join(__dirname, <span class="string">'../logs/log_date'</span>),</span><br><span class="line">      alwaysIncludePattern: <span class="literal">true</span>,</span><br><span class="line">      pattern: <span class="string">'yyyy-MM-dd.log'</span>,</span><br><span class="line">      compress: <span class="literal">true</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    out: &#123;</span><br><span class="line">      type: <span class="string">'stdout'</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  categories: &#123;</span><br><span class="line">    <span class="keyword">default</span>: &#123; <span class="attr">appenders</span>: [<span class="string">'dateFile'</span>, <span class="string">'out'</span>], <span class="attr">level</span>: <span class="string">'trace'</span> &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-PowerDesigner设计数据表"><a href="#2-PowerDesigner设计数据表" class="headerlink" title="2.PowerDesigner设计数据表"></a>2.<code>PowerDesigner</code>设计数据表</h3><p>使用<code>powerDeigner</code>这个神器，省的我自己去写sql代码生成对应的表；整个软件通过图形化的方式，构造表与表之间的关系和字段的数据类型，字段的约束、主键等。</p>
+<p>图中构造了两个表，其中学生表中<code>年级</code>字段与级别表存在关联；并且每个字段都标明了对应的数据类型和范围。最终以鼠标的方式就可以生成sql语句。</p>
+<p><img data-src="https://s1.ax1x.com/2020/07/20/U4c5zF.png" alt="表设计"></p>
+<h3 id="3-Promise解决异步操作"><a href="#3-Promise解决异步操作" class="headerlink" title="3.Promise解决异步操作"></a>3.Promise解决异步操作</h3><p>由于JavaScript单线程的性质，导致异步操作时很难保证sql查询的顺序；而Promise则能够确保查询语句按照固定的顺序执行。首先使用<code>mysql</code>配置mysql账号和密码。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> mysql = <span class="built_in">require</span>(<span class="string">'mysql'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> sqlconnection = mysql.createConnection(&#123;</span><br><span class="line">  host: <span class="string">'localhost'</span>,</span><br><span class="line">  user: <span class="string">'zpliu'</span>,</span><br><span class="line">  password: <span class="string">'123456'</span>,</span><br><span class="line">  port: <span class="number">3306</span>,</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  connection: sqlconnection,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>封装Promise对象</p>
+<p>当用户发起请求时，对mysql进行查询；将mysql对象、sql语句以及中间件传递给函数；如果Promise在执行过程中遇到了错误，则调用<code>logger</code>函数将错误写入到日志文件中；如果正常执行时则继续返回一个Promise对象。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sqlQueryPromise</span>(<span class="params">sqlConnecion, sql, next</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, NULL</span>) =&gt;</span> &#123;</span><br><span class="line">    sqlConnecion.query(sql, <span class="function"><span class="keyword">function</span> (<span class="params">err, result</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (err) &#123;</span><br><span class="line">        logger.error(</span><br><span class="line">          <span class="string">'sql language error: errcode:'</span> + err.errno + <span class="string">'\t`'</span> + err.sql + <span class="string">'`'</span></span><br><span class="line">        )</span><br><span class="line">        next(&#123;</span><br><span class="line">          code: err.errno,</span><br><span class="line">        &#125;) <span class="comment">//sql language error</span></span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">      &#125;</span><br><span class="line">      resolve(result)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>响应客户端请求</p>
+<p>在响应客户端请求时，涉及到两个sql循环，并且必须等第一个查询成功执行才能够进入到第二个查询语句。</p>
+<p>进入第二个查询语句后，再将结果返回给客户端</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">router.post(<span class="string">'/people/update'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">    sql=<span class="string">'*****'</span></span><br><span class="line">  sqlQueryPromise(mysqlconnection, <span class="string">`use <span class="subst">$&#123;DataBase&#125;</span>;`</span>, next)</span><br><span class="line">    .then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> sqlQueryPromise(mysqlconnection, sql, next)</span><br><span class="line">    &#125;)</span><br><span class="line">    .then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      res.json(&#123; <span class="attr">code</span>: <span class="number">0</span> &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-API测试"><a href="#4-API测试" class="headerlink" title="4.API测试"></a>4.API测试</h3><p>最后我把node后台API，放在了以下地址</p>
+<blockquote>
+<p><a href="http://cotton.hzau.edu.cn/web/" target="_blank" rel="noopener">http://cotton.hzau.edu.cn/web/</a></p>
+</blockquote>
+<p>API中包含了简单的<code>增删改查</code></p>
+<p>例如请求 <code>http://cotton.hzau.edu.cn/web/people</code>地址时；浏览器将会返回以下数据,感兴趣的话可以试一试</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">[&#123;<span class="string">"id"</span>:<span class="number">10</span>,</span><br><span class="line">  <span class="string">"name"</span>:<span class="string">"好好学习"</span>,</span><br><span class="line">  <span class="string">"photo"</span>:<span class="string">"天天向上"</span>,</span><br><span class="line">  <span class="string">"sex"</span>:<span class="number">0</span>,</span><br><span class="line">  <span class="string">"introduction"</span>:<span class="literal">null</span>,</span><br><span class="line">  <span class="string">"email"</span>:<span class="string">"19445322210@qq.com"</span>,</span><br><span class="line">  <span class="string">"grade"</span>:<span class="string">"Ph.D"</span>&#125;]</span><br></pre></td></tr></table></figure>
+
+<p>最后再拿到后台给的数据后，接下来的工作就是交给前端进行数据的渲染啦！今天通过整理之前学的一些node知识；把代码和文件夹规范了不少，之后就在这个基础上进行后端的开发。前端的内容等过一段时间再规范一下；准备使用node做后端API接口负责数据的存取；Vue负责前端的数据渲染和路由跳转。</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li><a href="https://www.cnblogs.com/biehongli/p/6025954.html" target="_blank" rel="noopener">powerDesigner使用</a></li>
+<li><a href="https://biocottonhub.github.io/codeHub/2020/04/19/2020-06%E4%BB%A5%E5%89%8D/23Promise%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">Promise异步</a></li>
+<li><a href="https://blog.csdn.net/lxhjh/article/details/50747642" target="_blank" rel="noopener">log4js</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+  </entry>
+  <entry>
     <title>matplotlib-image</title>
     <url>/codeHub/2020/07/16/2020-07/07matplotlib-image/</url>
     <content><![CDATA[<p>本教程主要讲，如何使用matplotlib绘制image图片；这里的<code>image</code>不是我们平时见到的RGB编码的图片，matplotlib绘制的<code>image</code>是基于矩阵数据进行绘制的；也可以将RGB的图片转码成numpy矩阵，然后对矩阵进行操作就</p>
