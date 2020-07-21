@@ -1,6 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>D3js-数据可视化神器</title>
+    <url>/codeHub/2020/07/21/2020-07/10D3js-%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E7%A5%9E%E5%99%A8/</url>
+    <content><![CDATA[<p>最近准备把一些数据可视化一下，打算使用前端的<code>d3.js</code>库。这个库的全称也被称为<strong>Data-Driven Document</strong>，顾名思义，基于数据驱动文档，这一概念和Vue的设计思想很类似。<code>d3.js</code>下面统称为<strong>D3</strong>；一直以来是神一般的库的存在；尽管已经有许多优秀的库例如百度的<code>echaet</code>等；但是<strong>D3</strong>与其他的库相比在于，提供了无限定制的能力，让你的想象力尽情的发挥；在交互性上做的同样优秀。</p>
+<p>~~感受一波</p>
+<p><img data-src="https://picb.zhimg.com/v2-bf6c58a9284672cecc16c645e69f85c4_b.webp" alt="d3js案例"></p>
+<a id="more"></a>
+
+<h4 id="D3的需要的入门知识："><a href="#D3的需要的入门知识：" class="headerlink" title="D3的需要的入门知识："></a>D3的需要的入门知识：</h4><ol>
+<li>SVG</li>
+<li>css</li>
+<li>JavaScript</li>
+</ol>
+<p>看完大佬们的博客，感觉<strong>D3</strong>的学习成本还是很高的，不过毕竟是神一样的包，肯定涉及到很多知识点，以后慢慢学习的过程查漏补缺吧。下面这张图就把一个学习的过程总结的很好，我觉得太生动了；还是站在巨人的肩膀上，躺着比较舒服，我也喜欢躺。</p>
+<ol>
+<li><p><img data-src="https://pic4.zhimg.com/80/v2-200a3d892a637679fdc5239e93f27bbc_720w.jpg" alt="学习过程"></p>
+</li>
+</ol>
+<h2 id="scale-vector-graphics-SVG-学习"><a href="#scale-vector-graphics-SVG-学习" class="headerlink" title="scale vector graphics (SVG)学习"></a>scale vector graphics (SVG)学习</h2><p>可缩放的矢量图，svg标签内的限制条件</p>
+<blockquote>
+<ul>
+<li>图片必须在<code>svg</code>标签内</li>
+<li>svg指定高度和宽度，也可以使用百分比；继承父元素宽度</li>
+<li>svg中可以绘制多个图片</li>
+</ul>
+</blockquote>
+<p>svg中可使用预先设置好的一系列标签；</p>
+<ul>
+<li>矩形 <code>rect</code></li>
+<li>圆形<code>circle</code></li>
+<li>椭圆 <code>ellipse</code></li>
+<li>线 <code>line</code></li>
+<li>折线 <code>polyline</code></li>
+<li>多边形 <code>polygon</code></li>
+<li>路径 <code>path</code></li>
+</ul>
+<h3 id="快速生成一个圆"><a href="#快速生成一个圆" class="headerlink" title="快速生成一个圆"></a>快速生成一个圆</h3><p><svg width="200" height="200"><circle cx="100" cy="100" r="100" stroke="black" stroke-width="2" fill="red" /></svg></p>
+<ul>
+<li>使用<code>circle</code>标签表示生成圆形</li>
+<li><code>cx|cy</code>圆心的位置，不指定则为0,0</li>
+<li><code>stroke</code>外圆边框颜色及厚度</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;svg width=<span class="string">"400"</span> height=<span class="string">"400"</span>&gt;</span><br><span class="line">  &lt;circle cx=<span class="string">"200"</span> cy=<span class="string">"200"</span> r=<span class="string">"100"</span> stroke=<span class="string">"black"</span> stroke-width=<span class="string">"2"</span> fill=<span class="string">"red"</span> /&gt;</span><br><span class="line">&lt;<span class="regexp">/svg&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="快速生成一个矩形"><a href="#快速生成一个矩形" class="headerlink" title="快速生成一个矩形"></a>快速生成一个矩形</h3><svg width="100" height="100">
+      <rect width="100" height="100" stroke="black" stroke-width="2" style="fill: red" />
+    </svg>
+
+
+<ul>
+<li>width 矩形长</li>
+<li>height 矩形宽</li>
+<li>stroke 矩形边框</li>
+<li>stroke-width 矩形边框宽度</li>
+<li>style 指定矩形样式</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;svg width=<span class="string">"400"</span> height=<span class="string">"400"</span>&gt;</span><br><span class="line">  &lt;rect width=<span class="string">"100"</span> height=<span class="string">"100"</span> stroke=<span class="string">"black"</span> stroke-width=<span class="string">"2"</span> style=<span class="string">"fill: red"</span> /&gt;</span><br><span class="line">&lt;<span class="regexp">/svg&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="快速生成一个椭圆"><a href="#快速生成一个椭圆" class="headerlink" title="快速生成一个椭圆"></a>快速生成一个椭圆</h3><svg width="200" height="200">
+      <ellipse
+        cx="100"
+        cy="100"
+        rx="100"
+        ry="50"
+        stroke="black"
+        stroke-width="2"
+        style="fill: red"
+      />
+    </svg>
+
+
+<ul>
+<li>rx 定义水平半径</li>
+<li>ry 定义垂直半径</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;svg width=<span class="string">"400"</span> height=<span class="string">"400"</span>&gt;</span><br><span class="line">  &lt;ellipse</span><br><span class="line">    cx=<span class="string">"150"</span></span><br><span class="line">    cy=<span class="string">"100"</span></span><br><span class="line">    rx=<span class="string">"100"</span></span><br><span class="line">    ry=<span class="string">"50"</span></span><br><span class="line">    stroke=<span class="string">"black"</span></span><br><span class="line">    stroke-width=<span class="string">"2"</span></span><br><span class="line">    style=<span class="string">"fill: red"</span></span><br><span class="line">  /&gt;</span><br><span class="line">&lt;<span class="regexp">/svg&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="快速生成一个线条"><a href="#快速生成一个线条" class="headerlink" title="快速生成一个线条"></a>快速生成一个线条</h3><svg width="200" height="200">
+      <line 
+        x1="150"
+        y1="100"
+        x2="100"
+        y2="50"
+        stroke="red" 
+        stroke-width="2" />
+    </svg>
+
+
+<ul>
+<li>x1 和x2 x轴的开始和结束</li>
+<li>y1和y2  y轴的开始和结束</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;svg width=<span class="string">"400"</span> height=<span class="string">"400"</span>&gt;</span><br><span class="line">  &lt;line </span><br><span class="line">    x1=<span class="string">"150"</span></span><br><span class="line">    y1=<span class="string">"100"</span></span><br><span class="line">    x2=<span class="string">"100"</span></span><br><span class="line">    y2=<span class="string">"50"</span></span><br><span class="line">    stroke=<span class="string">"black"</span> </span><br><span class="line">    stroke-width=<span class="string">"2"</span> /&gt;</span><br><span class="line">&lt;<span class="regexp">/svg&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="快速生成一个多边形"><a href="#快速生成一个多边形" class="headerlink" title="快速生成一个多边形"></a>快速生成一个多边形</h3>  <svg width="300" height="300">
+      <polygon
+        points="220,100 300,210 170,250"
+        style="fill:#cccccc;
+        stroke:#000000;stroke-width:1"
+      />
+    </svg>
+
+
+
+<p>定义了6个角的位置，将会生成一个三角形</p>
+<ul>
+<li>points 定义了每个角的坐标轴位置</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">    &lt;svg width=<span class="string">"400"</span> height=<span class="string">"400"</span>&gt;</span><br><span class="line">      &lt;polygon</span><br><span class="line">        points=<span class="string">"220,100 300,210 170,250"</span></span><br><span class="line">        style=<span class="string">"fill:#cccccc;</span></span><br><span class="line"><span class="string">stroke:#000000;stroke-width:1"</span></span><br><span class="line">      /&gt;</span><br><span class="line">    &lt;<span class="regexp">/svg&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="快速生成一个折线图"><a href="#快速生成一个折线图" class="headerlink" title="快速生成一个折线图"></a>快速生成一个折线图</h4><svg width="100" height="100">
+      <polyline
+        points="0,0 0,20 20,20 20,40 40,40 40,60"
+        style="fill:black;stroke:red;stroke-width:2"
+      />
+ </svg>
+
+
+<ul>
+<li>points同样定义了每个折点的坐标</li>
+<li>fill 这个填充区域还有点迷惑</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;svg width=<span class="string">"400"</span> height=<span class="string">"400"</span>&gt;</span><br><span class="line">  &lt;polyline</span><br><span class="line">    points=<span class="string">"0,0 0,20 20,20 20,40 40,40 40,60"</span></span><br><span class="line">    style=<span class="string">"fill:white;stroke:red;stroke-width:2"</span></span><br><span class="line">  /&gt;</span><br><span class="line">&lt;<span class="regexp">/svg&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="快速生成一个路径图"><a href="#快速生成一个路径图" class="headerlink" title="快速生成一个路径图"></a>快速生成一个路径图</h3><svg width="400" height="400" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <path d="M250 150 L150 350 L350 350 Z" style="fill:white;stroke:red;stroke-width:2" />
+    </svg>
+
+<p>从250，150出发，到150,350；再到350,350；最后回到原点，生成了一个三角形。</p>
+<blockquote>
+<p>推荐使用SVG编辑器来编辑路径图</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;svg width=<span class="string">"100%"</span> height=<span class="string">"100%"</span> version=<span class="string">"1.1"</span> xmlns=<span class="string">"http://www.w3.org/2000/svg"</span>&gt;</span><br><span class="line">  &lt;path d=<span class="string">"M250 150 L150 350 L350 350 Z"</span> /&gt;</span><br><span class="line">&lt;<span class="regexp">/svg&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li><a href="https://www.w3school.com.cn/svg/index.asp" target="_blank" rel="noopener">SVG</a></li>
+<li><a href="https://juejin.im/post/5d1e074af265da1bca51f8ec" target="_blank" rel="noopener">d3js</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/38001672" target="_blank" rel="noopener">D3学习之路-知乎</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+  </entry>
+  <entry>
     <title>node搭建后台</title>
     <url>/codeHub/2020/07/20/2020-07/09node%E5%90%8E%E5%8F%B0/</url>
     <content><![CDATA[<p>最近在使用<code>SMTP</code>邮件系统的时候，用的是网易163的账号，结果账号被封了导致服务器在给用户批量发送邮件时失败，而且又没有报错提示，整的我一脸懵逼。出于无奈，我使用之前学习的<code>node</code>、<code>mysql</code>知识搭建了一个后台系统；再使用<code>APPache</code>反向代理将内网中node服务器信息，转发到公网服务器。同时node操作<code>mysql</code>时，使用到了之前学习的<code>Promise</code>知识 ，解决了异步操作的问题。涉及到的知识点主要包含以下方面：</p>
