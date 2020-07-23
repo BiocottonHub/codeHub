@@ -23,12 +23,12 @@
 
   <meta property="og:type" content="website">
 <meta property="og:title" content="Code Hub">
-<meta property="og:url" content="https://biocottonhub.github.io/codeHub/categories/javascript/index.html">
+<meta property="og:url" content="https://biocottonhub.github.io/codeHub/categories/JavaScript/index.html">
 <meta property="og:site_name" content="Code Hub">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://biocottonhub.github.io/codeHub/categories/javascript/">
+<link rel="canonical" href="https://biocottonhub.github.io/codeHub/categories/JavaScript/">
 
 
 <script id="page-configurations">
@@ -41,7 +41,7 @@
   };
 </script>
 
-  <title>Category: javascript | Code Hub</title>
+  <title>Category: JavaScript | Code Hub</title>
   
 
 
@@ -117,7 +117,7 @@
   </li>
         <li class="menu-item menu-item-文章">
 
-    <a href="/codeHub/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>文章<span class="badge">45</span></a>
+    <a href="/codeHub/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>文章<span class="badge">46</span></a>
 
   </li>
         <li class="menu-item menu-item-分类">
@@ -192,7 +192,7 @@
   <div class="post-block">
     <div class="posts-collapse">
       <div class="collection-title">
-        <h2 class="collection-header">javascript
+        <h2 class="collection-header">JavaScript
           <small>分类</small>
         </h2>
       </div>
@@ -207,55 +207,15 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
-              datetime="2020-07-21T20:05:01+08:00"
-              content="2020-07-21">
-          07-21
+              datetime="2020-07-20T19:25:38+08:00"
+              content="2020-07-20">
+          07-20
         </time>
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/codeHub/2020/07/21/2020-07/10D3js-%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E7%A5%9E%E5%99%A8/" itemprop="url">
-            <span itemprop="name">D3js-数据可视化神器</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-19T11:42:14+08:00"
-              content="2020-04-19">
-          04-19
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/codeHub/2020/04/19/2020-06%E4%BB%A5%E5%89%8D/23Promise%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" itemprop="url">
-            <span itemprop="name">Promise源码解析</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-17T22:51:26+08:00"
-              content="2020-04-17">
-          04-17
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/codeHub/2020/04/17/2020-06%E4%BB%A5%E5%89%8D/22Tweenjs%E5%8A%A8%E7%94%BB%E6%8F%92%E4%BB%B6/" itemprop="url">
-            <span itemprop="name">Tweenjs动画插件</span>
+          <a class="post-title-link" href="/codeHub/2020/07/20/2020-07/09node%E5%90%8E%E5%8F%B0/" itemprop="url">
+            <span itemprop="name">node搭建后台</span>
           </a>
       </div>
 
@@ -334,7 +294,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/codeHub/archives">
-          <span class="site-state-item-count">45</span>
+          <span class="site-state-item-count">46</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -509,6 +469,77 @@ window.addEventListener('pjax:success', () => {
   NexT.boot.refresh();
   // Define Motion Sequence & Bootstrap Motion.
   if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/codeHub/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'd4VOUvNSU5WGIC3AjjM8UArx-gzGzoHsz',
+      appKey     : '5n9Xu8XStUzmAKyncMgSp0px',
+      placeholder: "有任何问题欢迎留言或者邮件告知",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>
+enable) {
     NexT.motion.integrator
       .init()
       .add(NexT.motion.middleWares.subMenu)

@@ -1,6 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>matplotlib-柱状图</title>
+    <url>/codeHub/2020/07/23/2020-07/11matplotlib-%E6%9F%B1%E7%8A%B6%E5%9B%BE/</url>
+    <content><![CDATA[<h2 id="使用matplotlib绘图的完整流程"><a href="#使用matplotlib绘图的完整流程" class="headerlink" title="使用matplotlib绘图的完整流程"></a>使用matplotlib绘图的完整流程</h2><p>在matplotlib中存在两套画图命令：</p>
+<ul>
+<li>基于面向对象的方式OO</li>
+<li>基于pyplot函数接口的方式</li>
+</ul>
+<blockquote>
+<p>作者还是推荐我们使用<code>object-oriented interface</code>的方式绘制图形</p>
+</blockquote>
+<p>以后绘图中涉及到的一些常见操作，我用锚点标注好；以后查具体的代码也很方便</p>
+<ul>
+<li><a href="#旋转x轴label">旋转X轴标签</a></li>
+<li><a href="#控制图片样式">修改图片样式</a>，如添加网格线等</li>
+<li><a href="#给图片添加label">添加label</a></li>
+<li><a href="#批量修改坐标轴刻度label">批量修改坐标轴标签</a></li>
+<li><a href="#保存图片">保存图片</a></li>
+</ul>
+<h3 id="绘图数据"><a href="#绘图数据" class="headerlink" title="绘图数据"></a>绘图数据</h3><p>准备绘图数据，包含了几个人的收入信息吧；准备绘制一个柱状图</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment">#数据字典</span></span><br><span class="line">data = &#123;<span class="string">'Barton LLC'</span>: <span class="number">109438.50</span>,</span><br><span class="line">        <span class="string">'Frami, Hills and Schmidt'</span>: <span class="number">103569.59</span>,</span><br><span class="line">        <span class="string">'Fritsch, Russel and Anderson'</span>: <span class="number">112214.71</span>,</span><br><span class="line">        <span class="string">'Jerde-Hilpert'</span>: <span class="number">112591.43</span>,</span><br><span class="line">        <span class="string">'Keeling LLC'</span>: <span class="number">100934.30</span>,</span><br><span class="line">        <span class="string">'Koepp Ltd'</span>: <span class="number">103660.54</span>,</span><br><span class="line">        <span class="string">'Kulas Inc'</span>: <span class="number">137351.96</span>,</span><br><span class="line">        <span class="string">'Trantow-Barrows'</span>: <span class="number">123381.38</span>,</span><br><span class="line">        <span class="string">'White-Trantow'</span>: <span class="number">135841.99</span>,</span><br><span class="line">        <span class="string">'Will LLC'</span>: <span class="number">104437.60</span>&#125;</span><br><span class="line"></span><br><span class="line">group_data = list(data.values()) <span class="comment">##工资</span></span><br><span class="line">group_names = list(data.keys()) <span class="comment">##人名</span></span><br><span class="line">group_mean = np.mean(group_data)  <span class="comment">## 平均值</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="创建实例对象"><a href="#创建实例对象" class="headerlink" title="创建实例对象"></a>创建实例对象</h3><p>采用面向对象的接口，生成<code>figure.Figure</code>和<code>axes.Axes</code>实例对象</p>
+<ul>
+<li><code>figure.Figure</code>相当于画布的作用，在上面可以绘制多个图片</li>
+<li><code>axes.Axes</code>就是一副完整的图片，多个图片可以绘制在一块画布上</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">fig, ax = plt.subplots() <span class="comment">##生成实例对象</span></span><br></pre></td></tr></table></figure>
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/22/Ub5jA0.png" alt="Ub5jA0.png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">fig,ax=plt.subplots()</span><br><span class="line">ax.barh(group_names,group_data) <span class="comment">##绘制柱状图</span></span><br></pre></td></tr></table></figure>
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/22/Ub5vNV.png" alt="Ub5vNV.png"></p>
+<h3 id="控制图片样式"><a href="#控制图片样式" class="headerlink" title="控制图片样式"></a>控制图片样式</h3><p>这里相当于ggplot2里的<code>theme</code>，可以使用<code>print(plt.style.available)</code>查看系统自带的样式；使用<code>plt.style.use(&#39;样式名&#39;)</code>使用对应的样式;如下图所示，选择好样式后，就在图中添加了网格线，改变了柱子的颜色</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">plt.style.use(<span class="string">'fivethirtyeight'</span>) <span class="comment">##选择定义好的样式</span></span><br><span class="line">fig,ax=plt.subplots()</span><br><span class="line">ax.barh(group_names,group_data)</span><br></pre></td></tr></table></figure>
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/22/Ub5O7q.png" alt="Ub5O7q.png"></p>
+<h3 id="旋转x轴label"><a href="#旋转x轴label" class="headerlink" title="旋转x轴label"></a>旋转x轴label</h3><p>当坐标轴上的label太长的时候，两个刻度之间可能会发生重叠。因此可以通过旋转label的方法调整label的显示。<br>首先的获取坐标轴上的label对象，使用<code>pyplot.setp()</code>函数设置对应的属性</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">fig,ax=plt.subplots()</span><br><span class="line">ax.barh(group_names,group_data)</span><br><span class="line">xlabels=ax.get_xticklabels() <span class="comment">##获取坐标轴label信息</span></span><br><span class="line">plt.setp(xlabels,rotation=<span class="number">45</span>,horizontalalignment=<span class="string">'right'</span>) <span class="comment">##旋转坐标轴</span></span><br></pre></td></tr></table></figure>
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/22/Ub5qns.png" alt="Ub5qns.png"></p>
+<h3 id="给图片添加label"><a href="#给图片添加label" class="headerlink" title="给图片添加label"></a>给图片添加label</h3><p>除了修改刻度线上的label，同样可以给图片的坐标轴label，图片的label，以及坐标轴显示范围。<br>所有的操作都是采用面向对象接口</p>
+<ul>
+<li>xlim参数修改坐标轴显示范围</li>
+<li>xlabel 修改坐标轴label</li>
+<li>title 修改图片label</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">fig, ax = plt.subplots()</span><br><span class="line">ax.barh(group_names, group_data)</span><br><span class="line">labels = ax.get_xticklabels()</span><br><span class="line">plt.setp(labels, rotation=<span class="number">45</span>, horizontalalignment=<span class="string">'right'</span>)</span><br><span class="line">ax.set(xlim=[<span class="number">-10000</span>, <span class="number">140000</span>], xlabel=<span class="string">'Total Revenue'</span>, ylabel=<span class="string">'Company'</span>,</span><br><span class="line">       title=<span class="string">'Company Revenue'</span>)  <span class="comment">#设置label</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/22/Ub5LBn.png" alt="Ub5LBn.png"></p>
+<h3 id="批量修改坐标轴刻度label"><a href="#批量修改坐标轴刻度label" class="headerlink" title="批量修改坐标轴刻度label"></a>批量修改坐标轴刻度label</h3><p>通过定义一个函数来处理传进来的每个label，传递的函数需要使用<code>tick</code>对象进行实例化</p>
+<blockquote>
+<p>报错 <a href="https://stackoverflow.com/questions/25119193/matplotlib-pyplot-axes-formatter" target="_blank" rel="noopener">https://stackoverflow.com/questions/25119193/matplotlib-pyplot-axes-formatter</a></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">## 定义处理函数</span></span><br><span class="line"><span class="keyword">import</span> matplotlib.ticker <span class="keyword">as</span> tick</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">currency</span><span class="params">(x, pos)</span>:</span></span><br><span class="line">    <span class="string">"""The two args are the value and tick position"""</span></span><br><span class="line">    <span class="keyword">if</span> x &gt;= <span class="number">1e6</span>:</span><br><span class="line">        s = <span class="string">'$&#123;:1.1f&#125;M'</span>.format(x*<span class="number">1e-6</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        s = <span class="string">'$&#123;:1.0f&#125;K'</span>.format(x*<span class="number">1e-3</span>)</span><br><span class="line">    <span class="keyword">return</span> s</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">6</span>, <span class="number">8</span>))</span><br><span class="line">ax.barh(group_names, group_data)</span><br><span class="line">labels = ax.get_xticklabels()</span><br><span class="line">plt.setp(labels, rotation=<span class="number">45</span>, horizontalalignment=<span class="string">'right'</span>)</span><br><span class="line"></span><br><span class="line">ax.set(xlim=[<span class="number">-10000</span>, <span class="number">140000</span>], xlabel=<span class="string">'Total Revenue'</span>, ylabel=<span class="string">'Company'</span>,</span><br><span class="line">       title=<span class="string">'Company Revenue'</span>)</span><br><span class="line"><span class="comment">#ax.get_xaxis().get_major_formatter()</span></span><br><span class="line">ax.xaxis.set_major_formatter(tick.FuncFormatter(currency)) <span class="comment">##实例化formater函数</span></span><br></pre></td></tr></table></figure>
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/22/Ub5HXj.png" alt="Ub5HXj.png"></p>
+<h3 id="组合多个axes"><a href="#组合多个axes" class="headerlink" title="组合多个axes"></a>组合多个axes</h3><p>直接操作ax对象，再使用对应的作图函数生成对应的图片</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">fig,ax =plt.subplots(figsize=(<span class="number">8</span>,<span class="number">8</span>))</span><br><span class="line">ax.barh(group_names,group_data)</span><br><span class="line">labels=ax.get_xticklabels()</span><br><span class="line">plt.setp(labels,rotation=<span class="number">45</span>,horizontalalignment=<span class="string">'right'</span>)</span><br><span class="line">ax.axvline(group_mean, ls=<span class="string">'--'</span>,c=<span class="string">'red'</span>) <span class="comment">##</span></span><br></pre></td></tr></table></figure>
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/22/Ub57cQ.png" alt="Ub57cQ.png"></p>
+<h3 id="保存图片"><a href="#保存图片" class="headerlink" title="保存图片"></a>保存图片</h3><p>调用<code>figure</code>对象的<code>savefig</code>方法保存图片；在保存图片之前可以查看支持保存的图片格式</p>
+<ul>
+<li><code>transparent</code>图片背景是否透明</li>
+<li><code>dpi</code> 图片清晰度</li>
+<li><code>format</code> 保存格式</li>
+<li><code>bbox_inches=&quot;tight&quot;</code> 图片与画布紧密排布</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">print(fig.canvas.get_supported_filetypes()) <span class="comment">## 查看支持保存格式</span></span><br><span class="line">fig.savefig(<span class="string">"test.pdf"</span>,format=<span class="string">"pdf"</span>, bbox_inches=<span class="string">"tight"</span>,transparent=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>{&apos;ps&apos;: &apos;Postscript&apos;, &apos;eps&apos;: &apos;Encapsulated Postscript&apos;, &apos;pdf&apos;: &apos;Portable Document Format&apos;, &apos;pgf&apos;: &apos;PGF code for LaTeX&apos;, &apos;png&apos;: &apos;Portable Network Graphics&apos;, &apos;raw&apos;: &apos;Raw RGBA bitmap&apos;, &apos;rgba&apos;: &apos;Raw RGBA bitmap&apos;, &apos;svg&apos;: &apos;Scalable Vector Graphics&apos;, &apos;svgz&apos;: &apos;Scalable Vector Graphics&apos;, &apos;jpg&apos;: &apos;Joint Photographic Experts Group&apos;, &apos;jpeg&apos;: &apos;Joint Photographic Experts Group&apos;, &apos;tif&apos;: &apos;Tagged Image File Format&apos;, &apos;tiff&apos;: &apos;Tagged Image File Format&apos;}</code></pre>]]></content>
+  </entry>
+  <entry>
     <title>D3js-数据可视化神器</title>
     <url>/codeHub/2020/07/21/2020-07/10D3js-%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E7%A5%9E%E5%99%A8/</url>
     <content><![CDATA[<p>最近准备把一些数据可视化一下，打算使用前端的<code>d3.js</code>库。这个库的全称也被称为<strong>Data-Driven Document</strong>，顾名思义，基于数据驱动文档，这一概念和Vue的设计思想很类似。<code>d3.js</code>下面统称为<strong>D3</strong>；一直以来是神一般的库的存在；尽管已经有许多优秀的库例如百度的<code>echaet</code>等；但是<strong>D3</strong>与其他的库相比在于，提供了无限定制的能力，让你的想象力尽情的发挥；在交互性上做的同样优秀。</p>
