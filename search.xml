@@ -1,6 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>手把手教你搭建JBrowse-初始化应用</title>
+    <url>/codeHub/2020/07/25/2020-07/12%E6%89%8B%E6%8A%8A%E6%89%8B%E6%90%AD%E5%BB%BAjbrowse/</url>
+    <content><![CDATA[<h2 id="手把手教你搭建JBrowse-初始化应用"><a href="#手把手教你搭建JBrowse-初始化应用" class="headerlink" title="手把手教你搭建JBrowse-初始化应用"></a>手把手教你搭建JBrowse-初始化应用</h2><p>JBrowse是<strong>GMOD</strong>开源项目中的一个基因组浏览器，所谓的基因组浏览器，字面意思就可以理解成一个网页应用。可能每个生物信息分析的同学电脑内都会安装一个<strong>IGV</strong>，用于对高通量测序数据的可视化。其实<strong>JBrowse</strong>也就是相当于把<strong>IGV</strong>，搬到了服务器内，把庞大的测序数据存储在服务器内，借助于快速发展的web技术；使得我们能够通过仅仅发送一个网页链接就能够与他人共享或者讨论课题。</p>
+<blockquote>
+<p>本文搭建JBrowse应用访问链接： <a href="http://cotton.hzau.edu.cn/tools/jbrowse/" target="_blank" rel="noopener">http://cotton.hzau.edu.cn/tools/jbrowse/</a></p>
+</blockquote>
+<p><img data-src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/80625/headerpic.svg" alt="吃瓜"></p>
+<a id="more"></a>
+
+<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><p>JBrowse支持两种配置文件：</p>
+<ul>
+<li>JSON格式</li>
+<li>textual格式</li>
+</ul>
+<p>其中JBrowse的全局配置文件<code>jbrowse.conf</code>采用textual格式进行配置，具体到特定的数据例如 基因组序列，BAM文件的配置信息时采用textual格式；具体到某种数据的显示时采用JSON进行配置</p>
+<blockquote>
+<p>入门文章也是使用简化的配置：<a href="https://jbrowse.org/docs/minimal.html" target="_blank" rel="noopener">https://jbrowse.org/docs/minimal.html</a></p>
+</blockquote>
+<p>主要讲一下<code>tracks.conf</code>这个<code>textual</code>类型的配置文件</p>
+<ul>
+<li><code>[tracks.refseq]</code>后面的refseq表示轨迹的名称，之后再WEB上的选项上会出现</li>
+<li><code>urlTemplate</code>表示轨迹文件在的路径，相对于当前配置文件的路径</li>
+<li><code>storeClass</code>轨迹的类型包括<code>fasta</code>、<code>vcf</code>、<code>BAM</code></li>
+<li><code>type</code>字段也差不多</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[GENERAL]</span><br><span class="line">refSeqs=Ghirsutum_HZAU_V1.0.fa.fai  <span class="comment">##固定格式便于快速提取基因序列</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="文件建立索引"><a href="#文件建立索引" class="headerlink" title="文件建立索引"></a>文件建立索引</h3><p>建立索引的目的是让JBrowse能够快速的找出目标位置的序列信息</p>
+<h4 id="fasta文件建立索引"><a href="#fasta文件建立索引" class="headerlink" title="fasta文件建立索引"></a>fasta文件建立索引</h4><p>使用samtools中的子程序<code>faidx</code>建立基因组索引，这样在JBrowse中就可以快速的导出指定片段的fasta序列信息</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">##使用软连接为了节省空间</span></span><br><span class="line">ln -s /home/genome/Public/genome_Ghir.HAU/Ghirsutum_genome.fasta Ghirsutum_HZAU_V1.0</span><br><span class="line">samtools faidx data/volvox.fa</span><br></pre></td></tr></table></figure>
+
+<p>配置文件<code>tracks.conf</code>，告诉JBrowse；基因组文件在哪里</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[GENERAL]</span><br><span class="line">refSeqs=Ghirsutum_HZAU_V1.0.fa.fai</span><br><span class="line">[tracks.refseq]</span><br><span class="line">urlTemplate=Ghirsutum_HZAU_V1.0.fa</span><br><span class="line">storeClass=JBrowse/Store/SeqFeature/IndexedFasta</span><br><span class="line"><span class="built_in">type</span>=Sequence</span><br></pre></td></tr></table></figure>
+
+<h4 id="gff文件索引"><a href="#gff文件索引" class="headerlink" title="gff文件索引"></a>gff文件索引</h4><p>使用GFF3文件构建索引，在建立索引之前需要对GFF3文件进行排序，安装染色体和位置进行排序</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">##排序</span></span><br><span class="line"> grep -v <span class="string">"^#"</span> /home/genome/Public/genome_Ghir.HAU/Ghirsutum_gene_model.gff3 |sort -k1,1 -k4,4n &gt;Ghirsutum_HZAU_V1.0_gene.gff3</span><br></pre></td></tr></table></figure>
+
+<p>在排序完成后进行压缩和建立索引；使用<code>tabix</code>软件进行；</p>
+<blockquote>
+<p>tabix安装参考 <a href="https://www.jianshu.com/p/b6f885fc8b5f" target="_blank" rel="noopener">https://www.jianshu.com/p/b6f885fc8b5f</a></p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">##压缩文件</span></span><br><span class="line">../../software/tabix-0.2.6/bgzip  Ghirsutum_HZAU_V1.0_gene.gff3</span><br><span class="line"><span class="comment">##建立索引</span></span><br><span class="line">../../software/tabix-0.2.6/tabix -p gff  Ghirsutum_HZAU_V1.0_gene.gff3.gz</span><br></pre></td></tr></table></figure>
+
+<p>在<code>tracks.conf</code>文件中添加配置信息</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[tracks.genes]</span><br><span class="line">urlTemplate=Ghirsutum_HZAU_V1.0_gene.gff3.gz</span><br><span class="line">storeClass=JBrowse/Store/SeqFeature/GFF3Tabix</span><br><span class="line"><span class="built_in">type</span>=CanvasFeatures</span><br></pre></td></tr></table></figure>
+
+<h4 id="BAM文件索引"><a href="#BAM文件索引" class="headerlink" title="BAM文件索引"></a>BAM文件索引</h4><p>BAM文件同样需要使用samtools按照染色体位置排好序，再建立索引；再JBrowse更新到<code>v1.15.0</code>版本后支持了CRAM格式文化，这种格式相比于BAM格式更加节省存储空间</p>
+<p>JBrowse可以对BAM文件进行两种展示:</p>
+<blockquote>
+<p>参考 BAM两种展示形式 <a href="https://jbrowse.org/docs/tutorial_classic.html#next-gen-read-track-types" target="_blank" rel="noopener">https://jbrowse.org/docs/tutorial_classic.html#next-gen-read-track-types</a></p>
+</blockquote>
+<ul>
+<li><p>set type = Alignments2  ；显示单个read的比对情况</p>
+</li>
+<li><p>type = SNPCoverage  ；显示某个区域read的覆盖情况</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">##对bam文件排序</span></span><br><span class="line">samtools sort test.bam -O bam -o test_sort.bam</span><br><span class="line"><span class="comment">##构建索引</span></span><br><span class="line">samtools index test_sort.bam</span><br></pre></td></tr></table></figure>
+
+<p>在<code>tracks.conf</code>文件中添加配置信息</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[tracks.alignments]</span><br><span class="line">urlTemplate=test_sort.bam</span><br><span class="line">storeClass=JBrowse/Store/SeqFeature/BAM</span><br><span class="line"><span class="built_in">type</span>=Alignments2</span><br></pre></td></tr></table></figure>
+
+<h4 id="配置完成后的目录结构"><a href="#配置完成后的目录结构" class="headerlink" title="配置完成后的目录结构"></a>配置完成后的目录结构</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">##当前目录为 @//jbrowse/data</span></span><br><span class="line">.</span><br><span class="line">├── Ghirsutum_HZAU_V1.0.fa -&gt; /home/genome/Public/genome_Ghir.HAU/Ghirsutum_genome.fasta</span><br><span class="line">├── Ghirsutum_HZAU_V1.0.fa.fai</span><br><span class="line">├── Ghirsutum_HZAU_V1.0_gene.gff3.gz</span><br><span class="line">├── Ghirsutum_HZAU_V1.0_gene.gff3.gz.tbi</span><br><span class="line">├── TM1_rmdup.bam</span><br><span class="line">├── TM1_rmdup.bam.bai</span><br><span class="line">└── tracks.conf</span><br></pre></td></tr></table></figure>
+
+<h3 id="定制轨迹"><a href="#定制轨迹" class="headerlink" title="定制轨迹"></a>定制轨迹</h3><h4 id="修改参考序列轨迹"><a href="#修改参考序列轨迹" class="headerlink" title="修改参考序列轨迹"></a>修改参考序列轨迹</h4><blockquote>
+<p>参考修改 序列轨迹 <a href="https://jbrowse.org/docs/reference_sequence.html#reference-sequence-display-order" target="_blank" rel="noopener">https://jbrowse.org/docs/reference_sequence.html#reference-sequence-display-order</a></p>
+</blockquote>
+<p>可以通过修改CSS来改变5种碱基 A T C G N显示的颜色</p>
+<h4 id="修改-CanvasFeatures"><a href="#修改-CanvasFeatures" class="headerlink" title="修改 CanvasFeatures"></a>修改 CanvasFeatures</h4><p>使用<code>flatfile-to-json.pl</code>脚本进行转换</p>
+<h3 id="信号转发"><a href="#信号转发" class="headerlink" title="信号转发"></a>信号转发</h3><p>现在访问<a href="http://cotton.hzau.edu.cn/tools/jbrowse/" target="_blank" rel="noopener">http://cotton.hzau.edu.cn/tools/jbrowse/</a> 就可以显示出内网中的JBrowse</p>
+<p>由于我把JBrowse放在了内网机器上，于是需要使用外网机器的Appache将内网信号转发一下；在转发后客户端找不到对应的CSS和JS文件；于是使用<code>webpack</code>重新打包了一下源代码；查看了一下webpack的配置文件，发现可以通过配置环境变量<code>JBROWSE_PUBLIC_PATH</code>的值来控制打包后的资源检索URL</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">output: &#123;</span><br><span class="line">    filename: <span class="string">'[name].bundle.js'</span>,</span><br><span class="line">    chunkFilename: <span class="string">'[name].bundle.js'</span>,</span><br><span class="line">    path: path.resolve(__dirname, <span class="string">'dist'</span>),</span><br><span class="line">    publicPath: process.env.JBROWSE_PUBLIC_PATH || <span class="string">'dist/'</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>修改打包后的公共资源请求路径，打包后的文件会在<code>jbrowse/dist</code>目录下</p>
+<blockquote>
+<p>如果没有yarn，使用npm进行全局安装 npm i yarn -g</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> JBROWSE_PUBLIC_PATH=http://cotton.hzau.edu.cn/tools/jbrowse/dist/ <span class="comment">##bund.js请求路径</span></span><br><span class="line"><span class="comment">##重新进行编译 在目录@/jbrowse下</span></span><br><span class="line">yarn build</span><br></pre></td></tr></table></figure>
+
+<p>修改<code>@/jbrowse/index.html</code>中资源路径；其实就加个转发路径就行</p>
+<p><code>sed -i &#39;s/href=\&quot;/href=\&quot;\/tools\/jbrowse\//g&#39; index.html</code></p>
+<p><code>sed -i &#39;s/src=\&quot;/src=\&quot;\/tools\/jbrowse\//g&#39; index.html</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&lt;link rel=<span class="string">"icon"</span> <span class="built_in">type</span>=<span class="string">"image/png"</span> sizes=<span class="string">"16x16"</span> href=<span class="string">"img/favicons/favicon-16x16.png"</span>&gt;</span><br><span class="line"><span class="comment">##修改为转发后的网址</span></span><br><span class="line">&lt;link rel=<span class="string">"icon"</span> <span class="built_in">type</span>=<span class="string">"image/png"</span> sizes=<span class="string">"16x16"</span> href=<span class="string">"/tools/jbrowse/img/favicons/favicon-16x16.png"</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h3><p><img data-src="https://s1.ax1x.com/2020/07/25/aSWG3q.png" alt="效果图"></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li><a href="https://www.jianshu.com/p/e4a90aafc461" target="_blank" rel="noopener">最全的JBrowse基因浏览器介绍</a></li>
+<li><a href="https://jbrowse.org/docs/installation.html" target="_blank" rel="noopener">官方文档</a></li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
     <title>matplotlib-柱状图</title>
     <url>/codeHub/2020/07/23/2020-07/11matplotlib-%E6%9F%B1%E7%8A%B6%E5%9B%BE/</url>
     <content><![CDATA[<h2 id="使用matplotlib绘图的完整流程"><a href="#使用matplotlib绘图的完整流程" class="headerlink" title="使用matplotlib绘图的完整流程"></a>使用matplotlib绘图的完整流程</h2><p>在matplotlib中存在两套画图命令：</p>
