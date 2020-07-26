@@ -132,7 +132,7 @@
   </li>
         <li class="menu-item menu-item-关于">
 
-    <a href="https://zpliu1126.github.io/About/" rel="noopener" target="_blank"><i class="fa fa-fw fa-heartbeat"></i>关于</a>
+    <a href="https://zpliu1126.github.io/About/index.html" rel="noopener" target="_blank"><i class="fa fa-fw fa-heartbeat"></i>关于</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -539,32 +539,52 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
     </div>
 </body>
 </html>
-des(item);
-    });
-    new Valine({
-      el         : '#valine-comments',
-      verify     : false,
-      notify     : false,
-      appId      : 'd4VOUvNSU5WGIC3AjjM8UArx-gzGzoHsz',
-      appKey     : '5n9Xu8XStUzmAKyncMgSp0px',
-      placeholder: "有任何问题欢迎留言或者邮件告知",
-      avatar     : 'mm',
-      meta       : guest,
-      pageSize   : '10' || 10,
-      visitor    : false,
-      lang       : 'zh-cn' || 'zh-cn',
-      path       : location.pathname,
-      recordIP   : false,
-      serverURLs : ''
-    });
-  }, window.Valine);
+enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
 });
 </script>
 
-    </div>
-</body>
-</html>
-m => {
+
+
+
+  
+
+
+
+
+  
+<script src="/codeHub/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
       return GUEST.includes(item);
     });
     new Valine({
