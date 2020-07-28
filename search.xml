@@ -4,6 +4,8 @@
     <title>Git系列（三）——文件的修改及提交</title>
     <url>/codeHub/2020/07/28/2020-07/16Git%E7%B3%BB%E5%88%97%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E7%9A%84%E4%BF%AE%E6%94%B9%E5%8F%8A%E6%8F%90%E4%BA%A4/</url>
     <content><![CDATA[<h1 id="Git系列（三）——文件的修改及提交"><a href="#Git系列（三）——文件的修改及提交" class="headerlink" title="Git系列（三）——文件的修改及提交"></a>Git系列（三）——文件的修改及提交</h1><p>文件的创建以及上传我们已经搞定了，现在我们需要对我们的文档进行修改，这些该如何进行呢，我么这就来学习一下。</p>
+<a id="more"></a>
+
 <hr>
 <h2 id="文件的修改及查看"><a href="#文件的修改及查看" class="headerlink" title="文件的修改及查看"></a>文件的修改及查看</h2><p>我们先给我们的<code>tmp.txt</code>文件加上一句话</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">I like Git</span><br><span class="line">Because it is useful</span><br></pre></td></tr></table></figure>
@@ -42,6 +44,8 @@
     <title>Git系列（二）——Git版本库创建以及文件上传</title>
     <url>/codeHub/2020/07/28/2020-07/15Git%E7%B3%BB%E5%88%97%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E7%89%88%E6%9C%AC%E5%BA%93%E5%88%9B%E5%BB%BA%E4%BB%A5%E5%8F%8A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/</url>
     <content><![CDATA[<h1 id="Git系列（二）——Git版本库创建以及文件上传"><a href="#Git系列（二）——Git版本库创建以及文件上传" class="headerlink" title="Git系列（二）——Git版本库创建以及文件上传"></a>Git系列（二）——Git版本库创建以及文件上传</h1><p>费（hao）尽（bu）心（fei）思（li）安装好了Git，那就赶紧跟着小编用用看吧！</p>
+<a id="more"></a>
+
 <hr>
 <h2 id="Git版本库的创建"><a href="#Git版本库的创建" class="headerlink" title="Git版本库的创建"></a>Git版本库的创建</h2><p>首先，名词解释<code>版本库</code>：又名仓库、英文名<strong>repository</strong>，其实说白了就是一个目录，这个目录下的任何修改都会被Git管理起来，在任何时候都可以追踪历史并且随心所欲“还原”。</p>
 <p>OK，弄懂了版本库，那么我们就来创建一个文件夹</p>
@@ -87,6 +91,8 @@
     <title>Git系列（一）——Git的简介及安装</title>
     <url>/codeHub/2020/07/28/2020-07/14Git%E7%B3%BB%E5%88%97%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94Git%E7%9A%84%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%AE%89%E8%A3%85/</url>
     <content><![CDATA[<h1 id="Git系列（一）——Git的简介及安装"><a href="#Git系列（一）——Git的简介及安装" class="headerlink" title="Git系列（一）——Git的简介及安装"></a>Git系列（一）——Git的简介及安装</h1><p>众所周知（跟计算机打交道多的），Git是一个很先进的版本控制系统，但其实不瞒你们知道，它是目前世界上最先进的分布式版本控制系统（没有之一）。所以说，还在等着什么，快跟着小编一起来轻松愉快的学习Git吧。</p>
+<a id="more"></a>
+
 <hr>
 <h2 id="Git的简介"><a href="#Git的简介" class="headerlink" title="Git的简介"></a>Git的简介</h2><p>相信大家在实际工作生活中都会使用word进行长篇大论文章的书写，尤其时当很多人一起进行文档的书写时，一定避免不了的进行文档的修改，这时候你一定会抱怨为什么会有这么多中间版本，接收文件时如果命名重复的话就会出现是否覆盖的选项，这个时候如果Git出现在你的世界，你一定会毫不留情地爱上它的。</p>
 <p>Git采用的是分布式控制管理系统（下图），与其相对应的是集中式版本控制系统（上图），分布式控制管理系统没有真正意义上的“中央服务器”，每个人的电脑都有完整的版本库，所以说除非所有的电脑同时坏掉，不然就不用担心数据会丢失这样的数据安全问题。当你和同事同时修改了文件A，那么你们只需要进行文件A修改的交换，就可以看到对方的修改了，但一般都会有一台电脑充当“中央服务器”，这是为了方便交换大家的修改。没有它大家也可以进行正常的工作，只是交换修改不方便而已。</p>
