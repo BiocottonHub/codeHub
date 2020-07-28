@@ -1,6 +1,688 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Git系列（三）——文件的修改及提交</title>
+    <url>/codeHub/2020/07/28/2020-07/16Git%E7%B3%BB%E5%88%97%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E7%9A%84%E4%BF%AE%E6%94%B9%E5%8F%8A%E6%8F%90%E4%BA%A4/</url>
+    <content><![CDATA[<h1 id="Git系列（三）——文件的修改及提交"><a href="#Git系列（三）——文件的修改及提交" class="headerlink" title="Git系列（三）——文件的修改及提交"></a>Git系列（三）——文件的修改及提交</h1><p>文件的创建以及上传我们已经搞定了，现在我们需要对我们的文档进行修改，这些该如何进行呢，我么这就来学习一下。</p>
+<hr>
+<h2 id="文件的修改及查看"><a href="#文件的修改及查看" class="headerlink" title="文件的修改及查看"></a>文件的修改及查看</h2><p>我们先给我们的<code>tmp.txt</code>文件加上一句话</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">I like Git</span><br><span class="line">Because it is useful</span><br></pre></td></tr></table></figure>
+
+<p>保存之后，我们就可以使用<code>git status</code>命令查看修改结果：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git status</span><br><span class="line"># On branch master</span><br><span class="line"># Changes not staged for commit:</span><br><span class="line">#   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)</span><br><span class="line">#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</span><br><span class="line">#</span><br><span class="line">#	modified:   tmp.txt</span><br><span class="line">#</span><br><span class="line">no changes added to commit (use &quot;git add&quot; and&#x2F;or &quot;git commit -a&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>结果很多，但其实就一句话最有用，就是<code>#    modified:   tmp.txt</code>它告诉我们<code>tmp.txt</code>文件被修改过了，最后一句话告诉我们修改还没有进行提交。</p>
+<p>但是如果第一天的修改，我们第二天忘记了，不用慌，我们可以使用<code>git diff</code>指令查看具体的修改内容：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git diff</span><br><span class="line">diff --git a&#x2F;tmp.txt b&#x2F;tmp.txt</span><br><span class="line">index ad2ec82..1137052 100644</span><br><span class="line">--- a&#x2F;tmp.txt</span><br><span class="line">+++ b&#x2F;tmp.txt</span><br><span class="line">@@ -1 +1,2 @@</span><br><span class="line"> I like Git</span><br><span class="line">+Because it is useful</span><br></pre></td></tr></table></figure>
+
+<p>我们就可以从结果看出，我们加了一行<code>Because it is useful</code></p>
+<h2 id="文件修改的查看"><a href="#文件修改的查看" class="headerlink" title="文件修改的查看"></a>文件修改的查看</h2><p>还是之前的两步：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git add tmp.txt</span><br></pre></td></tr></table></figure>
+
+<p>之后，我们可以再使用<code>git status</code>来查看当前仓库的状态</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git status</span><br><span class="line"># On branch master</span><br><span class="line"># Changes to be committed:</span><br><span class="line">#   (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)</span><br><span class="line">#</span><br><span class="line">#	modified:   tmp.txt</span><br><span class="line">#</span><br></pre></td></tr></table></figure>
+
+<p>git告诉我们，被提交的修改中包括<code>tmp.txt</code>文件，这时候我们就可以安心的提交了：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git commit -m &quot;add Because it is useful&quot;</span><br><span class="line">[master 2c2ad62] add Because it is useful</span><br><span class="line"> 1 file changed, 1 insertion(+)</span><br></pre></td></tr></table></figure>
+
+<p>成功之后，我们可以再来看当前仓库的状态</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git status</span><br><span class="line"># On branch master</span><br><span class="line">nothing to commit, working directory clean</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>git告诉我们，当前目录是干净的，没有文件被修改过，到此，我们就进行了文件的修改工作，这其实还没有展现出git的强大之处，下次我们会学习版本的回溯，准备好“时光穿梭机”一起感受git的强大之处吧！</p>
+<ul>
+<li>参考 <a href="https://www.liaoxuefeng.com/" target="_blank" rel="noopener">廖雪峰的官方网站</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Git系列（二）——Git版本库创建以及文件上传</title>
+    <url>/codeHub/2020/07/28/2020-07/15Git%E7%B3%BB%E5%88%97%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E7%89%88%E6%9C%AC%E5%BA%93%E5%88%9B%E5%BB%BA%E4%BB%A5%E5%8F%8A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/</url>
+    <content><![CDATA[<h1 id="Git系列（二）——Git版本库创建以及文件上传"><a href="#Git系列（二）——Git版本库创建以及文件上传" class="headerlink" title="Git系列（二）——Git版本库创建以及文件上传"></a>Git系列（二）——Git版本库创建以及文件上传</h1><p>费（hao）尽（bu）心（fei）思（li）安装好了Git，那就赶紧跟着小编用用看吧！</p>
+<hr>
+<h2 id="Git版本库的创建"><a href="#Git版本库的创建" class="headerlink" title="Git版本库的创建"></a>Git版本库的创建</h2><p>首先，名词解释<code>版本库</code>：又名仓库、英文名<strong>repository</strong>，其实说白了就是一个目录，这个目录下的任何修改都会被Git管理起来，在任何时候都可以追踪历史并且随心所欲“还原”。</p>
+<p>OK，弄懂了版本库，那么我们就来创建一个文件夹</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ mkdir learngit</span><br><span class="line">$ cd learngit</span><br><span class="line">$ pwd</span><br></pre></td></tr></table></figure>
+
+<p>版本库，简单到只有一个指令</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git init</span><br></pre></td></tr></table></figure>
+
+<p>在一个呼吸之间，Git就把仓库创建好了，本来空白的目录下悄无声息的多了一个文件加<code>.git</code>，这个目录很重要，是用来跟踪管理版本库的，不要随意修改，修改后很有可能把Git仓库给破坏了。</p>
+<ul>
+<li>如果没有看到<code>.git</code>文件夹，那一定是没有使用 ll -a命令</li>
+</ul>
+<h2 id="把文件添加到版本库"><a href="#把文件添加到版本库" class="headerlink" title="把文件添加到版本库"></a>把文件添加到版本库</h2><p>首先，我自这里必须强调一点，Git只能进行对纯文本文件进行文件版本得追踪及还原，对于二进制文件，没有办法追踪文件得变化，所以，要想用Git进行文件得管理，只能使用纯文本方式编写文件</p>
+<ul>
+<li>强烈建议使用标准的UTF-8编码文本，被所有平台支持的文件</li>
+</ul>
+<p>好了，我们现在先编写一个文件<code>tmp.txt</code>，文件内容如下</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">I like Git</span><br></pre></td></tr></table></figure>
+
+<p>这个文件必须在<code>learngit</code>文件夹下（子目录也可以）</p>
+<p>然后我们只需要两步就可以把这个文件添加到版本库里边了</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git add tmp.txt</span><br></pre></td></tr></table></figure>
+
+<p>执行上面的指令之后，如果什么都没有出现，那就成功了，第一步就是这样。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git commit -m &quot;write a tmp file&quot;</span><br><span class="line">[master 1210900] write a tmp file</span><br><span class="line"> 1 file changed, 1 insertion(+)</span><br><span class="line"> create mode 100644 tmp.txt</span><br></pre></td></tr></table></figure>
+
+<p>解释一下<code>git commit</code>这个指令，<code>-m</code>后面加的是对于本次改动的一个说明，强烈建议仔细填写，这样追溯版本时会很舒服。<code>git commit</code>之后，git会告诉你<code>1 file changed</code>这就是说有一个文件被改动了，<code>1 insertion(+)</code>这就是说我们插入了一行新的内容。</p>
+<p>最后，如果想分批添加三个文件，我们可以这么做</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git add file1</span><br><span class="line">$ git add file2 file3</span><br><span class="line">$ git commit -m &quot;add 3 files&quot;</span><br></pre></td></tr></table></figure>
+
+<p>这也是为什么git上传文件需要两步的原因。</p>
+<hr>
+<p>好了本次教程到此结束，我们学会了创建新的文件，接下来我们会学习文件的修改相关内容。</p>
+<ul>
+<li>参考 <a href="https://www.liaoxuefeng.com/" target="_blank" rel="noopener">廖雪峰的官方网站</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Git系列（一）——Git的简介及安装</title>
+    <url>/codeHub/2020/07/28/2020-07/14Git%E7%B3%BB%E5%88%97%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94Git%E7%9A%84%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%AE%89%E8%A3%85/</url>
+    <content><![CDATA[<h1 id="Git系列（一）——Git的简介及安装"><a href="#Git系列（一）——Git的简介及安装" class="headerlink" title="Git系列（一）——Git的简介及安装"></a>Git系列（一）——Git的简介及安装</h1><p>众所周知（跟计算机打交道多的），Git是一个很先进的版本控制系统，但其实不瞒你们知道，它是目前世界上最先进的分布式版本控制系统（没有之一）。所以说，还在等着什么，快跟着小编一起来轻松愉快的学习Git吧。</p>
+<hr>
+<h2 id="Git的简介"><a href="#Git的简介" class="headerlink" title="Git的简介"></a>Git的简介</h2><p>相信大家在实际工作生活中都会使用word进行长篇大论文章的书写，尤其时当很多人一起进行文档的书写时，一定避免不了的进行文档的修改，这时候你一定会抱怨为什么会有这么多中间版本，接收文件时如果命名重复的话就会出现是否覆盖的选项，这个时候如果Git出现在你的世界，你一定会毫不留情地爱上它的。</p>
+<p>Git采用的是分布式控制管理系统（下图），与其相对应的是集中式版本控制系统（上图），分布式控制管理系统没有真正意义上的“中央服务器”，每个人的电脑都有完整的版本库，所以说除非所有的电脑同时坏掉，不然就不用担心数据会丢失这样的数据安全问题。当你和同事同时修改了文件A，那么你们只需要进行文件A修改的交换，就可以看到对方的修改了，但一般都会有一台电脑充当“中央服务器”，这是为了方便交换大家的修改。没有它大家也可以进行正常的工作，只是交换修改不方便而已。</p>
+<img data-src="https://s1.ax1x.com/2020/07/28/aVizqg.png" alt="1.png" style="zoom:50%;" />
+
+<img data-src="https://s1.ax1x.com/2020/07/28/aVixsS.png" alt="2.png" style="zoom:50%;" />
+
+<h2 id="Git的安装"><a href="#Git的安装" class="headerlink" title="Git的安装"></a>Git的安装</h2><p>Git的安装很简单，这里主要介绍linux和windows上安装Git</p>
+<h3 id="在linux上安装Git"><a href="#在linux上安装Git" class="headerlink" title="在linux上安装Git"></a>在linux上安装Git</h3><p>你可以在系统中输入<code>git</code>，看看系统中有没有安装git，</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git</span><br><span class="line">The program &#39;git&#39; is currently not installed. You can install it by typing:</span><br><span class="line">sudo apt-get install git</span><br></pre></td></tr></table></figure>
+
+<p>如果没有安装git，linux会贴心的提示你安装的指令<code>sudo apt-get install git</code></p>
+<p>或者也可以通过源码进行安装，源码压缩包<a href="https://mirrors.edge.kernel.org/pub/software/scm/git/" target="_blank" rel="noopener">网站</a>，解压之后，依次输入<code>./config</code>，<code>make</code>，<code>sudo make install</code>这几个命令之后</p>
+<h3 id="在Windows上安装Git"><a href="#在Windows上安装Git" class="headerlink" title="在Windows上安装Git"></a>在Windows上安装Git</h3><p>直接从Git官网上直接下载并按照默认选项安装即可。安装成功之后，在开始菜单Git文件夹中找到Git Bash，打开以后是一个命令行窗口，那就说明安装成功了。</p>
+<p><img data-src="https://s1.ax1x.com/2020/07/28/aVivM8.png" alt="3.png"></p>
+<img data-src="https://s1.ax1x.com/2020/07/28/aViXxf.png" alt="4.png" style="zoom:67%;" />
+
+<p>安装成功之后，我们需要简单配置一下</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git config --global user.name	<span class="comment">#Your Name</span></span><br><span class="line">$ git config --global user.email	<span class="comment">#email@example.com</span></span><br></pre></td></tr></table></figure>
+
+<p><code>git config</code>命令的<code>--global</code>参数，用了这个参数，表示你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址，命令如下</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git config  user.name</span><br><span class="line">$ git config  user.email</span><br><span class="line">$ git config --list <span class="comment">#查看当前配置</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>到此为止，我们的Git已经安装并简单配置完毕，下一个教程我们会介绍创建版本库以及简单的上传文件操作，敬请期待！</p>
+<ul>
+<li>参考 <a href="https://www.liaoxuefeng.com/" target="_blank" rel="noopener">廖雪峰的官方网站</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>基于Vue前端网页实现</title>
+    <url>/codeHub/2020/07/28/2020-07/13%E5%9F%BA%E5%9B%A0Vue%E5%89%8D%E7%AB%AF%E7%BD%91%E9%A1%B5%E5%AE%9E%E7%8E%B0/</url>
+    <content><![CDATA[<p>在看了一遍<code>vue-element-admin</code>的源代码后，自己试着按照这个项目中的思路去构建前端单页面应用。在构建的过程中学习了<code>vuex</code>进行组件间的状态管理、学习了他项目的目录结构设计以及对应的思路；进一步优化了前端路由的设计。</p>
+<p>在写用户登录登出<code>API</code>时，使用到了<code>session/cookie</code>的知识，利用后端服务器保存用户信息在<code>session</code>中。</p>
+<blockquote>
+<p>项目展示网址 :<a href="http://cotton.hzau.edu.cn/web/#/home" target="_blank" rel="noopener">http://cotton.hzau.edu.cn/web/#/home</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="layout布局"><a href="#layout布局" class="headerlink" title="layout布局"></a>layout布局</h2><p>借助与router实现一个layout框架，在框架内部铺设子路由改变局部页面</p>
+<p>整个思维图如下：</p>
+<img data-src="https://s1.ax1x.com/2020/07/28/akcCrt.png" alt="akcCrt.png" style="zoom:67%;" />
+
+<h3 id="路由的设置"><a href="#路由的设置" class="headerlink" title="路由的设置"></a>路由的设置</h3><p>首先在路由进入到<code>/</code>时，将会渲染layout组件，在layout组件内部包含有一个子路由的视图</p>
+<p>因此，在进入到layout后，如果子路由将会渲染<code>App-main</code>内的内容；</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  path: <span class="string">'/'</span>,</span><br><span class="line">  component: HomeLayout,</span><br><span class="line">  redirect: <span class="string">'/home'</span>,</span><br><span class="line">  children: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">'/home'</span>,</span><br><span class="line">      name: <span class="string">'home'</span>,</span><br><span class="line">      component: <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">import</span>(<span class="string">'@/views/home'</span>)</span><br><span class="line">      &#125;,</span><br><span class="line">      meta: &#123; <span class="attr">title</span>: <span class="string">'cottonWeb'</span> &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  ],</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<h3 id="Vue中的配置"><a href="#Vue中的配置" class="headerlink" title="Vue中的配置"></a>Vue中的配置</h3><p>程序根组件<code>App.vue</code>中的<code>router-view</code>用于挂载布局组件或者<code>404</code>页面组件，布局发生改变，或者刚开始进入时都会触发页面动画</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">    &lt;transition enter-active-<span class="class"><span class="keyword">class</span></span>=<span class="string">"animate__animated animate__fadeInUp"</span>&gt;</span><br><span class="line">      &lt;router-view /&gt;</span><br><span class="line">    &lt;<span class="regexp">/transition&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>layout组件配置</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;cotton-navbar&gt;&lt;<span class="regexp">/cotton-navbar&gt;</span></span><br><span class="line">    &lt;app-main&gt;&lt;/app-main&gt; ###这里放置一个子路由</span><br><span class="line">    &lt;cotton-footer&gt;&lt;<span class="regexp">/cotton-footer&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>功能页面组件配置</p>
+<p>子路由发生改变时，将会触发动画效果</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;transition enter-active-<span class="class"><span class="keyword">class</span></span>=<span class="string">"animate__animated animate__fadeInDown"</span>&gt;</span><br><span class="line">      &lt;router-view :key=<span class="string">"key"</span> /&gt;</span><br><span class="line">    &lt;<span class="regexp">/transition&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="动画效果"><a href="#动画效果" class="headerlink" title="动画效果"></a>动画效果</h2><h3 id="安装animal-css"><a href="#安装animal-css" class="headerlink" title="安装animal.css"></a>安装animal.css</h3><p>借助第三方的css工具实现动画效果<code>animate.css</code></p>
+<blockquote>
+<p>注意使用的时候 一定要加上 animate__animate 这个类名</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install animate.css --save</span><br><span class="line"><span class="comment">##在需要使用的地方加上类就行</span></span><br><span class="line">&lt;h1 class=<span class="string">"animate__animated animate__bounce"</span>&gt;An animated element&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-路由跳转动画"><a href="#1-路由跳转动画" class="headerlink" title="1.路由跳转动画"></a>1.路由跳转动画</h3><ul>
+<li>这里的<code>mode</code>这个参数还没搞明白</li>
+</ul>
+<blockquote>
+<p>具体的参数描述： <a href="https://cn.vuejs.org/v2/api/#transition" target="_blank" rel="noopener">https://cn.vuejs.org/v2/api/#transition</a></p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;transition enter-active-<span class="class"><span class="keyword">class</span></span>=<span class="string">"animate__animated animate__fadeInDown"</span> mode=<span class="string">"in-out"</span>&gt;</span><br><span class="line">  &lt;router-view /&gt;</span><br><span class="line">&lt;<span class="regexp">/transition&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="session配置"><a href="#session配置" class="headerlink" title="session配置"></a>session配置</h2><blockquote>
+<p>1.5.0后的版本不再需要<code>cookie-parser</code>的支持了；并且session只是单纯的发送一个session ID 给客户端，而真正的session数据是存储在服务端的。并且默认情况下session是保存在内存当中的仅仅适用于开发和调试模式，至于生产模式下可能会导致内存泄露，得想个办法把它存数据库里或者文件中。</p>
+</blockquote>
+<p>由于我数据库使用的是<code>mysql</code>，因此可以使用对应的mysql将session持久化存起来；我采用文件的方式保存session</p>
+<blockquote>
+<p><a href="https://www.npmjs.com/package/connect-mssql" target="_blank" rel="noopener">connect-mssql</a> A SQL Server-based session store.</p>
+</blockquote>
+<h3 id="1-初始化session"><a href="#1-初始化session" class="headerlink" title="1.初始化session"></a>1.初始化session</h3><ul>
+<li><code>name</code>参数设置客户端中cookie的key名称</li>
+<li><code>secret</code>对session ID进行加盐的字符</li>
+<li><code>resave</code>多个客户端并发请求时，保留最后一次请求并且覆盖前面的</li>
+<li><code>saveUninitialized</code>初始化的session是否进行保存</li>
+<li><code>maxAge</code>和<code>cookie.expires</code>参数都可以设置cookie过期时间，如果都设置了以最后设置的为准，还是设置<code>maxAge</code>好一些，以秒为单位</li>
+<li><code>cookie.path</code>设置cookie存储的路径，默认是根域名下；当然可以修改为子域名</li>
+<li><code>cookie.secure</code>只适用于https请求，设置为true时，在http请求下cookie失效</li>
+</ul>
+<blockquote>
+<p>我设置只在/login API下才能够得到cookie，而在/people API下得不到；</p>
+<p>rolling: true, //每个请求都重新设置一个cookie ；当客户端手动删除cookie时，非常有用，我在这折腾了好久</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> session = <span class="built_in">require</span>(<span class="string">'express-session'</span>) <span class="comment">//use session</span></span><br><span class="line">app.use(</span><br><span class="line">  session(&#123;</span><br><span class="line">    secret: <span class="string">'cotton'</span>,</span><br><span class="line">    name: <span class="string">'token'</span>,</span><br><span class="line">    resave: <span class="literal">false</span>,</span><br><span class="line">    saveUninitialized: <span class="literal">true</span>,</span><br><span class="line">    cookie:&#123;</span><br><span class="line">        maxAge:<span class="number">86400000</span>,  <span class="comment">//设置cookie过期时间以毫秒为单位</span></span><br><span class="line">        path:<span class="string">'/login'</span></span><br><span class="line">    &#125;,</span><br><span class="line">      rolling: <span class="literal">true</span>, <span class="comment">//每个请求都重新设置一个cookie</span></span><br><span class="line">  &#125;)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p> rolling: true; 这个参数设置为真时，当用户手动清空掉cookie时，服务端仍旧会重新发送一份cookie；如果不设置的话，客户端是得不到cookie，进而服务端会出错；这里我弄了好久</p>
+</blockquote>
+<h3 id="2-将用户登录信息保存在session中"><a href="#2-将用户登录信息保存在session中" class="headerlink" title="2.将用户登录信息保存在session中"></a>2.将用户登录信息保存在session中</h3><p>首先根据客户端cookie中的信息判断客户端对应的session中是否包含<code>login</code>字段；如果包含则无需进行数据库query；直接从session中获取用户信息；否则验证用户身份，并将用户信息存在session中。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">router.get(<span class="string">'/login'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (req.session.login) &#123;</span><br><span class="line">    res.send(<span class="string">'ok'</span>)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    req.session.login = <span class="literal">true</span></span><br><span class="line">    res.send(<span class="string">'no'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-将session保存在文件中持久化"><a href="#3-将session保存在文件中持久化" class="headerlink" title="3.将session保存在文件中持久化"></a>3.将session保存在文件中持久化</h3><p>由于express-session将session信息保存在内存当中，因此为了防止node内心泄露，需要对session数据持久化</p>
+<blockquote>
+<p>参考 <a href="https://www.npmjs.com/package/session-file-store" target="_blank" rel="noopener">https://www.npmjs.com/package/session-file-store</a></p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> session = <span class="built_in">require</span>(<span class="string">'express-session'</span>) <span class="comment">//use session</span></span><br><span class="line"><span class="keyword">var</span> FileStore = <span class="built_in">require</span>(<span class="string">'session-file-store'</span>)(session) <span class="comment">//use file store session</span></span><br><span class="line"><span class="keyword">var</span> fileStoreOptions = &#123;</span><br><span class="line">  ttl: <span class="number">86400</span>,  <span class="comment">//设置session文件过期时间，以秒为单位</span></span><br><span class="line">  path: path.join(__dirname, <span class="string">'./sessions'</span>), <span class="comment">//设置session保存路径</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-存信息的时候统一存进一个date对象内"><a href="#4-存信息的时候统一存进一个date对象内" class="headerlink" title="4.存信息的时候统一存进一个date对象内"></a>4.存信息的时候统一存进一个date对象内</h4><p>当客户端第一次访问时，判断session是否存在<code>data</code>属性，如果不存在则进行进行身份验证，验证通过后修改session中data字段数据，并且返回成功代码给客户端；</p>
+<p>如果失败则返回错误代码给客户端，进行重新登录</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">router.get(<span class="string">'/login'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (req.session.data) &#123;</span><br><span class="line">    res.send(req.session.data) <span class="comment">//处于登录状态了</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    req.session.data = <span class="literal">true</span></span><br><span class="line">    res.send(<span class="string">'no'</span>) <span class="comment">//非登录状态，进行数据库查询操作</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>之后需要登录才能得到信息的接口，就直接判断当前session中是否存在数据，不存在就直接返回401，让前端进行登录才能获取到数据</p>
+<h3 id="登录验证API"><a href="#登录验证API" class="headerlink" title="登录验证API"></a>登录验证API</h3><p>当用户提交了账号和密码之后，进行验证；如果验证通过则将信息存储在session文件中，cookie中保留session文件ID</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> username = <span class="string">'zpliu'</span></span><br><span class="line"><span class="keyword">const</span> password = <span class="string">'111'</span></span><br><span class="line">router.post(<span class="string">'/login'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (req.session.data) &#123;</span><br><span class="line">    res.json(req.session.data)</span><br><span class="line">    <span class="comment">//处于登录状态了</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">//进行密码验证</span></span><br><span class="line">    <span class="keyword">if</span> (req.body.username === username &amp;&amp; req.body.password === password) &#123;</span><br><span class="line">      req.session.data = &#123;</span><br><span class="line">        name: <span class="string">'zpliu'</span>,</span><br><span class="line">        grade: <span class="string">'master'</span>,</span><br><span class="line">        role: <span class="string">'Administrator'</span>,</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="built_in">console</span>.log(req.session)</span><br><span class="line">      res.redirect(<span class="string">'/login'</span>)  <span class="comment">//这里重定向还是会产生一点问题，第一次登录会有404，后面改成发生响应数据</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      res.send(&#123;</span><br><span class="line">        code: <span class="number">6000</span>,</span><br><span class="line">        message: <span class="string">'账号或密码错误'</span>,</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>最终代码，已经加上了sql进行账号和密码的验证，以及MD5加密操作</p>
+<blockquote>
+<p><a href="https://github.com/zpliu1126/nodeAPI/blob/cfd3201f9b02a8d963a89ea8f5961c03997d3089/API/auth/index.js" target="_blank" rel="noopener">https://github.com/zpliu1126/nodeAPI/blob/cfd3201f9b02a8d963a89ea8f5961c03997d3089/API/auth/index.js</a></p>
+</blockquote>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li><a href="https://www.cnblogs.com/tugenhua0707/p/9098132.html" target="_blank" rel="noopener">配置session</a></li>
+<li><a href="https://vuex.vuejs.org/zh/guide/" target="_blank" rel="noopener">vuex</a></li>
+<li><a href="https://panjiachen.github.io/vue-element-admin-site/zh/guide/" target="_blank" rel="noopener">vue-element-admin</a></li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
+    <title>手把手教你搭建JBrowse-初始化应用</title>
+    <url>/codeHub/2020/07/25/2020-07/12%E6%89%8B%E6%8A%8A%E6%89%8B%E6%90%AD%E5%BB%BAjbrowse/</url>
+    <content><![CDATA[<h2 id="手把手教你搭建JBrowse-初始化应用"><a href="#手把手教你搭建JBrowse-初始化应用" class="headerlink" title="手把手教你搭建JBrowse-初始化应用"></a>手把手教你搭建JBrowse-初始化应用</h2><p>JBrowse是<strong>GMOD</strong>开源项目中的一个基因组浏览器，所谓的基因组浏览器，字面意思就可以理解成一个网页应用。可能每个生物信息分析的同学电脑内都会安装一个<strong>IGV</strong>，用于对高通量测序数据的可视化。其实<strong>JBrowse</strong>也就是相当于把<strong>IGV</strong>，搬到了服务器内，把庞大的测序数据存储在服务器内，借助于快速发展的web技术；使得我们能够通过仅仅发送一个网页链接就能够与他人共享或者讨论课题。</p>
+<blockquote>
+<p>本文搭建JBrowse应用访问链接： <a href="http://cotton.hzau.edu.cn/tools/jbrowse/" target="_blank" rel="noopener">http://cotton.hzau.edu.cn/tools/jbrowse/</a></p>
+</blockquote>
+<p><img data-src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/80625/headerpic.svg" alt="吃瓜"></p>
+<a id="more"></a>
+
+<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><p>JBrowse支持两种配置文件：</p>
+<ul>
+<li>JSON格式</li>
+<li>textual格式</li>
+</ul>
+<p>其中JBrowse的全局配置文件<code>jbrowse.conf</code>采用textual格式进行配置，具体到特定的数据例如 基因组序列，BAM文件的配置信息时采用textual格式；具体到某种数据的显示时采用JSON进行配置</p>
+<blockquote>
+<p>入门文章也是使用简化的配置：<a href="https://jbrowse.org/docs/minimal.html" target="_blank" rel="noopener">https://jbrowse.org/docs/minimal.html</a></p>
+</blockquote>
+<p>主要讲一下<code>tracks.conf</code>这个<code>textual</code>类型的配置文件</p>
+<ul>
+<li><code>[tracks.refseq]</code>后面的refseq表示轨迹的名称，之后再WEB上的选项上会出现</li>
+<li><code>urlTemplate</code>表示轨迹文件在的路径，相对于当前配置文件的路径</li>
+<li><code>storeClass</code>轨迹的类型包括<code>fasta</code>、<code>vcf</code>、<code>BAM</code></li>
+<li><code>type</code>字段也差不多</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[GENERAL]</span><br><span class="line">refSeqs=Ghirsutum_HZAU_V1.0.fa.fai  <span class="comment">##固定格式便于快速提取基因序列</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="文件建立索引"><a href="#文件建立索引" class="headerlink" title="文件建立索引"></a>文件建立索引</h3><p>建立索引的目的是让JBrowse能够快速的找出目标位置的序列信息</p>
+<h4 id="fasta文件建立索引"><a href="#fasta文件建立索引" class="headerlink" title="fasta文件建立索引"></a>fasta文件建立索引</h4><p>使用samtools中的子程序<code>faidx</code>建立基因组索引，这样在JBrowse中就可以快速的导出指定片段的fasta序列信息</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">##使用软连接为了节省空间</span></span><br><span class="line">ln -s /home/genome/Public/genome_Ghir.HAU/Ghirsutum_genome.fasta Ghirsutum_HZAU_V1.0</span><br><span class="line">samtools faidx data/volvox.fa</span><br></pre></td></tr></table></figure>
+
+<p>配置文件<code>tracks.conf</code>，告诉JBrowse；基因组文件在哪里</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[GENERAL]</span><br><span class="line">refSeqs=Ghirsutum_HZAU_V1.0.fa.fai</span><br><span class="line">[tracks.refseq]</span><br><span class="line">urlTemplate=Ghirsutum_HZAU_V1.0.fa</span><br><span class="line">storeClass=JBrowse/Store/SeqFeature/IndexedFasta</span><br><span class="line"><span class="built_in">type</span>=Sequence</span><br></pre></td></tr></table></figure>
+
+<h4 id="gff文件索引"><a href="#gff文件索引" class="headerlink" title="gff文件索引"></a>gff文件索引</h4><p>使用GFF3文件构建索引，在建立索引之前需要对GFF3文件进行排序，安装染色体和位置进行排序</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">##排序</span></span><br><span class="line"> grep -v <span class="string">"^#"</span> /home/genome/Public/genome_Ghir.HAU/Ghirsutum_gene_model.gff3 |sort -k1,1 -k4,4n &gt;Ghirsutum_HZAU_V1.0_gene.gff3</span><br></pre></td></tr></table></figure>
+
+<p>在排序完成后进行压缩和建立索引；使用<code>tabix</code>软件进行；</p>
+<blockquote>
+<p>tabix安装参考 <a href="https://www.jianshu.com/p/b6f885fc8b5f" target="_blank" rel="noopener">https://www.jianshu.com/p/b6f885fc8b5f</a></p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">##压缩文件</span></span><br><span class="line">../../software/tabix-0.2.6/bgzip  Ghirsutum_HZAU_V1.0_gene.gff3</span><br><span class="line"><span class="comment">##建立索引</span></span><br><span class="line">../../software/tabix-0.2.6/tabix -p gff  Ghirsutum_HZAU_V1.0_gene.gff3.gz</span><br></pre></td></tr></table></figure>
+
+<p>在<code>tracks.conf</code>文件中添加配置信息</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[tracks.genes]</span><br><span class="line">urlTemplate=Ghirsutum_HZAU_V1.0_gene.gff3.gz</span><br><span class="line">storeClass=JBrowse/Store/SeqFeature/GFF3Tabix</span><br><span class="line"><span class="built_in">type</span>=CanvasFeatures</span><br></pre></td></tr></table></figure>
+
+<h4 id="BAM文件索引"><a href="#BAM文件索引" class="headerlink" title="BAM文件索引"></a>BAM文件索引</h4><p>BAM文件同样需要使用samtools按照染色体位置排好序，再建立索引；再JBrowse更新到<code>v1.15.0</code>版本后支持了CRAM格式文化，这种格式相比于BAM格式更加节省存储空间</p>
+<p>JBrowse可以对BAM文件进行两种展示:</p>
+<blockquote>
+<p>参考 BAM两种展示形式 <a href="https://jbrowse.org/docs/tutorial_classic.html#next-gen-read-track-types" target="_blank" rel="noopener">https://jbrowse.org/docs/tutorial_classic.html#next-gen-read-track-types</a></p>
+</blockquote>
+<ul>
+<li><p>set type = Alignments2  ；显示单个read的比对情况</p>
+</li>
+<li><p>type = SNPCoverage  ；显示某个区域read的覆盖情况</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">##对bam文件排序</span></span><br><span class="line">samtools sort test.bam -O bam -o test_sort.bam</span><br><span class="line"><span class="comment">##构建索引</span></span><br><span class="line">samtools index test_sort.bam</span><br></pre></td></tr></table></figure>
+
+<p>在<code>tracks.conf</code>文件中添加配置信息</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[tracks.alignments]</span><br><span class="line">urlTemplate=test_sort.bam</span><br><span class="line">storeClass=JBrowse/Store/SeqFeature/BAM</span><br><span class="line"><span class="built_in">type</span>=Alignments2</span><br></pre></td></tr></table></figure>
+
+<h4 id="配置完成后的目录结构"><a href="#配置完成后的目录结构" class="headerlink" title="配置完成后的目录结构"></a>配置完成后的目录结构</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">##当前目录为 @//jbrowse/data</span></span><br><span class="line">.</span><br><span class="line">├── Ghirsutum_HZAU_V1.0.fa -&gt; /home/genome/Public/genome_Ghir.HAU/Ghirsutum_genome.fasta</span><br><span class="line">├── Ghirsutum_HZAU_V1.0.fa.fai</span><br><span class="line">├── Ghirsutum_HZAU_V1.0_gene.gff3.gz</span><br><span class="line">├── Ghirsutum_HZAU_V1.0_gene.gff3.gz.tbi</span><br><span class="line">├── TM1_rmdup.bam</span><br><span class="line">├── TM1_rmdup.bam.bai</span><br><span class="line">└── tracks.conf</span><br></pre></td></tr></table></figure>
+
+<h3 id="定制轨迹"><a href="#定制轨迹" class="headerlink" title="定制轨迹"></a>定制轨迹</h3><h4 id="修改参考序列轨迹"><a href="#修改参考序列轨迹" class="headerlink" title="修改参考序列轨迹"></a>修改参考序列轨迹</h4><blockquote>
+<p>参考修改 序列轨迹 <a href="https://jbrowse.org/docs/reference_sequence.html#reference-sequence-display-order" target="_blank" rel="noopener">https://jbrowse.org/docs/reference_sequence.html#reference-sequence-display-order</a></p>
+</blockquote>
+<p>可以通过修改CSS来改变5种碱基 A T C G N显示的颜色</p>
+<h4 id="修改-CanvasFeatures"><a href="#修改-CanvasFeatures" class="headerlink" title="修改 CanvasFeatures"></a>修改 CanvasFeatures</h4><p>使用<code>flatfile-to-json.pl</code>脚本进行转换</p>
+<h3 id="信号转发"><a href="#信号转发" class="headerlink" title="信号转发"></a>信号转发</h3><p>现在访问<a href="http://cotton.hzau.edu.cn/tools/jbrowse/" target="_blank" rel="noopener">http://cotton.hzau.edu.cn/tools/jbrowse/</a> 就可以显示出内网中的JBrowse</p>
+<p>由于我把JBrowse放在了内网机器上，于是需要使用外网机器的Appache将内网信号转发一下；在转发后客户端找不到对应的CSS和JS文件；于是使用<code>webpack</code>重新打包了一下源代码；查看了一下webpack的配置文件，发现可以通过配置环境变量<code>JBROWSE_PUBLIC_PATH</code>的值来控制打包后的资源检索URL</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">output: &#123;</span><br><span class="line">    filename: <span class="string">'[name].bundle.js'</span>,</span><br><span class="line">    chunkFilename: <span class="string">'[name].bundle.js'</span>,</span><br><span class="line">    path: path.resolve(__dirname, <span class="string">'dist'</span>),</span><br><span class="line">    publicPath: process.env.JBROWSE_PUBLIC_PATH || <span class="string">'dist/'</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>修改打包后的公共资源请求路径，打包后的文件会在<code>jbrowse/dist</code>目录下</p>
+<blockquote>
+<p>如果没有yarn，使用npm进行全局安装 npm i yarn -g</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> JBROWSE_PUBLIC_PATH=http://cotton.hzau.edu.cn/tools/jbrowse/dist/ <span class="comment">##bund.js请求路径</span></span><br><span class="line"><span class="comment">##重新进行编译 在目录@/jbrowse下</span></span><br><span class="line">yarn build</span><br></pre></td></tr></table></figure>
+
+<p>修改<code>@/jbrowse/index.html</code>中资源路径；其实就加个转发路径就行</p>
+<p><code>sed -i &#39;s/href=\&quot;/href=\&quot;\/tools\/jbrowse\//g&#39; index.html</code></p>
+<p><code>sed -i &#39;s/src=\&quot;/src=\&quot;\/tools\/jbrowse\//g&#39; index.html</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&lt;link rel=<span class="string">"icon"</span> <span class="built_in">type</span>=<span class="string">"image/png"</span> sizes=<span class="string">"16x16"</span> href=<span class="string">"img/favicons/favicon-16x16.png"</span>&gt;</span><br><span class="line"><span class="comment">##修改为转发后的网址</span></span><br><span class="line">&lt;link rel=<span class="string">"icon"</span> <span class="built_in">type</span>=<span class="string">"image/png"</span> sizes=<span class="string">"16x16"</span> href=<span class="string">"/tools/jbrowse/img/favicons/favicon-16x16.png"</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h3><p><img data-src="https://s1.ax1x.com/2020/07/25/aSWG3q.png" alt="效果图"></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li><a href="https://www.jianshu.com/p/e4a90aafc461" target="_blank" rel="noopener">最全的JBrowse基因浏览器介绍</a></li>
+<li><a href="https://jbrowse.org/docs/installation.html" target="_blank" rel="noopener">官方文档</a></li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
+    <title>matplotlib-柱状图</title>
+    <url>/codeHub/2020/07/23/2020-07/11matplotlib-%E6%9F%B1%E7%8A%B6%E5%9B%BE/</url>
+    <content><![CDATA[<h2 id="使用matplotlib绘图的完整流程"><a href="#使用matplotlib绘图的完整流程" class="headerlink" title="使用matplotlib绘图的完整流程"></a>使用matplotlib绘图的完整流程</h2><p>在matplotlib中存在两套画图命令：</p>
+<ul>
+<li>基于面向对象的方式OO</li>
+<li>基于pyplot函数接口的方式</li>
+</ul>
+<blockquote>
+<p>作者还是推荐我们使用<code>object-oriented interface</code>的方式绘制图形</p>
+</blockquote>
+<p>以后绘图中涉及到的一些常见操作，我用锚点标注好；以后查具体的代码也很方便</p>
+<ul>
+<li><a href="#旋转x轴label">旋转X轴标签</a></li>
+<li><a href="#控制图片样式">修改图片样式</a>，如添加网格线等</li>
+<li><a href="#给图片添加label">添加label</a></li>
+<li><a href="#批量修改坐标轴刻度label">批量修改坐标轴标签</a></li>
+<li><a href="#保存图片">保存图片</a></li>
+</ul>
+<h3 id="绘图数据"><a href="#绘图数据" class="headerlink" title="绘图数据"></a>绘图数据</h3><p>准备绘图数据，包含了几个人的收入信息吧；准备绘制一个柱状图</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment">#数据字典</span></span><br><span class="line">data = &#123;<span class="string">'Barton LLC'</span>: <span class="number">109438.50</span>,</span><br><span class="line">        <span class="string">'Frami, Hills and Schmidt'</span>: <span class="number">103569.59</span>,</span><br><span class="line">        <span class="string">'Fritsch, Russel and Anderson'</span>: <span class="number">112214.71</span>,</span><br><span class="line">        <span class="string">'Jerde-Hilpert'</span>: <span class="number">112591.43</span>,</span><br><span class="line">        <span class="string">'Keeling LLC'</span>: <span class="number">100934.30</span>,</span><br><span class="line">        <span class="string">'Koepp Ltd'</span>: <span class="number">103660.54</span>,</span><br><span class="line">        <span class="string">'Kulas Inc'</span>: <span class="number">137351.96</span>,</span><br><span class="line">        <span class="string">'Trantow-Barrows'</span>: <span class="number">123381.38</span>,</span><br><span class="line">        <span class="string">'White-Trantow'</span>: <span class="number">135841.99</span>,</span><br><span class="line">        <span class="string">'Will LLC'</span>: <span class="number">104437.60</span>&#125;</span><br><span class="line"></span><br><span class="line">group_data = list(data.values()) <span class="comment">##工资</span></span><br><span class="line">group_names = list(data.keys()) <span class="comment">##人名</span></span><br><span class="line">group_mean = np.mean(group_data)  <span class="comment">## 平均值</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="创建实例对象"><a href="#创建实例对象" class="headerlink" title="创建实例对象"></a>创建实例对象</h3><p>采用面向对象的接口，生成<code>figure.Figure</code>和<code>axes.Axes</code>实例对象</p>
+<ul>
+<li><code>figure.Figure</code>相当于画布的作用，在上面可以绘制多个图片</li>
+<li><code>axes.Axes</code>就是一副完整的图片，多个图片可以绘制在一块画布上</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">fig, ax = plt.subplots() <span class="comment">##生成实例对象</span></span><br></pre></td></tr></table></figure>
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/22/Ub5jA0.png" alt="Ub5jA0.png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">fig,ax=plt.subplots()</span><br><span class="line">ax.barh(group_names,group_data) <span class="comment">##绘制柱状图</span></span><br></pre></td></tr></table></figure>
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/22/Ub5vNV.png" alt="Ub5vNV.png"></p>
+<h3 id="控制图片样式"><a href="#控制图片样式" class="headerlink" title="控制图片样式"></a>控制图片样式</h3><p>这里相当于ggplot2里的<code>theme</code>，可以使用<code>print(plt.style.available)</code>查看系统自带的样式；使用<code>plt.style.use(&#39;样式名&#39;)</code>使用对应的样式;如下图所示，选择好样式后，就在图中添加了网格线，改变了柱子的颜色</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">plt.style.use(<span class="string">'fivethirtyeight'</span>) <span class="comment">##选择定义好的样式</span></span><br><span class="line">fig,ax=plt.subplots()</span><br><span class="line">ax.barh(group_names,group_data)</span><br></pre></td></tr></table></figure>
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/22/Ub5O7q.png" alt="Ub5O7q.png"></p>
+<h3 id="旋转x轴label"><a href="#旋转x轴label" class="headerlink" title="旋转x轴label"></a>旋转x轴label</h3><p>当坐标轴上的label太长的时候，两个刻度之间可能会发生重叠。因此可以通过旋转label的方法调整label的显示。<br>首先的获取坐标轴上的label对象，使用<code>pyplot.setp()</code>函数设置对应的属性</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">fig,ax=plt.subplots()</span><br><span class="line">ax.barh(group_names,group_data)</span><br><span class="line">xlabels=ax.get_xticklabels() <span class="comment">##获取坐标轴label信息</span></span><br><span class="line">plt.setp(xlabels,rotation=<span class="number">45</span>,horizontalalignment=<span class="string">'right'</span>) <span class="comment">##旋转坐标轴</span></span><br></pre></td></tr></table></figure>
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/22/Ub5qns.png" alt="Ub5qns.png"></p>
+<h3 id="给图片添加label"><a href="#给图片添加label" class="headerlink" title="给图片添加label"></a>给图片添加label</h3><p>除了修改刻度线上的label，同样可以给图片的坐标轴label，图片的label，以及坐标轴显示范围。<br>所有的操作都是采用面向对象接口</p>
+<ul>
+<li>xlim参数修改坐标轴显示范围</li>
+<li>xlabel 修改坐标轴label</li>
+<li>title 修改图片label</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">fig, ax = plt.subplots()</span><br><span class="line">ax.barh(group_names, group_data)</span><br><span class="line">labels = ax.get_xticklabels()</span><br><span class="line">plt.setp(labels, rotation=<span class="number">45</span>, horizontalalignment=<span class="string">'right'</span>)</span><br><span class="line">ax.set(xlim=[<span class="number">-10000</span>, <span class="number">140000</span>], xlabel=<span class="string">'Total Revenue'</span>, ylabel=<span class="string">'Company'</span>,</span><br><span class="line">       title=<span class="string">'Company Revenue'</span>)  <span class="comment">#设置label</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/22/Ub5LBn.png" alt="Ub5LBn.png"></p>
+<h3 id="批量修改坐标轴刻度label"><a href="#批量修改坐标轴刻度label" class="headerlink" title="批量修改坐标轴刻度label"></a>批量修改坐标轴刻度label</h3><p>通过定义一个函数来处理传进来的每个label，传递的函数需要使用<code>tick</code>对象进行实例化</p>
+<blockquote>
+<p>报错 <a href="https://stackoverflow.com/questions/25119193/matplotlib-pyplot-axes-formatter" target="_blank" rel="noopener">https://stackoverflow.com/questions/25119193/matplotlib-pyplot-axes-formatter</a></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">## 定义处理函数</span></span><br><span class="line"><span class="keyword">import</span> matplotlib.ticker <span class="keyword">as</span> tick</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">currency</span><span class="params">(x, pos)</span>:</span></span><br><span class="line">    <span class="string">"""The two args are the value and tick position"""</span></span><br><span class="line">    <span class="keyword">if</span> x &gt;= <span class="number">1e6</span>:</span><br><span class="line">        s = <span class="string">'$&#123;:1.1f&#125;M'</span>.format(x*<span class="number">1e-6</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        s = <span class="string">'$&#123;:1.0f&#125;K'</span>.format(x*<span class="number">1e-3</span>)</span><br><span class="line">    <span class="keyword">return</span> s</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">6</span>, <span class="number">8</span>))</span><br><span class="line">ax.barh(group_names, group_data)</span><br><span class="line">labels = ax.get_xticklabels()</span><br><span class="line">plt.setp(labels, rotation=<span class="number">45</span>, horizontalalignment=<span class="string">'right'</span>)</span><br><span class="line"></span><br><span class="line">ax.set(xlim=[<span class="number">-10000</span>, <span class="number">140000</span>], xlabel=<span class="string">'Total Revenue'</span>, ylabel=<span class="string">'Company'</span>,</span><br><span class="line">       title=<span class="string">'Company Revenue'</span>)</span><br><span class="line"><span class="comment">#ax.get_xaxis().get_major_formatter()</span></span><br><span class="line">ax.xaxis.set_major_formatter(tick.FuncFormatter(currency)) <span class="comment">##实例化formater函数</span></span><br></pre></td></tr></table></figure>
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/22/Ub5HXj.png" alt="Ub5HXj.png"></p>
+<h3 id="组合多个axes"><a href="#组合多个axes" class="headerlink" title="组合多个axes"></a>组合多个axes</h3><p>直接操作ax对象，再使用对应的作图函数生成对应的图片</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">fig,ax =plt.subplots(figsize=(<span class="number">8</span>,<span class="number">8</span>))</span><br><span class="line">ax.barh(group_names,group_data)</span><br><span class="line">labels=ax.get_xticklabels()</span><br><span class="line">plt.setp(labels,rotation=<span class="number">45</span>,horizontalalignment=<span class="string">'right'</span>)</span><br><span class="line">ax.axvline(group_mean, ls=<span class="string">'--'</span>,c=<span class="string">'red'</span>) <span class="comment">##</span></span><br></pre></td></tr></table></figure>
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/22/Ub57cQ.png" alt="Ub57cQ.png"></p>
+<h3 id="保存图片"><a href="#保存图片" class="headerlink" title="保存图片"></a>保存图片</h3><p>调用<code>figure</code>对象的<code>savefig</code>方法保存图片；在保存图片之前可以查看支持保存的图片格式</p>
+<ul>
+<li><code>transparent</code>图片背景是否透明</li>
+<li><code>dpi</code> 图片清晰度</li>
+<li><code>format</code> 保存格式</li>
+<li><code>bbox_inches=&quot;tight&quot;</code> 图片与画布紧密排布</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">print(fig.canvas.get_supported_filetypes()) <span class="comment">## 查看支持保存格式</span></span><br><span class="line">fig.savefig(<span class="string">"test.pdf"</span>,format=<span class="string">"pdf"</span>, bbox_inches=<span class="string">"tight"</span>,transparent=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>{&apos;ps&apos;: &apos;Postscript&apos;, &apos;eps&apos;: &apos;Encapsulated Postscript&apos;, &apos;pdf&apos;: &apos;Portable Document Format&apos;, &apos;pgf&apos;: &apos;PGF code for LaTeX&apos;, &apos;png&apos;: &apos;Portable Network Graphics&apos;, &apos;raw&apos;: &apos;Raw RGBA bitmap&apos;, &apos;rgba&apos;: &apos;Raw RGBA bitmap&apos;, &apos;svg&apos;: &apos;Scalable Vector Graphics&apos;, &apos;svgz&apos;: &apos;Scalable Vector Graphics&apos;, &apos;jpg&apos;: &apos;Joint Photographic Experts Group&apos;, &apos;jpeg&apos;: &apos;Joint Photographic Experts Group&apos;, &apos;tif&apos;: &apos;Tagged Image File Format&apos;, &apos;tiff&apos;: &apos;Tagged Image File Format&apos;}</code></pre>]]></content>
+  </entry>
+  <entry>
+    <title>D3js-数据可视化神器</title>
+    <url>/codeHub/2020/07/21/2020-07/10D3js-%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E7%A5%9E%E5%99%A8/</url>
+    <content><![CDATA[<p>最近准备把一些数据可视化一下，打算使用前端的<code>d3.js</code>库。这个库的全称也被称为<strong>Data-Driven Document</strong>，顾名思义，基于数据驱动文档，这一概念和Vue的设计思想很类似。<code>d3.js</code>下面统称为<strong>D3</strong>；一直以来是神一般的库的存在；尽管已经有许多优秀的库例如百度的<code>echaet</code>等；但是<strong>D3</strong>与其他的库相比在于，提供了无限定制的能力，让你的想象力尽情的发挥；在交互性上做的同样优秀。</p>
+<p>~~感受一波</p>
+<p><img data-src="https://picb.zhimg.com/v2-bf6c58a9284672cecc16c645e69f85c4_b.webp" alt="d3js案例"></p>
+<a id="more"></a>
+
+<h4 id="D3的需要的入门知识："><a href="#D3的需要的入门知识：" class="headerlink" title="D3的需要的入门知识："></a>D3的需要的入门知识：</h4><ol>
+<li>SVG</li>
+<li>css</li>
+<li>JavaScript</li>
+</ol>
+<p>看完大佬们的博客，感觉<strong>D3</strong>的学习成本还是很高的，不过毕竟是神一样的包，肯定涉及到很多知识点，以后慢慢学习的过程查漏补缺吧。下面这张图就把一个学习的过程总结的很好，我觉得太生动了；还是站在巨人的肩膀上，躺着比较舒服，我也喜欢躺。</p>
+<ol>
+<li><p><img data-src="https://pic4.zhimg.com/80/v2-200a3d892a637679fdc5239e93f27bbc_720w.jpg" alt="学习过程"></p>
+</li>
+</ol>
+<h2 id="scale-vector-graphics-SVG-学习"><a href="#scale-vector-graphics-SVG-学习" class="headerlink" title="scale vector graphics (SVG)学习"></a>scale vector graphics (SVG)学习</h2><p>可缩放的矢量图，svg标签内的限制条件</p>
+<blockquote>
+<ul>
+<li>图片必须在<code>svg</code>标签内</li>
+<li>svg指定高度和宽度，也可以使用百分比；继承父元素宽度</li>
+<li>svg中可以绘制多个图片</li>
+</ul>
+</blockquote>
+<p>svg中可使用预先设置好的一系列标签；</p>
+<ul>
+<li>矩形 <code>rect</code></li>
+<li>圆形<code>circle</code></li>
+<li>椭圆 <code>ellipse</code></li>
+<li>线 <code>line</code></li>
+<li>折线 <code>polyline</code></li>
+<li>多边形 <code>polygon</code></li>
+<li>路径 <code>path</code></li>
+</ul>
+<h3 id="快速生成一个圆"><a href="#快速生成一个圆" class="headerlink" title="快速生成一个圆"></a>快速生成一个圆</h3><p><svg width="200" height="200"><circle cx="100" cy="100" r="100" stroke="black" stroke-width="2" fill="red" /></svg></p>
+<ul>
+<li>使用<code>circle</code>标签表示生成圆形</li>
+<li><code>cx|cy</code>圆心的位置，不指定则为0,0</li>
+<li><code>stroke</code>外圆边框颜色及厚度</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;svg width=<span class="string">"400"</span> height=<span class="string">"400"</span>&gt;</span><br><span class="line">  &lt;circle cx=<span class="string">"200"</span> cy=<span class="string">"200"</span> r=<span class="string">"100"</span> stroke=<span class="string">"black"</span> stroke-width=<span class="string">"2"</span> fill=<span class="string">"red"</span> /&gt;</span><br><span class="line">&lt;<span class="regexp">/svg&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="快速生成一个矩形"><a href="#快速生成一个矩形" class="headerlink" title="快速生成一个矩形"></a>快速生成一个矩形</h3><svg width="100" height="100">
+      <rect width="100" height="100" stroke="black" stroke-width="2" style="fill: red" />
+    </svg>
+
+
+<ul>
+<li>width 矩形长</li>
+<li>height 矩形宽</li>
+<li>stroke 矩形边框</li>
+<li>stroke-width 矩形边框宽度</li>
+<li>style 指定矩形样式</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;svg width=<span class="string">"400"</span> height=<span class="string">"400"</span>&gt;</span><br><span class="line">  &lt;rect width=<span class="string">"100"</span> height=<span class="string">"100"</span> stroke=<span class="string">"black"</span> stroke-width=<span class="string">"2"</span> style=<span class="string">"fill: red"</span> /&gt;</span><br><span class="line">&lt;<span class="regexp">/svg&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="快速生成一个椭圆"><a href="#快速生成一个椭圆" class="headerlink" title="快速生成一个椭圆"></a>快速生成一个椭圆</h3><svg width="200" height="200">
+      <ellipse
+        cx="100"
+        cy="100"
+        rx="100"
+        ry="50"
+        stroke="black"
+        stroke-width="2"
+        style="fill: red"
+      />
+    </svg>
+
+
+<ul>
+<li>rx 定义水平半径</li>
+<li>ry 定义垂直半径</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;svg width=<span class="string">"400"</span> height=<span class="string">"400"</span>&gt;</span><br><span class="line">  &lt;ellipse</span><br><span class="line">    cx=<span class="string">"150"</span></span><br><span class="line">    cy=<span class="string">"100"</span></span><br><span class="line">    rx=<span class="string">"100"</span></span><br><span class="line">    ry=<span class="string">"50"</span></span><br><span class="line">    stroke=<span class="string">"black"</span></span><br><span class="line">    stroke-width=<span class="string">"2"</span></span><br><span class="line">    style=<span class="string">"fill: red"</span></span><br><span class="line">  /&gt;</span><br><span class="line">&lt;<span class="regexp">/svg&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="快速生成一个线条"><a href="#快速生成一个线条" class="headerlink" title="快速生成一个线条"></a>快速生成一个线条</h3><svg width="200" height="200">
+      <line 
+        x1="150"
+        y1="100"
+        x2="100"
+        y2="50"
+        stroke="red" 
+        stroke-width="2" />
+    </svg>
+
+
+<ul>
+<li>x1 和x2 x轴的开始和结束</li>
+<li>y1和y2  y轴的开始和结束</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;svg width=<span class="string">"400"</span> height=<span class="string">"400"</span>&gt;</span><br><span class="line">  &lt;line </span><br><span class="line">    x1=<span class="string">"150"</span></span><br><span class="line">    y1=<span class="string">"100"</span></span><br><span class="line">    x2=<span class="string">"100"</span></span><br><span class="line">    y2=<span class="string">"50"</span></span><br><span class="line">    stroke=<span class="string">"black"</span> </span><br><span class="line">    stroke-width=<span class="string">"2"</span> /&gt;</span><br><span class="line">&lt;<span class="regexp">/svg&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="快速生成一个多边形"><a href="#快速生成一个多边形" class="headerlink" title="快速生成一个多边形"></a>快速生成一个多边形</h3>  <svg width="300" height="300">
+      <polygon
+        points="220,100 300,210 170,250"
+        style="fill:#cccccc;
+        stroke:#000000;stroke-width:1"
+      />
+    </svg>
+
+
+
+<p>定义了6个角的位置，将会生成一个三角形</p>
+<ul>
+<li>points 定义了每个角的坐标轴位置</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">    &lt;svg width=<span class="string">"400"</span> height=<span class="string">"400"</span>&gt;</span><br><span class="line">      &lt;polygon</span><br><span class="line">        points=<span class="string">"220,100 300,210 170,250"</span></span><br><span class="line">        style=<span class="string">"fill:#cccccc;</span></span><br><span class="line"><span class="string">stroke:#000000;stroke-width:1"</span></span><br><span class="line">      /&gt;</span><br><span class="line">    &lt;<span class="regexp">/svg&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="快速生成一个折线图"><a href="#快速生成一个折线图" class="headerlink" title="快速生成一个折线图"></a>快速生成一个折线图</h4><svg width="100" height="100">
+      <polyline
+        points="0,0 0,20 20,20 20,40 40,40 40,60"
+        style="fill:black;stroke:red;stroke-width:2"
+      />
+ </svg>
+
+
+<ul>
+<li>points同样定义了每个折点的坐标</li>
+<li>fill 这个填充区域还有点迷惑</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;svg width=<span class="string">"400"</span> height=<span class="string">"400"</span>&gt;</span><br><span class="line">  &lt;polyline</span><br><span class="line">    points=<span class="string">"0,0 0,20 20,20 20,40 40,40 40,60"</span></span><br><span class="line">    style=<span class="string">"fill:white;stroke:red;stroke-width:2"</span></span><br><span class="line">  /&gt;</span><br><span class="line">&lt;<span class="regexp">/svg&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="快速生成一个路径图"><a href="#快速生成一个路径图" class="headerlink" title="快速生成一个路径图"></a>快速生成一个路径图</h3><svg width="400" height="400" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <path d="M250 150 L150 350 L350 350 Z" style="fill:white;stroke:red;stroke-width:2" />
+    </svg>
+
+<p>从250，150出发，到150,350；再到350,350；最后回到原点，生成了一个三角形。</p>
+<blockquote>
+<p>推荐使用SVG编辑器来编辑路径图</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;svg width=<span class="string">"100%"</span> height=<span class="string">"100%"</span> version=<span class="string">"1.1"</span> xmlns=<span class="string">"http://www.w3.org/2000/svg"</span>&gt;</span><br><span class="line">  &lt;path d=<span class="string">"M250 150 L150 350 L350 350 Z"</span> /&gt;</span><br><span class="line">&lt;<span class="regexp">/svg&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li><a href="https://www.w3school.com.cn/svg/index.asp" target="_blank" rel="noopener">SVG</a></li>
+<li><a href="https://juejin.im/post/5d1e074af265da1bca51f8ec" target="_blank" rel="noopener">d3js</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/38001672" target="_blank" rel="noopener">D3学习之路-知乎</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>node搭建后台</title>
+    <url>/codeHub/2020/07/20/2020-07/09node%E5%90%8E%E5%8F%B0/</url>
+    <content><![CDATA[<p>最近在使用<code>SMTP</code>邮件系统的时候，用的是网易163的账号，结果账号被封了导致服务器在给用户批量发送邮件时失败，而且又没有报错提示，整的我一脸懵逼。出于无奈，我使用之前学习的<code>node</code>、<code>mysql</code>知识搭建了一个后台系统；再使用<code>APPache</code>反向代理将内网中node服务器信息，转发到公网服务器。同时node操作<code>mysql</code>时，使用到了之前学习的<code>Promise</code>知识 ，解决了异步操作的问题。涉及到的知识点主要包含以下方面：</p>
+<ol>
+<li><code>log4js</code>记录node日志</li>
+<li><code>PowerDesigner</code>设计数据表</li>
+<li><code>Promise</code>解决mysql异步操作</li>
+</ol>
+<p><img data-src="https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif" alt="404"></p>
+<a id="more"></a>
+
+<h3 id="1-log4js记录日志"><a href="#1-log4js记录日志" class="headerlink" title="1.log4js记录日志"></a>1.log4js记录日志</h3><p>使用npm 下载<code>log4js</code>插件后，配置对应的信息。</p>
+<p>这里我使用了两个记录器：</p>
+<ul>
+<li>按照天数记录node运行日志</li>
+<li>同时将日志打印到标准输出</li>
+</ul>
+<p>最终生成的文件将会以<code>log_date.2020-07-20.log</code>文件的形式进行保存</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> log4js = <span class="built_in">require</span>(<span class="string">'log4js'</span>)</span><br><span class="line">log4js.configure(&#123;</span><br><span class="line">  appenders: &#123;</span><br><span class="line">    dateFile: &#123;</span><br><span class="line">      type: <span class="string">'dateFile'</span>,</span><br><span class="line">      filename: path.join(__dirname, <span class="string">'../logs/log_date'</span>),</span><br><span class="line">      alwaysIncludePattern: <span class="literal">true</span>,</span><br><span class="line">      pattern: <span class="string">'yyyy-MM-dd.log'</span>,</span><br><span class="line">      compress: <span class="literal">true</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    out: &#123;</span><br><span class="line">      type: <span class="string">'stdout'</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  categories: &#123;</span><br><span class="line">    <span class="keyword">default</span>: &#123; <span class="attr">appenders</span>: [<span class="string">'dateFile'</span>, <span class="string">'out'</span>], <span class="attr">level</span>: <span class="string">'trace'</span> &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-PowerDesigner设计数据表"><a href="#2-PowerDesigner设计数据表" class="headerlink" title="2.PowerDesigner设计数据表"></a>2.<code>PowerDesigner</code>设计数据表</h3><p>使用<code>powerDeigner</code>这个神器，省的我自己去写sql代码生成对应的表；整个软件通过图形化的方式，构造表与表之间的关系和字段的数据类型，字段的约束、主键等。</p>
+<p>图中构造了两个表，其中学生表中<code>年级</code>字段与级别表存在关联；并且每个字段都标明了对应的数据类型和范围。最终以鼠标的方式就可以生成sql语句。</p>
+<p><img data-src="https://s1.ax1x.com/2020/07/20/U4c5zF.png" alt="表设计"></p>
+<h3 id="3-Promise解决异步操作"><a href="#3-Promise解决异步操作" class="headerlink" title="3.Promise解决异步操作"></a>3.Promise解决异步操作</h3><p>由于JavaScript单线程的性质，导致异步操作时很难保证sql查询的顺序；而Promise则能够确保查询语句按照固定的顺序执行。首先使用<code>mysql</code>配置mysql账号和密码。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> mysql = <span class="built_in">require</span>(<span class="string">'mysql'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> sqlconnection = mysql.createConnection(&#123;</span><br><span class="line">  host: <span class="string">'localhost'</span>,</span><br><span class="line">  user: <span class="string">'zpliu'</span>,</span><br><span class="line">  password: <span class="string">'123456'</span>,</span><br><span class="line">  port: <span class="number">3306</span>,</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  connection: sqlconnection,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>封装Promise对象</p>
+<p>当用户发起请求时，对mysql进行查询；将mysql对象、sql语句以及中间件传递给函数；如果Promise在执行过程中遇到了错误，则调用<code>logger</code>函数将错误写入到日志文件中；如果正常执行时则继续返回一个Promise对象。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sqlQueryPromise</span>(<span class="params">sqlConnecion, sql, next</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, NULL</span>) =&gt;</span> &#123;</span><br><span class="line">    sqlConnecion.query(sql, <span class="function"><span class="keyword">function</span> (<span class="params">err, result</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (err) &#123;</span><br><span class="line">        logger.error(</span><br><span class="line">          <span class="string">'sql language error: errcode:'</span> + err.errno + <span class="string">'\t`'</span> + err.sql + <span class="string">'`'</span></span><br><span class="line">        )</span><br><span class="line">        next(&#123;</span><br><span class="line">          code: err.errno,</span><br><span class="line">        &#125;) <span class="comment">//sql language error</span></span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">      &#125;</span><br><span class="line">      resolve(result)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>响应客户端请求</p>
+<p>在响应客户端请求时，涉及到两个sql循环，并且必须等第一个查询成功执行才能够进入到第二个查询语句。</p>
+<p>进入第二个查询语句后，再将结果返回给客户端</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">router.post(<span class="string">'/people/update'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">    sql=<span class="string">'*****'</span></span><br><span class="line">  sqlQueryPromise(mysqlconnection, <span class="string">`use <span class="subst">$&#123;DataBase&#125;</span>;`</span>, next)</span><br><span class="line">    .then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> sqlQueryPromise(mysqlconnection, sql, next)</span><br><span class="line">    &#125;)</span><br><span class="line">    .then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      res.json(&#123; <span class="attr">code</span>: <span class="number">0</span> &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-API测试"><a href="#4-API测试" class="headerlink" title="4.API测试"></a>4.API测试</h3><p>最后我把node后台API，放在了以下地址</p>
+<blockquote>
+<p><a href="http://cotton.hzau.edu.cn/web/" target="_blank" rel="noopener">http://cotton.hzau.edu.cn/web/</a></p>
+</blockquote>
+<p>API中包含了简单的<code>增删改查</code></p>
+<p>例如请求 <code>http://cotton.hzau.edu.cn/web/people</code>地址时；浏览器将会返回以下数据,感兴趣的话可以试一试</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">[&#123;<span class="string">"id"</span>:<span class="number">10</span>,</span><br><span class="line">  <span class="string">"name"</span>:<span class="string">"好好学习"</span>,</span><br><span class="line">  <span class="string">"photo"</span>:<span class="string">"天天向上"</span>,</span><br><span class="line">  <span class="string">"sex"</span>:<span class="number">0</span>,</span><br><span class="line">  <span class="string">"introduction"</span>:<span class="literal">null</span>,</span><br><span class="line">  <span class="string">"email"</span>:<span class="string">"19445322210@qq.com"</span>,</span><br><span class="line">  <span class="string">"grade"</span>:<span class="string">"Ph.D"</span>&#125;]</span><br></pre></td></tr></table></figure>
+
+<p>最后再拿到后台给的数据后，接下来的工作就是交给前端进行数据的渲染啦！今天通过整理之前学的一些node知识；把代码和文件夹规范了不少，之后就在这个基础上进行后端的开发。前端的内容等过一段时间再规范一下；准备使用node做后端API接口负责数据的存取；Vue负责前端的数据渲染和路由跳转。</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li><a href="https://www.cnblogs.com/biehongli/p/6025954.html" target="_blank" rel="noopener">powerDesigner使用</a></li>
+<li><a href="https://biocottonhub.github.io/codeHub/2020/04/19/2020-06%E4%BB%A5%E5%89%8D/23Promise%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">Promise异步</a></li>
+<li><a href="https://blog.csdn.net/lxhjh/article/details/50747642" target="_blank" rel="noopener">log4js</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>matplotlib-image</title>
+    <url>/codeHub/2020/07/16/2020-07/07matplotlib-image/</url>
+    <content><![CDATA[<p>本教程主要讲，如何使用matplotlib绘制image图片；这里的<code>image</code>不是我们平时见到的RGB编码的图片，matplotlib绘制的<code>image</code>是基于矩阵数据进行绘制的；也可以将RGB的图片转码成numpy矩阵，然后对矩阵进行操作就</p>
+<blockquote>
+<p>需要注意的是matplotlib中只支持png图片的加载，如果要获得其他类型图片的数据，则需要<code>Pillow</code>包的支持</p>
+</blockquote>
+<a id="more"></a>
+
+<h3 id="下面让我们来对这张小虫子的图片来一番操作"><a href="#下面让我们来对这张小虫子的图片来一番操作" class="headerlink" title="下面让我们来对这张小虫子的图片来一番操作"></a>下面让我们来对这张小虫子的图片来一番操作</h3><p><img data-src="https://matplotlib.org/_images/stinkbug.png" alt="虫子"></p>
+<blockquote>
+<p> RGB色彩模式是工业界的一种颜色标准，是通过对红(R)、绿(G)、蓝(B)三个颜色通道的变化以及它们相互之间的叠加来得到各式各样的颜色的，RGB即是代表红、绿、蓝三个通道的颜色，这个标准几乎包括了人类视力所能感知的所有颜色，是运用最广的颜色系统之一。&lt;引自百度百科&gt;</p>
+</blockquote>
+<p>这是一种RGB的PNG图片，它的分辨率为500x375;通俗的讲就是这张PNG的图片数据包含有<code>500X375</code>个点；每个点通过一个RGB代码表示出一种颜色。这张图片的每个点是一个24位的二进制代码,其中每8位二进制代码表示一个颜色的编码；如果是RGB是32位的编码的话，matplotlib会将它缩放到24位，在计算每种颜色的编码，颜色编码范围在<code>0~1</code>之间。</p>
+<p>例如通过matplotlib读取png图片后，每个像素的RGB代码表示成一个数组<code>[0.40784314 0.40784314 0.40784314]</code></p>
+<p>​                                        </p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> matplotlib.image <span class="keyword">as</span> mping </span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">导入Image 所需要的包</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line">img=mping.imread(<span class="string">"../stinkbug.png"</span>)</span><br><span class="line"><span class="comment">#print(img.shape)</span></span><br><span class="line"><span class="comment">#(375, 500, 3)</span></span><br><span class="line">print(img)</span><br></pre></td></tr></table></figure>
+
+<pre><code>[[[0.40784314 0.40784314 0.40784314]
+  [0.40784314 0.40784314 0.40784314]
+  [0.40784314 0.40784314 0.40784314]
+  ...
+  [0.42745098 0.42745098 0.42745098]
+  [0.42745098 0.42745098 0.42745098]
+  [0.42745098 0.42745098 0.42745098]]
+]]</code></pre><h3 id="打印矩阵数据"><a href="#打印矩阵数据" class="headerlink" title="打印矩阵数据"></a>打印矩阵数据</h3><p>在使用<code>mping.imread</code>获取到PNG图片的编码矩阵后，可以使用<code>plt.imshow()</code>将矩阵数据显示成图片，并且多了两个坐标轴，坐标轴的刻度是以像素为单位的。</p>
+<ul>
+<li>横坐标是图片原始的宽度</li>
+<li>纵坐标是图片高度</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">plt.imshow(img) <span class="comment">##显示图片</span></span><br></pre></td></tr></table></figure>
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/16/UBLaBq.png" alt="UBLaBq.png"></p>
+<h3 id="对原始矩阵进行操作"><a href="#对原始矩阵进行操作" class="headerlink" title="对原始矩阵进行操作"></a>对原始矩阵进行操作</h3><ul>
+<li>截取部分图片</li>
+<li>改变图片原始的RGB代码</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="comment">##截取200行，400列的矩阵；实际上相当于图片高度变成200，宽度变成400</span></span><br><span class="line">plt.imshow(img[<span class="number">0</span>:<span class="number">200</span>,<span class="number">0</span>:<span class="number">600</span>,]) <span class="comment">##矩阵的切片操作</span></span><br></pre></td></tr></table></figure>
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/16/UBLJ3Q.png" alt="UBLJ3Q.png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">## 改变RGB编码，我这里只截取了RGB数组中的一个维度</span></span><br><span class="line"><span class="comment">## 对于图片大小我没有进行修改</span></span><br><span class="line">plt.imshow(img[:,:,<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/16/UBLUun.png" alt="UBLUun.png"></p>
+<h3 id="将颜色进行映射"><a href="#将颜色进行映射" class="headerlink" title="将颜色进行映射"></a>将颜色进行映射</h3><p>如果你的每个像素点中，只有一个数字代表它是什么颜色，同样可以使用<code>imshow</code>函数中封装好的映射函数将一维的数据映射成3维的数据点</p>
+<p>例如我将img矩阵中的RGB编码，压缩到一维空间，再使用<code>cmap=hot</code>，&lt; color maping &gt;的缩写将一维空间重新映射到三维空间后的图片，搞了两种映射。<br>既可以使用函数中的参数进行设置，也可以使用对象的属性进行设置</p>
+<ul>
+<li><code>Greys</code>这个有点像x光片</li>
+<li><code>hot</code> 这个有点像热成像</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">plt.imshow(img[:,:,<span class="number">1</span>],cmap=<span class="string">'Greys'</span>) <span class="comment">##按照灰色进行映射</span></span><br></pre></td></tr></table></figure>
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/16/UBLtjs.png" alt="UBLtjs.png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">imgplot=plt.imshow(img[:,:,<span class="number">1</span>]) <span class="comment">##返回一个image对象</span></span><br><span class="line">imgplot.set_cmap(<span class="string">'hot'</span>)  <span class="comment">##调用属性进行设置hot映射</span></span><br></pre></td></tr></table></figure>
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/16/UBLYcj.png" alt="UBLYcj.png"></p>
+<h3 id="添加图例，描述颜色深浅"><a href="#添加图例，描述颜色深浅" class="headerlink" title="添加图例，描述颜色深浅"></a>添加图例，描述颜色深浅</h3><p>直接使用<code>plt.colorbar()</code>函数即可；<br>当然有时候我们可以通过设置颜色映射时的上下限，来增加我们感兴趣的地方的对比度；从而突出重点</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">imgplot=plt.imshow(img[:,:,<span class="number">1</span>]) <span class="comment">##返回一个image对象</span></span><br><span class="line">imgplot.set_cmap(<span class="string">'nipy_spectral'</span>)  <span class="comment">##调用属性进行设置hot映射</span></span><br><span class="line">plt.colorbar()  <span class="comment">##添加图例</span></span><br></pre></td></tr></table></figure>
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/16/UBL0EV.png" alt="UBL0EV.png"></p>
+<h3 id="改变颜色映射规则"><a href="#改变颜色映射规则" class="headerlink" title="改变颜色映射规则"></a>改变颜色映射规则</h3><p>当然有时候我们可以通过设置颜色映射时的上下限，来增加我们感兴趣的地方的对比度；从而突出重点<br>使用<code>clim</code>函数进行操作，同样可以使用对象的方法<code>set_clim</code></p>
+<p>在设置了颜色的映射范围之后，增强你感兴趣的地方的对比度；可以发现在经过调整后，B图中有些peak值出，对比度更亮了</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">fig=plt.figure(figsize=(<span class="number">10</span>,<span class="number">10</span>)) <span class="comment">##创建一个画板</span></span><br><span class="line">a=plt.subplot2grid((<span class="number">1</span>,<span class="number">2</span>),(<span class="number">0</span>,<span class="number">0</span>),rowspan=<span class="number">1</span>,colspan=<span class="number">1</span>) <span class="comment">##创建一个图层</span></span><br><span class="line">imgplot=plt.imshow(img[:,:,<span class="number">1</span>])</span><br><span class="line">a.set_title(<span class="string">'Before'</span>)</span><br><span class="line">plt.colorbar(ticks=[<span class="number">0.1</span>, <span class="number">0.3</span>, <span class="number">0.5</span>, <span class="number">0.7</span>], orientation=<span class="string">'horizontal'</span>) <span class="comment">##设置图例位置和刻度线</span></span><br><span class="line">b=plt.subplot2grid((<span class="number">1</span>,<span class="number">2</span>),(<span class="number">0</span>,<span class="number">1</span>),rowspan=<span class="number">1</span>,colspan=<span class="number">1</span>) <span class="comment">## 创建一个图层</span></span><br><span class="line">imgplot=plt.imshow(img[:,:,<span class="number">1</span>])</span><br><span class="line">imgplot.set_clim(<span class="number">0</span>,<span class="number">0.7</span>)</span><br><span class="line">b.set_title(<span class="string">'After'</span>)</span><br><span class="line">plt.colorbar(ticks=[<span class="number">0.1</span>, <span class="number">0.3</span>, <span class="number">0.5</span>, <span class="number">0.7</span>], orientation=<span class="string">'horizontal'</span>)</span><br></pre></td></tr></table></figure>
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/16/UBLD4U.png" alt="UBLD4U.png"></p>
+<h3 id="打马赛克"><a href="#打马赛克" class="headerlink" title="打马赛克"></a>打马赛克</h3><p>使用<code>Pillow</code>包对图片的RGB数据进行扰动。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pip3 install pillow</span><br></pre></td></tr></table></figure>
+
+<p>例如当图片像素发生改变时，必然会有像素点的丢失和新像素点的获得。在保持图片的整体特征不变的情况下，对图片的像素点进行处理方案又有好多种；在图片缩小时，丢弃掉一些像素点；在图片放大时，插入一些像素点。</p>
+<p>这里借助<code>pillow</code>包将图片缩小64x48个像素；但是当你以原有的尺寸来看这张图片，就相当于打了一层马赛克；因为有原图中的一些像素被丢弃了。如果图片缩写这看，估计也就是个缩略图</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line">img = Image.open(<span class="string">'../stinkbug.png'</span>)</span><br><span class="line">print(img.size)</span><br><span class="line">(<span class="number">500</span>, <span class="number">375</span>)</span><br><span class="line">img.thumbnail((<span class="number">64</span>, <span class="number">64</span>), Image.ANTIALIAS)  <span class="comment"># resizes image in-place</span></span><br><span class="line">print(img.size)</span><br><span class="line"><span class="comment">#(64, 48)</span></span><br><span class="line">imgplot = plt.imshow(img)</span><br><span class="line">fig=plt.figure(figsize=(<span class="number">0.64</span>,<span class="number">0.48</span>))</span><br><span class="line">imgplot = plt.imshow(img)</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="https://s1.ax1x.com/2020/07/16/UBLBNT.png" alt="UBLBNT.png"></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li><a href="https://matplotlib.org/tutorials/introductory/images.html#sphx-glr-tutorials-introductory-images-py" target="_blank" rel="noopener">matplotlib</a></li>
+<li><a href="https://www.cnblogs.com/Sinte-Beuve/p/6573246.html" target="_blank" rel="noopener">数组切片</a></li>
+<li><a href="https://blog.csdn.net/MiniCatTwo/article/details/80557109" target="_blank" rel="noopener">pillow</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+  </entry>
+  <entry>
     <title>TAD的鉴定方法（一）——cool格式的转换</title>
     <url>/codeHub/2020/07/13/2020-07/07TAD%E7%9A%84%E9%89%B4%E5%AE%9A%E6%96%B9%E6%B3%95%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94cool%E6%A0%BC%E5%BC%8F%E7%9A%84%E8%BD%AC%E6%8D%A2/</url>
     <content><![CDATA[<h1 id="TAD的鉴定方法（一）——cool格式的转换"><a href="#TAD的鉴定方法（一）——cool格式的转换" class="headerlink" title="TAD的鉴定方法（一）——cool格式的转换"></a>TAD的鉴定方法（一）——cool格式的转换</h1><p>上次我们使用HiC-Pro将HiC数据比对到了参考基因组上，并且得到了bin水平的HiC数据（交互文件），我们这里介绍一下TAD的鉴定方法（使用HiCPeaks和TADLib中的两个程序），大致分为以下两步（我们会分）</p>
