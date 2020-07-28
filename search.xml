@@ -1,6 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>基于Vue前端网页实现</title>
+    <url>/codeHub/2020/07/28/2020-07/13%E5%9F%BA%E5%9B%A0Vue%E5%89%8D%E7%AB%AF%E7%BD%91%E9%A1%B5%E5%AE%9E%E7%8E%B0/</url>
+    <content><![CDATA[<p>在看了一遍<code>vue-element-admin</code>的源代码后，自己试着按照这个项目中的思路去构建前端单页面应用。在构建的过程中学习了<code>vuex</code>进行组件间的状态管理、学习了他项目的目录结构设计以及对应的思路；进一步优化了前端路由的设计。</p>
+<p>在写用户登录登出<code>API</code>时，使用到了<code>session/cookie</code>的知识，利用后端服务器保存用户信息在<code>session</code>中。</p>
+<blockquote>
+<p>项目展示网址 :<a href="http://cotton.hzau.edu.cn/web/#/home" target="_blank" rel="noopener">http://cotton.hzau.edu.cn/web/#/home</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="layout布局"><a href="#layout布局" class="headerlink" title="layout布局"></a>layout布局</h2><p>借助与router实现一个layout框架，在框架内部铺设子路由改变局部页面</p>
+<p>整个思维图如下：</p>
+<img data-src="https://s1.ax1x.com/2020/07/28/akcCrt.png" alt="akcCrt.png" style="zoom:67%;" />
+
+<h3 id="路由的设置"><a href="#路由的设置" class="headerlink" title="路由的设置"></a>路由的设置</h3><p>首先在路由进入到<code>/</code>时，将会渲染layout组件，在layout组件内部包含有一个子路由的视图</p>
+<p>因此，在进入到layout后，如果子路由将会渲染<code>App-main</code>内的内容；</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  path: <span class="string">'/'</span>,</span><br><span class="line">  component: HomeLayout,</span><br><span class="line">  redirect: <span class="string">'/home'</span>,</span><br><span class="line">  children: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">'/home'</span>,</span><br><span class="line">      name: <span class="string">'home'</span>,</span><br><span class="line">      component: <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">import</span>(<span class="string">'@/views/home'</span>)</span><br><span class="line">      &#125;,</span><br><span class="line">      meta: &#123; <span class="attr">title</span>: <span class="string">'cottonWeb'</span> &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  ],</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<h3 id="Vue中的配置"><a href="#Vue中的配置" class="headerlink" title="Vue中的配置"></a>Vue中的配置</h3><p>程序根组件<code>App.vue</code>中的<code>router-view</code>用于挂载布局组件或者<code>404</code>页面组件，布局发生改变，或者刚开始进入时都会触发页面动画</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">    &lt;transition enter-active-<span class="class"><span class="keyword">class</span></span>=<span class="string">"animate__animated animate__fadeInUp"</span>&gt;</span><br><span class="line">      &lt;router-view /&gt;</span><br><span class="line">    &lt;<span class="regexp">/transition&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>layout组件配置</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;cotton-navbar&gt;&lt;<span class="regexp">/cotton-navbar&gt;</span></span><br><span class="line">    &lt;app-main&gt;&lt;/app-main&gt; ###这里放置一个子路由</span><br><span class="line">    &lt;cotton-footer&gt;&lt;<span class="regexp">/cotton-footer&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>功能页面组件配置</p>
+<p>子路由发生改变时，将会触发动画效果</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;transition enter-active-<span class="class"><span class="keyword">class</span></span>=<span class="string">"animate__animated animate__fadeInDown"</span>&gt;</span><br><span class="line">      &lt;router-view :key=<span class="string">"key"</span> /&gt;</span><br><span class="line">    &lt;<span class="regexp">/transition&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="动画效果"><a href="#动画效果" class="headerlink" title="动画效果"></a>动画效果</h2><h3 id="安装animal-css"><a href="#安装animal-css" class="headerlink" title="安装animal.css"></a>安装animal.css</h3><p>借助第三方的css工具实现动画效果<code>animate.css</code></p>
+<blockquote>
+<p>注意使用的时候 一定要加上 animate__animate 这个类名</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install animate.css --save</span><br><span class="line"><span class="comment">##在需要使用的地方加上类就行</span></span><br><span class="line">&lt;h1 class=<span class="string">"animate__animated animate__bounce"</span>&gt;An animated element&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-路由跳转动画"><a href="#1-路由跳转动画" class="headerlink" title="1.路由跳转动画"></a>1.路由跳转动画</h3><ul>
+<li>这里的<code>mode</code>这个参数还没搞明白</li>
+</ul>
+<blockquote>
+<p>具体的参数描述： <a href="https://cn.vuejs.org/v2/api/#transition" target="_blank" rel="noopener">https://cn.vuejs.org/v2/api/#transition</a></p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;transition enter-active-<span class="class"><span class="keyword">class</span></span>=<span class="string">"animate__animated animate__fadeInDown"</span> mode=<span class="string">"in-out"</span>&gt;</span><br><span class="line">  &lt;router-view /&gt;</span><br><span class="line">&lt;<span class="regexp">/transition&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="session配置"><a href="#session配置" class="headerlink" title="session配置"></a>session配置</h2><blockquote>
+<p>1.5.0后的版本不再需要<code>cookie-parser</code>的支持了；并且session只是单纯的发送一个session ID 给客户端，而真正的session数据是存储在服务端的。并且默认情况下session是保存在内存当中的仅仅适用于开发和调试模式，至于生产模式下可能会导致内存泄露，得想个办法把它存数据库里或者文件中。</p>
+</blockquote>
+<p>由于我数据库使用的是<code>mysql</code>，因此可以使用对应的mysql将session持久化存起来；我采用文件的方式保存session</p>
+<blockquote>
+<p><a href="https://www.npmjs.com/package/connect-mssql" target="_blank" rel="noopener">connect-mssql</a> A SQL Server-based session store.</p>
+</blockquote>
+<h3 id="1-初始化session"><a href="#1-初始化session" class="headerlink" title="1.初始化session"></a>1.初始化session</h3><ul>
+<li><code>name</code>参数设置客户端中cookie的key名称</li>
+<li><code>secret</code>对session ID进行加盐的字符</li>
+<li><code>resave</code>多个客户端并发请求时，保留最后一次请求并且覆盖前面的</li>
+<li><code>saveUninitialized</code>初始化的session是否进行保存</li>
+<li><code>maxAge</code>和<code>cookie.expires</code>参数都可以设置cookie过期时间，如果都设置了以最后设置的为准，还是设置<code>maxAge</code>好一些，以秒为单位</li>
+<li><code>cookie.path</code>设置cookie存储的路径，默认是根域名下；当然可以修改为子域名</li>
+<li><code>cookie.secure</code>只适用于https请求，设置为true时，在http请求下cookie失效</li>
+</ul>
+<blockquote>
+<p>我设置只在/login API下才能够得到cookie，而在/people API下得不到；</p>
+<p>rolling: true, //每个请求都重新设置一个cookie ；当客户端手动删除cookie时，非常有用，我在这折腾了好久</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> session = <span class="built_in">require</span>(<span class="string">'express-session'</span>) <span class="comment">//use session</span></span><br><span class="line">app.use(</span><br><span class="line">  session(&#123;</span><br><span class="line">    secret: <span class="string">'cotton'</span>,</span><br><span class="line">    name: <span class="string">'token'</span>,</span><br><span class="line">    resave: <span class="literal">false</span>,</span><br><span class="line">    saveUninitialized: <span class="literal">true</span>,</span><br><span class="line">    cookie:&#123;</span><br><span class="line">        maxAge:<span class="number">86400000</span>,  <span class="comment">//设置cookie过期时间以毫秒为单位</span></span><br><span class="line">        path:<span class="string">'/login'</span></span><br><span class="line">    &#125;,</span><br><span class="line">      rolling: <span class="literal">true</span>, <span class="comment">//每个请求都重新设置一个cookie</span></span><br><span class="line">  &#125;)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p> rolling: true; 这个参数设置为真时，当用户手动清空掉cookie时，服务端仍旧会重新发送一份cookie；如果不设置的话，客户端是得不到cookie，进而服务端会出错；这里我弄了好久</p>
+</blockquote>
+<h3 id="2-将用户登录信息保存在session中"><a href="#2-将用户登录信息保存在session中" class="headerlink" title="2.将用户登录信息保存在session中"></a>2.将用户登录信息保存在session中</h3><p>首先根据客户端cookie中的信息判断客户端对应的session中是否包含<code>login</code>字段；如果包含则无需进行数据库query；直接从session中获取用户信息；否则验证用户身份，并将用户信息存在session中。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">router.get(<span class="string">'/login'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (req.session.login) &#123;</span><br><span class="line">    res.send(<span class="string">'ok'</span>)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    req.session.login = <span class="literal">true</span></span><br><span class="line">    res.send(<span class="string">'no'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-将session保存在文件中持久化"><a href="#3-将session保存在文件中持久化" class="headerlink" title="3.将session保存在文件中持久化"></a>3.将session保存在文件中持久化</h3><p>由于express-session将session信息保存在内存当中，因此为了防止node内心泄露，需要对session数据持久化</p>
+<blockquote>
+<p>参考 <a href="https://www.npmjs.com/package/session-file-store" target="_blank" rel="noopener">https://www.npmjs.com/package/session-file-store</a></p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> session = <span class="built_in">require</span>(<span class="string">'express-session'</span>) <span class="comment">//use session</span></span><br><span class="line"><span class="keyword">var</span> FileStore = <span class="built_in">require</span>(<span class="string">'session-file-store'</span>)(session) <span class="comment">//use file store session</span></span><br><span class="line"><span class="keyword">var</span> fileStoreOptions = &#123;</span><br><span class="line">  ttl: <span class="number">86400</span>,  <span class="comment">//设置session文件过期时间，以秒为单位</span></span><br><span class="line">  path: path.join(__dirname, <span class="string">'./sessions'</span>), <span class="comment">//设置session保存路径</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-存信息的时候统一存进一个date对象内"><a href="#4-存信息的时候统一存进一个date对象内" class="headerlink" title="4.存信息的时候统一存进一个date对象内"></a>4.存信息的时候统一存进一个date对象内</h4><p>当客户端第一次访问时，判断session是否存在<code>data</code>属性，如果不存在则进行进行身份验证，验证通过后修改session中data字段数据，并且返回成功代码给客户端；</p>
+<p>如果失败则返回错误代码给客户端，进行重新登录</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">router.get(<span class="string">'/login'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (req.session.data) &#123;</span><br><span class="line">    res.send(req.session.data) <span class="comment">//处于登录状态了</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    req.session.data = <span class="literal">true</span></span><br><span class="line">    res.send(<span class="string">'no'</span>) <span class="comment">//非登录状态，进行数据库查询操作</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>之后需要登录才能得到信息的接口，就直接判断当前session中是否存在数据，不存在就直接返回401，让前端进行登录才能获取到数据</p>
+<h3 id="登录验证API"><a href="#登录验证API" class="headerlink" title="登录验证API"></a>登录验证API</h3><p>当用户提交了账号和密码之后，进行验证；如果验证通过则将信息存储在session文件中，cookie中保留session文件ID</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> username = <span class="string">'zpliu'</span></span><br><span class="line"><span class="keyword">const</span> password = <span class="string">'111'</span></span><br><span class="line">router.post(<span class="string">'/login'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (req.session.data) &#123;</span><br><span class="line">    res.json(req.session.data)</span><br><span class="line">    <span class="comment">//处于登录状态了</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">//进行密码验证</span></span><br><span class="line">    <span class="keyword">if</span> (req.body.username === username &amp;&amp; req.body.password === password) &#123;</span><br><span class="line">      req.session.data = &#123;</span><br><span class="line">        name: <span class="string">'zpliu'</span>,</span><br><span class="line">        grade: <span class="string">'master'</span>,</span><br><span class="line">        role: <span class="string">'Administrator'</span>,</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="built_in">console</span>.log(req.session)</span><br><span class="line">      res.redirect(<span class="string">'/login'</span>)  <span class="comment">//这里重定向还是会产生一点问题，第一次登录会有404，后面改成发生响应数据</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      res.send(&#123;</span><br><span class="line">        code: <span class="number">6000</span>,</span><br><span class="line">        message: <span class="string">'账号或密码错误'</span>,</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>最终代码，已经加上了sql进行账号和密码的验证，以及MD5加密操作</p>
+<blockquote>
+<p><a href="https://github.com/zpliu1126/nodeAPI/blob/cfd3201f9b02a8d963a89ea8f5961c03997d3089/API/auth/index.js" target="_blank" rel="noopener">https://github.com/zpliu1126/nodeAPI/blob/cfd3201f9b02a8d963a89ea8f5961c03997d3089/API/auth/index.js</a></p>
+</blockquote>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li><a href="https://www.cnblogs.com/tugenhua0707/p/9098132.html" target="_blank" rel="noopener">配置session</a></li>
+<li><a href="https://vuex.vuejs.org/zh/guide/" target="_blank" rel="noopener">vuex</a></li>
+<li><a href="https://panjiachen.github.io/vue-element-admin-site/zh/guide/" target="_blank" rel="noopener">vue-element-admin</a></li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
     <title>手把手教你搭建JBrowse-初始化应用</title>
     <url>/codeHub/2020/07/25/2020-07/12%E6%89%8B%E6%8A%8A%E6%89%8B%E6%90%AD%E5%BB%BAjbrowse/</url>
     <content><![CDATA[<h2 id="手把手教你搭建JBrowse-初始化应用"><a href="#手把手教你搭建JBrowse-初始化应用" class="headerlink" title="手把手教你搭建JBrowse-初始化应用"></a>手把手教你搭建JBrowse-初始化应用</h2><p>JBrowse是<strong>GMOD</strong>开源项目中的一个基因组浏览器，所谓的基因组浏览器，字面意思就可以理解成一个网页应用。可能每个生物信息分析的同学电脑内都会安装一个<strong>IGV</strong>，用于对高通量测序数据的可视化。其实<strong>JBrowse</strong>也就是相当于把<strong>IGV</strong>，搬到了服务器内，把庞大的测序数据存储在服务器内，借助于快速发展的web技术；使得我们能够通过仅仅发送一个网页链接就能够与他人共享或者讨论课题。</p>
