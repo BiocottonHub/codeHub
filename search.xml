@@ -1,6 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>01matplotlib样式文件</title>
+    <url>/codeHub/2020/07/31/2020-08/01matplotlib%E6%A0%B7%E5%BC%8F%E6%96%87%E4%BB%B6/</url>
+    <content><![CDATA[<p>这篇文章主要讲了如何修改样式，保存样式以及加载样式文件</p>
+<blockquote>
+<p>样式： 就是定义图形、字体、线条等一切可以美化的元素的公式；说人话就是：你定义好一个公式A，A中定义线条的颜色是红色；现在画图的时候你需要美化一个线条；就直接使用这个公式；线条就变成了红色；这样说的话样式也就相当于一种画图的风格。</p>
+</blockquote>
+<p>matplot支持两种修改样式的方式：</p>
+<ul>
+<li>使用样式表</li>
+<li>使用rcParams</li>
+</ul>
+<a id="more"></a>
+
+<h3 id="这两种修改样式的方式有啥区别呢？"><a href="#这两种修改样式的方式有啥区别呢？" class="headerlink" title="这两种修改样式的方式有啥区别呢？"></a>这两种修改样式的方式有啥区别呢？</h3><p>样式表的方式是通过加载样式文件，来修改matplotlib中默认的绘图风格；加载了文件后只在当前环境生效，下次要用还得重新加载。而rcParams则是直接修改matplotlib的默认配置，一劳永逸。</p>
+<p>下面就用代码来看看具体的效果吧。</p>
+<p>来解读一下具体代码的作用</p>
+<p>为了方便比较，我使用了<code>subplot</code>函数生成两个子图，函数内部参数不懂的可以看我之前写的一篇<code>pyplot</code>对象的文章。<br>默认情况下，matplotlib中加载自定义样式时是对全局生效的，如果你只想在某个地方使用这个样式就得像我这样</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">with</span> plt.style.context(<span class="string">'fivethirtyeight'</span>):</span><br><span class="line">    plt.plot(data)</span><br><span class="line">    plt.title(<span class="string">'fivethirtyeight style'</span>)</span><br><span class="line">    plt.grid(<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<p>通过比较可以发现，再使用了系统中的定义的一个样式后，线条明显变粗了</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">##使用系统默认的样式</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt </span><br><span class="line"><span class="keyword">import</span> matplotlib <span class="keyword">as</span> mpl   <span class="comment">##因为要修改样式所有matplotlib都得引入</span></span><br><span class="line"><span class="keyword">from</span> cycler <span class="keyword">import</span> cycler</span><br><span class="line">plt.figure() <span class="comment">##生成一块画布</span></span><br><span class="line">data = np.random.randn(<span class="number">50</span>) <span class="comment">##绘图数据</span></span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">121</span>) <span class="comment">##绘制系统默认的样式</span></span><br><span class="line"></span><br><span class="line">plt.plot(data)</span><br><span class="line">plt.title(<span class="string">"default style"</span>)</span><br><span class="line">plt.grid(<span class="literal">True</span>)</span><br><span class="line">plt.subplot(<span class="number">122</span>) <span class="comment">##绘制系统样式</span></span><br><span class="line"><span class="keyword">with</span> plt.style.context(<span class="string">'fivethirtyeight'</span>):</span><br><span class="line">    plt.plot(data)</span><br><span class="line">    plt.title(<span class="string">'fivethirtyeight style'</span>)</span><br><span class="line">    plt.grid(<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/31/aljVK0.png" alt="aljVK0.png"></p>
+<h3 id="使用系统定义的样式"><a href="#使用系统定义的样式" class="headerlink" title="使用系统定义的样式"></a>使用系统定义的样式</h3><p>使用这个<code>print(plt.style.available)</code>函数可以打印中吗，matplotlib中预先定义好的一些样式。<br>哇哦惊讶的发现我无敌<code>ggplot</code>样式竟然在里面</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">[<span class="string">'Solarize_Light2'</span>, <span class="string">'_classic_test_patch'</span>, <span class="string">'bmh'</span>, <span class="string">'classic'</span>, <span class="string">'dark_background'</span>, <span class="string">'fast'</span>, <span class="string">'fivethirtyeight'</span>, <span class="string">'ggplot'</span>, <span class="string">'grayscale'</span>, <span class="string">'seaborn'</span>, <span class="string">'seaborn-bright'</span>, <span class="string">'seaborn-colorblind'</span>, <span class="string">'seaborn-dark'</span>, <span class="string">'seaborn-dark-palette'</span>, <span class="string">'seaborn-darkgrid'</span>, <span class="string">'seaborn-deep'</span>, <span class="string">'seaborn-muted'</span>, <span class="string">'seaborn-notebook'</span>, <span class="string">'seaborn-paper'</span>, <span class="string">'seaborn-pastel'</span>, <span class="string">'seaborn-poster'</span>, <span class="string">'seaborn-talk'</span>, <span class="string">'seaborn-ticks'</span>, <span class="string">'seaborn-white'</span>, <span class="string">'seaborn-whitegrid'</span>, <span class="string">'tableau-colorblind10'</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="定义你的样式文件"><a href="#定义你的样式文件" class="headerlink" title="定义你的样式文件"></a>定义你的样式文件</h3><p>知道了如何使用样式文件来批量美化图片后，接下来就是定义你自己的一套审美啦。样式文件的格式采用的是键值对的形式，如下所示</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">axes.titlesize : <span class="number">24</span></span><br><span class="line">axes.labelsize : <span class="number">20</span></span><br><span class="line">lines.linewidth : <span class="number">3</span></span><br><span class="line">lines.markersize : <span class="number">10</span></span><br><span class="line">xtick.labelsize : <span class="number">16</span></span><br><span class="line">ytick.labelsize : <span class="number">16</span></span><br></pre></td></tr></table></figure>
+
+<p>在定义好之后，只需要加上文件路径就可以使用，这里我还没测试不知道文件是不是必须得用<code>mplstyle</code>为后缀；我觉得应该不需要</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>plt.style.use(<span class="string">'./images/presentation.mplstyle'</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="组合多个样式文件"><a href="#组合多个样式文件" class="headerlink" title="组合多个样式文件"></a>组合多个样式文件</h3><p>美化图片也可以变成和搭积木一样，比如把线条的美化存成一个<code>line.mplstyle</code>文件，背景的美化存成<code>background.mplstyle</code>文件；这样当你有多个这个的文件的时候就可以同过组合起来，构成一个独特的样式啦</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">with</span> plt.style.context(<span class="string">'dark_background'</span>,<span class="string">'ggplot'</span>):  <span class="comment">##只在局部环境生效</span></span><br><span class="line">    plt.plot(np.sin(np.linspace(<span class="number">0</span>, <span class="number">2</span> * np.pi)), <span class="string">'r-o'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">with</span> plt.style.context(<span class="string">'dark_background'</span>,<span class="string">'ggplot'</span>):</span><br><span class="line">    plt.plot(np.sin(np.linspace(<span class="number">0</span>, <span class="number">2</span> * np.pi)))</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/31/aljZrV.png" alt="aljZrV.png"></p>
+<h3 id="rcParams修改系统默认样式"><a href="#rcParams修改系统默认样式" class="headerlink" title="rcParams修改系统默认样式"></a>rcParams修改系统默认样式</h3><p>这个操作时对所有环境都生效的哟，如果你觉得matplotlib的默认样式太丑了，恰巧你想修改它的样式并且想在每次画图都自动的使用你设置好的样式，那就可以考虑用它了</p>
+<p>设置的方式也非常的简单</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">mpl.rcParams[<span class="string">'lines.linewidth'</span>] = <span class="number">2</span></span><br><span class="line">mpl.rcParams[<span class="string">'lines.linestyle'</span>] = <span class="string">'--'</span></span><br><span class="line">plt.plot(data)</span><br></pre></td></tr></table></figure>
+
+<p>如果你想重置之前的配置的话，可以使用函数<code>matplotlib.rcdefaults()</code>进行重置。</p>
+<h3 id="关于样式文件的位置"><a href="#关于样式文件的位置" class="headerlink" title="关于样式文件的位置"></a>关于样式文件的位置</h3><p>这个东西用的不多，仅仅了解一下就可以了</p>
+<p>如果想像使用系统中自定义样式文件那样引入样式文件而不使用路径的话<code>plt.style.context(&#39;ggplot&#39;)</code>，只需要把你的为文件存在这个目录下即可<code>~/.config/matplotlib/stylelib/</code>,文件的命名也有讲究和系统的命令类似即可。<br>系统rcParams中默认的样式文件，存储在<code>~/.config/matplotlib/matplotlibrc</code>这个文件内；喜欢折腾的可以改改这个文件。</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>1.<a href="https://matplotlib.org/tutorials/introductory/customizing.html#sphx-glr-tutorials-introductory-customizing-py" target="_blank" rel="noopener">matplotlib样式</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>Git系列（三）——文件的修改及提交</title>
+    <url>/codeHub/2020/07/28/2020-07/16Git%E7%B3%BB%E5%88%97%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E7%9A%84%E4%BF%AE%E6%94%B9%E5%8F%8A%E6%8F%90%E4%BA%A4/</url>
+    <content><![CDATA[<h1 id="Git系列（三）——文件的修改及提交"><a href="#Git系列（三）——文件的修改及提交" class="headerlink" title="Git系列（三）——文件的修改及提交"></a>Git系列（三）——文件的修改及提交</h1><p>文件的创建以及上传我们已经搞定了，现在我们需要对我们的文档进行修改，这些该如何进行呢，我么这就来学习一下。</p>
+<a id="more"></a>
+
+<hr>
+<h2 id="文件的修改及查看"><a href="#文件的修改及查看" class="headerlink" title="文件的修改及查看"></a>文件的修改及查看</h2><p>我们先给我们的<code>tmp.txt</code>文件加上一句话</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">I like Git</span><br><span class="line">Because it is useful</span><br></pre></td></tr></table></figure>
+
+<p>保存之后，我们就可以使用<code>git status</code>命令查看修改结果：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git status</span><br><span class="line"># On branch master</span><br><span class="line"># Changes not staged for commit:</span><br><span class="line">#   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)</span><br><span class="line">#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</span><br><span class="line">#</span><br><span class="line">#	modified:   tmp.txt</span><br><span class="line">#</span><br><span class="line">no changes added to commit (use &quot;git add&quot; and&#x2F;or &quot;git commit -a&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>结果很多，但其实就一句话最有用，就是<code>#    modified:   tmp.txt</code>它告诉我们<code>tmp.txt</code>文件被修改过了，最后一句话告诉我们修改还没有进行提交。</p>
+<p>但是如果第一天的修改，我们第二天忘记了，不用慌，我们可以使用<code>git diff</code>指令查看具体的修改内容：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git diff</span><br><span class="line">diff --git a&#x2F;tmp.txt b&#x2F;tmp.txt</span><br><span class="line">index ad2ec82..1137052 100644</span><br><span class="line">--- a&#x2F;tmp.txt</span><br><span class="line">+++ b&#x2F;tmp.txt</span><br><span class="line">@@ -1 +1,2 @@</span><br><span class="line"> I like Git</span><br><span class="line">+Because it is useful</span><br></pre></td></tr></table></figure>
+
+<p>我们就可以从结果看出，我们加了一行<code>Because it is useful</code></p>
+<h2 id="文件修改的查看"><a href="#文件修改的查看" class="headerlink" title="文件修改的查看"></a>文件修改的查看</h2><p>还是之前的两步：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git add tmp.txt</span><br></pre></td></tr></table></figure>
+
+<p>之后，我们可以再使用<code>git status</code>来查看当前仓库的状态</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git status</span><br><span class="line"># On branch master</span><br><span class="line"># Changes to be committed:</span><br><span class="line">#   (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)</span><br><span class="line">#</span><br><span class="line">#	modified:   tmp.txt</span><br><span class="line">#</span><br></pre></td></tr></table></figure>
+
+<p>git告诉我们，被提交的修改中包括<code>tmp.txt</code>文件，这时候我们就可以安心的提交了：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git commit -m &quot;add Because it is useful&quot;</span><br><span class="line">[master 2c2ad62] add Because it is useful</span><br><span class="line"> 1 file changed, 1 insertion(+)</span><br></pre></td></tr></table></figure>
+
+<p>成功之后，我们可以再来看当前仓库的状态</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git status</span><br><span class="line"># On branch master</span><br><span class="line">nothing to commit, working directory clean</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>git告诉我们，当前目录是干净的，没有文件被修改过，到此，我们就进行了文件的修改工作，这其实还没有展现出git的强大之处，下次我们会学习版本的回溯，准备好“时光穿梭机”一起感受git的强大之处吧！</p>
+<ul>
+<li>参考 <a href="https://www.liaoxuefeng.com/" target="_blank" rel="noopener">廖雪峰的官方网站</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Git系列（二）——Git版本库创建以及文件上传</title>
+    <url>/codeHub/2020/07/28/2020-07/15Git%E7%B3%BB%E5%88%97%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E7%89%88%E6%9C%AC%E5%BA%93%E5%88%9B%E5%BB%BA%E4%BB%A5%E5%8F%8A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/</url>
+    <content><![CDATA[<h1 id="Git系列（二）——Git版本库创建以及文件上传"><a href="#Git系列（二）——Git版本库创建以及文件上传" class="headerlink" title="Git系列（二）——Git版本库创建以及文件上传"></a>Git系列（二）——Git版本库创建以及文件上传</h1><p>费（hao）尽（bu）心（fei）思（li）安装好了Git，那就赶紧跟着小编用用看吧！</p>
+<a id="more"></a>
+
+<hr>
+<h2 id="Git版本库的创建"><a href="#Git版本库的创建" class="headerlink" title="Git版本库的创建"></a>Git版本库的创建</h2><p>首先，名词解释<code>版本库</code>：又名仓库、英文名<strong>repository</strong>，其实说白了就是一个目录，这个目录下的任何修改都会被Git管理起来，在任何时候都可以追踪历史并且随心所欲“还原”。</p>
+<p>OK，弄懂了版本库，那么我们就来创建一个文件夹</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ mkdir learngit</span><br><span class="line">$ cd learngit</span><br><span class="line">$ pwd</span><br></pre></td></tr></table></figure>
+
+<p>版本库，简单到只有一个指令</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git init</span><br></pre></td></tr></table></figure>
+
+<p>在一个呼吸之间，Git就把仓库创建好了，本来空白的目录下悄无声息的多了一个文件加<code>.git</code>，这个目录很重要，是用来跟踪管理版本库的，不要随意修改，修改后很有可能把Git仓库给破坏了。</p>
+<ul>
+<li>如果没有看到<code>.git</code>文件夹，那一定是没有使用 ll -a命令</li>
+</ul>
+<h2 id="把文件添加到版本库"><a href="#把文件添加到版本库" class="headerlink" title="把文件添加到版本库"></a>把文件添加到版本库</h2><p>首先，我自这里必须强调一点，Git只能进行对纯文本文件进行文件版本得追踪及还原，对于二进制文件，没有办法追踪文件得变化，所以，要想用Git进行文件得管理，只能使用纯文本方式编写文件</p>
+<ul>
+<li>强烈建议使用标准的UTF-8编码文本，被所有平台支持的文件</li>
+</ul>
+<p>好了，我们现在先编写一个文件<code>tmp.txt</code>，文件内容如下</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">I like Git</span><br></pre></td></tr></table></figure>
+
+<p>这个文件必须在<code>learngit</code>文件夹下（子目录也可以）</p>
+<p>然后我们只需要两步就可以把这个文件添加到版本库里边了</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git add tmp.txt</span><br></pre></td></tr></table></figure>
+
+<p>执行上面的指令之后，如果什么都没有出现，那就成功了，第一步就是这样。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git commit -m &quot;write a tmp file&quot;</span><br><span class="line">[master 1210900] write a tmp file</span><br><span class="line"> 1 file changed, 1 insertion(+)</span><br><span class="line"> create mode 100644 tmp.txt</span><br></pre></td></tr></table></figure>
+
+<p>解释一下<code>git commit</code>这个指令，<code>-m</code>后面加的是对于本次改动的一个说明，强烈建议仔细填写，这样追溯版本时会很舒服。<code>git commit</code>之后，git会告诉你<code>1 file changed</code>这就是说有一个文件被改动了，<code>1 insertion(+)</code>这就是说我们插入了一行新的内容。</p>
+<p>最后，如果想分批添加三个文件，我们可以这么做</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git add file1</span><br><span class="line">$ git add file2 file3</span><br><span class="line">$ git commit -m &quot;add 3 files&quot;</span><br></pre></td></tr></table></figure>
+
+<p>这也是为什么git上传文件需要两步的原因。</p>
+<hr>
+<p>好了本次教程到此结束，我们学会了创建新的文件，接下来我们会学习文件的修改相关内容。</p>
+<ul>
+<li>参考 <a href="https://www.liaoxuefeng.com/" target="_blank" rel="noopener">廖雪峰的官方网站</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Git系列（一）——Git的简介及安装</title>
+    <url>/codeHub/2020/07/28/2020-07/14Git%E7%B3%BB%E5%88%97%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94Git%E7%9A%84%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%AE%89%E8%A3%85/</url>
+    <content><![CDATA[<h1 id="Git系列（一）——Git的简介及安装"><a href="#Git系列（一）——Git的简介及安装" class="headerlink" title="Git系列（一）——Git的简介及安装"></a>Git系列（一）——Git的简介及安装</h1><p>众所周知（跟计算机打交道多的），Git是一个很先进的版本控制系统，但其实不瞒你们知道，它是目前世界上最先进的分布式版本控制系统（没有之一）。所以说，还在等着什么，快跟着小编一起来轻松愉快的学习Git吧。</p>
+<a id="more"></a>
+
+<hr>
+<h2 id="Git的简介"><a href="#Git的简介" class="headerlink" title="Git的简介"></a>Git的简介</h2><p>相信大家在实际工作生活中都会使用word进行长篇大论文章的书写，尤其时当很多人一起进行文档的书写时，一定避免不了的进行文档的修改，这时候你一定会抱怨为什么会有这么多中间版本，接收文件时如果命名重复的话就会出现是否覆盖的选项，这个时候如果Git出现在你的世界，你一定会毫不留情地爱上它的。</p>
+<p>Git采用的是分布式控制管理系统（下图），与其相对应的是集中式版本控制系统（上图），分布式控制管理系统没有真正意义上的“中央服务器”，每个人的电脑都有完整的版本库，所以说除非所有的电脑同时坏掉，不然就不用担心数据会丢失这样的数据安全问题。当你和同事同时修改了文件A，那么你们只需要进行文件A修改的交换，就可以看到对方的修改了，但一般都会有一台电脑充当“中央服务器”，这是为了方便交换大家的修改。没有它大家也可以进行正常的工作，只是交换修改不方便而已。</p>
+<img data-src="https://s1.ax1x.com/2020/07/28/aVizqg.png" alt="1.png" style="zoom:50%;" />
+
+<img data-src="https://s1.ax1x.com/2020/07/28/aVixsS.png" alt="2.png" style="zoom:50%;" />
+
+<h2 id="Git的安装"><a href="#Git的安装" class="headerlink" title="Git的安装"></a>Git的安装</h2><p>Git的安装很简单，这里主要介绍linux和windows上安装Git</p>
+<h3 id="在linux上安装Git"><a href="#在linux上安装Git" class="headerlink" title="在linux上安装Git"></a>在linux上安装Git</h3><p>你可以在系统中输入<code>git</code>，看看系统中有没有安装git，</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git</span><br><span class="line">The program &#39;git&#39; is currently not installed. You can install it by typing:</span><br><span class="line">sudo apt-get install git</span><br></pre></td></tr></table></figure>
+
+<p>如果没有安装git，linux会贴心的提示你安装的指令<code>sudo apt-get install git</code></p>
+<p>或者也可以通过源码进行安装，源码压缩包<a href="https://mirrors.edge.kernel.org/pub/software/scm/git/" target="_blank" rel="noopener">网站</a>，解压之后，依次输入<code>./config</code>，<code>make</code>，<code>sudo make install</code>这几个命令之后</p>
+<h3 id="在Windows上安装Git"><a href="#在Windows上安装Git" class="headerlink" title="在Windows上安装Git"></a>在Windows上安装Git</h3><p>直接从Git官网上直接下载并按照默认选项安装即可。安装成功之后，在开始菜单Git文件夹中找到Git Bash，打开以后是一个命令行窗口，那就说明安装成功了。</p>
+<p><img data-src="https://s1.ax1x.com/2020/07/28/aVivM8.png" alt="3.png"></p>
+<img data-src="https://s1.ax1x.com/2020/07/28/aViXxf.png" alt="4.png" style="zoom:67%;" />
+
+<p>安装成功之后，我们需要简单配置一下</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git config --global user.name	<span class="comment">#Your Name</span></span><br><span class="line">$ git config --global user.email	<span class="comment">#email@example.com</span></span><br></pre></td></tr></table></figure>
+
+<p><code>git config</code>命令的<code>--global</code>参数，用了这个参数，表示你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址，命令如下</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git config  user.name</span><br><span class="line">$ git config  user.email</span><br><span class="line">$ git config --list <span class="comment">#查看当前配置</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>到此为止，我们的Git已经安装并简单配置完毕，下一个教程我们会介绍创建版本库以及简单的上传文件操作，敬请期待！</p>
+<ul>
+<li>参考 <a href="https://www.liaoxuefeng.com/" target="_blank" rel="noopener">廖雪峰的官方网站</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+  </entry>
+  <entry>
     <title>基于Vue前端网页实现</title>
     <url>/codeHub/2020/07/28/2020-07/13%E5%9F%BA%E5%9B%A0Vue%E5%89%8D%E7%AB%AF%E7%BD%91%E9%A1%B5%E5%AE%9E%E7%8E%B0/</url>
     <content><![CDATA[<p>在看了一遍<code>vue-element-admin</code>的源代码后，自己试着按照这个项目中的思路去构建前端单页面应用。在构建的过程中学习了<code>vuex</code>进行组件间的状态管理、学习了他项目的目录结构设计以及对应的思路；进一步优化了前端路由的设计。</p>

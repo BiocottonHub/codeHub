@@ -117,12 +117,12 @@
   </li>
         <li class="menu-item menu-item-文章">
 
-    <a href="/codeHub/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>文章<span class="badge">48</span></a>
+    <a href="/codeHub/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>文章<span class="badge">52</span></a>
 
   </li>
         <li class="menu-item menu-item-分类">
 
-    <a href="/codeHub/categories" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">11</span></a>
+    <a href="/codeHub/categories" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">12</span></a>
 
   </li>
         <li class="menu-item menu-item-标签">
@@ -187,6 +187,414 @@
             
 
   <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2020/04/19/2020-06%E4%BB%A5%E5%89%8D/23Promise%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/codeHub/uploads/themeImg/logo.png">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Hub">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/codeHub/2020/04/19/2020-06%E4%BB%A5%E5%89%8D/23Promise%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" class="post-title-link" itemprop="url">Promise源码解析</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>发布于
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-19 11:42:14" itemprop="dateCreated datePublished" datetime="2020-04-19T11:42:14+08:00">2020-04-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>修改于
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-06-17 10:43:15" itemprop="dateModified" datetime="2020-06-17T10:43:15+08:00">2020-06-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  分类于<a href="/codeHub/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/codeHub/2020/04/19/2020-06%E4%BB%A5%E5%89%8D/23Promise%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2020/04/19/2020-06%E4%BB%A5%E5%89%8D/23Promise%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>众所周知javascript是一门单线程语言，这种设计有效的避免了多线程带来的复杂同步问题。但有时候单线程模式遇到耗时较长的任务时，会拖延整个程序的进度，造成浏览器长时间无响应。为了解决这个问题，js将任务分为两种执行模式：</p>
+<ul>
+<li>异步模式</li>
+<li>同步模式</li>
+</ul>
+<p>为了获得异步任务得到的结果，最常见的做法是使用回调函数。但是回调函数剥夺了我们使用return和throw的权利，而且代码以一种向右扩展的风格；不利于维护（回调地狱)，还会产生一些回调问题。</p>
+<ul>
+<li>回调过早（一般是异步被同步调用）；</li>
+<li>回调过晚或没有回调；</li>
+<li>回调次数过多；</li>
+<li>等等</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/codeHub/2020/04/19/2020-06%E4%BB%A5%E5%89%8D/23Promise%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+   
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2020/04/17/2020-06%E4%BB%A5%E5%89%8D/22Tweenjs%E5%8A%A8%E7%94%BB%E6%8F%92%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/codeHub/uploads/themeImg/logo.png">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Hub">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/codeHub/2020/04/17/2020-06%E4%BB%A5%E5%89%8D/22Tweenjs%E5%8A%A8%E7%94%BB%E6%8F%92%E4%BB%B6/" class="post-title-link" itemprop="url">Tweenjs动画插件</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>发布于
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-17 22:51:26" itemprop="dateCreated datePublished" datetime="2020-04-17T22:51:26+08:00">2020-04-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>修改于
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-06-17 10:43:15" itemprop="dateModified" datetime="2020-06-17T10:43:15+08:00">2020-06-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  分类于<a href="/codeHub/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/codeHub/2020/04/17/2020-06%E4%BB%A5%E5%89%8D/22Tweenjs%E5%8A%A8%E7%94%BB%E6%8F%92%E4%BB%B6/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2020/04/17/2020-06%E4%BB%A5%E5%89%8D/22Tweenjs%E5%8A%A8%E7%94%BB%E6%8F%92%E4%BB%B6/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>TweenJS允许你以一种平滑的方式来改变对象的属性。所有的动画处理函数都封装成了API，你需要做的仅仅是告诉它哪些属性需要被修改，修改的值的范围，修改所经历的时间、轨迹的选择。</p>
+<h3 id="1-快速入门"><a href="#1-快速入门" class="headerlink" title="1.快速入门"></a>1.快速入门</h3><ul>
+<li>首先给<code>TWEEN</code>对象传递一个对象，里面包含了需要修改的属性</li>
+<li>传递属性范围值</li>
+<li>激活TWEEN实例</li>
+<li>使用主函数进行渲染</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/codeHub/2020/04/17/2020-06%E4%BB%A5%E5%89%8D/22Tweenjs%E5%8A%A8%E7%94%BB%E6%8F%92%E4%BB%B6/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+   
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2020/04/17/2020-06%E4%BB%A5%E5%89%8D/21%E6%A4%8D%E7%89%A9DNA%E7%94%B2%E5%9F%BA%E5%8C%96%E6%9C%BA%E5%88%B6%E5%92%8C%E9%9D%B6%E5%90%91%E6%93%8D%E7%BA%B5%E5%B7%A5%E5%85%B7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/codeHub/uploads/themeImg/logo.png">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Hub">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/codeHub/2020/04/17/2020-06%E4%BB%A5%E5%89%8D/21%E6%A4%8D%E7%89%A9DNA%E7%94%B2%E5%9F%BA%E5%8C%96%E6%9C%BA%E5%88%B6%E5%92%8C%E9%9D%B6%E5%90%91%E6%93%8D%E7%BA%B5%E5%B7%A5%E5%85%B7/" class="post-title-link" itemprop="url">植物DNA甲基化机制和靶向操纵工具</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>发布于
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-17 09:32:17" itemprop="dateCreated datePublished" datetime="2020-04-17T09:32:17+08:00">2020-04-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>修改于
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-06-17 10:43:15" itemprop="dateModified" datetime="2020-06-17T10:43:15+08:00">2020-06-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  分类于<a href="/codeHub/categories/%E6%96%87%E7%8C%AE/" itemprop="url" rel="index"><span itemprop="name">文献</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/codeHub/2020/04/17/2020-06%E4%BB%A5%E5%89%8D/21%E6%A4%8D%E7%89%A9DNA%E7%94%B2%E5%9F%BA%E5%8C%96%E6%9C%BA%E5%88%B6%E5%92%8C%E9%9D%B6%E5%90%91%E6%93%8D%E7%BA%B5%E5%B7%A5%E5%85%B7/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2020/04/17/2020-06%E4%BB%A5%E5%89%8D/21%E6%A4%8D%E7%89%A9DNA%E7%94%B2%E5%9F%BA%E5%8C%96%E6%9C%BA%E5%88%B6%E5%92%8C%E9%9D%B6%E5%90%91%E6%93%8D%E7%BA%B5%E5%B7%A5%E5%85%B7/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h3><p>DNA甲基化是表观遗传中的一种，它能够调控多种生物途径，例如：基因的表达、基因组的稳定性。在植物中对某个位点突变或者使用药物的方法被用来研究DNA甲基化的作用。许多工具就能够直接的对特定位点的DNA甲基化进行操作，从而评估DNA甲基化在特定途径中的直接效应。最近研究者们，通过改造DNA-binding蛋白，实现对甲基化机器的招募，从而改变特定位点的DNA甲基化水平。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/codeHub/2020/04/17/2020-06%E4%BB%A5%E5%89%8D/21%E6%A4%8D%E7%89%A9DNA%E7%94%B2%E5%9F%BA%E5%8C%96%E6%9C%BA%E5%88%B6%E5%92%8C%E9%9D%B6%E5%90%91%E6%93%8D%E7%BA%B5%E5%B7%A5%E5%85%B7/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+   
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2020/04/16/2020-06%E4%BB%A5%E5%89%8D/20sgRNAcase9%E8%AE%BE%E8%AE%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/codeHub/uploads/themeImg/logo.png">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Hub">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/codeHub/2020/04/16/2020-06%E4%BB%A5%E5%89%8D/20sgRNAcase9%E8%AE%BE%E8%AE%A1/" class="post-title-link" itemprop="url">sgRNAcase9设计</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>发布于
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-16 23:46:40" itemprop="dateCreated datePublished" datetime="2020-04-16T23:46:40+08:00">2020-04-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>修改于
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-06-17 10:43:15" itemprop="dateModified" datetime="2020-06-17T10:43:15+08:00">2020-06-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  分类于<a href="/codeHub/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/codeHub/2020/04/16/2020-06%E4%BB%A5%E5%89%8D/20sgRNAcase9%E8%AE%BE%E8%AE%A1/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2020/04/16/2020-06%E4%BB%A5%E5%89%8D/20sgRNAcase9%E8%AE%BE%E8%AE%A1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>使用<code>sgRNAcas9</code>软件包进行基于参考基因组的sgRNA 设计：针对每条给定的query 序列首先搜索<code>NGG</code>的PAM结构，找到对应的motif后，在全基因组范围内评估<code>on-target</code>和<code>off-target</code>值。如果有多条质量比较好的<code>on-target</code>sgRNA，后面还可以根据基因注释文件筛选那些距离5’端更近的sgRNA。</p>
+<blockquote>
+<p> <a href="http://www.biootools.com/software.html#tab1" target="_blank" rel="noopener">软件包地址</a></p>
+</blockquote>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/codeHub/2020/04/16/2020-06%E4%BB%A5%E5%89%8D/20sgRNAcase9%E8%AE%BE%E8%AE%A1/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+   
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
         
   
   
@@ -773,405 +1181,11 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2020/04/06/2020-06%E4%BB%A5%E5%89%8D/13fasta%E6%96%87%E4%BB%B6%E6%A0%A1%E9%AA%8C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/codeHub/uploads/themeImg/logo.png">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Code Hub">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/codeHub/2020/04/06/2020-06%E4%BB%A5%E5%89%8D/13fasta%E6%96%87%E4%BB%B6%E6%A0%A1%E9%AA%8C/" class="post-title-link" itemprop="url">fasta文件校验</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>发布于
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-04-06 19:55:37" itemprop="dateCreated datePublished" datetime="2020-04-06T19:55:37+08:00">2020-04-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>修改于
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-17 10:43:15" itemprop="dateModified" datetime="2020-06-17T10:43:15+08:00">2020-06-17</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  分类于<a href="/codeHub/categories/Javascript/" itemprop="url" rel="index"><span itemprop="name">Javascript</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/codeHub/2020/04/06/2020-06%E4%BB%A5%E5%89%8D/13fasta%E6%96%87%E4%BB%B6%E6%A0%A1%E9%AA%8C/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2020/04/06/2020-06%E4%BB%A5%E5%89%8D/13fasta%E6%96%87%E4%BB%B6%E6%A0%A1%E9%AA%8C/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="fasta文件校验"><a href="#fasta文件校验" class="headerlink" title="fasta文件校验"></a>fasta文件校验</h1><p>最近在利用javascripte构建网页blast时候，涉及到客户端文件和表单的提交。因此结合vue与element-ui框架封装了一个上传并对fasta文件进行校验的插件</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/codeHub/2020/04/06/2020-06%E4%BB%A5%E5%89%8D/13fasta%E6%96%87%E4%BB%B6%E6%A0%A1%E9%AA%8C/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-   
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2020/03/27/2020-06%E4%BB%A5%E5%89%8D/11circos%E6%A8%A1%E5%9D%97%E5%AE%89%E8%A3%85/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/codeHub/uploads/themeImg/logo.png">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Code Hub">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/codeHub/2020/03/27/2020-06%E4%BB%A5%E5%89%8D/11circos%E6%A8%A1%E5%9D%97%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">circos模块安装</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>发布于
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-03-27 10:40:48" itemprop="dateCreated datePublished" datetime="2020-03-27T10:40:48+08:00">2020-03-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>修改于
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-17 10:43:15" itemprop="dateModified" datetime="2020-06-17T10:43:15+08:00">2020-06-17</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  分类于<a href="/codeHub/categories/Circos/" itemprop="url" rel="index"><span itemprop="name">Circos</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/codeHub/2020/03/27/2020-06%E4%BB%A5%E5%89%8D/11circos%E6%A8%A1%E5%9D%97%E5%AE%89%E8%A3%85/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2020/03/27/2020-06%E4%BB%A5%E5%89%8D/11circos%E6%A8%A1%E5%9D%97%E5%AE%89%E8%A3%85/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Circos安装"><a href="#Circos安装" class="headerlink" title="Circos安装"></a>Circos安装</h2><ol>
-<li><p>下载软件包</p>
-<blockquote>
-<p> <a href="http://circos.ca/software/download/circos/" target="_blank" rel="noopener">http://circos.ca/software/download/circos/</a> </p>
-</blockquote>
-</li>
-<li><p>解压</p>
-<p><code>tar -xvzf circos*.tgz</code></p>
-</li>
-<li><p>安装模块</p>
-</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看依赖项是否安装</span></span><br><span class="line"><span class="built_in">cd</span> circos*</span><br><span class="line">./bin/circos -module</span><br><span class="line"><span class="comment">#####输出结果</span></span><br><span class="line">ok       1.26 Carp</span><br><span class="line">missing            Clone</span><br><span class="line">missing            Config::General</span><br><span class="line">ok       3.40 Cwd</span><br><span class="line">ok      2.145 Data::Dumper</span><br><span class="line">ok       2.52 Digest::MD5</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/codeHub/2020/03/27/2020-06%E4%BB%A5%E5%89%8D/11circos%E6%A8%A1%E5%9D%97%E5%AE%89%E8%A3%85/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-   
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2020/03/26/2020-06%E4%BB%A5%E5%89%8D/10circos%E8%BF%9B%E9%98%B6%E4%B9%8Blink%E5%9B%BE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/codeHub/uploads/themeImg/logo.png">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Code Hub">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/codeHub/2020/03/26/2020-06%E4%BB%A5%E5%89%8D/10circos%E8%BF%9B%E9%98%B6%E4%B9%8Blink%E5%9B%BE/" class="post-title-link" itemprop="url">circos进阶之link图</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>发布于
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-03-26 23:24:59" itemprop="dateCreated datePublished" datetime="2020-03-26T23:24:59+08:00">2020-03-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>修改于
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-17 10:43:15" itemprop="dateModified" datetime="2020-06-17T10:43:15+08:00">2020-06-17</time>
-              </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/codeHub/2020/03/26/2020-06%E4%BB%A5%E5%89%8D/10circos%E8%BF%9B%E9%98%B6%E4%B9%8Blink%E5%9B%BE/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2020/03/26/2020-06%E4%BB%A5%E5%89%8D/10circos%E8%BF%9B%E9%98%B6%E4%B9%8Blink%E5%9B%BE/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="circos进阶之link图"><a href="#circos进阶之link图" class="headerlink" title="circos进阶之link图"></a>circos进阶之link图</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>Links主要试图利用连线关系，表明染色体上不同位置之间的联系。这在实际生物学问题中很常用，尤其是在表示基因和基因之间的共线性的时候，link图是我们的不二选择，之前我们一起学习了使用MCScanX进行共线性分析，下游分析中可以画一个圈图，但是本人认为那个圈图无论是配色还是布局都不是特别好看，今天我们就来学习如何处理MCScanX的结果文件然后用circos去画出我们想要的圈图</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/codeHub/2020/03/26/2020-06%E4%BB%A5%E5%89%8D/10circos%E8%BF%9B%E9%98%B6%E4%B9%8Blink%E5%9B%BE/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-   
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2020/03/26/2020-06%E4%BB%A5%E5%89%8D/09%E6%8B%9F%E5%8D%97%E8%8A%A5%E4%B8%ADco-transcriptional-splicing/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/codeHub/uploads/themeImg/logo.png">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Code Hub">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/codeHub/2020/03/26/2020-06%E4%BB%A5%E5%89%8D/09%E6%8B%9F%E5%8D%97%E8%8A%A5%E4%B8%ADco-transcriptional-splicing/" class="post-title-link" itemprop="url">拟南芥中co-transcriptional splicing</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>发布于
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-03-26 20:16:34" itemprop="dateCreated datePublished" datetime="2020-03-26T20:16:34+08:00">2020-03-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>修改于
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-17 10:43:15" itemprop="dateModified" datetime="2020-06-17T10:43:15+08:00">2020-06-17</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  分类于<a href="/codeHub/categories/%E6%96%87%E7%8C%AE/" itemprop="url" rel="index"><span itemprop="name">文献</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/codeHub/2020/03/26/2020-06%E4%BB%A5%E5%89%8D/09%E6%8B%9F%E5%8D%97%E8%8A%A5%E4%B8%ADco-transcriptional-splicing/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2020/03/26/2020-06%E4%BB%A5%E5%89%8D/09%E6%8B%9F%E5%8D%97%E8%8A%A5%E4%B8%ADco-transcriptional-splicing/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>  The Features and Regulation of Co-transcriptional Splicing in Arabidopsis  </p>
-</blockquote>
-<p>在多数真核生物钟，前体RNA的剪切对于基因表达是至关重要的。在之前哺乳动物、果蝇和酵母的研究中发现，大多数剪切事件与RNA的转录是同时进行的。然而在植物中，co-transcriptional splicing(CTS ) 在细胞中表现的特征和它具体的调控机制仍旧是不清楚的。因此作者使用<strong>chromatin-bound RNA sequencing</strong>技术来研究拟南芥中的<strong>CTS</strong>(剪切与转录共同进行)。通过分析发现，拟南芥中大量的可变剪切事件是受到 co-transcriptionally 决定的。同时CTS的效率与基因表达水平、染色质状态、还有基因中内含子、外显子数目存在相关性，而与基因的长度不相关。与此同时结合免疫共沉淀技术，表明一些hnRNP-like 蛋白(RNA结合蛋白)，通过结合到外显子序列上来促进CTS。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/codeHub/2020/03/26/2020-06%E4%BB%A5%E5%89%8D/09%E6%8B%9F%E5%8D%97%E8%8A%A5%E4%B8%ADco-transcriptional-splicing/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-   
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/codeHub/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/codeHub/">1</a><span class="space">&hellip;</span><a class="page-number" href="/codeHub/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/codeHub/page/5/">5</a><a class="extend next" rel="next" href="/codeHub/page/5/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/codeHub/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/codeHub/">1</a><span class="space">&hellip;</span><a class="page-number" href="/codeHub/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/codeHub/page/5/">5</a><a class="page-number" href="/codeHub/page/6/">6</a><a class="extend next" rel="next" href="/codeHub/page/5/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1238,13 +1252,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/codeHub/archives">
-          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-count">52</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/codeHub/categories/">
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
