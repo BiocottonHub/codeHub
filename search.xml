@@ -1,6 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Git系列（四）——版本回退</title>
+    <url>/codeHub/2020/08/02/2020-08/02Git%E7%B3%BB%E5%88%97%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80/</url>
+    <content><![CDATA[<h1 id="Git系列（四）——版本回退"><a href="#Git系列（四）——版本回退" class="headerlink" title="Git系列（四）——版本回退"></a>Git系列（四）——版本回退</h1><p>我们已经学会了创建和修改文件，那也就是说我们已经生成了很多个版本，这样我们也就可以来学习版本的回退了。</p>
+<hr>
+<h2 id="工作区和暂存区"><a href="#工作区和暂存区" class="headerlink" title="工作区和暂存区"></a>工作区和暂存区</h2><p>首先，我们来了解工作区和暂存区这两个概念：</p>
+<ul>
+<li>工作区就是我们能看到的目录，比如<code>learngit</code>这个目录，就是我们的工作区；</li>
+<li>暂存区就是我们通过<code>git add</code>这个指令，将修改提交到的地方，图中的<code>stage</code>；</li>
+<li>除此之外，<code>git commit</code>是把这些修改提交到我们自动创建的第一个分支<code>master</code>，还有一个指向<code>master</code>的指针<code>HEAD</code>（这两个概念我们之后再讲）</li>
+</ul>
+<p><a href="https://imgchr.com/i/ats6sJ" target="_blank" rel="noopener"><img data-src="https://s1.ax1x.com/2020/08/02/ats6sJ.png" alt="1.png"></a></p>
+<p>这样我们就可以理解为什么Git上传或者修改文件都需要两步，而且每次<code>commit</code>都是将暂存区的所有修改一起提交到分支，所以说，如果我们有很多个修改，一定要用<code>git add</code>指令全部添加到暂存区之后，再一起上传到分支。</p>
+<p>我们来举一个例子：我们再在<code>learngit</code>目录下创建一个文件README.txt，内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">I am learning git</span><br></pre></td></tr></table></figure>
+
+<p>并且把我们之前的<code>tmp.txt</code>文件再加一行变成：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">I like Git</span><br><span class="line">Because it is useful</span><br><span class="line">I will use it</span><br></pre></td></tr></table></figure>
+
+<p>然后，我们使用<code>git status</code>来看看我们的修改：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git status</span><br><span class="line"># On branch master</span><br><span class="line"># Changes not staged for commit:</span><br><span class="line">#   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)</span><br><span class="line">#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</span><br><span class="line">#</span><br><span class="line">#	modified:   tmp.txt</span><br><span class="line">#</span><br><span class="line"># Untracked files:</span><br><span class="line">#   (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)</span><br><span class="line">#</span><br><span class="line">#	README.txt</span><br><span class="line">no changes added to commit (use &quot;git add&quot; and&#x2F;or &quot;git commit -a&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>很明显，git定位到了我们的修改，我们可以看到<code>README.txt</code>的状态是<code>Untracked files</code>，这是因为我们还没有将这个文件上传，现在，我们使用<code>git add</code>对两个文件进行添加后，我们再用<code>git status</code>来看一下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git status</span><br><span class="line"># On branch master</span><br><span class="line"># Changes to be committed:</span><br><span class="line">#   (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)</span><br><span class="line">#</span><br><span class="line">#	new file:   README.txt</span><br><span class="line">#	modified:   tmp.txt</span><br><span class="line">#</span><br></pre></td></tr></table></figure>
+
+<p>在这个时候，这两个修改都在暂存区里，git就会提示我们使用<code>git commit</code>来进行上传，然后我们就用<code>git commit</code>将修改进行上传，这时候我们再使用<code>git status</code>查看一下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git statua</span><br><span class="line"># On branch master</span><br><span class="line">nothing to commit, working directory clean</span><br></pre></td></tr></table></figure>
+
+<p>这时候，Git就告诉我们，整个世界都是干净的了!</p>
+<p>我们可以两次<code>add</code>后再进行<code>commit</code>，但是我们不能<code>add</code>–<code>commit</code>–<code>add</code>，后者的第二次<code>add</code>的内容就不会被上传到分支。总之，我们在操作git时，最后一步一定是<code>commit</code>。</p>
+<h2 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h2><p>版本回退这个功能就意味着，我们可以有无限的犯错机会，就像我们打单机游戏最后的boss之前，我们都会先存档，这样我们就算失败了也可以无限次的从头再来，git的版本回退功能也是一样的道理。</p>
+<p>我们的工作目录<code>learngit</code>已经经历了很多次修改，也产生了很多个版本，我们想要进行版本回退，我们首先需要知道都有那些版本，我们可以用<code>git log</code>这个指令</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git log</span><br><span class="line">commit 5b8c051f43c21483c100aafdf0362899d2168fb9</span><br><span class="line">Author: yxlong &lt;1570447120@qq.com&gt;</span><br><span class="line">Date:   Sat Aug 1 16:12:25 2020 +0800</span><br><span class="line"></span><br><span class="line">    add a new file and a new line : I will use it</span><br><span class="line"></span><br><span class="line">commit 2c2ad624b48cc59d345206e038de9c3b9e0140bc</span><br><span class="line">Author: yxlong &lt;1570447120@qq.com&gt;</span><br><span class="line">Date:   Tue Jul 28 21:34:54 2020 +0800</span><br><span class="line"></span><br><span class="line">    add Because it is useful</span><br><span class="line"></span><br><span class="line">commit 90b59be891df1420bc9d243f6da6681cdde4fb60</span><br><span class="line">Author: yxlong &lt;1570447120@qq.com&gt;</span><br><span class="line">Date:   Tue Jul 28 21:23:12 2020 +0800</span><br><span class="line"></span><br><span class="line">    write a tmp file</span><br></pre></td></tr></table></figure>
+
+<p>我们可以清晰的看到有三次提交，如果觉得信息太多看的眼花缭乱的话，我们可以加上<code>--pretty=oneline</code>参数：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git log --pretty&#x3D;oneline</span><br><span class="line">5b8c051f43c21483c100aafdf0362899d2168fb9 add a new file and a new line : I will use it</span><br><span class="line">2c2ad624b48cc59d345206e038de9c3b9e0140bc add Because it is useful</span><br><span class="line">90b59be891df1420bc9d243f6da6681cdde4fb60 write a tmp file</span><br></pre></td></tr></table></figure>
+
+<p>前面的这一大串数字是<code>commit id</code>（版本号），是每个版本的唯一标识。</p>
+<p>现在我们就坐上时光穿梭机把<code>tmp.txt</code>回退到上一个版本吧，首先我们需要知道，<code>HEAD</code>表示当前版本，也就是最新的<code>5b8c051...</code>，上一个版本就是<code>HEAD^</code>，上上个版本就是<code>HEAD^^</code>，100个版本之前就是<code>HEAD~100</code>。</p>
+<p>我们如果想回退到上一个版本，我们就需要使用<code>git reset</code>命令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git reset --hard HEAD^</span><br><span class="line">HEAD is now at 2c2ad62 add Because it is useful</span><br></pre></td></tr></table></figure>
+
+<p><code>--hard</code>参数的含义我们之后再讲，这里直接用就可以了，我们来看一下<code>tmp.txt</code>的内容：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ cat tmp.txt</span><br><span class="line">I like Git</span><br><span class="line">Because it is useful</span><br></pre></td></tr></table></figure>
+
+<p>果然，被还原了，而且最新添加的<code>README.txt</code>文件也消失了。</p>
+<p>现在我们来看一下我们现有的版本信息：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git log</span><br><span class="line">commit 2c2ad624b48cc59d345206e038de9c3b9e0140bc</span><br><span class="line">Author: yxlong &lt;1570447120@qq.com&gt;</span><br><span class="line">Date:   Tue Jul 28 21:34:54 2020 +0800</span><br><span class="line"></span><br><span class="line">    add Because it is useful</span><br><span class="line"></span><br><span class="line">commit 90b59be891df1420bc9d243f6da6681cdde4fb60</span><br><span class="line">Author: yxlong &lt;1570447120@qq.com&gt;</span><br><span class="line">Date:   Tue Jul 28 21:23:12 2020 +0800</span><br><span class="line"></span><br><span class="line">    write a tmp file</span><br></pre></td></tr></table></figure>
+
+<p>Oh my God!最后的那个版本消失了，我们真的穿越了，那可以传回去嘛？答案是肯定的，我们只需要向上翻一番记录找到最新版本的<code>commit id</code>，然后使用如下指令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git reset --hard 5b8c0</span><br><span class="line">HEAD is now at 5b8c051 add a new file and a new line : I will use it</span><br></pre></td></tr></table></figure>
+
+<p>这样就变回去了，最后那个<code>commit id</code>不用写全，写前几位就可以，Git会自动为你寻找的。</p>
+<p>我们来看一下<code>tmp.txt</code>的内容：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ cat tmp.txt </span><br><span class="line">I like Git</span><br><span class="line">Because it is useful</span><br><span class="line">I will use it</span><br></pre></td></tr></table></figure>
+
+<p>嗯，没错，它又回来了。</p>
+<p>这时候，可能就会有朋友问，如果我忘记了<code>commit id</code>怎么办呢？放心，Git很强大的，他会提前想到所有的情况的，<code>git reflog</code>这个命令用来记录你的每一次命令，如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git reflog</span><br><span class="line">5b8c051 HEAD@&#123;0&#125;: reset: moving to 5b8c0</span><br><span class="line">2c2ad62 HEAD@&#123;1&#125;: reset: moving to HEAD^</span><br><span class="line">5b8c051 HEAD@&#123;2&#125;: commit: add a new file and a new line : I will use it</span><br><span class="line">2c2ad62 HEAD@&#123;3&#125;: commit: add Because it is useful</span><br><span class="line">90b59be HEAD@&#123;4&#125;: commit (initial): write a tmp file</span><br></pre></td></tr></table></figure>
+
+<p>Oh Nice! 我又可以知道我的<code>commit id</code>了，然后我们就可以随心所欲地版本回退了。</p>
+<hr>
+<p>本次教程就到此结束了，本次知识点较多，大家要多复习呦。</p>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>matplotlib样式文件</title>
+    <url>/codeHub/2020/07/31/2020-08/01matplotlib%E6%A0%B7%E5%BC%8F%E6%96%87%E4%BB%B6/</url>
+    <content><![CDATA[<p>这篇文章主要讲了如何修改样式，保存样式以及加载样式文件</p>
+<blockquote>
+<p>样式： 就是定义图形、字体、线条等一切可以美化的元素的公式；说人话就是：你定义好一个公式A，A中定义线条的颜色是红色；现在画图的时候你需要美化一个线条；就直接使用这个公式；线条就变成了红色；这样说的话样式也就相当于一种画图的风格。</p>
+</blockquote>
+<p>matplot支持两种修改样式的方式：</p>
+<ul>
+<li>使用样式表</li>
+<li>使用rcParams</li>
+</ul>
+<a id="more"></a>
+
+<h3 id="这两种修改样式的方式有啥区别呢？"><a href="#这两种修改样式的方式有啥区别呢？" class="headerlink" title="这两种修改样式的方式有啥区别呢？"></a>这两种修改样式的方式有啥区别呢？</h3><p>样式表的方式是通过加载样式文件，来修改matplotlib中默认的绘图风格；加载了文件后只在当前环境生效，下次要用还得重新加载。而rcParams则是直接修改matplotlib的默认配置，一劳永逸。</p>
+<p>下面就用代码来看看具体的效果吧。</p>
+<p>来解读一下具体代码的作用</p>
+<p>为了方便比较，我使用了<code>subplot</code>函数生成两个子图，函数内部参数不懂的可以看我之前写的一篇<code>pyplot</code>对象的文章。<br>默认情况下，matplotlib中加载自定义样式时是对全局生效的，如果你只想在某个地方使用这个样式就得像我这样</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">with</span> plt.style.context(<span class="string">'fivethirtyeight'</span>):</span><br><span class="line">    plt.plot(data)</span><br><span class="line">    plt.title(<span class="string">'fivethirtyeight style'</span>)</span><br><span class="line">    plt.grid(<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<p>通过比较可以发现，再使用了系统中的定义的一个样式后，线条明显变粗了</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">##使用系统默认的样式</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt </span><br><span class="line"><span class="keyword">import</span> matplotlib <span class="keyword">as</span> mpl   <span class="comment">##因为要修改样式所有matplotlib都得引入</span></span><br><span class="line"><span class="keyword">from</span> cycler <span class="keyword">import</span> cycler</span><br><span class="line">plt.figure() <span class="comment">##生成一块画布</span></span><br><span class="line">data = np.random.randn(<span class="number">50</span>) <span class="comment">##绘图数据</span></span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">121</span>) <span class="comment">##绘制系统默认的样式</span></span><br><span class="line"></span><br><span class="line">plt.plot(data)</span><br><span class="line">plt.title(<span class="string">"default style"</span>)</span><br><span class="line">plt.grid(<span class="literal">True</span>)</span><br><span class="line">plt.subplot(<span class="number">122</span>) <span class="comment">##绘制系统样式</span></span><br><span class="line"><span class="keyword">with</span> plt.style.context(<span class="string">'fivethirtyeight'</span>):</span><br><span class="line">    plt.plot(data)</span><br><span class="line">    plt.title(<span class="string">'fivethirtyeight style'</span>)</span><br><span class="line">    plt.grid(<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/31/aljVK0.png" alt="aljVK0.png"></p>
+<h3 id="使用系统定义的样式"><a href="#使用系统定义的样式" class="headerlink" title="使用系统定义的样式"></a>使用系统定义的样式</h3><p>使用这个<code>print(plt.style.available)</code>函数可以打印中吗，matplotlib中预先定义好的一些样式。<br>哇哦惊讶的发现我无敌<code>ggplot</code>样式竟然在里面</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">[<span class="string">'Solarize_Light2'</span>, <span class="string">'_classic_test_patch'</span>, <span class="string">'bmh'</span>, <span class="string">'classic'</span>, <span class="string">'dark_background'</span>, <span class="string">'fast'</span>, <span class="string">'fivethirtyeight'</span>, <span class="string">'ggplot'</span>, <span class="string">'grayscale'</span>, <span class="string">'seaborn'</span>, <span class="string">'seaborn-bright'</span>, <span class="string">'seaborn-colorblind'</span>, <span class="string">'seaborn-dark'</span>, <span class="string">'seaborn-dark-palette'</span>, <span class="string">'seaborn-darkgrid'</span>, <span class="string">'seaborn-deep'</span>, <span class="string">'seaborn-muted'</span>, <span class="string">'seaborn-notebook'</span>, <span class="string">'seaborn-paper'</span>, <span class="string">'seaborn-pastel'</span>, <span class="string">'seaborn-poster'</span>, <span class="string">'seaborn-talk'</span>, <span class="string">'seaborn-ticks'</span>, <span class="string">'seaborn-white'</span>, <span class="string">'seaborn-whitegrid'</span>, <span class="string">'tableau-colorblind10'</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="定义你的样式文件"><a href="#定义你的样式文件" class="headerlink" title="定义你的样式文件"></a>定义你的样式文件</h3><p>知道了如何使用样式文件来批量美化图片后，接下来就是定义你自己的一套审美啦。样式文件的格式采用的是键值对的形式，如下所示</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">axes.titlesize : <span class="number">24</span></span><br><span class="line">axes.labelsize : <span class="number">20</span></span><br><span class="line">lines.linewidth : <span class="number">3</span></span><br><span class="line">lines.markersize : <span class="number">10</span></span><br><span class="line">xtick.labelsize : <span class="number">16</span></span><br><span class="line">ytick.labelsize : <span class="number">16</span></span><br></pre></td></tr></table></figure>
+
+<p>在定义好之后，只需要加上文件路径就可以使用，这里我还没测试不知道文件是不是必须得用<code>mplstyle</code>为后缀；我觉得应该不需要</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>plt.style.use(<span class="string">'./images/presentation.mplstyle'</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="组合多个样式文件"><a href="#组合多个样式文件" class="headerlink" title="组合多个样式文件"></a>组合多个样式文件</h3><p>美化图片也可以变成和搭积木一样，比如把线条的美化存成一个<code>line.mplstyle</code>文件，背景的美化存成<code>background.mplstyle</code>文件；这样当你有多个这个的文件的时候就可以同过组合起来，构成一个独特的样式啦</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">with</span> plt.style.context(<span class="string">'dark_background'</span>,<span class="string">'ggplot'</span>):  <span class="comment">##只在局部环境生效</span></span><br><span class="line">    plt.plot(np.sin(np.linspace(<span class="number">0</span>, <span class="number">2</span> * np.pi)), <span class="string">'r-o'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">with</span> plt.style.context(<span class="string">'dark_background'</span>,<span class="string">'ggplot'</span>):</span><br><span class="line">    plt.plot(np.sin(np.linspace(<span class="number">0</span>, <span class="number">2</span> * np.pi)))</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+<p><img data-src="https://s1.ax1x.com/2020/07/31/aljZrV.png" alt="aljZrV.png"></p>
+<h3 id="rcParams修改系统默认样式"><a href="#rcParams修改系统默认样式" class="headerlink" title="rcParams修改系统默认样式"></a>rcParams修改系统默认样式</h3><p>这个操作时对所有环境都生效的哟，如果你觉得matplotlib的默认样式太丑了，恰巧你想修改它的样式并且想在每次画图都自动的使用你设置好的样式，那就可以考虑用它了</p>
+<p>设置的方式也非常的简单</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">mpl.rcParams[<span class="string">'lines.linewidth'</span>] = <span class="number">2</span></span><br><span class="line">mpl.rcParams[<span class="string">'lines.linestyle'</span>] = <span class="string">'--'</span></span><br><span class="line">plt.plot(data)</span><br></pre></td></tr></table></figure>
+
+<p>如果你想重置之前的配置的话，可以使用函数<code>matplotlib.rcdefaults()</code>进行重置。</p>
+<h3 id="关于样式文件的位置"><a href="#关于样式文件的位置" class="headerlink" title="关于样式文件的位置"></a>关于样式文件的位置</h3><p>这个东西用的不多，仅仅了解一下就可以了</p>
+<p>如果想像使用系统中自定义样式文件那样引入样式文件而不使用路径的话<code>plt.style.context(&#39;ggplot&#39;)</code>，只需要把你的为文件存在这个目录下即可<code>~/.config/matplotlib/stylelib/</code>,文件的命名也有讲究和系统的命令类似即可。<br>系统rcParams中默认的样式文件，存储在<code>~/.config/matplotlib/matplotlibrc</code>这个文件内；喜欢折腾的可以改改这个文件。</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>1.<a href="https://matplotlib.org/tutorials/introductory/customizing.html#sphx-glr-tutorials-introductory-customizing-py" target="_blank" rel="noopener">matplotlib样式</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>Git系列（三）——文件的修改及提交</title>
     <url>/codeHub/2020/07/28/2020-07/16Git%E7%B3%BB%E5%88%97%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E7%9A%84%E4%BF%AE%E6%94%B9%E5%8F%8A%E6%8F%90%E4%BA%A4/</url>
     <content><![CDATA[<h1 id="Git系列（三）——文件的修改及提交"><a href="#Git系列（三）——文件的修改及提交" class="headerlink" title="Git系列（三）——文件的修改及提交"></a>Git系列（三）——文件的修改及提交</h1><p>文件的创建以及上传我们已经搞定了，现在我们需要对我们的文档进行修改，这些该如何进行呢，我么这就来学习一下。</p>
