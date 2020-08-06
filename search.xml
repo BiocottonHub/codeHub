@@ -1,9 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Git系列（六）——删除文件</title>
+    <url>/codeHub/2020/08/06/2020-08/04Git%E7%B3%BB%E5%88%97%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6/</url>
+    <content><![CDATA[<h1 id="Git系列（六）——删除文件"><a href="#Git系列（六）——删除文件" class="headerlink" title="Git系列（六）——删除文件"></a>Git系列（六）——删除文件</h1><p>Git中删除文件可不太一样哦，我们一起来学习一下</p>
+<a id="more"></a>
+
+<hr>
+<p>在Git中如果你想要删除文件，比平时我们删除文件要麻烦那么一点点，毕竟Git有两个地方：工作区、版本库，平时我们删除文件的方式，只是把工作区的文件给删除了，这时候版本库和工作区不一致，Git会自动追踪到这个修改，然后告诉你该怎么做，我们来举个例子：</p>
+<p>如果大家按照之前的教程来学习的话，我们的<code>learngit</code>文件夹中还有一个<code>README.txt</code>文件，这时候，我们使用linux指令rm把它删掉之后，来看一下Git的状态</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ rm README.txt</span><br><span class="line"></span><br><span class="line">$ git status</span><br><span class="line"># On branch master</span><br><span class="line"># Changes not staged for commit:</span><br><span class="line">#   (use &quot;git add&#x2F;rm &lt;file&gt;...&quot; to update what will be committed)</span><br><span class="line">#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</span><br><span class="line">#</span><br><span class="line">#	deleted:    README.txt</span><br><span class="line">#</span><br><span class="line">no changes added to commit (use &quot;git add&quot; and&#x2F;or &quot;git commit -a&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>Git告诉我们使用<code>git add/rm &lt;file&gt;..</code>把修改提交到暂存区，然后除此之外我们还需要使用<code>git commit</code>将修改提交到版本库中：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git rm README.txt</span><br><span class="line">rm &#39;README.txt&#39;</span><br><span class="line"></span><br><span class="line">$ git commit -m &quot;remove README.txt&quot;</span><br><span class="line">[master 0f43972] remove README.txt</span><br><span class="line"> 1 file changed, 1 deletion(-)</span><br><span class="line"> delete mode 100644 README.txt</span><br></pre></td></tr></table></figure>
+
+<p>这样我们的文件就成功地删除了。</p>
+<ul>
+<li><code>git rm</code> 和 先<code>rm</code>再<code>git rm</code>这两种情况是一样的结果</li>
+<li>如果删错了文件，请参考（四）（五）教程恢复</li>
+</ul>
+<hr>
+<p>Git的基本操作其实我们已经学的差不多了，下一个阶段我们就来学习一下神奇的远程仓库和神奇的Github。</p>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Git系列（五）——撤销修改</title>
+    <url>/codeHub/2020/08/06/2020-08/03Git%E7%B3%BB%E5%88%97%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94%E6%92%A4%E9%94%80%E4%BF%AE%E6%94%B9/</url>
+    <content><![CDATA[<h1 id="Git系列（五）——撤销修改"><a href="#Git系列（五）——撤销修改" class="headerlink" title="Git系列（五）——撤销修改"></a>Git系列（五）——撤销修改</h1><p>在Git中“后悔药”可是有好多种的，今天我们就来看看另外的几种“后悔药”</p>
+<a id="more"></a>
+
+<hr>
+<p>在我们的使用Git的过程中，可能会有三种情况出现：1、文件修改之后，突然发现自己的修改没有意义，想把修改删去 2、<code>git add</code>之后，突然发现自己的修改没有意义 3、<code>git commit</code>之后，突然发现自己的修改没有意义，这时候大家可能最想做的就是把修改给撤销了，这节课，我们就来学习一下这三种情况下如何撤销我们的修改。</p>
+<h2 id="撤销工作区的修改"><a href="#撤销工作区的修改" class="headerlink" title="撤销工作区的修改"></a>撤销工作区的修改</h2><p>假设在学习Git的过程中我们想放弃了，所以我们在我们的<code>tmp.txt</code>文件之后加上了一行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">I like Git</span><br><span class="line">Because it is useful</span><br><span class="line">I will use it</span><br><span class="line">I will give up</span><br></pre></td></tr></table></figure>
+
+<p>一觉醒来，我们突然又觉得自己不能前功尽弃，自己一定要坚持下去，我们用<code>git status</code>一看：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git status</span><br><span class="line"># On branch master</span><br><span class="line"># Changes not staged for commit:</span><br><span class="line">#   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)</span><br><span class="line">#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</span><br><span class="line">#</span><br><span class="line">#	modified:   tmp.txt</span><br><span class="line">#</span><br><span class="line">no changes added to commit (use &quot;git add&quot; and&#x2F;or &quot;git commit -a&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>Git也在提示你使用<code>git checkout -- &lt;file&gt;...</code>去撤销工作区的修改，我们来试一试：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git checkout -- tmp.txt</span><br></pre></td></tr></table></figure>
+
+<p>再来看看<code>tmp.txt</code>文件：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ cat tmp.txt </span><br><span class="line">I like Git</span><br><span class="line">Because it is useful</span><br><span class="line">I will use it</span><br></pre></td></tr></table></figure>
+
+<p>OK，工作区的修改确实消失了。</p>
+<p>其实，<code>git checkout -- &lt;file&gt;...</code>这个指令就是让这个文件回到最近一次<code>git commit</code>或<code>git add</code>时的状态。如果修改在缓存区就让它回到工作区，如果在工作区就直接删除修改了，很像是word里边的撤销按钮。</p>
+<h2 id="撤销缓存区的修改"><a href="#撤销缓存区的修改" class="headerlink" title="撤销缓存区的修改"></a>撤销缓存区的修改</h2><p>我们再次回到刚刚的场景，假设，我们跟刚才一样的修改了<code>tmp.txt</code>文件，这次我们用<code>git add</code>之后，我们该如何撤销呢，我们先来用<code>git status</code>看看状态：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git status</span><br><span class="line"># On branch master</span><br><span class="line"># Changes to be committed:</span><br><span class="line">#   (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)</span><br><span class="line">#</span><br><span class="line">#	modified:   tmp.txt</span><br><span class="line">#</span><br></pre></td></tr></table></figure>
+
+<p>同样的，Git告诉我们可以使用<code>git reset HEAD &lt;file&gt;...</code>将暂存区的修改撤销掉（unstage），重新放回工作区：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git reset HEAD tmp.txt</span><br><span class="line">Unstaged changes after reset:</span><br><span class="line">M	tmp.txt</span><br></pre></td></tr></table></figure>
+
+<p>这个<code>git reset</code>既可以版本回退，也可以把暂存区的修改退回到工作区，<code>HEAD</code>指的是最新版本，然后我们再看一下状态：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git status</span><br><span class="line"># On branch master</span><br><span class="line"># Changes not staged for commit:</span><br><span class="line">#   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)</span><br><span class="line">#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</span><br><span class="line">#</span><br><span class="line">#	modified:   tmp.txt</span><br><span class="line">#</span><br><span class="line">no changes added to commit (use &quot;git add&quot; and&#x2F;or &quot;git commit -a&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>确实，修改回到了工作区，这时我们再用第一个撤销工作区的指令：<code>git checkout -- tmp.txt</code>，用了之后，我们再来看一下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git status</span><br><span class="line"># On branch master</span><br><span class="line">nothing to commit, working directory clean</span><br></pre></td></tr></table></figure>
+
+<p>OK，修改成功被我们撤销了。</p>
+<h2 id="撤销版本库的修改"><a href="#撤销版本库的修改" class="headerlink" title="撤销版本库的修改"></a>撤销版本库的修改</h2><p>如果成功的<code>git commit</code>之后，修改就上传到了版本库，这是我们如果想要撤销版本库的修改，请看上一个教程，这里就不再赘述了。</p>
+<hr>
+<p>OK，本次教程就到这里结束了，下一节课，我们来讲一下如何删除文件。</p>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Git系列（四）——版本回退</title>
     <url>/codeHub/2020/08/02/2020-08/02Git%E7%B3%BB%E5%88%97%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80/</url>
     <content><![CDATA[<h1 id="Git系列（四）——版本回退"><a href="#Git系列（四）——版本回退" class="headerlink" title="Git系列（四）——版本回退"></a>Git系列（四）——版本回退</h1><p>我们已经学会了创建和修改文件，那也就是说我们已经生成了很多个版本，这样我们也就可以来学习版本的回退了。</p>
+<a id="more"></a>
+
 <hr>
 <h2 id="工作区和暂存区"><a href="#工作区和暂存区" class="headerlink" title="工作区和暂存区"></a>工作区和暂存区</h2><p>首先，我们来了解工作区和暂存区这两个概念：</p>
 <ul>
