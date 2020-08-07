@@ -1,7 +1,199 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>01matplotlib样式文件</title>
+    <title>爬取GO信息</title>
+    <url>/codeHub/2020/08/07/2020-08/05%E7%88%AC%E5%8F%96GO%E4%BF%A1%E6%81%AF/</url>
+    <content><![CDATA[<p>为了查找某个研究领域的相关信息，生物学家往往要花费大量的时间。与此同时由于不同数据库之间的信息可能不同步或者术语不一样，这使得信息的检索更加的麻烦。如果让人来做还勉强能查，但是让机器来查询的话一切就会变的无章可循。Gene Ontology（GO）就是为了解决这种问题而发起的一个项目；每一个GO Term都是由7个数字标识这个Term编号，同时还有一个lable标识具体的生物学功能。每个Tern属于一个本体，在GO中有三个ontology它们分别是：</p>
+<ul>
+<li>molecular function,</li>
+<li>cellular component</li>
+<li>biological process</li>
+</ul>
+<p>今天要做的就是大批量的根据某个功能的关键字，搜索已经报导的基因对应的序列信息；从而进行Blast找到你所研究的物种中的同源基因。这里以爬取<code>Ethylene</code>关键字为例，分以下三个步骤搞：</p>
+<ol>
+<li>根据关键字爬取GO编号信息</li>
+<li>根据GO编号爬取对应的基因注释信息</li>
+<li>根据基因注释信息爬取基因的序列信息</li>
+</ol>
+<a id="more"></a>
+
+<h3 id="1-爬取GO编号信息"><a href="#1-爬取GO编号信息" class="headerlink" title="1.爬取GO编号信息"></a>1.爬取GO编号信息</h3><blockquote>
+<p> 网页地址: <a href="http://geneontology.org/" target="_blank" rel="noopener">http://geneontology.org/</a></p>
+</blockquote>
+<p>​    <img data-src="https://s1.ax1x.com/2020/08/07/af0Pr4.png" alt="af0Pr4.png"></p>
+<p>在开发者模式下可用发现浏览器请求的API地址为</p>
+<blockquote>
+<p><a href="http://golr.geneontology.org/solr/select?defType=edismax&amp;qt=standard&amp;indent=on&amp;wt=json&amp;rows=10&amp;start=0&amp;fl=annotation_class,description,source,idspace,synonym,alternate_id,annotation_class_label,score,id&amp;facet=true&amp;facet.mincount=1&amp;facet.sort=count&amp;json.nl=arrarr&amp;facet.limit=25&amp;hl=true&amp;hl.simple.pre=%3Cem%20class=%22hilite%22%3E&amp;hl.snippets=1000&amp;fq=document_category:%22ontology_class%22&amp;fq=idspace:%22GO%22&amp;fq=is_obsolete:%22false%22&amp;facet.field=source&amp;facet.field=idspace&amp;facet.field=subset&amp;facet.field=is_obsolete&amp;q=Ethylene*&amp;qf=annotation_class%5E3&amp;qf=annotation_class_label_searchable%5E5.5&amp;qf=description_searchable%5E1&amp;qf=synonym_searchable%5E1&amp;qf=alternate_id%5E1&amp;packet=1&amp;callback_type=search&amp;json.wrf=jQuery214044957252147235494_1596787199447&amp;_=1596787199448" target="_blank" rel="noopener">http://golr.geneontology.org/solr/select?defType=edismax&amp;qt=standard&amp;indent=on&amp;wt=json&amp;rows=10&amp;start=0&amp;fl=annotation_class,description,source,idspace,synonym,alternate_id,annotation_class_label,score,id&amp;facet=true&amp;facet.mincount=1&amp;facet.sort=count&amp;json.nl=arrarr&amp;facet.limit=25&amp;hl=true&amp;hl.simple.pre=%3Cem%20class=%22hilite%22%3E&amp;hl.snippets=1000&amp;fq=document_category:%22ontology_class%22&amp;fq=idspace:%22GO%22&amp;fq=is_obsolete:%22false%22&amp;facet.field=source&amp;facet.field=idspace&amp;facet.field=subset&amp;facet.field=is_obsolete&amp;q=Ethylene*&amp;qf=annotation_class%5E3&amp;qf=annotation_class_label_searchable%5E5.5&amp;qf=description_searchable%5E1&amp;qf=synonym_searchable%5E1&amp;qf=alternate_id%5E1&amp;packet=1&amp;callback_type=search&amp;json.wrf=jQuery214044957252147235494_1596787199447&amp;_=1596787199448</a></p>
+</blockquote>
+<p><img data-src="https://s1.ax1x.com/2020/08/07/afwr8K.png" alt="afwr8K.png"></p>
+<p>接下来使用python中的<code>urllib</code>包向目标API地址发起<code>GET</code>请求，并且使用Json包将响应的数据解析成<code>Dict</code>对象;</p>
+<p>这里对同一个URL进行了两次请求，主要是为了获取所有的响应数据；因为每次请求时，默认只响应10条数据</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">response = urllib.request.urlopen(getGoItemUrl)  <span class="comment"># 发起get请求</span></span><br><span class="line">jsonData = json.loads(response.read().decode(<span class="string">'utf-8'</span>))  <span class="comment"># 解析成json数据</span></span><br><span class="line"><span class="comment"># time.sleep(1)  # 缓一缓</span></span><br><span class="line"><span class="comment"># print(jsonData['response']['docs'])</span></span><br><span class="line"><span class="keyword">return</span> jsonData[<span class="string">'response'</span>][<span class="string">'docs'</span>]  <span class="comment"># 得到GO item信息</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-爬取对应基因编号"><a href="#2-爬取对应基因编号" class="headerlink" title="2.爬取对应基因编号"></a>2.爬取对应基因编号</h3><p>有的GO term可能没有对应的基因注释信息，有的GO term可能存在注释信息不完整的情况，统一使用<code>NA</code>进行填充</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> GoItem:</span><br><span class="line">    print(<span class="string">"爬取GO编号:\t"</span>+item[<span class="string">'id'</span>])</span><br><span class="line">    info = getGeneIdByGoItem(item[<span class="string">'id'</span>])</span><br><span class="line">    GoInfo = <span class="string">"\t"</span>.join([str(item[i]) <span class="keyword">for</span> i <span class="keyword">in</span> GoKeys])  <span class="comment"># 获取Go item 描述信息</span></span><br><span class="line">    <span class="keyword">if</span>(len(info) == <span class="number">0</span>):</span><br><span class="line">        geneMessage = <span class="string">"\t"</span>.join(</span><br><span class="line">            [<span class="string">'NA'</span>, <span class="string">'NA'</span>, <span class="string">'NA'</span>, <span class="string">'NA'</span>, <span class="string">'NA'</span>, <span class="string">'NA'</span>, <span class="string">'NA'</span>, <span class="string">'NA'</span>, <span class="string">'NA'</span>])</span><br><span class="line">        out.append(GoInfo+<span class="string">"\t"</span>+geneMessage+<span class="string">"\n"</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">for</span> geneItem <span class="keyword">in</span> info:</span><br><span class="line">            geneMessage = []</span><br><span class="line">          <span class="comment"># 有不存在值的列,就输出NA信息</span></span><br><span class="line">            <span class="keyword">for</span> key <span class="keyword">in</span> geneInfoKeys:</span><br><span class="line">                <span class="keyword">try</span>:</span><br><span class="line">                    geneMessage.append(geneItem[key])</span><br><span class="line">                <span class="keyword">except</span> KeyError:</span><br><span class="line">                    geneMessage.append(<span class="string">"NA"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>最终生成一个Txt文档；文档内包含GO Term的注释信息和对应的基因的注释信息</p>
+<p><img data-src="https://s1.ax1x.com/2020/08/07/afyF4s.png" alt="afyF4s.png"></p>
+<h3 id="3-爬取基因序列信息"><a href="#3-爬取基因序列信息" class="headerlink" title="3.爬取基因序列信息"></a>3.爬取基因序列信息</h3><p>有了上一步的GO Term的注释信息后，我想得到植物中所有与乙烯相关的基因的序列信息用于Blast；来获得我所研究的物种中对应的同源基因的功能。</p>
+<p>使用得到的基因编号和物种编号在NCBI中获得对应的gene序列信息，这里获得的序列都是正链上的序列，而不是有义链上的。</p>
+<p>最终得到一个fasta序列文件</p>
+<p><img data-src="https://s1.ax1x.com/2020/08/07/af6TFH.png" alt="af6TFH.png"></p>
+<h3 id="4-脚本运行"><a href="#4-脚本运行" class="headerlink" title="4.脚本运行"></a>4.脚本运行</h3><p>当想要获取某一些感兴趣的基因序列信息时，只需要从第一个脚本生成的文件<code>GOAnnotion.txt</code>，截取对应的行到另一个文件，用作第二个脚本的输入文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">##获得感兴趣的GO 注释信息</span></span><br><span class="line">python GoItem2gene.py 关键字 GOAnnotion.txt</span><br><span class="line"><span class="comment">## 获得感兴趣物种、感兴趣GO的基因序列信息</span></span><br><span class="line">head 100  GOAnnotion.txt &gt;interest_Annotion.txt </span><br><span class="line">python getSeqByID.py interest_Annotion.txt  interest_Annotion.fasta</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://imgchr.com/i/afRah4" target="_blank" rel="noopener"><img data-src="https://s1.ax1x.com/2020/08/07/afRah4.png" alt="afRah4.png"></a></p>
+<blockquote>
+<p> 脚本地址：<a href="https://github.com/BiocottonHub/zpliuCode/tree/8666815dfe1f14698596f160e236d9a6c5a042b7/GOTerm" target="_blank" rel="noopener">https://github.com/BiocottonHub/zpliuCode/tree/8666815dfe1f14698596f160e236d9a6c5a042b7/GOTerm</a></p>
+<p><strong>GoItem2gene.py</strong>： 根据关键字获取基因编号</p>
+<p><strong>getSeqByID.py</strong>：根据基因编号提取基因序列</p>
+</blockquote>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li><a href="https://www.zhihu.com/question/53055375/answer/206863647" target="_blank" rel="noopener">基因本体概念</a>  </li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
+    <title>Git系列（六）——删除文件</title>
+    <url>/codeHub/2020/08/06/2020-08/04Git%E7%B3%BB%E5%88%97%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6/</url>
+    <content><![CDATA[<h1 id="Git系列（六）——删除文件"><a href="#Git系列（六）——删除文件" class="headerlink" title="Git系列（六）——删除文件"></a>Git系列（六）——删除文件</h1><p>Git中删除文件可不太一样哦，我们一起来学习一下</p>
+<a id="more"></a>
+
+<hr>
+<p>在Git中如果你想要删除文件，比平时我们删除文件要麻烦那么一点点，毕竟Git有两个地方：工作区、版本库，平时我们删除文件的方式，只是把工作区的文件给删除了，这时候版本库和工作区不一致，Git会自动追踪到这个修改，然后告诉你该怎么做，我们来举个例子：</p>
+<p>如果大家按照之前的教程来学习的话，我们的<code>learngit</code>文件夹中还有一个<code>README.txt</code>文件，这时候，我们使用linux指令rm把它删掉之后，来看一下Git的状态</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ rm README.txt</span><br><span class="line"></span><br><span class="line">$ git status</span><br><span class="line"># On branch master</span><br><span class="line"># Changes not staged for commit:</span><br><span class="line">#   (use &quot;git add&#x2F;rm &lt;file&gt;...&quot; to update what will be committed)</span><br><span class="line">#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</span><br><span class="line">#</span><br><span class="line">#	deleted:    README.txt</span><br><span class="line">#</span><br><span class="line">no changes added to commit (use &quot;git add&quot; and&#x2F;or &quot;git commit -a&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>Git告诉我们使用<code>git add/rm &lt;file&gt;..</code>把修改提交到暂存区，然后除此之外我们还需要使用<code>git commit</code>将修改提交到版本库中：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git rm README.txt</span><br><span class="line">rm &#39;README.txt&#39;</span><br><span class="line"></span><br><span class="line">$ git commit -m &quot;remove README.txt&quot;</span><br><span class="line">[master 0f43972] remove README.txt</span><br><span class="line"> 1 file changed, 1 deletion(-)</span><br><span class="line"> delete mode 100644 README.txt</span><br></pre></td></tr></table></figure>
+
+<p>这样我们的文件就成功地删除了。</p>
+<ul>
+<li><code>git rm</code> 和 先<code>rm</code>再<code>git rm</code>这两种情况是一样的结果</li>
+<li>如果删错了文件，请参考（四）（五）教程恢复</li>
+</ul>
+<hr>
+<p>Git的基本操作其实我们已经学的差不多了，下一个阶段我们就来学习一下神奇的远程仓库和神奇的Github。</p>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Git系列（五）——撤销修改</title>
+    <url>/codeHub/2020/08/06/2020-08/03Git%E7%B3%BB%E5%88%97%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94%E6%92%A4%E9%94%80%E4%BF%AE%E6%94%B9/</url>
+    <content><![CDATA[<h1 id="Git系列（五）——撤销修改"><a href="#Git系列（五）——撤销修改" class="headerlink" title="Git系列（五）——撤销修改"></a>Git系列（五）——撤销修改</h1><p>在Git中“后悔药”可是有好多种的，今天我们就来看看另外的几种“后悔药”</p>
+<a id="more"></a>
+
+<hr>
+<p>在我们的使用Git的过程中，可能会有三种情况出现：1、文件修改之后，突然发现自己的修改没有意义，想把修改删去 2、<code>git add</code>之后，突然发现自己的修改没有意义 3、<code>git commit</code>之后，突然发现自己的修改没有意义，这时候大家可能最想做的就是把修改给撤销了，这节课，我们就来学习一下这三种情况下如何撤销我们的修改。</p>
+<h2 id="撤销工作区的修改"><a href="#撤销工作区的修改" class="headerlink" title="撤销工作区的修改"></a>撤销工作区的修改</h2><p>假设在学习Git的过程中我们想放弃了，所以我们在我们的<code>tmp.txt</code>文件之后加上了一行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">I like Git</span><br><span class="line">Because it is useful</span><br><span class="line">I will use it</span><br><span class="line">I will give up</span><br></pre></td></tr></table></figure>
+
+<p>一觉醒来，我们突然又觉得自己不能前功尽弃，自己一定要坚持下去，我们用<code>git status</code>一看：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git status</span><br><span class="line"># On branch master</span><br><span class="line"># Changes not staged for commit:</span><br><span class="line">#   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)</span><br><span class="line">#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</span><br><span class="line">#</span><br><span class="line">#	modified:   tmp.txt</span><br><span class="line">#</span><br><span class="line">no changes added to commit (use &quot;git add&quot; and&#x2F;or &quot;git commit -a&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>Git也在提示你使用<code>git checkout -- &lt;file&gt;...</code>去撤销工作区的修改，我们来试一试：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git checkout -- tmp.txt</span><br></pre></td></tr></table></figure>
+
+<p>再来看看<code>tmp.txt</code>文件：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ cat tmp.txt </span><br><span class="line">I like Git</span><br><span class="line">Because it is useful</span><br><span class="line">I will use it</span><br></pre></td></tr></table></figure>
+
+<p>OK，工作区的修改确实消失了。</p>
+<p>其实，<code>git checkout -- &lt;file&gt;...</code>这个指令就是让这个文件回到最近一次<code>git commit</code>或<code>git add</code>时的状态。如果修改在缓存区就让它回到工作区，如果在工作区就直接删除修改了，很像是word里边的撤销按钮。</p>
+<h2 id="撤销缓存区的修改"><a href="#撤销缓存区的修改" class="headerlink" title="撤销缓存区的修改"></a>撤销缓存区的修改</h2><p>我们再次回到刚刚的场景，假设，我们跟刚才一样的修改了<code>tmp.txt</code>文件，这次我们用<code>git add</code>之后，我们该如何撤销呢，我们先来用<code>git status</code>看看状态：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git status</span><br><span class="line"># On branch master</span><br><span class="line"># Changes to be committed:</span><br><span class="line">#   (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)</span><br><span class="line">#</span><br><span class="line">#	modified:   tmp.txt</span><br><span class="line">#</span><br></pre></td></tr></table></figure>
+
+<p>同样的，Git告诉我们可以使用<code>git reset HEAD &lt;file&gt;...</code>将暂存区的修改撤销掉（unstage），重新放回工作区：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git reset HEAD tmp.txt</span><br><span class="line">Unstaged changes after reset:</span><br><span class="line">M	tmp.txt</span><br></pre></td></tr></table></figure>
+
+<p>这个<code>git reset</code>既可以版本回退，也可以把暂存区的修改退回到工作区，<code>HEAD</code>指的是最新版本，然后我们再看一下状态：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git status</span><br><span class="line"># On branch master</span><br><span class="line"># Changes not staged for commit:</span><br><span class="line">#   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)</span><br><span class="line">#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</span><br><span class="line">#</span><br><span class="line">#	modified:   tmp.txt</span><br><span class="line">#</span><br><span class="line">no changes added to commit (use &quot;git add&quot; and&#x2F;or &quot;git commit -a&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>确实，修改回到了工作区，这时我们再用第一个撤销工作区的指令：<code>git checkout -- tmp.txt</code>，用了之后，我们再来看一下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git status</span><br><span class="line"># On branch master</span><br><span class="line">nothing to commit, working directory clean</span><br></pre></td></tr></table></figure>
+
+<p>OK，修改成功被我们撤销了。</p>
+<h2 id="撤销版本库的修改"><a href="#撤销版本库的修改" class="headerlink" title="撤销版本库的修改"></a>撤销版本库的修改</h2><p>如果成功的<code>git commit</code>之后，修改就上传到了版本库，这是我们如果想要撤销版本库的修改，请看上一个教程，这里就不再赘述了。</p>
+<hr>
+<p>OK，本次教程就到这里结束了，下一节课，我们来讲一下如何删除文件。</p>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Git系列（四）——版本回退</title>
+    <url>/codeHub/2020/08/02/2020-08/02Git%E7%B3%BB%E5%88%97%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80/</url>
+    <content><![CDATA[<h1 id="Git系列（四）——版本回退"><a href="#Git系列（四）——版本回退" class="headerlink" title="Git系列（四）——版本回退"></a>Git系列（四）——版本回退</h1><p>我们已经学会了创建和修改文件，那也就是说我们已经生成了很多个版本，这样我们也就可以来学习版本的回退了。</p>
+<a id="more"></a>
+
+<hr>
+<h2 id="工作区和暂存区"><a href="#工作区和暂存区" class="headerlink" title="工作区和暂存区"></a>工作区和暂存区</h2><p>首先，我们来了解工作区和暂存区这两个概念：</p>
+<ul>
+<li>工作区就是我们能看到的目录，比如<code>learngit</code>这个目录，就是我们的工作区；</li>
+<li>暂存区就是我们通过<code>git add</code>这个指令，将修改提交到的地方，图中的<code>stage</code>；</li>
+<li>除此之外，<code>git commit</code>是把这些修改提交到我们自动创建的第一个分支<code>master</code>，还有一个指向<code>master</code>的指针<code>HEAD</code>（这两个概念我们之后再讲）</li>
+</ul>
+<p><a href="https://imgchr.com/i/ats6sJ" target="_blank" rel="noopener"><img data-src="https://s1.ax1x.com/2020/08/02/ats6sJ.png" alt="1.png"></a></p>
+<p>这样我们就可以理解为什么Git上传或者修改文件都需要两步，而且每次<code>commit</code>都是将暂存区的所有修改一起提交到分支，所以说，如果我们有很多个修改，一定要用<code>git add</code>指令全部添加到暂存区之后，再一起上传到分支。</p>
+<p>我们来举一个例子：我们再在<code>learngit</code>目录下创建一个文件README.txt，内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">I am learning git</span><br></pre></td></tr></table></figure>
+
+<p>并且把我们之前的<code>tmp.txt</code>文件再加一行变成：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">I like Git</span><br><span class="line">Because it is useful</span><br><span class="line">I will use it</span><br></pre></td></tr></table></figure>
+
+<p>然后，我们使用<code>git status</code>来看看我们的修改：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git status</span><br><span class="line"># On branch master</span><br><span class="line"># Changes not staged for commit:</span><br><span class="line">#   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)</span><br><span class="line">#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</span><br><span class="line">#</span><br><span class="line">#	modified:   tmp.txt</span><br><span class="line">#</span><br><span class="line"># Untracked files:</span><br><span class="line">#   (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)</span><br><span class="line">#</span><br><span class="line">#	README.txt</span><br><span class="line">no changes added to commit (use &quot;git add&quot; and&#x2F;or &quot;git commit -a&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>很明显，git定位到了我们的修改，我们可以看到<code>README.txt</code>的状态是<code>Untracked files</code>，这是因为我们还没有将这个文件上传，现在，我们使用<code>git add</code>对两个文件进行添加后，我们再用<code>git status</code>来看一下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git status</span><br><span class="line"># On branch master</span><br><span class="line"># Changes to be committed:</span><br><span class="line">#   (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)</span><br><span class="line">#</span><br><span class="line">#	new file:   README.txt</span><br><span class="line">#	modified:   tmp.txt</span><br><span class="line">#</span><br></pre></td></tr></table></figure>
+
+<p>在这个时候，这两个修改都在暂存区里，git就会提示我们使用<code>git commit</code>来进行上传，然后我们就用<code>git commit</code>将修改进行上传，这时候我们再使用<code>git status</code>查看一下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git statua</span><br><span class="line"># On branch master</span><br><span class="line">nothing to commit, working directory clean</span><br></pre></td></tr></table></figure>
+
+<p>这时候，Git就告诉我们，整个世界都是干净的了!</p>
+<p>我们可以两次<code>add</code>后再进行<code>commit</code>，但是我们不能<code>add</code>–<code>commit</code>–<code>add</code>，后者的第二次<code>add</code>的内容就不会被上传到分支。总之，我们在操作git时，最后一步一定是<code>commit</code>。</p>
+<h2 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h2><p>版本回退这个功能就意味着，我们可以有无限的犯错机会，就像我们打单机游戏最后的boss之前，我们都会先存档，这样我们就算失败了也可以无限次的从头再来，git的版本回退功能也是一样的道理。</p>
+<p>我们的工作目录<code>learngit</code>已经经历了很多次修改，也产生了很多个版本，我们想要进行版本回退，我们首先需要知道都有那些版本，我们可以用<code>git log</code>这个指令</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git log</span><br><span class="line">commit 5b8c051f43c21483c100aafdf0362899d2168fb9</span><br><span class="line">Author: yxlong &lt;1570447120@qq.com&gt;</span><br><span class="line">Date:   Sat Aug 1 16:12:25 2020 +0800</span><br><span class="line"></span><br><span class="line">    add a new file and a new line : I will use it</span><br><span class="line"></span><br><span class="line">commit 2c2ad624b48cc59d345206e038de9c3b9e0140bc</span><br><span class="line">Author: yxlong &lt;1570447120@qq.com&gt;</span><br><span class="line">Date:   Tue Jul 28 21:34:54 2020 +0800</span><br><span class="line"></span><br><span class="line">    add Because it is useful</span><br><span class="line"></span><br><span class="line">commit 90b59be891df1420bc9d243f6da6681cdde4fb60</span><br><span class="line">Author: yxlong &lt;1570447120@qq.com&gt;</span><br><span class="line">Date:   Tue Jul 28 21:23:12 2020 +0800</span><br><span class="line"></span><br><span class="line">    write a tmp file</span><br></pre></td></tr></table></figure>
+
+<p>我们可以清晰的看到有三次提交，如果觉得信息太多看的眼花缭乱的话，我们可以加上<code>--pretty=oneline</code>参数：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git log --pretty&#x3D;oneline</span><br><span class="line">5b8c051f43c21483c100aafdf0362899d2168fb9 add a new file and a new line : I will use it</span><br><span class="line">2c2ad624b48cc59d345206e038de9c3b9e0140bc add Because it is useful</span><br><span class="line">90b59be891df1420bc9d243f6da6681cdde4fb60 write a tmp file</span><br></pre></td></tr></table></figure>
+
+<p>前面的这一大串数字是<code>commit id</code>（版本号），是每个版本的唯一标识。</p>
+<p>现在我们就坐上时光穿梭机把<code>tmp.txt</code>回退到上一个版本吧，首先我们需要知道，<code>HEAD</code>表示当前版本，也就是最新的<code>5b8c051...</code>，上一个版本就是<code>HEAD^</code>，上上个版本就是<code>HEAD^^</code>，100个版本之前就是<code>HEAD~100</code>。</p>
+<p>我们如果想回退到上一个版本，我们就需要使用<code>git reset</code>命令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git reset --hard HEAD^</span><br><span class="line">HEAD is now at 2c2ad62 add Because it is useful</span><br></pre></td></tr></table></figure>
+
+<p><code>--hard</code>参数的含义我们之后再讲，这里直接用就可以了，我们来看一下<code>tmp.txt</code>的内容：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ cat tmp.txt</span><br><span class="line">I like Git</span><br><span class="line">Because it is useful</span><br></pre></td></tr></table></figure>
+
+<p>果然，被还原了，而且最新添加的<code>README.txt</code>文件也消失了。</p>
+<p>现在我们来看一下我们现有的版本信息：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git log</span><br><span class="line">commit 2c2ad624b48cc59d345206e038de9c3b9e0140bc</span><br><span class="line">Author: yxlong &lt;1570447120@qq.com&gt;</span><br><span class="line">Date:   Tue Jul 28 21:34:54 2020 +0800</span><br><span class="line"></span><br><span class="line">    add Because it is useful</span><br><span class="line"></span><br><span class="line">commit 90b59be891df1420bc9d243f6da6681cdde4fb60</span><br><span class="line">Author: yxlong &lt;1570447120@qq.com&gt;</span><br><span class="line">Date:   Tue Jul 28 21:23:12 2020 +0800</span><br><span class="line"></span><br><span class="line">    write a tmp file</span><br></pre></td></tr></table></figure>
+
+<p>Oh my God!最后的那个版本消失了，我们真的穿越了，那可以传回去嘛？答案是肯定的，我们只需要向上翻一番记录找到最新版本的<code>commit id</code>，然后使用如下指令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git reset --hard 5b8c0</span><br><span class="line">HEAD is now at 5b8c051 add a new file and a new line : I will use it</span><br></pre></td></tr></table></figure>
+
+<p>这样就变回去了，最后那个<code>commit id</code>不用写全，写前几位就可以，Git会自动为你寻找的。</p>
+<p>我们来看一下<code>tmp.txt</code>的内容：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ cat tmp.txt </span><br><span class="line">I like Git</span><br><span class="line">Because it is useful</span><br><span class="line">I will use it</span><br></pre></td></tr></table></figure>
+
+<p>嗯，没错，它又回来了。</p>
+<p>这时候，可能就会有朋友问，如果我忘记了<code>commit id</code>怎么办呢？放心，Git很强大的，他会提前想到所有的情况的，<code>git reflog</code>这个命令用来记录你的每一次命令，如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git reflog</span><br><span class="line">5b8c051 HEAD@&#123;0&#125;: reset: moving to 5b8c0</span><br><span class="line">2c2ad62 HEAD@&#123;1&#125;: reset: moving to HEAD^</span><br><span class="line">5b8c051 HEAD@&#123;2&#125;: commit: add a new file and a new line : I will use it</span><br><span class="line">2c2ad62 HEAD@&#123;3&#125;: commit: add Because it is useful</span><br><span class="line">90b59be HEAD@&#123;4&#125;: commit (initial): write a tmp file</span><br></pre></td></tr></table></figure>
+
+<p>Oh Nice! 我又可以知道我的<code>commit id</code>了，然后我们就可以随心所欲地版本回退了。</p>
+<hr>
+<p>本次教程就到此结束了，本次知识点较多，大家要多复习呦。</p>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>matplotlib样式文件</title>
     <url>/codeHub/2020/07/31/2020-08/01matplotlib%E6%A0%B7%E5%BC%8F%E6%96%87%E4%BB%B6/</url>
     <content><![CDATA[<p>这篇文章主要讲了如何修改样式，保存样式以及加载样式文件</p>
 <blockquote>
