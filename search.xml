@@ -1,6 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>gaunxaun</title>
+    <url>/codeHub/2020/08/24/gaunxaun/</url>
+    <content><![CDATA[<h1 id="今日心闻联播官宣！"><a href="#今日心闻联播官宣！" class="headerlink" title="今日心闻联播官宣！"></a>今日心闻联播官宣！</h1><p><strong>心闻联播今日官宣：华中农业大学植物科学技术学院龙跃轩和华中农业大学植物科学技术学院徐梦伊自通知返校以来，集中力量攻克难关，终于8月25日在华中农业大学展开会晤。</strong></p>
+<img data-src="https://s1.ax1x.com/2020/08/24/dygQbV.jpg" alt="F1.jpg" style="zoom:50%;" />
+
+<p>自认识以来，两人联合腾讯QQ，在当今网络科技的支持下，一共发送182935条消息，其中包括13007张图片和13788张表情。如果每条消息长1KM，消息连起来可以绕地球4圈半。</p>
+<img data-src="https://s1.ax1x.com/2020/08/24/dyg1ET.jpg" alt="F2.jpg" style="zoom:50%;" />
+
+<p>华中农业大学龙跃轩在接受本台记者采访时表示，两人于5月25日已经在一起了，在一起的3个月期间感情逐渐升温，想借此机会在华农展开为期2年的会晤，为两人美好的未来打下坚实的基础，让我们共同期待！</p>
+<img data-src="https://s1.ax1x.com/2020/08/24/dyD4Ve.jpg" alt="F3.jpg" style="zoom: 50%;" />
+
+]]></content>
+  </entry>
+  <entry>
+    <title>爬取GO信息</title>
+    <url>/codeHub/2020/08/07/2020-08/05%E7%88%AC%E5%8F%96GO%E4%BF%A1%E6%81%AF/</url>
+    <content><![CDATA[<p>为了查找某个研究领域的相关信息，生物学家往往要花费大量的时间。与此同时由于不同数据库之间的信息可能不同步或者术语不一样，这使得信息的检索更加的麻烦。如果让人来做还勉强能查，但是让机器来查询的话一切就会变的无章可循。Gene Ontology（GO）就是为了解决这种问题而发起的一个项目；每一个GO Term都是由7个数字标识这个Term编号，同时还有一个lable标识具体的生物学功能。每个Tern属于一个本体，在GO中有三个ontology它们分别是：</p>
+<ul>
+<li>molecular function,</li>
+<li>cellular component</li>
+<li>biological process</li>
+</ul>
+<p>今天要做的就是大批量的根据某个功能的关键字，搜索已经报导的基因对应的序列信息；从而进行Blast找到你所研究的物种中的同源基因。这里以爬取<code>Ethylene</code>关键字为例，分以下三个步骤搞：</p>
+<ol>
+<li>根据关键字爬取GO编号信息</li>
+<li>根据GO编号爬取对应的基因注释信息</li>
+<li>根据基因注释信息爬取基因的序列信息</li>
+</ol>
+<a id="more"></a>
+
+<h3 id="1-爬取GO编号信息"><a href="#1-爬取GO编号信息" class="headerlink" title="1.爬取GO编号信息"></a>1.爬取GO编号信息</h3><blockquote>
+<p> 网页地址: <a href="http://geneontology.org/" target="_blank" rel="noopener">http://geneontology.org/</a></p>
+</blockquote>
+<p>​    <img data-src="https://s1.ax1x.com/2020/08/07/af0Pr4.png" alt="af0Pr4.png"></p>
+<p>在开发者模式下可用发现浏览器请求的API地址为</p>
+<blockquote>
+<p><a href="http://golr.geneontology.org/solr/select?defType=edismax&amp;qt=standard&amp;indent=on&amp;wt=json&amp;rows=10&amp;start=0&amp;fl=annotation_class,description,source,idspace,synonym,alternate_id,annotation_class_label,score,id&amp;facet=true&amp;facet.mincount=1&amp;facet.sort=count&amp;json.nl=arrarr&amp;facet.limit=25&amp;hl=true&amp;hl.simple.pre=%3Cem%20class=%22hilite%22%3E&amp;hl.snippets=1000&amp;fq=document_category:%22ontology_class%22&amp;fq=idspace:%22GO%22&amp;fq=is_obsolete:%22false%22&amp;facet.field=source&amp;facet.field=idspace&amp;facet.field=subset&amp;facet.field=is_obsolete&amp;q=Ethylene*&amp;qf=annotation_class%5E3&amp;qf=annotation_class_label_searchable%5E5.5&amp;qf=description_searchable%5E1&amp;qf=synonym_searchable%5E1&amp;qf=alternate_id%5E1&amp;packet=1&amp;callback_type=search&amp;json.wrf=jQuery214044957252147235494_1596787199447&amp;_=1596787199448" target="_blank" rel="noopener">http://golr.geneontology.org/solr/select?defType=edismax&amp;qt=standard&amp;indent=on&amp;wt=json&amp;rows=10&amp;start=0&amp;fl=annotation_class,description,source,idspace,synonym,alternate_id,annotation_class_label,score,id&amp;facet=true&amp;facet.mincount=1&amp;facet.sort=count&amp;json.nl=arrarr&amp;facet.limit=25&amp;hl=true&amp;hl.simple.pre=%3Cem%20class=%22hilite%22%3E&amp;hl.snippets=1000&amp;fq=document_category:%22ontology_class%22&amp;fq=idspace:%22GO%22&amp;fq=is_obsolete:%22false%22&amp;facet.field=source&amp;facet.field=idspace&amp;facet.field=subset&amp;facet.field=is_obsolete&amp;q=Ethylene*&amp;qf=annotation_class%5E3&amp;qf=annotation_class_label_searchable%5E5.5&amp;qf=description_searchable%5E1&amp;qf=synonym_searchable%5E1&amp;qf=alternate_id%5E1&amp;packet=1&amp;callback_type=search&amp;json.wrf=jQuery214044957252147235494_1596787199447&amp;_=1596787199448</a></p>
+</blockquote>
+<p><img data-src="https://s1.ax1x.com/2020/08/07/afwr8K.png" alt="afwr8K.png"></p>
+<p>接下来使用python中的<code>urllib</code>包向目标API地址发起<code>GET</code>请求，并且使用Json包将响应的数据解析成<code>Dict</code>对象;</p>
+<p>这里对同一个URL进行了两次请求，主要是为了获取所有的响应数据；因为每次请求时，默认只响应10条数据</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">response = urllib.request.urlopen(getGoItemUrl)  <span class="comment"># 发起get请求</span></span><br><span class="line">jsonData = json.loads(response.read().decode(<span class="string">'utf-8'</span>))  <span class="comment"># 解析成json数据</span></span><br><span class="line"><span class="comment"># time.sleep(1)  # 缓一缓</span></span><br><span class="line"><span class="comment"># print(jsonData['response']['docs'])</span></span><br><span class="line"><span class="keyword">return</span> jsonData[<span class="string">'response'</span>][<span class="string">'docs'</span>]  <span class="comment"># 得到GO item信息</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-爬取对应基因编号"><a href="#2-爬取对应基因编号" class="headerlink" title="2.爬取对应基因编号"></a>2.爬取对应基因编号</h3><p>有的GO term可能没有对应的基因注释信息，有的GO term可能存在注释信息不完整的情况，统一使用<code>NA</code>进行填充</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> GoItem:</span><br><span class="line">    print(<span class="string">"爬取GO编号:\t"</span>+item[<span class="string">'id'</span>])</span><br><span class="line">    info = getGeneIdByGoItem(item[<span class="string">'id'</span>])</span><br><span class="line">    GoInfo = <span class="string">"\t"</span>.join([str(item[i]) <span class="keyword">for</span> i <span class="keyword">in</span> GoKeys])  <span class="comment"># 获取Go item 描述信息</span></span><br><span class="line">    <span class="keyword">if</span>(len(info) == <span class="number">0</span>):</span><br><span class="line">        geneMessage = <span class="string">"\t"</span>.join(</span><br><span class="line">            [<span class="string">'NA'</span>, <span class="string">'NA'</span>, <span class="string">'NA'</span>, <span class="string">'NA'</span>, <span class="string">'NA'</span>, <span class="string">'NA'</span>, <span class="string">'NA'</span>, <span class="string">'NA'</span>, <span class="string">'NA'</span>])</span><br><span class="line">        out.append(GoInfo+<span class="string">"\t"</span>+geneMessage+<span class="string">"\n"</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">for</span> geneItem <span class="keyword">in</span> info:</span><br><span class="line">            geneMessage = []</span><br><span class="line">          <span class="comment"># 有不存在值的列,就输出NA信息</span></span><br><span class="line">            <span class="keyword">for</span> key <span class="keyword">in</span> geneInfoKeys:</span><br><span class="line">                <span class="keyword">try</span>:</span><br><span class="line">                    geneMessage.append(geneItem[key])</span><br><span class="line">                <span class="keyword">except</span> KeyError:</span><br><span class="line">                    geneMessage.append(<span class="string">"NA"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>最终生成一个Txt文档；文档内包含GO Term的注释信息和对应的基因的注释信息</p>
+<p><img data-src="https://s1.ax1x.com/2020/08/07/afyF4s.png" alt="afyF4s.png"></p>
+<h3 id="3-爬取基因序列信息"><a href="#3-爬取基因序列信息" class="headerlink" title="3.爬取基因序列信息"></a>3.爬取基因序列信息</h3><p>有了上一步的GO Term的注释信息后，我想得到植物中所有与乙烯相关的基因的序列信息用于Blast；来获得我所研究的物种中对应的同源基因的功能。</p>
+<p>使用得到的基因编号和物种编号在NCBI中获得对应的gene序列信息，这里获得的序列都是正链上的序列，而不是有义链上的。</p>
+<p>最终得到一个fasta序列文件</p>
+<p><img data-src="https://s1.ax1x.com/2020/08/07/af6TFH.png" alt="af6TFH.png"></p>
+<h3 id="4-脚本运行"><a href="#4-脚本运行" class="headerlink" title="4.脚本运行"></a>4.脚本运行</h3><p>当想要获取某一些感兴趣的基因序列信息时，只需要从第一个脚本生成的文件<code>GOAnnotion.txt</code>，截取对应的行到另一个文件，用作第二个脚本的输入文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">##获得感兴趣的GO 注释信息</span></span><br><span class="line">python GoItem2gene.py 关键字 GOAnnotion.txt</span><br><span class="line"><span class="comment">## 获得感兴趣物种、感兴趣GO的基因序列信息</span></span><br><span class="line">head 100  GOAnnotion.txt &gt;interest_Annotion.txt </span><br><span class="line">python getSeqByID.py interest_Annotion.txt  interest_Annotion.fasta</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://imgchr.com/i/afRah4" target="_blank" rel="noopener"><img data-src="https://s1.ax1x.com/2020/08/07/afRah4.png" alt="afRah4.png"></a></p>
+<blockquote>
+<p> 脚本地址：<a href="https://github.com/BiocottonHub/zpliuCode/tree/8666815dfe1f14698596f160e236d9a6c5a042b7/GOTerm" target="_blank" rel="noopener">https://github.com/BiocottonHub/zpliuCode/tree/8666815dfe1f14698596f160e236d9a6c5a042b7/GOTerm</a></p>
+<p><strong>GoItem2gene.py</strong>： 根据关键字获取基因编号</p>
+<p><strong>getSeqByID.py</strong>：根据基因编号提取基因序列</p>
+</blockquote>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li><a href="https://www.zhihu.com/question/53055375/answer/206863647" target="_blank" rel="noopener">基因本体概念</a>  </li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
     <title>Git系列（六）——删除文件</title>
     <url>/codeHub/2020/08/06/2020-08/04Git%E7%B3%BB%E5%88%97%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6/</url>
     <content><![CDATA[<h1 id="Git系列（六）——删除文件"><a href="#Git系列（六）——删除文件" class="headerlink" title="Git系列（六）——删除文件"></a>Git系列（六）——删除文件</h1><p>Git中删除文件可不太一样哦，我们一起来学习一下</p>
