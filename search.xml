@@ -1,20 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>gaunxaun</title>
-    <url>/codeHub/2020/08/24/gaunxaun/</url>
-    <content><![CDATA[<h1 id="今日心闻联播官宣！"><a href="#今日心闻联播官宣！" class="headerlink" title="今日心闻联播官宣！"></a>今日心闻联播官宣！</h1><p><strong>心闻联播今日官宣：华中农业大学植物科学技术学院龙跃轩和华中农业大学植物科学技术学院徐梦伊自通知返校以来，集中力量攻克难关，终于8月25日在华中农业大学展开会晤。</strong></p>
-<img data-src="https://s1.ax1x.com/2020/08/24/dygQbV.jpg" alt="F1.jpg" style="zoom:50%;" />
-
-<p>自认识以来，两人联合腾讯QQ，在当今网络科技的支持下，一共发送182935条消息，其中包括13007张图片和13788张表情。如果每条消息长1KM，消息连起来可以绕地球4圈半。</p>
-<img data-src="https://s1.ax1x.com/2020/08/24/dyg1ET.jpg" alt="F2.jpg" style="zoom:50%;" />
-
-<p>华中农业大学龙跃轩在接受本台记者采访时表示，两人于5月25日已经在一起了，在一起的3个月期间感情逐渐升温，想借此机会在华农展开为期2年的会晤，为两人美好的未来打下坚实的基础，让我们共同期待！</p>
-<img data-src="https://s1.ax1x.com/2020/08/24/dyfseI.jpg" alt="F3.jpg" style="zoom:50%;" />
-
-]]></content>
-  </entry>
-  <entry>
     <title>爬取GO信息</title>
     <url>/codeHub/2020/08/07/2020-08/05%E7%88%AC%E5%8F%96GO%E4%BF%A1%E6%81%AF/</url>
     <content><![CDATA[<p>为了查找某个研究领域的相关信息，生物学家往往要花费大量的时间。与此同时由于不同数据库之间的信息可能不同步或者术语不一样，这使得信息的检索更加的麻烦。如果让人来做还勉强能查，但是让机器来查询的话一切就会变的无章可循。Gene Ontology（GO）就是为了解决这种问题而发起的一个项目；每一个GO Term都是由7个数字标识这个Term编号，同时还有一个lable标识具体的生物学功能。每个Tern属于一个本体，在GO中有三个ontology它们分别是：</p>
