@@ -21,14 +21,23 @@
     var CONFIG = {"hostname":"biocottonhub.github.io","root":"/codeHub/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Code Hub">
-<meta property="og:url" content="https://biocottonhub.github.io/codeHub/archives/2020/07/index.html">
+  <meta name="description" content="Git系列（八）——添加远程库 现在我们已经成功创建了Github帐号并且绑定了我们自己的电脑，那我们就来学习一下如何添加远程仓库。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git系列（八）——添加远程库">
+<meta property="og:url" content="https://biocottonhub.github.io/codeHub/2020/08/30/07Git%E7%B3%BB%E5%88%97%EF%BC%88%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94%E6%B7%BB%E5%8A%A0%E8%BF%9C%E7%A8%8B%E5%BA%93/index.html">
 <meta property="og:site_name" content="Code Hub">
+<meta property="og:description" content="Git系列（八）——添加远程库 现在我们已经成功创建了Github帐号并且绑定了我们自己的电脑，那我们就来学习一下如何添加远程仓库。">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s1.ax1x.com/2020/08/30/dbiYJP.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/08/30/dbi3dA.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/08/30/dbi8II.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/08/30/dbitRf.png">
+<meta property="article:published_time" content="2020-08-30T01:51:55.000Z">
+<meta property="article:modified_time" content="2020-08-30T02:03:30.416Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s1.ax1x.com/2020/08/30/dbiYJP.png">
 
-<link rel="canonical" href="https://biocottonhub.github.io/codeHub/archives/2020/07/">
+<link rel="canonical" href="https://biocottonhub.github.io/codeHub/2020/08/30/07Git%E7%B3%BB%E5%88%97%EF%BC%88%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94%E6%B7%BB%E5%8A%A0%E8%BF%9C%E7%A8%8B%E5%BA%93/">
 
 
 <script id="page-configurations">
@@ -36,12 +45,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>Archive | Code Hub</title>
+  <title>Git系列（八）——添加远程库 | Code Hub</title>
   
 
 
@@ -186,237 +195,211 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2020/08/30/07Git%E7%B3%BB%E5%88%97%EF%BC%88%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94%E6%B7%BB%E5%8A%A0%E8%BF%9C%E7%A8%8B%E5%BA%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/codeHub/uploads/themeImg/logo.png">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Hub">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Git系列（八）——添加远程库
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>发布于
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-08-30 09:51:55 / Modified: 10:03:30" itemprop="dateCreated datePublished" datetime="2020-08-30T09:51:55+08:00">2020-08-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  分类于<a href="/codeHub/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                阅读量:<i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
   
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        
-        <span class="collection-header">恩..！目前共计 58 篇文章。 继续努力。</span>
-      </div>
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/codeHub/2020/08/30/07Git%E7%B3%BB%E5%88%97%EF%BC%88%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94%E6%B7%BB%E5%8A%A0%E8%BF%9C%E7%A8%8B%E5%BA%93/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2020/08/30/07Git%E7%B3%BB%E5%88%97%EF%BC%88%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94%E6%B7%BB%E5%8A%A0%E8%BF%9C%E7%A8%8B%E5%BA%93/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2020</span>
-    </div>
+        <h1 id="Git系列（八）——添加远程库"><a href="#Git系列（八）——添加远程库" class="headerlink" title="Git系列（八）——添加远程库"></a>Git系列（八）——添加远程库</h1><p> 现在我们已经成功创建了Github帐号并且绑定了我们自己的电脑，那我们就来学习一下如何添加远程仓库。</p>
+<a id="more"></a>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+<hr>
+<h2 id="创建远程库"><a href="#创建远程库" class="headerlink" title="创建远程库"></a>创建远程库</h2><p>具体操作如下图所示</p>
+<img data-src="https://s1.ax1x.com/2020/08/30/dbiYJP.png" alt="1.png" style="zoom:33%;" />
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-31T19:59:37+08:00"
-              content="2020-07-31">
-          07-31
-        </time>
-      </div>
+<p>仓库名称和本地的保持一致都为<code>learngit</code>，输入后点击<code>create repository</code>即可</p>
+<img data-src="https://s1.ax1x.com/2020/08/30/dbi3dA.png" alt="2.png" style="zoom:33%;" />
 
-      <div class="post-title">
-          <a class="post-title-link" href="/codeHub/2020/07/31/2020-08/01matplotlib%E6%A0%B7%E5%BC%8F%E6%96%87%E4%BB%B6/" itemprop="url">
-            <span itemprop="name">matplotlib样式文件</span>
-          </a>
-      </div>
+<h2 id="关联本地仓库"><a href="#关联本地仓库" class="headerlink" title="关联本地仓库"></a>关联本地仓库</h2><p>创建成功后Github会显示如下界面，图中红色框框圈起来的就是关键本地仓库的指令。</p>
+<img data-src="https://s1.ax1x.com/2020/08/30/dbi8II.png" alt="3.png" style="zoom:33%;" />
 
-    </header>
-  </article>
+<p>我们只需要在本地的仓库下输入上述指令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git remote add origin git@github.com:yxlong-science&#x2F;learngit.git</span><br></pre></td></tr></table></figure>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+<ul>
+<li>注意，一定是自己的邮箱和路径，不要直接复制粘贴，不然就关联到我的远程库了</li>
+<li><code>README.md</code>文件是Github默认的介绍文件，会显示在仓库的首页，对项目进行一个简要的介绍，在创建仓库时可以选择自动创建，推荐大家创建一个</li>
+</ul>
+<h2 id="推送"><a href="#推送" class="headerlink" title="推送"></a>推送</h2><p>关联成功以后，远程库的名字就是<code>origin</code>，这个是默认名字，一般我们也不会修改，一看到<code>origin</code>我们就知道这是一个远程库。</p>
+<p>这个远程库现在还是空空如也的，我们就可以通过下面这个指令将本地的库的文件推动到远程库：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ git push -u origin master</span><br><span class="line">Counting objects: 12, done.</span><br><span class="line">Delta compression using up to 40 threads.</span><br><span class="line">Compressing objects: 100% (5&#x2F;5), done.</span><br><span class="line">Writing objects: 100% (12&#x2F;12), 994 bytes | 0 bytes&#x2F;s, done.</span><br><span class="line">Total 12 (delta 0), reused 0 (delta 0)</span><br><span class="line">To git@github.com:yxlong-science&#x2F;learngit.git</span><br><span class="line"> * [new branch]      master -&gt; master</span><br><span class="line">Branch master set up to track remote branch master from origin.</span><br></pre></td></tr></table></figure>
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-28T21:45:37+08:00"
-              content="2020-07-28">
-          07-28
-        </time>
-      </div>
+<p>将本地的库推送到远程用的是<code>git push</code>，第一次推送时要加上<code>-u</code>参数，Git不但会把本地的<code>master</code>分支内容推送的远程新的<code>master</code>分支，还会把本地的<code>master</code>分支和远程的<code>master</code>分支关联起来，在以后的推送或者拉取时就可以简化命令。</p>
+<p>可以看到，远程库和本地库完全一样了。</p>
+<img data-src="https://s1.ax1x.com/2020/08/30/dbitRf.png" alt="4.png" style="zoom:33%;" />
 
-      <div class="post-title">
-          <a class="post-title-link" href="/codeHub/2020/07/28/2020-07/16Git%E7%B3%BB%E5%88%97%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E7%9A%84%E4%BF%AE%E6%94%B9%E5%8F%8A%E6%8F%90%E4%BA%A4/" itemprop="url">
-            <span itemprop="name">Git系列（三）——文件的修改及提交</span>
-          </a>
-      </div>
+<p>以后，如果本地做了修改，就可以简单的通过下面的指令推送到远程了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git push origin master</span><br></pre></td></tr></table></figure>
 
-    </header>
-  </article>
+<h2 id="拉取"><a href="#拉取" class="headerlink" title="拉取"></a>拉取</h2><p>从远程库拉取，我们需要下述指令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git pull origin master</span><br><span class="line">From github.com:yxlong-science&#x2F;learngit</span><br><span class="line"> * branch            master     -&gt; FETCH_HEAD</span><br><span class="line">Already up-to-date.</span><br></pre></td></tr></table></figure>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+<ul>
+<li>一个项目如果是多人协作时，每次在本地修改之前，我们都要先<code>git pull</code>，不然再一次提交时就可能会覆盖别人的修改。</li>
+</ul>
+<h2 id="克隆"><a href="#克隆" class="headerlink" title="克隆"></a>克隆</h2><p>多人修改一个项目时，我们就可以用命令<code>git clone</code>克隆一个本地库。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone git@github.com:yxlong-science&#x2F;learngit.git</span><br></pre></td></tr></table></figure>
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-28T21:45:12+08:00"
-              content="2020-07-28">
-          07-28
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/codeHub/2020/07/28/2020-07/15Git%E7%B3%BB%E5%88%97%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E7%89%88%E6%9C%AC%E5%BA%93%E5%88%9B%E5%BB%BA%E4%BB%A5%E5%8F%8A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" itemprop="url">
-            <span itemprop="name">Git系列（二）——Git版本库创建以及文件上传</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-28T21:44:51+08:00"
-              content="2020-07-28">
-          07-28
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/codeHub/2020/07/28/2020-07/14Git%E7%B3%BB%E5%88%97%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94Git%E7%9A%84%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%AE%89%E8%A3%85/" itemprop="url">
-            <span itemprop="name">Git系列（一）——Git的简介及安装</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-28T18:58:47+08:00"
-              content="2020-07-28">
-          07-28
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/codeHub/2020/07/28/2020-07/13%E5%9F%BA%E5%9B%A0Vue%E5%89%8D%E7%AB%AF%E7%BD%91%E9%A1%B5%E5%AE%9E%E7%8E%B0/" itemprop="url">
-            <span itemprop="name">基于Vue前端网页实现</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-25T22:10:53+08:00"
-              content="2020-07-25">
-          07-25
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/codeHub/2020/07/25/2020-07/12%E6%89%8B%E6%8A%8A%E6%89%8B%E6%90%AD%E5%BB%BAjbrowse/" itemprop="url">
-            <span itemprop="name">手把手教你搭建JBrowse-初始化应用</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-23T13:49:12+08:00"
-              content="2020-07-23">
-          07-23
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/codeHub/2020/07/23/2020-07/11matplotlib-%E6%9F%B1%E7%8A%B6%E5%9B%BE/" itemprop="url">
-            <span itemprop="name">matplotlib-柱状图</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-21T20:05:01+08:00"
-              content="2020-07-21">
-          07-21
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/codeHub/2020/07/21/2020-07/10D3js-%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E7%A5%9E%E5%99%A8/" itemprop="url">
-            <span itemprop="name">D3js-数据可视化神器</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-20T19:25:38+08:00"
-              content="2020-07-20">
-          07-20
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/codeHub/2020/07/20/2020-07/09node%E5%90%8E%E5%8F%B0/" itemprop="url">
-            <span itemprop="name">node搭建后台</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-16T14:31:33+08:00"
-              content="2020-07-16">
-          07-16
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/codeHub/2020/07/16/2020-07/07matplotlib-image/" itemprop="url">
-            <span itemprop="name">matplotlib-image</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
+<p>指令的最后是仓库的地址，克隆好了以后，就可以进行多人修改了。</p>
+<hr>
+<p>从此，你就拥有了真正的分布式版本库了，之后我们会学习Git的最后一部分分支和标签的管理。</p>
 
     </div>
+
+    
+    
+    
+   
+   <div>
+     <div>
+  
+    <div style="text-align:center;color:#bfbfbf;font-size:16px;">
+      <span>------ 本文结束 </span>
+      <img src="https://s1.ax1x.com/2020/03/23/8HFzxH.png" 
+      style="display:inline-block;"
+      data-loaded="true"
+      alt="thankyou" border="0" 
+      width="100"
+      heigh="100"
+      />
+      <span> 感谢阅读 ------</span>
+
+    </div>
+    <p>
+    <a class="fancybox fancybox.image" 
+    href="https://s1.ax1x.com/2020/03/23/8HCEjI.jpg" 
+    itemscope="" itemtype="http://schema.org/ImageObject" 
+    itemprop="url" data-fancybox="default" 
+    rel="default" title="公众号" 
+    data-caption="公众号"
+    >
+    <img data-src="https://s1.ax1x.com/2020/03/23/8HCEjI.jpg" alt="公众号"
+     src="https://s1.ax1x.com/2020/03/23/8HCEjI.jpg" data-loaded="true">
+    </a>
+    <p  style="text-align:center;">
+     <sapn style="">欢迎扫一扫上面的微信二维码，订阅
+     <span style="color: #428bca;font-size:20px;">codeHub</span>
+     公众号</span>
+     </p>
+     </p>
+    
+  
+</div>
+   </div>
+  
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>yxlong
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://biocottonhub.github.io/codeHub/2020/08/30/07Git%E7%B3%BB%E5%88%97%EF%BC%88%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94%E6%B7%BB%E5%8A%A0%E8%BF%9C%E7%A8%8B%E5%BA%93/" title="Git系列（八）——添加远程库">https://biocottonhub.github.io/codeHub/2020/08/30/07Git系列（八）——添加远程库/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/codeHub/2020/08/30/06Git%E7%B3%BB%E5%88%97%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/" rel="prev" title="Git系列（七）——远程仓库">
+      <i class="fa fa-chevron-left"></i> Git系列（七）——远程仓库
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
   </div>
-  
-  
-  
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/codeHub/archives/2020/07/page/2/">2</a><a class="extend next" rel="next" href="/codeHub/archives/2020/07/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
-  </nav>
-
 
 
           </div>
           
+    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -463,6 +446,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Git系列（八）——添加远程库"><span class="nav-number">1.</span> <span class="nav-text">Git系列（八）——添加远程库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建远程库"><span class="nav-number">1.1.</span> <span class="nav-text">创建远程库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关联本地仓库"><span class="nav-number">1.2.</span> <span class="nav-text">关联本地仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#推送"><span class="nav-number">1.3.</span> <span class="nav-text">推送</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拉取"><span class="nav-number">1.4.</span> <span class="nav-text">拉取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#克隆"><span class="nav-number">1.5.</span> <span class="nav-text">克隆</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
