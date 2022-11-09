@@ -1,6 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>科学上网</title>
+    <url>/codeHub/2022/11/09/2022-11/06%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/</url>
+    <content><![CDATA[<blockquote>
+<p>使用教程直接看以下内容</p>
+<ol>
+<li>客户端软件（软件群文件里有）</li>
+<li>window软件配置</li>
+<li>安卓配置</li>
+<li>白名单配置</li>
+</ol>
+</blockquote>
+<h3 id="1-服务端脚本（不需要管）："><a href="#1-服务端脚本（不需要管）：" class="headerlink" title="1.服务端脚本（不需要管）："></a>1.服务端脚本（不需要管）：</h3><ol>
+<li><a href="https://github.com/v2fly/v2ray-core" target="_blank" rel="noopener">https://github.com/v2fly/v2ray-core</a></li>
+<li><a href="https://github.com/v2fly/fhs-install-v2ray" target="_blank" rel="noopener">https://github.com/v2fly/fhs-install-v2ray</a></li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#修改配置文件</span></span><br><span class="line">/usr/<span class="built_in">local</span>/etc/v2ray/config.json</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"inbounds"</span>: [&#123;</span><br><span class="line">    <span class="string">"port"</span>: 10086, // 服务器监听端口，必须和上面的一样</span><br><span class="line">    <span class="string">"protocol"</span>: <span class="string">"vmess"</span>,</span><br><span class="line">    <span class="string">"settings"</span>: &#123;</span><br><span class="line">      <span class="string">"clients"</span>: [&#123; <span class="string">"id"</span>: <span class="string">"b831381d-6324-4d53-ad4f-8cda48b30811"</span> &#125;]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;],</span><br><span class="line">  <span class="string">"outbounds"</span>: [&#123;</span><br><span class="line">    <span class="string">"protocol"</span>: <span class="string">"freedom"</span>,</span><br><span class="line">    <span class="string">"settings"</span>: &#123;&#125;</span><br><span class="line">  &#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>重启服务</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl restart v2ray</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-客户端软件"><a href="#2-客户端软件" class="headerlink" title="2.客户端软件"></a>2.客户端软件</h3><ol>
+<li>windows： <a href="https://github.com/2dust/v2rayN/releases" target="_blank" rel="noopener">https://github.com/2dust/v2rayN/releases</a></li>
+<li>安卓 <a href="https://github.com/2dust/v2rayNG" target="_blank" rel="noopener">https://github.com/2dust/v2rayNG</a></li>
+</ol>
+<h3 id="3-windows客户端脚本配置"><a href="#3-windows客户端脚本配置" class="headerlink" title="3.windows客户端脚本配置"></a>3.windows客户端脚本配置</h3><blockquote>
+<p>解压后，开箱即食</p>
+</blockquote>
+<p><a href="https://imgse.com/i/xzcCsU" target="_blank" rel="noopener"><img data-src="https://s1.ax1x.com/2022/11/09/xzcCsU.md.png" alt="xzcCsU.md.png"></a></p>
+<p><a href="https://imgse.com/i/xzcPLF" target="_blank" rel="noopener"><img data-src="https://s1.ax1x.com/2022/11/09/xzcPLF.md.png" alt="xzcPLF.md.png"></a></p>
+<h3 id="4-安卓端使用"><a href="#4-安卓端使用" class="headerlink" title="4.安卓端使用"></a>4.安卓端使用</h3><p><a href="https://imgse.com/i/xzc9MT" target="_blank" rel="noopener"><img data-src="https://s1.ax1x.com/2022/11/09/xzc9MT.md.png" alt="xzc9MT.md.png"></a></p>
+<h3 id="5-配置v2rayN白名单"><a href="#5-配置v2rayN白名单" class="headerlink" title="5.配置v2rayN白名单"></a>5.配置v2rayN白名单</h3><p><a href="https://baiyunju.cc/7527" target="_blank" rel="noopener">https://baiyunju.cc/7527</a></p>
+<p><a href="https://baiyunju.cc/7242" target="_blank" rel="noopener">https://baiyunju.cc/7242</a></p>
+<p>Proxy (代理)、Direct (直连)、Block (阻止)的含义</p>
+<ul>
+<li>Block (阻止)： 拦截向外发送的连接请求，禁止连网。</li>
+<li>Direct (直连)： 直接访问外部网络，不走代理。</li>
+<li>Proxy (代理)： 允许通过代理连接上网。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#* 规则列表</span></span><br><span class="line">genome.cshlp.org,</span><br><span class="line">cell.com,</span><br><span class="line">science.org,</span><br><span class="line">nature.come,</span><br><span class="line">nph.onlinelibrary.wiley.com,</span><br><span class="line">genomebiology.biomedcentral.com,</span><br><span class="line">academic.oup.com,</span><br><span class="line">journals.plos.org,</span><br><span class="line">onlinelibrary.wiley.com,</span><br><span class="line">pnas.org</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://imgse.com/i/xz6zR0" target="_blank" rel="noopener"><img data-src="https://s1.ax1x.com/2022/11/09/xz6zR0.md.png" alt="xz6zR0.md.png"></a></p>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>未配置白名单，使用代理访问，机构显示为空</p>
+<p>配置成功后，使用直连，显示机构</p>
+<p><a href="https://imgse.com/i/xzcSzV" target="_blank" rel="noopener"><img data-src="https://s1.ax1x.com/2022/11/09/xzcSzV.md.png" alt="xzcSzV.md.png"></a></p>
+<h3 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h3><ol>
+<li><a href="https://www.v2fly.org/guide/start.html" target="_blank" rel="noopener">https://www.v2fly.org/guide/start.html</a></li>
+<li><a href="https://www.v2fly.org/guide/start.html" target="_blank" rel="noopener">https://www.v2fly.org/guide/start.html</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>实用工具</category>
+      </categories>
+  </entry>
+  <entry>
     <title>爬取GO信息</title>
     <url>/codeHub/2020/08/07/2020-08/05%E7%88%AC%E5%8F%96GO%E4%BF%A1%E6%81%AF/</url>
     <content><![CDATA[<p>为了查找某个研究领域的相关信息，生物学家往往要花费大量的时间。与此同时由于不同数据库之间的信息可能不同步或者术语不一样，这使得信息的检索更加的麻烦。如果让人来做还勉强能查，但是让机器来查询的话一切就会变的无章可循。Gene Ontology（GO）就是为了解决这种问题而发起的一个项目；每一个GO Term都是由7个数字标识这个Term编号，同时还有一个lable标识具体的生物学功能。每个Tern属于一个本体，在GO中有三个ontology它们分别是：</p>
