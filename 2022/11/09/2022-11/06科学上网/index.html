@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="generator" content="Hexo 6.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/codeHub/uploads/themeImg/logo.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/codeHub/uploads/themeImg/logo.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/codeHub/uploads/themeImg/logo.png">
@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://s1.ax1x.com/2022/11/09/xz6zR0.md.png">
 <meta property="og:image" content="https://s1.ax1x.com/2022/11/09/xzcSzV.md.png">
 <meta property="article:published_time" content="2022-11-09T00:57:48.000Z">
-<meta property="article:modified_time" content="2022-11-09T01:27:50.221Z">
+<meta property="article:modified_time" content="2022-11-09T01:58:43.512Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://s1.ax1x.com/2022/11/09/xzcCsU.md.png">
 
@@ -127,12 +127,12 @@
   </li>
         <li class="menu-item menu-item-文章">
 
-    <a href="/codeHub/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>文章<span class="badge">57</span></a>
+    <a href="/codeHub/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>文章<span class="badge">67</span></a>
 
   </li>
         <li class="menu-item menu-item-分类">
 
-    <a href="/codeHub/categories" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">12</span></a>
+    <a href="/codeHub/categories" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">13</span></a>
 
   </li>
         <li class="menu-item menu-item-标签">
@@ -226,7 +226,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2022-11-09 08:57:48 / Modified: 09:27:50" itemprop="dateCreated datePublished" datetime="2022-11-09T08:57:48+08:00">2022-11-09</time>
+              <time title="Created: 2022-11-09 08:57:48 / Modified: 09:58:43" itemprop="dateCreated datePublished" datetime="2022-11-09T08:57:48+08:00">2022-11-09</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -280,26 +280,26 @@
 </ol>
 </blockquote>
 <h3 id="1-服务端脚本（不需要管）："><a href="#1-服务端脚本（不需要管）：" class="headerlink" title="1.服务端脚本（不需要管）："></a>1.服务端脚本（不需要管）：</h3><ol>
-<li><a href="https://github.com/v2fly/v2ray-core" target="_blank" rel="noopener">https://github.com/v2fly/v2ray-core</a></li>
-<li><a href="https://github.com/v2fly/fhs-install-v2ray" target="_blank" rel="noopener">https://github.com/v2fly/fhs-install-v2ray</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/v2fly/v2ray-core">https://github.com/v2fly/v2ray-core</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/v2fly/fhs-install-v2ray">https://github.com/v2fly/fhs-install-v2ray</a></li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#修改配置文件</span></span><br><span class="line">/usr/<span class="built_in">local</span>/etc/v2ray/config.json</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"inbounds"</span>: [&#123;</span><br><span class="line">    <span class="string">"port"</span>: 10086, // 服务器监听端口，必须和上面的一样</span><br><span class="line">    <span class="string">"protocol"</span>: <span class="string">"vmess"</span>,</span><br><span class="line">    <span class="string">"settings"</span>: &#123;</span><br><span class="line">      <span class="string">"clients"</span>: [&#123; <span class="string">"id"</span>: <span class="string">"b831381d-6324-4d53-ad4f-8cda48b30811"</span> &#125;]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;],</span><br><span class="line">  <span class="string">"outbounds"</span>: [&#123;</span><br><span class="line">    <span class="string">"protocol"</span>: <span class="string">"freedom"</span>,</span><br><span class="line">    <span class="string">"settings"</span>: &#123;&#125;</span><br><span class="line">  &#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#修改配置文件</span></span><br><span class="line">/usr/local/etc/v2ray/config.json</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;inbounds&quot;</span>: [&#123;</span><br><span class="line">    <span class="string">&quot;port&quot;</span>: 10086, // 服务器监听端口，必须和上面的一样</span><br><span class="line">    <span class="string">&quot;protocol&quot;</span>: <span class="string">&quot;vmess&quot;</span>,</span><br><span class="line">    <span class="string">&quot;settings&quot;</span>: &#123;</span><br><span class="line">      <span class="string">&quot;clients&quot;</span>: [&#123; <span class="string">&quot;id&quot;</span>: <span class="string">&quot;b831381d-6324-4d53-ad4f-8cda48b30811&quot;</span> &#125;]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;],</span><br><span class="line">  <span class="string">&quot;outbounds&quot;</span>: [&#123;</span><br><span class="line">    <span class="string">&quot;protocol&quot;</span>: <span class="string">&quot;freedom&quot;</span>,</span><br><span class="line">    <span class="string">&quot;settings&quot;</span>: &#123;&#125;</span><br><span class="line">  &#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>重启服务</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart v2ray</span><br></pre></td></tr></table></figure>
 
 <h3 id="2-客户端软件"><a href="#2-客户端软件" class="headerlink" title="2.客户端软件"></a>2.客户端软件</h3><ol>
-<li>windows： <a href="https://github.com/2dust/v2rayN/releases" target="_blank" rel="noopener">https://github.com/2dust/v2rayN/releases</a></li>
-<li>安卓 <a href="https://github.com/2dust/v2rayNG" target="_blank" rel="noopener">https://github.com/2dust/v2rayNG</a></li>
+<li>windows： <a target="_blank" rel="noopener" href="https://github.com/2dust/v2rayN/releases">https://github.com/2dust/v2rayN/releases</a></li>
+<li>安卓 <a target="_blank" rel="noopener" href="https://github.com/2dust/v2rayNG">https://github.com/2dust/v2rayNG</a></li>
 </ol>
 <h3 id="3-windows客户端脚本配置"><a href="#3-windows客户端脚本配置" class="headerlink" title="3.windows客户端脚本配置"></a>3.windows客户端脚本配置</h3><blockquote>
 <p>解压后，开箱即食</p>
 </blockquote>
-<p><a href="https://imgse.com/i/xzcCsU" target="_blank" rel="noopener"><img data-src="https://s1.ax1x.com/2022/11/09/xzcCsU.md.png" alt="xzcCsU.md.png"></a></p>
-<p><a href="https://imgse.com/i/xzcPLF" target="_blank" rel="noopener"><img data-src="https://s1.ax1x.com/2022/11/09/xzcPLF.md.png" alt="xzcPLF.md.png"></a></p>
-<h3 id="4-安卓端使用"><a href="#4-安卓端使用" class="headerlink" title="4.安卓端使用"></a>4.安卓端使用</h3><p><a href="https://imgse.com/i/xzc9MT" target="_blank" rel="noopener"><img data-src="https://s1.ax1x.com/2022/11/09/xzc9MT.md.png" alt="xzc9MT.md.png"></a></p>
-<h3 id="5-配置v2rayN白名单"><a href="#5-配置v2rayN白名单" class="headerlink" title="5.配置v2rayN白名单"></a>5.配置v2rayN白名单</h3><p><a href="https://baiyunju.cc/7527" target="_blank" rel="noopener">https://baiyunju.cc/7527</a></p>
-<p><a href="https://baiyunju.cc/7242" target="_blank" rel="noopener">https://baiyunju.cc/7242</a></p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/xzcCsU"><img data-src="https://s1.ax1x.com/2022/11/09/xzcCsU.md.png" alt="xzcCsU.md.png"></a></p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/xzcPLF"><img data-src="https://s1.ax1x.com/2022/11/09/xzcPLF.md.png" alt="xzcPLF.md.png"></a></p>
+<h3 id="4-安卓端使用"><a href="#4-安卓端使用" class="headerlink" title="4.安卓端使用"></a>4.安卓端使用</h3><p><a target="_blank" rel="noopener" href="https://imgse.com/i/xzc9MT"><img data-src="https://s1.ax1x.com/2022/11/09/xzc9MT.md.png" alt="xzc9MT.md.png"></a></p>
+<h3 id="5-配置v2rayN白名单"><a href="#5-配置v2rayN白名单" class="headerlink" title="5.配置v2rayN白名单"></a>5.配置v2rayN白名单</h3><p><a target="_blank" rel="noopener" href="https://baiyunju.cc/7527">https://baiyunju.cc/7527</a></p>
+<p><a target="_blank" rel="noopener" href="https://baiyunju.cc/7242">https://baiyunju.cc/7242</a></p>
 <p>Proxy (代理)、Direct (直连)、Block (阻止)的含义</p>
 <ul>
 <li>Block (阻止)： 拦截向外发送的连接请求，禁止连网。</li>
@@ -308,13 +308,13 @@
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#* 规则列表</span></span><br><span class="line">genome.cshlp.org,</span><br><span class="line">cell.com,</span><br><span class="line">science.org,</span><br><span class="line">nature.come,</span><br><span class="line">nph.onlinelibrary.wiley.com,</span><br><span class="line">genomebiology.biomedcentral.com,</span><br><span class="line">academic.oup.com,</span><br><span class="line">journals.plos.org,</span><br><span class="line">onlinelibrary.wiley.com,</span><br><span class="line">pnas.org</span><br></pre></td></tr></table></figure>
 
-<p><a href="https://imgse.com/i/xz6zR0" target="_blank" rel="noopener"><img data-src="https://s1.ax1x.com/2022/11/09/xz6zR0.md.png" alt="xz6zR0.md.png"></a></p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/xz6zR0"><img data-src="https://s1.ax1x.com/2022/11/09/xz6zR0.md.png" alt="xz6zR0.md.png"></a></p>
 <h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>未配置白名单，使用代理访问，机构显示为空</p>
 <p>配置成功后，使用直连，显示机构</p>
-<p><a href="https://imgse.com/i/xzcSzV" target="_blank" rel="noopener"><img data-src="https://s1.ax1x.com/2022/11/09/xzcSzV.md.png" alt="xzcSzV.md.png"></a></p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/xzcSzV"><img data-src="https://s1.ax1x.com/2022/11/09/xzcSzV.md.png" alt="xzcSzV.md.png"></a></p>
 <h3 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h3><ol>
-<li><a href="https://www.v2fly.org/guide/start.html" target="_blank" rel="noopener">https://www.v2fly.org/guide/start.html</a></li>
-<li><a href="https://www.v2fly.org/guide/start.html" target="_blank" rel="noopener">https://www.v2fly.org/guide/start.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.v2fly.org/guide/start.html">https://www.v2fly.org/guide/start.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.v2fly.org/guide/start.html">https://www.v2fly.org/guide/start.html</a></li>
 </ol>
 
     </div>
@@ -340,10 +340,10 @@
     </div>
     <p>
     <a class="fancybox fancybox.image" 
-    href="https://s1.ax1x.com/2020/03/23/8HCEjI.jpg" 
+    target="_blank" href="https://s1.ax1x.com/2020/03/23/8HCEjI.jpg" 
     itemscope="" itemtype="http://schema.org/ImageObject" 
     itemprop="url" data-fancybox="default" 
-    rel="default" title="公众号" 
+    rel="default noopener" title="公众号" 
     data-caption="公众号"
     >
     <img data-src="https://s1.ax1x.com/2020/03/23/8HCEjI.jpg" alt="公众号"
@@ -386,8 +386,8 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/codeHub/2020/08/07/2020-08/05%E7%88%AC%E5%8F%96GO%E4%BF%A1%E6%81%AF/" rel="prev" title="爬取GO信息">
-      <i class="fa fa-chevron-left"></i> 爬取GO信息
+    <a href="/codeHub/2021/11/23/2021-11/02Plink%E4%BD%BF%E7%94%A8/" rel="prev" title="【未完待续】Plink简单使用">
+      <i class="fa fa-chevron-left"></i> 【未完待续】Plink简单使用
     </a></div>
       <div class="post-nav-item"></div>
     </div>
@@ -450,7 +450,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-服务端脚本（不需要管）："><span class="nav-number">1.</span> <span class="nav-text">1.服务端脚本（不需要管）：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-客户端软件"><span class="nav-number">2.</span> <span class="nav-text">2.客户端软件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-windows客户端脚本配置"><span class="nav-number">3.</span> <span class="nav-text">3.windows客户端脚本配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-安卓端使用"><span class="nav-number">4.</span> <span class="nav-text">4.安卓端使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-配置v2rayN白名单"><span class="nav-number">5.</span> <span class="nav-text">5.配置v2rayN白名单</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例"><span class="nav-number">6.</span> <span class="nav-text">示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文档"><span class="nav-number">7.</span> <span class="nav-text">文档</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%84%9A%E6%9C%AC%EF%BC%88%E4%B8%8D%E9%9C%80%E8%A6%81%E7%AE%A1%EF%BC%89%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">1.服务端脚本（不需要管）：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BD%AF%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">2.客户端软件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-windows%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%84%9A%E6%9C%AC%E9%85%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">3.windows客户端脚本配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%AE%89%E5%8D%93%E7%AB%AF%E4%BD%BF%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">4.安卓端使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E9%85%8D%E7%BD%AEv2rayN%E7%99%BD%E5%90%8D%E5%8D%95"><span class="nav-number">5.</span> <span class="nav-text">5.配置v2rayN白名单</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B"><span class="nav-number">6.</span> <span class="nav-text">示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E6%A1%A3"><span class="nav-number">7.</span> <span class="nav-text">文档</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -465,13 +465,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/codeHub/archives">
-          <span class="site-state-item-count">57</span>
+          <span class="site-state-item-count">67</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/codeHub/categories/">
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">

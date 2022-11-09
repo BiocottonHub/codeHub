@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/codeHub/uploads/themeImg/logo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/codeHub/uploads/themeImg/logo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/codeHub/uploads/themeImg/logo.png">
+  <link rel="mask-icon" href="/codeHub/uploads/themeImg/logo.png" color="#222">
+
+<link rel="stylesheet" href="/codeHub/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/codeHub/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"biocottonhub.github.io","root":"/codeHub/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="1.张量的初始化12import torchimport numpy as np   由原始数据直接生成 从numpyArray转换而来  123456data &#x3D; [[1, 2], [3, 4]]x_data &#x3D; torch.tensor(data)np_array &#x3D; np.array(data)x_np &#x3D; torch.from_numpy(np_array)x_np     tensor(">
+<meta property="og:type" content="article">
+<meta property="og:title" content="张量(tensor)">
+<meta property="og:url" content="https://biocottonhub.github.io/codeHub/2021/10/25/2021-10/01tensor/index.html">
+<meta property="og:site_name" content="Code Hub">
+<meta property="og:description" content="1.张量的初始化12import torchimport numpy as np   由原始数据直接生成 从numpyArray转换而来  123456data &#x3D; [[1, 2], [3, 4]]x_data &#x3D; torch.tensor(data)np_array &#x3D; np.array(data)x_np &#x3D; torch.from_numpy(np_array)x_np     tensor(">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-10-25T10:39:48.000Z">
+<meta property="article:modified_time" content="2022-11-09T01:41:32.642Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://biocottonhub.github.io/codeHub/2021/10/25/2021-10/01tensor/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>张量(tensor) | Code Hub</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/codeHub/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Code Hub</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">keeping learn</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-首页">
+
+    <a href="/codeHub/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-文章">
+
+    <a href="/codeHub/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>文章<span class="badge">67</span></a>
+
+  </li>
+        <li class="menu-item menu-item-分类">
+
+    <a href="/codeHub/categories" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">13</span></a>
+
+  </li>
+        <li class="menu-item menu-item-标签">
+
+    <a href="/codeHub/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">3</span></a>
+
+  </li>
+        <li class="menu-item menu-item-关于">
+
+    <a href="https://zpliu1126.github.io/About/index.html" rel="noopener" target="_blank"><i class="fa fa-fw fa-heartbeat"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/BiocottonHub/" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="200" height="200" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2021/10/25/2021-10/01tensor/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/codeHub/uploads/themeImg/logo.png">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Hub">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          张量(tensor)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>发布于
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-10-25 18:39:48" itemprop="dateCreated datePublished" datetime="2021-10-25T18:39:48+08:00">2021-10-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>修改于
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-11-09 09:41:32" itemprop="dateModified" datetime="2022-11-09T09:41:32+08:00">2022-11-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  分类于<a href="/codeHub/categories/PyTroch/" itemprop="url" rel="index"><span itemprop="name">PyTroch</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                阅读量:<i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/codeHub/2021/10/25/2021-10/01tensor/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2021/10/25/2021-10/01tensor/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="1-张量的初始化"><a href="#1-张量的初始化" class="headerlink" title="1.张量的初始化"></a>1.张量的初始化</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>由原始数据直接生成</li>
+<li>从numpyArray转换而来</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">data = [[<span class="number">1</span>, <span class="number">2</span>], [<span class="number">3</span>, <span class="number">4</span>]]</span><br><span class="line">x_data = torch.tensor(data)</span><br><span class="line"></span><br><span class="line">np_array = np.array(data)</span><br><span class="line">x_np = torch.from_numpy(np_array)</span><br><span class="line">x_np</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>tensor([[1, 2],
+        [3, 4]])
+</code></pre>
+<h3 id="2-通过已有的张量来生成新的张量"><a href="#2-通过已有的张量来生成新的张量" class="headerlink" title="2.通过已有的张量来生成新的张量"></a>2.通过已有的张量来生成新的张量</h3><blockquote>
+<p>新的张量可以继承原有张量的结构和数据属性<br>也可以重新指定新的数据类型</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x_ones=torch.ones_like(x_data) <span class="comment">#! 保留原张量的结构和属性</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;ones Tensors:\n<span class="subst">&#123;x_ones&#125;</span>\n&quot;</span>)</span><br><span class="line"></span><br><span class="line">x_rand=torch.rand_like(x_data,dtype=torch.<span class="built_in">float</span>)  <span class="comment">#! 重写数据类型</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;Random Tensor:\n <span class="subst">&#123;x_rand&#125;</span>\n&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>ones Tensors:
+tensor([[1, 1],
+        [1, 1]])
+
+Random Tensor:
+ tensor([[0.7318, 0.2529],
+        [0.1007, 0.8059]])
+</code></pre>
+<h3 id="3-张量的属性"><a href="#3-张量的属性" class="headerlink" title="3.张量的属性"></a>3.张量的属性</h3><pre><code>1.维数
+2.属性
+3.存储的CPU或者GPU设备
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;shape of tensor: <span class="subst">&#123;x_data.shape&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;Datatype of tensor: <span class="subst">&#123;x_data.dtype&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;Device tensor of tensor: <span class="subst">&#123;x_data.device&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>shape of tensor: torch.Size([2, 2])
+Datatype of tensor: torch.int64
+Device tensor of tensor: cpu
+</code></pre>
+<h3 id="4-张量运算"><a href="#4-张量运算" class="headerlink" title="4.张量运算"></a>4.张量运算</h3><blockquote>
+<p>有超过100多种张量的相关运算，其中包括转置、索引、切片等数学运算<br>这些运算既可以在CPU上运行也可以在GPU上面运行，下面演示一下如何使用GPU进行张量的运算</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#! 使用GPU前，判断当前GPU环境是否可用</span></span><br><span class="line"><span class="keyword">if</span> torch.cuda.is_available():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;GPU device is available&quot;</span>)</span><br><span class="line">    x_rand=torch.rand((<span class="number">3</span>,<span class="number">3</span>))</span><br><span class="line">    x_rand=x_rand.to(<span class="string">&#x27;cuda&#x27;</span>) <span class="comment">#! 挂载到GPU上进行运算</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;GPU device is not available&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>GPU device is not available
+</code></pre>
+<h4 id="4-1张量的拼接"><a href="#4-1张量的拼接" class="headerlink" title="4.1张量的拼接"></a>4.1张量的拼接</h4><ol>
+<li>使用torch.cat </li>
+<li>使用torch.stack （与cat方法有些不同）</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x_rand=torch.rand((<span class="number">3</span>,<span class="number">3</span>))</span><br><span class="line">t1=torch.cat([x_rand,x_rand,x_rand],dim=<span class="number">1</span>)</span><br><span class="line"><span class="built_in">print</span>(t1)</span><br></pre></td></tr></table></figure>
+
+<pre><code>tensor([[0.8613, 0.8276, 0.4882, 0.8613, 0.8276, 0.4882, 0.8613, 0.8276, 0.4882],
+        [0.7835, 0.2157, 0.8945, 0.7835, 0.2157, 0.8945, 0.7835, 0.2157, 0.8945],
+        [0.1266, 0.6035, 0.1746, 0.1266, 0.6035, 0.1746, 0.1266, 0.6035, 0.1746]])
+</code></pre>
+<h4 id="4-2张量的乘积和矩阵的乘法"><a href="#4-2张量的乘积和矩阵的乘法" class="headerlink" title="4.2张量的乘积和矩阵的乘法"></a>4.2张量的乘积和矩阵的乘法</h4><pre><code>1.乘积: 逐个原始相乘不改变原有的shape
+2.矩阵乘法：需要满足矩阵的乘法运算
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#! 张量的乘积</span></span><br><span class="line">x_rand.mul(x_rand)</span><br><span class="line"><span class="comment">#* 等价于</span></span><br><span class="line">x_rand*x_rand</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>tensor([[0.7419, 0.6849, 0.2384],
+        [0.6139, 0.0465, 0.8001],
+        [0.0160, 0.3642, 0.0305]])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#! 张量的矩阵乘法,</span></span><br><span class="line">x_rand.matmul(x_rand.T)</span><br><span class="line"><span class="comment">#! 等价写法</span></span><br><span class="line">x_rand @ x_rand.T</span><br></pre></td></tr></table></figure>
+<pre><code>tensor([[1.6651, 1.2901, 0.6937],
+        [1.2901, 1.4606, 0.3856],
+        [0.6937, 0.3856, 0.4107]])
+</code></pre>
+<h3 id="5-张量与numpy的相互转换"><a href="#5-张量与numpy的相互转换" class="headerlink" title="5.张量与numpy的相互转换"></a>5.张量与numpy的相互转换</h3><blockquote>
+<p>张量和numpy共用系统中的一块内存，改变其中的一个也会导致另一个的改变</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">t=torch.ones(<span class="number">5</span>)</span><br><span class="line">n=t.numpy()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;tensor: <span class="subst">&#123;t&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;numpy: <span class="subst">&#123;n&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>tensor: tensor([1., 1., 1., 1., 1.])
+numpy: [1. 1. 1. 1. 1.]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#! 共享同一块内存地址</span></span><br><span class="line">t.add_(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;tensor: <span class="subst">&#123;t&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;numpy: <span class="subst">&#123;n&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>tensor: tensor([2., 2., 2., 2., 2.])
+numpy: [2. 2. 2. 2. 2.]
+</code></pre>
+
+    </div>
+
+    
+    
+    
+   
+   <div>
+     <div>
+  
+    <div style="text-align:center;color:#bfbfbf;font-size:16px;">
+      <span>------ 本文结束 </span>
+      <img src="https://s1.ax1x.com/2020/03/23/8HFzxH.png" 
+      style="display:inline-block;"
+      data-loaded="true"
+      alt="thankyou" border="0" 
+      width="100"
+      heigh="100"
+      />
+      <span> 感谢阅读 ------</span>
+
+    </div>
+    <p>
+    <a class="fancybox fancybox.image" 
+    target="_blank" href="https://s1.ax1x.com/2020/03/23/8HCEjI.jpg" 
+    itemscope="" itemtype="http://schema.org/ImageObject" 
+    itemprop="url" data-fancybox="default" 
+    rel="default noopener" title="公众号" 
+    data-caption="公众号"
+    >
+    <img data-src="https://s1.ax1x.com/2020/03/23/8HCEjI.jpg" alt="公众号"
+     src="https://s1.ax1x.com/2020/03/23/8HCEjI.jpg" data-loaded="true">
+    </a>
+    <p  style="text-align:center;">
+     <sapn style="">欢迎扫一扫上面的微信二维码，订阅
+     <span style="color: #428bca;font-size:20px;">codeHub</span>
+     公众号</span>
+     </p>
+     </p>
+    
+  
+</div>
+   </div>
+  
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>zpliu
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://biocottonhub.github.io/codeHub/2021/10/25/2021-10/01tensor/" title="张量(tensor)">https://biocottonhub.github.io/codeHub/2021/10/25/2021-10/01tensor/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/codeHub/2020/08/30/2020-08/07Git%E7%B3%BB%E5%88%97%EF%BC%88%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94%E6%B7%BB%E5%8A%A0%E8%BF%9C%E7%A8%8B%E5%BA%93/" rel="prev" title="Git系列（八）——添加远程库">
+      <i class="fa fa-chevron-left"></i> Git系列（八）——添加远程库
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/codeHub/2021/10/25/2021-10/02autogrand/" rel="next" title="autogrand">
+      autogrand <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概括
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%BC%A0%E9%87%8F%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.</span> <span class="nav-text">1.张量的初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E9%80%9A%E8%BF%87%E5%B7%B2%E6%9C%89%E7%9A%84%E5%BC%A0%E9%87%8F%E6%9D%A5%E7%94%9F%E6%88%90%E6%96%B0%E7%9A%84%E5%BC%A0%E9%87%8F"><span class="nav-number">2.</span> <span class="nav-text">2.通过已有的张量来生成新的张量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%BC%A0%E9%87%8F%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="nav-number">3.</span> <span class="nav-text">3.张量的属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%BC%A0%E9%87%8F%E8%BF%90%E7%AE%97"><span class="nav-number">4.</span> <span class="nav-text">4.张量运算</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1%E5%BC%A0%E9%87%8F%E7%9A%84%E6%8B%BC%E6%8E%A5"><span class="nav-number">4.1.</span> <span class="nav-text">4.1张量的拼接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2%E5%BC%A0%E9%87%8F%E7%9A%84%E4%B9%98%E7%A7%AF%E5%92%8C%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B9%98%E6%B3%95"><span class="nav-number">4.2.</span> <span class="nav-text">4.2张量的乘积和矩阵的乘法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%BC%A0%E9%87%8F%E4%B8%8Enumpy%E7%9A%84%E7%9B%B8%E4%BA%92%E8%BD%AC%E6%8D%A2"><span class="nav-number">5.</span> <span class="nav-text">5.张量与numpy的相互转换</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt=""
+      src="/codeHub/uploads/themeImg/logo.png">
+  <p class="site-author-name" itemprop="name"></p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/codeHub/archives">
+          <span class="site-state-item-count">67</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/codeHub/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/codeHub/tags/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/BiocottonHub/" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;BiocottonHub&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/codeHub/1944532210@qq.com" title="E-Mail → 1944532210@qq.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-cn" class="cc-opacity" rel="noopener" target="_blank"><img src="/codeHub/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://cotton.hzau.edu.cn/" title="http:&#x2F;&#x2F;cotton.hzau.edu.cn&#x2F;" rel="noopener" target="_blank">GCGI</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">codeHub</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        站点访问人次
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        总访问量<i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/codeHub/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/codeHub/lib/velocity/velocity.min.js"></script>
+  <script src="/codeHub/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/codeHub/js/utils.js"></script>
+
+<script src="/codeHub/js/motion.js"></script>
+
+
+<script src="/codeHub/js/schemes/pisces.js"></script>
+
+
+<script src="/codeHub/js/next-boot.js"></script>
+
+<script src="/codeHub/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      script.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/codeHub/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'd4VOUvNSU5WGIC3AjjM8UArx-gzGzoHsz',
+      appKey     : '5n9Xu8XStUzmAKyncMgSp0px',
+      placeholder: "有任何问题欢迎留言或者邮件告知",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>

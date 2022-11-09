@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="generator" content="Hexo 6.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/codeHub/uploads/themeImg/logo.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/codeHub/uploads/themeImg/logo.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/codeHub/uploads/themeImg/logo.png">
@@ -117,12 +117,12 @@
   </li>
         <li class="menu-item menu-item-文章">
 
-    <a href="/codeHub/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>文章<span class="badge">57</span></a>
+    <a href="/codeHub/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>文章<span class="badge">67</span></a>
 
   </li>
         <li class="menu-item menu-item-分类">
 
-    <a href="/codeHub/categories" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">12</span></a>
+    <a href="/codeHub/categories" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">13</span></a>
 
   </li>
         <li class="menu-item menu-item-标签">
@@ -217,7 +217,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2022-11-09 08:57:48 / Modified: 09:27:50" itemprop="dateCreated datePublished" datetime="2022-11-09T08:57:48+08:00">2022-11-09</time>
+              <time title="Created: 2022-11-09 08:57:48 / Modified: 09:58:43" itemprop="dateCreated datePublished" datetime="2022-11-09T08:57:48+08:00">2022-11-09</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -264,17 +264,17 @@
 </ol>
 </blockquote>
 <h3 id="1-服务端脚本（不需要管）："><a href="#1-服务端脚本（不需要管）：" class="headerlink" title="1.服务端脚本（不需要管）："></a>1.服务端脚本（不需要管）：</h3><ol>
-<li><a href="https://github.com/v2fly/v2ray-core" target="_blank" rel="noopener">https://github.com/v2fly/v2ray-core</a></li>
-<li><a href="https://github.com/v2fly/fhs-install-v2ray" target="_blank" rel="noopener">https://github.com/v2fly/fhs-install-v2ray</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/v2fly/v2ray-core">https://github.com/v2fly/v2ray-core</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/v2fly/fhs-install-v2ray">https://github.com/v2fly/fhs-install-v2ray</a></li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#修改配置文件</span></span><br><span class="line">/usr/<span class="built_in">local</span>/etc/v2ray/config.json</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"inbounds"</span>: [&#123;</span><br><span class="line">    <span class="string">"port"</span>: 10086, // 服务器监听端口，必须和上面的一样</span><br><span class="line">    <span class="string">"protocol"</span>: <span class="string">"vmess"</span>,</span><br><span class="line">    <span class="string">"settings"</span>: &#123;</span><br><span class="line">      <span class="string">"clients"</span>: [&#123; <span class="string">"id"</span>: <span class="string">"b831381d-6324-4d53-ad4f-8cda48b30811"</span> &#125;]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;],</span><br><span class="line">  <span class="string">"outbounds"</span>: [&#123;</span><br><span class="line">    <span class="string">"protocol"</span>: <span class="string">"freedom"</span>,</span><br><span class="line">    <span class="string">"settings"</span>: &#123;&#125;</span><br><span class="line">  &#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#修改配置文件</span></span><br><span class="line">/usr/local/etc/v2ray/config.json</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;inbounds&quot;</span>: [&#123;</span><br><span class="line">    <span class="string">&quot;port&quot;</span>: 10086, // 服务器监听端口，必须和上面的一样</span><br><span class="line">    <span class="string">&quot;protocol&quot;</span>: <span class="string">&quot;vmess&quot;</span>,</span><br><span class="line">    <span class="string">&quot;settings&quot;</span>: &#123;</span><br><span class="line">      <span class="string">&quot;clients&quot;</span>: [&#123; <span class="string">&quot;id&quot;</span>: <span class="string">&quot;b831381d-6324-4d53-ad4f-8cda48b30811&quot;</span> &#125;]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;],</span><br><span class="line">  <span class="string">&quot;outbounds&quot;</span>: [&#123;</span><br><span class="line">    <span class="string">&quot;protocol&quot;</span>: <span class="string">&quot;freedom&quot;</span>,</span><br><span class="line">    <span class="string">&quot;settings&quot;</span>: &#123;&#125;</span><br><span class="line">  &#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>重启服务</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart v2ray</span><br></pre></td></tr></table></figure>
 
 <h3 id="2-客户端软件"><a href="#2-客户端软件" class="headerlink" title="2.客户端软件"></a>2.客户端软件</h3><ol>
-<li>windows： <a href="https://github.com/2dust/v2rayN/releases" target="_blank" rel="noopener">https://github.com/2dust/v2rayN/releases</a></li>
-<li>安卓 <a href="https://github.com/2dust/v2rayNG" target="_blank" rel="noopener">https://github.com/2dust/v2rayNG</a></li>
+<li>windows： <a target="_blank" rel="noopener" href="https://github.com/2dust/v2rayN/releases">https://github.com/2dust/v2rayN/releases</a></li>
+<li>安卓 <a target="_blank" rel="noopener" href="https://github.com/2dust/v2rayNG">https://github.com/2dust/v2rayNG</a></li>
 </ol>
 <h3 id="3-windows客户端脚本配置"><a href="#3-windows客户端脚本配置" class="headerlink" title="3.windows客户端脚本配置"></a>3.windows客户端脚本配置</h3><blockquote>
 <p>解压后，开箱即食</p>
@@ -306,7 +306,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2020/08/07/2020-08/05%E7%88%AC%E5%8F%96GO%E4%BF%A1%E6%81%AF/">
+    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2021/11/23/2021-11/02Plink%E4%BD%BF%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/codeHub/uploads/themeImg/logo.png">
@@ -320,7 +320,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/codeHub/2020/08/07/2020-08/05%E7%88%AC%E5%8F%96GO%E4%BF%A1%E6%81%AF/" class="post-title-link" itemprop="url">爬取GO信息</a>
+            <a href="/codeHub/2021/11/23/2021-11/02Plink%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">【未完待续】Plink简单使用</a>
         </h2>
 
         <div class="post-meta">
@@ -331,14 +331,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-08-07 15:21:45" itemprop="dateCreated datePublished" datetime="2020-08-07T15:21:45+08:00">2020-08-07</time>
+              <time title="Created: 2021-11-23 13:56:56" itemprop="dateCreated datePublished" datetime="2021-11-23T13:56:56+08:00">2021-11-23</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>修改于
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-09 09:27:50" itemprop="dateModified" datetime="2022-11-09T09:27:50+08:00">2022-11-09</time>
+                <time title="Modified: 2022-11-09 09:41:32" itemprop="dateModified" datetime="2022-11-09T09:41:32+08:00">2022-11-09</time>
               </span>
 
           
@@ -350,8 +350,8 @@
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/codeHub/2020/08/07/2020-08/05%E7%88%AC%E5%8F%96GO%E4%BF%A1%E6%81%AF/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2020/08/07/2020-08/05%E7%88%AC%E5%8F%96GO%E4%BF%A1%E6%81%AF/" itemprop="commentCount"></span>
+    <a title="valine" href="/codeHub/2021/11/23/2021-11/02Plink%E4%BD%BF%E7%94%A8/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2021/11/23/2021-11/02Plink%E4%BD%BF%E7%94%A8/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -366,791 +366,877 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>为了查找某个研究领域的相关信息，生物学家往往要花费大量的时间。与此同时由于不同数据库之间的信息可能不同步或者术语不一样，这使得信息的检索更加的麻烦。如果让人来做还勉强能查，但是让机器来查询的话一切就会变的无章可循。Gene Ontology（GO）就是为了解决这种问题而发起的一个项目；每一个GO Term都是由7个数字标识这个Term编号，同时还有一个lable标识具体的生物学功能。每个Tern属于一个本体，在GO中有三个ontology它们分别是：</p>
-<ul>
-<li>molecular function,</li>
-<li>cellular component</li>
-<li>biological process</li>
-</ul>
-<p>今天要做的就是大批量的根据某个功能的关键字，搜索已经报导的基因对应的序列信息；从而进行Blast找到你所研究的物种中的同源基因。这里以爬取<code>Ethylene</code>关键字为例，分以下三个步骤搞：</p>
-<ol>
-<li>根据关键字爬取GO编号信息</li>
-<li>根据GO编号爬取对应的基因注释信息</li>
-<li>根据基因注释信息爬取基因的序列信息</li>
+          <p><a target="_blank" rel="noopener" href="http://zzz.bwh.harvard.edu/plink/"><strong>Plink</strong></a></p>
+<div class="note primary">
+            <p><strong>Plink</strong>是一款开源的，用于全基因组关联分析的工具集；它一般用于对基因型数据进行基本的操作。<br>以下是记录了关联分析中常见的一些操作</p>
+          </div>
+
+
+<h3 id="提取指定SNP的坐标信息"><a href="#提取指定SNP的坐标信息" class="headerlink" title="提取指定SNP的坐标信息"></a>提取指定SNP的坐标信息</h3><ol>
+<li>基于SNP id进行提取</li>
 </ol>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/codeHub/2020/08/07/2020-08/05%E7%88%AC%E5%8F%96GO%E4%BF%A1%E6%81%AF/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-   
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2020/08/06/2020-08/04Git%E7%B3%BB%E5%88%97%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/codeHub/uploads/themeImg/logo.png">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Code Hub">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/codeHub/2020/08/06/2020-08/04Git%E7%B3%BB%E5%88%97%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">Git系列（六）——删除文件</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>发布于
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-08-06 10:01:36" itemprop="dateCreated datePublished" datetime="2020-08-06T10:01:36+08:00">2020-08-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>修改于
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 15:21:17" itemprop="dateModified" datetime="2020-08-07T15:21:17+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  分类于<a href="/codeHub/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/codeHub/2020/08/06/2020-08/04Git%E7%B3%BB%E5%88%97%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2020/08/06/2020-08/04Git%E7%B3%BB%E5%88%97%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Git系列（六）——删除文件"><a href="#Git系列（六）——删除文件" class="headerlink" title="Git系列（六）——删除文件"></a>Git系列（六）——删除文件</h1><p>Git中删除文件可不太一样哦，我们一起来学习一下</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/codeHub/2020/08/06/2020-08/04Git%E7%B3%BB%E5%88%97%EF%BC%88%E5%85%AD%EF%BC%89%E2%80%94%E2%80%94%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-   
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2020/08/06/2020-08/03Git%E7%B3%BB%E5%88%97%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94%E6%92%A4%E9%94%80%E4%BF%AE%E6%94%B9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/codeHub/uploads/themeImg/logo.png">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Code Hub">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/codeHub/2020/08/06/2020-08/03Git%E7%B3%BB%E5%88%97%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94%E6%92%A4%E9%94%80%E4%BF%AE%E6%94%B9/" class="post-title-link" itemprop="url">Git系列（五）——撤销修改</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>发布于
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-08-06 10:00:33" itemprop="dateCreated datePublished" datetime="2020-08-06T10:00:33+08:00">2020-08-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>修改于
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 15:21:17" itemprop="dateModified" datetime="2020-08-07T15:21:17+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  分类于<a href="/codeHub/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/codeHub/2020/08/06/2020-08/03Git%E7%B3%BB%E5%88%97%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94%E6%92%A4%E9%94%80%E4%BF%AE%E6%94%B9/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2020/08/06/2020-08/03Git%E7%B3%BB%E5%88%97%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94%E6%92%A4%E9%94%80%E4%BF%AE%E6%94%B9/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Git系列（五）——撤销修改"><a href="#Git系列（五）——撤销修改" class="headerlink" title="Git系列（五）——撤销修改"></a>Git系列（五）——撤销修改</h1><p>在Git中“后悔药”可是有好多种的，今天我们就来看看另外的几种“后悔药”</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/codeHub/2020/08/06/2020-08/03Git%E7%B3%BB%E5%88%97%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94%E6%92%A4%E9%94%80%E4%BF%AE%E6%94%B9/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-   
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2020/08/02/2020-08/02Git%E7%B3%BB%E5%88%97%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/codeHub/uploads/themeImg/logo.png">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Code Hub">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/codeHub/2020/08/02/2020-08/02Git%E7%B3%BB%E5%88%97%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80/" class="post-title-link" itemprop="url">Git系列（四）——版本回退</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>发布于
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-08-02 21:29:06" itemprop="dateCreated datePublished" datetime="2020-08-02T21:29:06+08:00">2020-08-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>修改于
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 15:21:17" itemprop="dateModified" datetime="2020-08-07T15:21:17+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  分类于<a href="/codeHub/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/codeHub/2020/08/02/2020-08/02Git%E7%B3%BB%E5%88%97%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2020/08/02/2020-08/02Git%E7%B3%BB%E5%88%97%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Git系列（四）——版本回退"><a href="#Git系列（四）——版本回退" class="headerlink" title="Git系列（四）——版本回退"></a>Git系列（四）——版本回退</h1><p>我们已经学会了创建和修改文件，那也就是说我们已经生成了很多个版本，这样我们也就可以来学习版本的回退了。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/codeHub/2020/08/02/2020-08/02Git%E7%B3%BB%E5%88%97%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-   
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2020/07/31/2020-08/01matplotlib%E6%A0%B7%E5%BC%8F%E6%96%87%E4%BB%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/codeHub/uploads/themeImg/logo.png">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Code Hub">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/codeHub/2020/07/31/2020-08/01matplotlib%E6%A0%B7%E5%BC%8F%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">matplotlib样式文件</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>发布于
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-07-31 19:59:37" itemprop="dateCreated datePublished" datetime="2020-07-31T19:59:37+08:00">2020-07-31</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>修改于
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 15:21:17" itemprop="dateModified" datetime="2020-08-07T15:21:17+08:00">2020-08-07</time>
-              </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/codeHub/2020/07/31/2020-08/01matplotlib%E6%A0%B7%E5%BC%8F%E6%96%87%E4%BB%B6/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2020/07/31/2020-08/01matplotlib%E6%A0%B7%E5%BC%8F%E6%96%87%E4%BB%B6/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>这篇文章主要讲了如何修改样式，保存样式以及加载样式文件</p>
 <blockquote>
-<p>样式： 就是定义图形、字体、线条等一切可以美化的元素的公式；说人话就是：你定义好一个公式A，A中定义线条的颜色是红色；现在画图的时候你需要美化一个线条；就直接使用这个公式；线条就变成了红色；这样说的话样式也就相当于一种画图的风格。</p>
+<p><code>--recode</code> 将会提取SNP的信息生成对应的map和ped文件<br><code>--extract</code> 则可以进行多个SNP信息的批量提取，后面接一个SNP id的文件</p>
 </blockquote>
-<p>matplot支持两种修改样式的方式：</p>
-<ul>
-<li>使用样式表</li>
-<li>使用rcParams</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/codeHub/2020/07/31/2020-08/01matplotlib%E6%A0%B7%E5%BC%8F%E6%96%87%E4%BB%B6/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#* 提取单个SNP信息</span></span><br><span class="line">plink --bfile genotypeFile --snp SNP1 --recode --out <span class="built_in">test</span></span><br><span class="line"><span class="comment">#* 批量提取多个SNP信息</span></span><br><span class="line">plink --bfile genotypeFile --extract SNP.txt --recode --out <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
 
-    
-    
-    
-   
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2020/07/28/2020-07/16Git%E7%B3%BB%E5%88%97%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E7%9A%84%E4%BF%AE%E6%94%B9%E5%8F%8A%E6%8F%90%E4%BA%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/codeHub/uploads/themeImg/logo.png">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Code Hub">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/codeHub/2020/07/28/2020-07/16Git%E7%B3%BB%E5%88%97%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E7%9A%84%E4%BF%AE%E6%94%B9%E5%8F%8A%E6%8F%90%E4%BA%A4/" class="post-title-link" itemprop="url">Git系列（三）——文件的修改及提交</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>发布于
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-07-28 21:45:37" itemprop="dateCreated datePublished" datetime="2020-07-28T21:45:37+08:00">2020-07-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>修改于
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-07-30 15:35:53" itemprop="dateModified" datetime="2020-07-30T15:35:53+08:00">2020-07-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  分类于<a href="/codeHub/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/codeHub/2020/07/28/2020-07/16Git%E7%B3%BB%E5%88%97%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E7%9A%84%E4%BF%AE%E6%94%B9%E5%8F%8A%E6%8F%90%E4%BA%A4/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2020/07/28/2020-07/16Git%E7%B3%BB%E5%88%97%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E7%9A%84%E4%BF%AE%E6%94%B9%E5%8F%8A%E6%8F%90%E4%BA%A4/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Git系列（三）——文件的修改及提交"><a href="#Git系列（三）——文件的修改及提交" class="headerlink" title="Git系列（三）——文件的修改及提交"></a>Git系列（三）——文件的修改及提交</h1><p>文件的创建以及上传我们已经搞定了，现在我们需要对我们的文档进行修改，这些该如何进行呢，我么这就来学习一下。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/codeHub/2020/07/28/2020-07/16Git%E7%B3%BB%E5%88%97%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E7%9A%84%E4%BF%AE%E6%94%B9%E5%8F%8A%E6%8F%90%E4%BA%A4/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-   
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2020/07/28/2020-07/15Git%E7%B3%BB%E5%88%97%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E7%89%88%E6%9C%AC%E5%BA%93%E5%88%9B%E5%BB%BA%E4%BB%A5%E5%8F%8A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/codeHub/uploads/themeImg/logo.png">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Code Hub">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/codeHub/2020/07/28/2020-07/15Git%E7%B3%BB%E5%88%97%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E7%89%88%E6%9C%AC%E5%BA%93%E5%88%9B%E5%BB%BA%E4%BB%A5%E5%8F%8A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" class="post-title-link" itemprop="url">Git系列（二）——Git版本库创建以及文件上传</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>发布于
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-07-28 21:45:12" itemprop="dateCreated datePublished" datetime="2020-07-28T21:45:12+08:00">2020-07-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>修改于
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-07-30 15:35:53" itemprop="dateModified" datetime="2020-07-30T15:35:53+08:00">2020-07-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  分类于<a href="/codeHub/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/codeHub/2020/07/28/2020-07/15Git%E7%B3%BB%E5%88%97%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E7%89%88%E6%9C%AC%E5%BA%93%E5%88%9B%E5%BB%BA%E4%BB%A5%E5%8F%8A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2020/07/28/2020-07/15Git%E7%B3%BB%E5%88%97%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E7%89%88%E6%9C%AC%E5%BA%93%E5%88%9B%E5%BB%BA%E4%BB%A5%E5%8F%8A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Git系列（二）——Git版本库创建以及文件上传"><a href="#Git系列（二）——Git版本库创建以及文件上传" class="headerlink" title="Git系列（二）——Git版本库创建以及文件上传"></a>Git系列（二）——Git版本库创建以及文件上传</h1><p>费（hao）尽（bu）心（fei）思（li）安装好了Git，那就赶紧跟着小编用用看吧！</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/codeHub/2020/07/28/2020-07/15Git%E7%B3%BB%E5%88%97%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94Git%E7%89%88%E6%9C%AC%E5%BA%93%E5%88%9B%E5%BB%BA%E4%BB%A5%E5%8F%8A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-   
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2020/07/28/2020-07/14Git%E7%B3%BB%E5%88%97%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94Git%E7%9A%84%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%AE%89%E8%A3%85/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/codeHub/uploads/themeImg/logo.png">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Code Hub">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/codeHub/2020/07/28/2020-07/14Git%E7%B3%BB%E5%88%97%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94Git%E7%9A%84%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">Git系列（一）——Git的简介及安装</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>发布于
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-07-28 21:44:51" itemprop="dateCreated datePublished" datetime="2020-07-28T21:44:51+08:00">2020-07-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>修改于
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-07-30 15:35:53" itemprop="dateModified" datetime="2020-07-30T15:35:53+08:00">2020-07-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  分类于<a href="/codeHub/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/codeHub/2020/07/28/2020-07/14Git%E7%B3%BB%E5%88%97%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94Git%E7%9A%84%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%AE%89%E8%A3%85/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2020/07/28/2020-07/14Git%E7%B3%BB%E5%88%97%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94Git%E7%9A%84%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%AE%89%E8%A3%85/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Git系列（一）——Git的简介及安装"><a href="#Git系列（一）——Git的简介及安装" class="headerlink" title="Git系列（一）——Git的简介及安装"></a>Git系列（一）——Git的简介及安装</h1><p>众所周知（跟计算机打交道多的），Git是一个很先进的版本控制系统，但其实不瞒你们知道，它是目前世界上最先进的分布式版本控制系统（没有之一）。所以说，还在等着什么，快跟着小编一起来轻松愉快的学习Git吧。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/codeHub/2020/07/28/2020-07/14Git%E7%B3%BB%E5%88%97%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94Git%E7%9A%84%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%AE%89%E8%A3%85/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-   
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2020/07/28/2020-07/13%E5%9F%BA%E5%9B%A0Vue%E5%89%8D%E7%AB%AF%E7%BD%91%E9%A1%B5%E5%AE%9E%E7%8E%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/codeHub/uploads/themeImg/logo.png">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Code Hub">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/codeHub/2020/07/28/2020-07/13%E5%9F%BA%E5%9B%A0Vue%E5%89%8D%E7%AB%AF%E7%BD%91%E9%A1%B5%E5%AE%9E%E7%8E%B0/" class="post-title-link" itemprop="url">基于Vue前端网页实现</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>发布于
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-07-28 18:58:47" itemprop="dateCreated datePublished" datetime="2020-07-28T18:58:47+08:00">2020-07-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>修改于
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-09 09:27:50" itemprop="dateModified" datetime="2022-11-09T09:27:50+08:00">2022-11-09</time>
-              </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/codeHub/2020/07/28/2020-07/13%E5%9F%BA%E5%9B%A0Vue%E5%89%8D%E7%AB%AF%E7%BD%91%E9%A1%B5%E5%AE%9E%E7%8E%B0/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2020/07/28/2020-07/13%E5%9F%BA%E5%9B%A0Vue%E5%89%8D%E7%AB%AF%E7%BD%91%E9%A1%B5%E5%AE%9E%E7%8E%B0/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>在看了一遍<code>vue-element-admin</code>的源代码后，自己试着按照这个项目中的思路去构建前端单页面应用。在构建的过程中学习了<code>vuex</code>进行组件间的状态管理、学习了他项目的目录结构设计以及对应的思路；进一步优化了前端路由的设计。</p>
-<p>在写用户登录登出<code>API</code>时，使用到了<code>session/cookie</code>的知识，利用后端服务器保存用户信息在<code>session</code>中。</p>
+<ol start="2">
+<li>基因染色体坐标进行提取</li>
+</ol>
 <blockquote>
-<p>项目展示网址 :<a href="http://cotton.hzau.edu.cn/web/#/home" target="_blank" rel="noopener">http://cotton.hzau.edu.cn/web/#/home</a></p>
+<p>提取指定基因组范围的SNP信息，使用<code>--extract  range 范围文件名</code>；范围文件中包含四列信息分别是</p>
+<ol>
+<li>染色体编号（可能是数字）</li>
+<li>起始位置</li>
+<li>终止位置</li>
+<li>区域的label（随便起名字）</li>
+</ol>
 </blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#* 提取指定范围的SNP信息</span></span><br><span class="line">plink --bfile genotypeFile --extract range local.txt --recode --out <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="计算任意两个SNP之间的连锁度"><a href="#计算任意两个SNP之间的连锁度" class="headerlink" title="计算任意两个SNP之间的连锁度"></a>计算任意两个SNP之间的连锁度</h3>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/codeHub/2020/07/28/2020-07/13%E5%9F%BA%E5%9B%A0Vue%E5%89%8D%E7%AB%AF%E7%BD%91%E9%A1%B5%E5%AE%9E%E7%8E%B0/#more" rel="contents">
+              <a class="btn" href="/codeHub/2021/11/23/2021-11/02Plink%E4%BD%BF%E7%94%A8/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+   
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2021/11/08/2021-11/01GEMMA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/codeHub/uploads/themeImg/logo.png">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Hub">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/codeHub/2021/11/08/2021-11/01GEMMA/" class="post-title-link" itemprop="url">GEMMA使用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>发布于
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-11-08 21:28:51" itemprop="dateCreated datePublished" datetime="2021-11-08T21:28:51+08:00">2021-11-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>修改于
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-11-09 09:41:32" itemprop="dateModified" datetime="2022-11-09T09:41:32+08:00">2022-11-09</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/codeHub/2021/11/08/2021-11/01GEMMA/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2021/11/08/2021-11/01GEMMA/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <div class="note success">
+            <p>GEMMA(Genome-wide Efficient Mixed Model Association algorithm) 基于混合线性模型进行全基因组关联分析，相比于其他关联分析软件在以下几点上有所改进：</p>
+          </div>
+
+<pre><code>1. 更快
+2. 更加准确
+3. 基因plink二进制数据进行分析
+4. 功能更加丰富，同时可以进行多个表型的混合线性模型
+</code></pre>
+<hr>
+<h3 id="1-输入文件格式"><a href="#1-输入文件格式" class="headerlink" title="1.输入文件格式"></a>1.输入文件格式</h3><ol>
+<li>基因型文件</li>
+<li>表型文件</li>
+<li>亲缘关系矩阵</li>
+<li>协方差（可选）</li>
+</ol>
+<p> GEMMA的输入文件可以有两种格式，分别是<strong>plink</strong>二进制文件和<strong>BIMBAM</strong>格式；由于plink用的比较普遍，这里只介绍如何使用plink文件格式。<br> 需要注意的是两种格式的文件不能够混用，如果用错了可能会出现未知错误</p>
+<h4 id="1-1-基于基因型vcf文件生成plink二进制文件"><a href="#1-1-基于基因型vcf文件生成plink二进制文件" class="headerlink" title="1.1 基于基因型vcf文件生成plink二进制文件"></a>1.1 基于基因型vcf文件生成plink二进制文件</h4> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">vcftools --vcf test.vcf --plink --out <span class="built_in">test</span> </span><br><span class="line"><span class="comment">#out files</span></span><br><span class="line"><span class="comment">#test.ped </span></span><br><span class="line"><span class="comment">#test.map</span></span><br><span class="line"><span class="comment">#基因ped文件生成plink 二进制文件</span></span><br><span class="line">plink --file <span class="built_in">test</span> --make-bed --out <span class="built_in">test</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#out files</span></span><br><span class="line"><span class="comment">#test.bed</span></span><br><span class="line"><span class="comment">#test.bim</span></span><br><span class="line"><span class="comment">#test.fam</span></span><br></pre></td></tr></table></figure>
+<h4 id="1-2-表型文件"><a href="#1-2-表型文件" class="headerlink" title="1.2 表型文件"></a>1.2 表型文件</h4><p><code>test.fam</code>文件的第6列代表的是样本对应的表型值，其中每一行代表一个样本；需要注意的是表型文件中样本的顺序要和基因型文件一致.<br>如果存在多个表型只，可以修改<code>test.fam</code>文件内容,第6列表示第一个表型值，第7列表示第二个表型值；依次类推</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/codeHub/2021/11/08/2021-11/01GEMMA/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+   
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2021/10/29/2021-10/04Bootstrap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/codeHub/uploads/themeImg/logo.png">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Hub">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/codeHub/2021/10/29/2021-10/04Bootstrap/" class="post-title-link" itemprop="url">04Bootstrap</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>发布于
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-10-29 23:50:52" itemprop="dateCreated datePublished" datetime="2021-10-29T23:50:52+08:00">2021-10-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>修改于
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-11-09 09:41:32" itemprop="dateModified" datetime="2022-11-09T09:41:32+08:00">2022-11-09</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/codeHub/2021/10/29/2021-10/04Bootstrap/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2021/10/29/2021-10/04Bootstrap/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Bootstrap(自助法取样)</p>
+<div class="note primary">
+            <p>Bootstrap 的思想是生成一系列 bootstrap 伪样本，每个样本是初始数据有放回抽样。通过对伪样本的计算，获得统计量的分布；当样本数量非常大时，每次抽样中不是重复的样本概率趋近为 0.632，故该抽样方法也叫 0.632 自助法</p>
+          </div>
+
+
+<h3 id="置信区间估计"><a href="#置信区间估计" class="headerlink" title="置信区间估计"></a>置信区间估计</h3><blockquote>
+<p>在正态分布情况下对统计量的置信区间进行估计，在标准正态分布中最常用的就是95%置信区间；从公式上演化推断均值的95%置信区间就是：</p>
+</blockquote>
+<p><img data-src="https://img-blog.csdnimg.cn/2019042514284532.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MDkwMTA1Ng==,size_16,color_FFFFFF,t_70" alt="标准正态分布"></p>
+<p>$$\begin{equation}<br>   \mu-1.96<em>\sigma \le X\le\mu+1.96</em>\sigma<br>\end{equation}$$</p>
+<div class="note warning">
+            <p>但事实上，当找不到合适的分布时，就无法用标准的正态分布计算置信区间了。但幸运的是有一种随机化的方法可以用于计算<br>非参数分布的置信区间。通过对小样本数据的有放回抽样近似的估计总体的分布，例如我们对包含30个小样本的测试数据进行平均值置信区间估计。</p>
+          </div>
+
+<h3 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h3><pre><code>+ 随机进行1000次有放回的抽样，每次抽样从数据集中抽取30个样本
++ 每次抽样后计算当前抽样状态的平均值
++ 最后得到1000次抽样的平均值分布
++ 使用百分位数方法估计平均数的置信区间
+</code></pre>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/codeHub/2021/10/29/2021-10/04Bootstrap/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+   
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2021/10/28/2021-10/03Genotype/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/codeHub/uploads/themeImg/logo.png">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Hub">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/codeHub/2021/10/28/2021-10/03Genotype/" class="post-title-link" itemprop="url">03Genotype</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>发布于
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-10-28 10:20:42" itemprop="dateCreated datePublished" datetime="2021-10-28T10:20:42+08:00">2021-10-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>修改于
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-11-09 09:41:32" itemprop="dateModified" datetime="2022-11-09T09:41:32+08:00">2022-11-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  分类于<a href="/codeHub/categories/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">实用工具</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/codeHub/2021/10/28/2021-10/03Genotype/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2021/10/28/2021-10/03Genotype/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="基因型文件处理合集"><a href="#基因型文件处理合集" class="headerlink" title="基因型文件处理合集"></a>基因型文件处理合集</h3><h3 id="1-计算两个SNP位点间的连锁度"><a href="#1-计算两个SNP位点间的连锁度" class="headerlink" title="1.计算两个SNP位点间的连锁度"></a>1.计算两个SNP位点间的连锁度</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#* plink 文件前称</span></span><br><span class="line">bmapFile=/data/cotton/zhenpingliu/LZP_fiberFullPopulationRNAseq/03express_gene/eQTLgenes_Allstages_340samples/indepent_eQTL/Samples_Q1000_SNPs_joint_376.filter2.Chrs.short</span><br><span class="line">plink --bfile <span class="variable">$bmapFile</span> --ld SNP303009 SNP304796</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-提取SNP对应的坐标信息"><a href="#2-提取SNP对应的坐标信息" class="headerlink" title="2.提取SNP对应的坐标信息"></a>2.提取SNP对应的坐标信息</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#* 提取任意SNP对应的坐标信息</span></span><br><span class="line">plink --bfile <span class="variable">$bmapFile</span> --snp SNP303009 --make-bed</span><br><span class="line">plink --bfile <span class="variable">$bmapFile</span> --extract SNPlist.txt --make-bed</span><br></pre></td></tr></table></figure>
+
+
+
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/codeHub/2021/10/28/2021-10/03Genotype/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+   
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2021/10/25/2021-10/02autogrand/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/codeHub/uploads/themeImg/logo.png">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Hub">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/codeHub/2021/10/25/2021-10/02autogrand/" class="post-title-link" itemprop="url">autogrand</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>发布于
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-10-25 19:25:58" itemprop="dateCreated datePublished" datetime="2021-10-25T19:25:58+08:00">2021-10-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>修改于
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-11-09 09:41:32" itemprop="dateModified" datetime="2022-11-09T09:41:32+08:00">2022-11-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  分类于<a href="/codeHub/categories/PyTroch/" itemprop="url" rel="index"><span itemprop="name">PyTroch</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/codeHub/2021/10/25/2021-10/02autogrand/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2021/10/25/2021-10/02autogrand/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>神经网络（NN）是在某些输入数据上执行的嵌套函数的集合。 这些函数由参数（由权重和偏差组成）定义，这些参数在 PyTorch 中存储在张量中。</p>
+<p>训练 NN 分为两个步骤：</p>
+<div class="note primary">
+            <p><strong>正向传播</strong>：在正向传播中，NN 对正确的输出进行最佳猜测。 它通过其每个函数运行输入数据以进行猜测。</p><p><strong>反向传播</strong>：在反向传播中，NN 根据其猜测中的误差调整其参数。 它通过从输出向后遍历，收集有关函数参数（梯度）的误差导数并使用梯度下降来优化参数来实现。 有关反向传播的更详细的演练，请查看 3Blue1Brown 的视频。</p>
+          </div>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch,torchvision</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#* 一个随机张量具有3个通道的64X64的图片</span></span><br><span class="line">model = torchvision.models.resnet18(pretrained=<span class="literal">True</span>)</span><br><span class="line">data = torch.rand(<span class="number">1</span>, <span class="number">3</span>, <span class="number">64</span>, <span class="number">64</span>)</span><br><span class="line">labels =torch.rand(<span class="number">1</span>, <span class="number">1000</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-通过模型的每一层运行输入数据，进行正向传播"><a href="#1-通过模型的每一层运行输入数据，进行正向传播" class="headerlink" title="1.通过模型的每一层运行输入数据，进行正向传播"></a>1.通过模型的每一层运行输入数据，进行正向传播</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">prediction=model(data) <span class="comment">#forward pass </span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-计算损失并通过反向传播估计每个模型参数的梯度"><a href="#2-计算损失并通过反向传播估计每个模型参数的梯度" class="headerlink" title="2.计算损失并通过反向传播估计每个模型参数的梯度"></a>2.计算损失并通过反向传播估计每个模型参数的梯度</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">loss=(prediction-labels).<span class="built_in">sum</span>()</span><br><span class="line">loss.backward() <span class="comment"># backward pass </span></span><br></pre></td></tr></table></figure>
+
+<p>#3.使用SGD优化器根据模型参数的梯度来调整每个模型参数</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/codeHub/2021/10/25/2021-10/02autogrand/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+   
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2021/10/25/2021-10/01tensor/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/codeHub/uploads/themeImg/logo.png">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Hub">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/codeHub/2021/10/25/2021-10/01tensor/" class="post-title-link" itemprop="url">张量(tensor)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>发布于
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-10-25 18:39:48" itemprop="dateCreated datePublished" datetime="2021-10-25T18:39:48+08:00">2021-10-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>修改于
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-11-09 09:41:32" itemprop="dateModified" datetime="2022-11-09T09:41:32+08:00">2022-11-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  分类于<a href="/codeHub/categories/PyTroch/" itemprop="url" rel="index"><span itemprop="name">PyTroch</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/codeHub/2021/10/25/2021-10/01tensor/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2021/10/25/2021-10/01tensor/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="1-张量的初始化"><a href="#1-张量的初始化" class="headerlink" title="1.张量的初始化"></a>1.张量的初始化</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>由原始数据直接生成</li>
+<li>从numpyArray转换而来</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">data = [[<span class="number">1</span>, <span class="number">2</span>], [<span class="number">3</span>, <span class="number">4</span>]]</span><br><span class="line">x_data = torch.tensor(data)</span><br><span class="line"></span><br><span class="line">np_array = np.array(data)</span><br><span class="line">x_np = torch.from_numpy(np_array)</span><br><span class="line">x_np</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>tensor([[1, 2],
+        [3, 4]])
+</code></pre>
+<h3 id="2-通过已有的张量来生成新的张量"><a href="#2-通过已有的张量来生成新的张量" class="headerlink" title="2.通过已有的张量来生成新的张量"></a>2.通过已有的张量来生成新的张量</h3><blockquote>
+<p>新的张量可以继承原有张量的结构和数据属性<br>也可以重新指定新的数据类型</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x_ones=torch.ones_like(x_data) <span class="comment">#! 保留原张量的结构和属性</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;ones Tensors:\n<span class="subst">&#123;x_ones&#125;</span>\n&quot;</span>)</span><br><span class="line"></span><br><span class="line">x_rand=torch.rand_like(x_data,dtype=torch.<span class="built_in">float</span>)  <span class="comment">#! 重写数据类型</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;Random Tensor:\n <span class="subst">&#123;x_rand&#125;</span>\n&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>ones Tensors:
+tensor([[1, 1],
+        [1, 1]])
+
+Random Tensor:
+ tensor([[0.7318, 0.2529],
+        [0.1007, 0.8059]])
+</code></pre>
+<h3 id="3-张量的属性"><a href="#3-张量的属性" class="headerlink" title="3.张量的属性"></a>3.张量的属性</h3>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/codeHub/2021/10/25/2021-10/01tensor/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+   
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2020/08/30/2020-08/07Git%E7%B3%BB%E5%88%97%EF%BC%88%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94%E6%B7%BB%E5%8A%A0%E8%BF%9C%E7%A8%8B%E5%BA%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/codeHub/uploads/themeImg/logo.png">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Hub">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/codeHub/2020/08/30/2020-08/07Git%E7%B3%BB%E5%88%97%EF%BC%88%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94%E6%B7%BB%E5%8A%A0%E8%BF%9C%E7%A8%8B%E5%BA%93/" class="post-title-link" itemprop="url">Git系列（八）——添加远程库</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>发布于
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-08-30 09:51:55" itemprop="dateCreated datePublished" datetime="2020-08-30T09:51:55+08:00">2020-08-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>修改于
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-11-09 09:41:32" itemprop="dateModified" datetime="2022-11-09T09:41:32+08:00">2022-11-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  分类于<a href="/codeHub/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/codeHub/2020/08/30/2020-08/07Git%E7%B3%BB%E5%88%97%EF%BC%88%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94%E6%B7%BB%E5%8A%A0%E8%BF%9C%E7%A8%8B%E5%BA%93/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2020/08/30/2020-08/07Git%E7%B3%BB%E5%88%97%EF%BC%88%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94%E6%B7%BB%E5%8A%A0%E8%BF%9C%E7%A8%8B%E5%BA%93/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Git系列（八）——添加远程库"><a href="#Git系列（八）——添加远程库" class="headerlink" title="Git系列（八）——添加远程库"></a>Git系列（八）——添加远程库</h1><p> 现在我们已经成功创建了Github帐号并且绑定了我们自己的电脑，那我们就来学习一下如何添加远程仓库。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/codeHub/2020/08/30/2020-08/07Git%E7%B3%BB%E5%88%97%EF%BC%88%E5%85%AB%EF%BC%89%E2%80%94%E2%80%94%E6%B7%BB%E5%8A%A0%E8%BF%9C%E7%A8%8B%E5%BA%93/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+   
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2020/08/30/2020-08/06Git%E7%B3%BB%E5%88%97%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/codeHub/uploads/themeImg/logo.png">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Hub">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/codeHub/2020/08/30/2020-08/06Git%E7%B3%BB%E5%88%97%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/" class="post-title-link" itemprop="url">Git系列（七）——远程仓库</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>发布于
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-08-30 09:51:23" itemprop="dateCreated datePublished" datetime="2020-08-30T09:51:23+08:00">2020-08-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>修改于
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-11-09 09:41:32" itemprop="dateModified" datetime="2022-11-09T09:41:32+08:00">2022-11-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  分类于<a href="/codeHub/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/codeHub/2020/08/30/2020-08/06Git%E7%B3%BB%E5%88%97%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2020/08/30/2020-08/06Git%E7%B3%BB%E5%88%97%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Git系列（七）——远程仓库"><a href="#Git系列（七）——远程仓库" class="headerlink" title="Git系列（七）——远程仓库"></a>Git系列（七）——远程仓库</h1><p>远程仓库绝对是Git的杀手锏之一，我们来系统的学习一下。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/codeHub/2020/08/30/2020-08/06Git%E7%B3%BB%E5%88%97%EF%BC%88%E4%B8%83%EF%BC%89%E2%80%94%E2%80%94%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+   
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://biocottonhub.github.io/codeHub/2020/08/28/2020-08/06loopt%E5%9B%BE%E8%B0%B1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/codeHub/uploads/themeImg/logo.png">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Hub">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/codeHub/2020/08/28/2020-08/06loopt%E5%9B%BE%E8%B0%B1/" class="post-title-link" itemprop="url">06loopt图谱</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>发布于
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-08-28 23:44:39" itemprop="dateCreated datePublished" datetime="2020-08-28T23:44:39+08:00">2020-08-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>修改于
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-11-09 09:41:32" itemprop="dateModified" datetime="2022-11-09T09:41:32+08:00">2022-11-09</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/codeHub/2020/08/28/2020-08/06loopt%E5%9B%BE%E8%B0%B1/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/codeHub/2020/08/28/2020-08/06loopt%E5%9B%BE%E8%B0%B1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="由粘连蛋白介导的人类基因组中染色体loop图谱"><a href="#由粘连蛋白介导的人类基因组中染色体loop图谱" class="headerlink" title="由粘连蛋白介导的人类基因组中染色体loop图谱"></a>由粘连蛋白介导的人类基因组中染色体loop图谱</h2><h3 id="科学问题："><a href="#科学问题：" class="headerlink" title="科学问题："></a>科学问题：</h3><blockquote>
+<p>远端调控元件与基因的互作对基因的表达有着重要的作用，在不同类型的细胞中这种远端调控元件与基因的互作存在差异的，而这种差异的程度以及是否会造成不同细胞间基因的差异表达仍旧是未知</p>
+</blockquote>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p><img data-src="https://s1.ax1x.com/2020/03/31/GlV5As.png" alt="染色质三维结构"></p>
+<p>TAD：作为基因组内一个基本的调节单元；促进内部的调节元件与基因发生互作而阻止与附近基因的互作。这种染色质区域化是高基因组结构和功能的重要特征。在动物和果蝇中部分TAD是在CTCF 结合位点形成一个环状的粘连蛋白复合物。作者这里想要探究粘连蛋白介导的loop在不同类型细胞中的情况及其对基因表达的影响。</p>
+<p><img data-src="https://43423.oss-cn-beijing.aliyuncs.com/img/20200324211307.png" alt="CTCF模式"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/codeHub/2020/08/28/2020-08/06loopt%E5%9B%BE%E8%B0%B1/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1175,7 +1261,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/codeHub/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/codeHub/page/6/">6</a><a class="extend next" rel="next" href="/codeHub/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/codeHub/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/codeHub/page/7/">7</a><a class="extend next" rel="next" href="/codeHub/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1242,13 +1328,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/codeHub/archives">
-          <span class="site-state-item-count">57</span>
+          <span class="site-state-item-count">67</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/codeHub/categories/">
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
